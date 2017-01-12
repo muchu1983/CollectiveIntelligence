@@ -7,5 +7,7 @@ This file is part of BSD license
 <https://opensource.org/licenses/BSD-3-Clause>
 """
 from django.shortcuts import render
+from django.http import JsonResponse
 
-# Create your views here.
+def renderMainPage(request):
+    return render(request, "main.html", {})
