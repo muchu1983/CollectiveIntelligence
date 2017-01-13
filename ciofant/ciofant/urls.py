@@ -27,4 +27,5 @@ from core import views as core_views
 urlpatterns = [
     url(r"^admin/", include(admin.site.urls)),
     url(r"^$", core_views.renderMainPage),
+    url(r"^main/$", core_views.renderMainPage),
 ]

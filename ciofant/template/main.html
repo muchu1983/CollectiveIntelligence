@@ -22,7 +22,10 @@ This file is part of BSD license
     <!-- CIofAnt js or paper.js -->
     <script type="text/javascript" src="/static/js/ciofant/main.js"></script>
     <script type="text/paperscript" src="/static/js/ciofant/canvas_main.paper.js" canvas="canvas_main"></script>
-    
+    <!-- custom script in this page -->
+    <script type="text/javascript">
+        var wsUrl = "ws://" + window.location.host + "/chat/?session_key={{request.session.session_key}}"
+    </script>
 </head>
 <body>
     <canvas id="canvas_main" resize="true"></canvas>

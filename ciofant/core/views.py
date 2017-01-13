@@ -10,4 +10,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 
 def renderMainPage(request):
+    if not request.session.get("has_session", None):
+        request.session["has_session"] = True
+    print("session key: " + request.session.session_key)
     return render(request, "main.html", {})
+    

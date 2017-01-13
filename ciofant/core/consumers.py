@@ -8,9 +8,12 @@ This file is part of BSD license
 """
 from channels import Group
 from channels.sessions import channel_session
+from channels.auth import http_session_user
+from channels.auth import channel_session_user
+from channels.auth import channel_session_user_from_http
 
 # Connected to websocket.connect
-@channel_session
+@channel_session_user_from_http
 def ws_connect(message):
     # Accept connection
     message.reply_channel.send({"accept": True})
@@ -21,13 +24,13 @@ def ws_connect(message):
     Group("chat-%s" % room).add(message.reply_channel)
 
 # Connected to websocket.receive
-@channel_session
+@channel_session_user
 def ws_message(message):
     Group("chat-%s" % message.channel_session["room"]).send({
         "text": message["text"] + " " + message.channel_session["room"],
     })
 
 # Connected to websocket.disconnect
-@channel_session
+@channel_session_user
 def ws_disconnect(message):
     Group("chat-%s" % message.channel_session["room"]).discard(message.reply_channel)
