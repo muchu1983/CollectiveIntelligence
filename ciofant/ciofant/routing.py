@@ -7,7 +7,10 @@ This file is part of BSD license
 <https://opensource.org/licenses/BSD-3-Clause>
 """
 from channels.routing import route
+from core import consumers as core_consumers
 
 channel_routing = [
-    route("http.request", "core.consumers.http_consumer"),
+    route("websocket.connect", core_consumers.ws_connect),
+    route("websocket.receive", core_consumers.ws_message),
+    route("websocket.disconnect", core_consumers.ws_disconnect),
 ]

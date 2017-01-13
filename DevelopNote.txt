@@ -2,7 +2,8 @@
 3.4.4
 
 使用 pip 安裝的第三方庫
-python3 -m pip install "Django<1.9"
+python3 -m pip install "Django<1.9" (1.8.13)
+python3 -m pip install channels (1.0.2)
 
 開發使用的資料庫版本
 MySQL 5.6.28.0
