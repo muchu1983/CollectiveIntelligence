@@ -10,17 +10,14 @@
     
     function initMain() {
         
-        // Note that the path doesn't matter for routing; any WebSocket
-        // connection gets bumped over to WebSocket consumers
-        socket = new WebSocket(wsUrl);
-        socket.onmessage = function(e) {
-            alert(e.data);
+        var webSocket = new WebSocket(wsUrl);
+        webSocket.onmessage = function(msgEvent) {
+            alert(msgEvent.data)
+            console.log(JSON.parse(msgEvent.data))
         }
-        socket.onopen = function() {
-            socket.send("hello world");
+        webSocket.onopen = function() {
+            webSocket.send(JSON.stringify({"msg":"hello world"}));
         }
-        // Call onopen directly if socket is already open
-        if (socket.readyState == WebSocket.OPEN) socket.onopen();
         
     };
     

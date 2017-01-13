@@ -7,6 +7,7 @@ This file is part of BSD license
 <https://opensource.org/licenses/BSD-3-Clause>
 """
 from channels.routing import route
+from channels.routing import route_class
 from core import consumers as core_consumers
 
 channel_routing = [
