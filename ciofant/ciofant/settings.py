@@ -121,3 +121,11 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+#channels settings
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgiref.inmemory.ChannelLayer",
+        "ROUTING": "ciofant.routing.channel_routing",
+    },
+}
