@@ -11,7 +11,8 @@ from channels.routing import route_class
 from core import consumers as core_consumers
 
 channel_routing = [
-    route("websocket.connect", core_consumers.ws_connect, path=r"^/chat/(?P<room>[a-zA-Z0-9_]+)/$"),
-    route("websocket.receive", core_consumers.ws_message, path=r"^/chat/(?P<room>[a-zA-Z0-9_]+)/$"),
-    route("websocket.disconnect", core_consumers.ws_disconnect, path=r"^/chat/(?P<room>[a-zA-Z0-9_]+)/$"),
+    route_class(core_consumers.ChatConsumer, path=r"^/chat/(?P<room>[a-zA-Z0-9_]+)/$"),
+    #route("websocket.connect", core_consumers.ws_connect, path=r"^/chat/(?P<room>[a-zA-Z0-9_]+)/$"),
+    #route("websocket.receive", core_consumers.ws_message, path=r"^/chat/(?P<room>[a-zA-Z0-9_]+)/$"),
+    #route("websocket.disconnect", core_consumers.ws_disconnect, path=r"^/chat/(?P<room>[a-zA-Z0-9_]+)/$"),
 ]
