@@ -11,6 +11,7 @@ from channels.generic.websockets import JsonWebsocketConsumer
 class ChatConsumer(JsonWebsocketConsumer):
     
     http_user = True
+    channel_session_user = True
     strict_ordering = False
     slight_ordering = False
     
