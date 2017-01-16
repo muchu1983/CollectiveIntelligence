@@ -20,7 +20,8 @@ class BattleField(object):
     def __init__(self):
         self.dicField = {
             "field_1":[
-                {"name":"Red Queue", "position":(100, 100), "action":""},
+                {"name":"Red Queue", "position":(100, 100), "action":None},
+                {"name":"Black Queue", "position":(300, 100), "action":None},
             ]
         }
     

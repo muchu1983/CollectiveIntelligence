@@ -6,7 +6,8 @@
 
 $(document).ready(initCanvasMain);
 var websocketBattle = null;
-var path;
+var pathRed;
+var pathBlack;
 
 //初始化 #canvas_main 畫布
 function initCanvasMain() {
@@ -24,13 +25,6 @@ function connectToBattleChannel(){
     };
     //接收並處理 battle channel 訊息
     handleBattleMessage();
-    
-    
-    path = new Path.Rectangle({
-        point: [75, 75],
-        size: [75, 75],
-        strokeColor: "black"
-    });
 };
 
 //接收並處理 battle channel 訊息
@@ -38,7 +32,29 @@ function handleBattleMessage(){
     websocketBattle.onmessage = function(eventMsg) {
         jsonMsg = JSON.parse(eventMsg.data)
         console.log(jsonMsg);
-        path.rotate(3);
+        if (jsonMsg["msg"] == "sync") {
+            //清空 canvas_main
+            project.activeLayer.removeChildren();
+            //重繪 canvas_main
+            $.each(jsonMsg["lstDicFieldStatus"], function(intIndex, dicValue) {
+                if (dicValue["name"] == "Red Queue"){
+                    pathRed = new Path.Rectangle({
+                        point: [dicValue["position"][0], dicValue["position"][1]],
+                        size: [75, 75],
+                        strokeColor: "red"
+                    });
+                }else if (dicValue["name"] == "Black Queue"){
+                    pathBlack = new Path.Rectangle({
+                        point: [dicValue["position"][0], dicValue["position"][1]],
+                        size: [75, 75],
+                        strokeColor: "black"
+                    });
+                }
+            });
+        }else if (jsonMsg["msg"] == "hello"){
+            pathRed.rotate(3);
+            pathBlack.rotate(-3);
+        }
     }
 };
 
