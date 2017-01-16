@@ -9,6 +9,7 @@ This file is part of BSD license
 from channels.generic.websockets import JsonWebsocketConsumer
 from core.battle_field import BattleField
 
+#戰鬥 websockets 訊息處理器
 class BattleConsumer(JsonWebsocketConsumer):
     
     http_user = True
@@ -23,7 +24,7 @@ class BattleConsumer(JsonWebsocketConsumer):
     #建立連線
     def connect(self, message, **kwargs):
         #回傳同意建立連線
-        self.message.reply_channel.send({"accept": True})
+        message.reply_channel.send({"accept": True})
     
     #接收命令
     def receive(self, content, **kwargs):
@@ -41,6 +42,7 @@ class BattleConsumer(JsonWebsocketConsumer):
     def disconnect(self, message, **kwargs):
         pass
 
+#聊天 websockets 訊息處理器
 class ChatConsumer(JsonWebsocketConsumer):
     
     http_user = True
