@@ -7,6 +7,7 @@ This file is part of BSD license
 <https://opensource.org/licenses/BSD-3-Clause>
 """
 from channels.generic.websockets import JsonWebsocketConsumer
+from core.battle_field import BattleField
 
 class BattleConsumer(JsonWebsocketConsumer):
     
@@ -26,12 +27,15 @@ class BattleConsumer(JsonWebsocketConsumer):
     
     #接收命令
     def receive(self, content, **kwargs):
-        dicRespData = {
-            "data": content,
-            "user": self.message.user.username,
-            "field": kwargs.get("field")
-        }
-        self.group_send(kwargs.get("field"), dicRespData)
+        strMsg = content.get("msg", None)
+        strField = kwargs.get("field")
+        dicRespData = {"field": strField, "msg":strMsg}
+        if strMsg == "sync":#同步
+            lstDicFieldStatus = BattleField.getInstance().dicField.get(strField, [])
+            dicRespData.setdefault("lstDicFieldStatus", lstDicFieldStatus)
+            self.send(dicRespData)
+        elif strMsg == "hello":#新命令
+            self.group_send(strField, dicRespData)
     
     #離線
     def disconnect(self, message, **kwargs):

@@ -6,7 +6,7 @@
 
 $(document).ready(initCanvasMain);
 var websocketBattle = null;
-var path
+var path;
 
 //初始化 #canvas_main 畫布
 function initCanvasMain() {
@@ -15,36 +15,49 @@ function initCanvasMain() {
 
 //建立 web socket 連線
 function connectToBattleChannel(){
-    var strWsBattleUrl = "ws://" + window.location.host + "/battle/field_1/?session_key=" + strSessionKey
+    var strWsBattleUrl = "ws://" + window.location.host + "/battle/field_1/?session_key=" + strSessionKey;
     websocketBattle = new WebSocket(strWsBattleUrl);
+    //web socket 建立完成
+    websocketBattle.onopen = function(){
+        //要求同步戰場狀況
+        sendBattleMessage({"msg":"sync"});
+    };
+    //接收並處理 battle channel 訊息
+    handleBattleMessage();
+    
+    
     path = new Path.Rectangle({
         point: [75, 75],
         size: [75, 75],
         strokeColor: "black"
     });
-    handleBattleChannelMessage();
 };
 
-//處理 battle channel 訊息
-function handleBattleChannelMessage(){
-    websocketBattle.onmessage = function(msgEvent) {
-        console.log(JSON.parse(msgEvent.data))
+//接收並處理 battle channel 訊息
+function handleBattleMessage(){
+    websocketBattle.onmessage = function(eventMsg) {
+        jsonMsg = JSON.parse(eventMsg.data)
+        console.log(jsonMsg);
         path.rotate(3);
     }
 };
 
 //送出訊息至 battle channel
-function sendBattleChannelMessage() {
-    websocketBattle.send(JSON.stringify({"msg":"hello battle field"}));
+function sendBattleMessage(jsonMsg) {
+    websocketBattle.send(JSON.stringify(jsonMsg));
 };
 
-//paper.js 畫布更新
-function onFrame(event) {
-    console.log(event.count);
-    if (websocketBattle != null && event.count%6==0) {
-        websocketBattle.onopen = sendBattleChannelMessage;
-        if (websocketBattle.readyState == WebSocket.OPEN) {
-            websocketBattle.onopen();
-        };
+//paper.js 滑鼠點擊
+function onMouseDown(event) {
+    if (websocketBattle != null && websocketBattle.readyState == WebSocket.OPEN) {
+        sendBattleMessage({"msg":"hello"});
+    };
+}
+
+//paper.js 畫布更新 (60fps)
+function onFrame(event){
+    if (websocketBattle != null && websocketBattle.readyState == WebSocket.OPEN && event.count % 600 == 0) {
+        //每 10 秒同步一次戰場狀況
+        sendBattleMessage({"msg":"sync"});
     };
 }
