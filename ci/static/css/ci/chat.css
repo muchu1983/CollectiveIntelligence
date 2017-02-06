@@ -43,9 +43,16 @@ html, body {
     float: left;
 }
 
+.divLeftChatFrame h3{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    margin: 0px;
+}
+
 .divLeftChatFrame .divLeftMessage{
     width: 50%;
-    height: 80%;
+    height: 85%;
     position: absolute;
     top: 5px;
     right: 0px;
@@ -74,9 +81,16 @@ html, body {
     float: right;
 }
 
+.divRightChatFrame h3{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    margin: 0px;
+}
+
 .divRightChatFrame .divRightMessage{
     width: 50%;
-    height: 80%;
+    height: 85%;
     position: absolute;
     top: 5px;
     left: 0px;

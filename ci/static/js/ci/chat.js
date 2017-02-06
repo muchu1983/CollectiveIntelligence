@@ -9,8 +9,21 @@
     $(document).ready(initChat);
     
     function initChat() {
+        initLeftAndRightSwitchBtn();
         
-        
+    };
+    
+    function initLeftAndRightSwitchBtn() {
+        $(".btnLeftOn").prop("disabled", false);
+        $(".btnRightOn").prop("disabled", true);
+        $(".btnLeftOn").click(function(){
+            $(".btnLeftOn").prop("disabled", true);
+            $(".btnRightOn").prop("disabled", false);
+        });
+        $(".btnRightOn").click(function(){
+            $(".btnLeftOn").prop("disabled", false);
+            $(".btnRightOn").prop("disabled", true);
+        });
     };
     
 })(jQuery);
