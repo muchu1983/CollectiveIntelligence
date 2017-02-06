@@ -6,7 +6,7 @@ This file is part of BSD license
 
 <https://opensource.org/licenses/BSD-3-Clause>
 """
-"""ciofant URL Configuration
+"""ci URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
@@ -25,7 +25,7 @@ from django.contrib import admin
 from core import views as core_views
 
 urlpatterns = [
-    url(r"^admin/", include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     url(r"^$", core_views.renderMainPage),
     url(r"^main/$", core_views.renderMainPage),
 ]

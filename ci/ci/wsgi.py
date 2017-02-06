@@ -7,7 +7,7 @@ This file is part of BSD license
 <https://opensource.org/licenses/BSD-3-Clause>
 """
 """
-WSGI config for ciofant project.
+WSGI config for ci project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -19,6 +19,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ciofant.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ci.settings")
 
 application = get_wsgi_application()
