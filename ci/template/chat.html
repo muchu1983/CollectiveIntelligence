@@ -1,0 +1,53 @@
+<!-- 
+Copyright (C) 2017, MuChu Hsu
+Contributed by Muchu Hsu (muchu1983@gmail.com)
+This file is part of BSD license
+
+<https://opensource.org/licenses/BSD-3-Clause>
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Collective Intelligence of Chat</title>
+    <!-- css -->
+    <link type="text/css" rel="stylesheet" href="/static/css/ci/chat.css" >
+    <!-- js -->
+    <!-- jQuery -->
+    <script type="text/javascript" src="/static/js/jquery-3.1.1/jquery-3.1.1.min.js"></script>
+    <!-- Paper.js -->
+    <script type="text/javascript" src="/static/js/paperjs-v0.10.2/paper-full.min.js"></script>
+    <!-- CI js or paper.js -->
+    <script type="text/javascript" src="/static/js/ci/chat.js"></script>
+    <!-- custom script in this page -->
+    <script type="text/javascript">
+        var strSessionKey = "{{request.session.session_key}}"
+    </script>
+</head>
+<body>
+    <div class="divBackGround">
+        <div class="divHeader"></div>
+        <div class="divContent">
+            <div class="divLeftChatFrame">
+                <div class="divLeftMessage">
+                    <span>123456789</span>
+                </div>
+                <input class="btnLeftOn" type="button" value="left"></input>
+            </div>
+            <div class="divRightChatFrame">
+                <div class="divRightMessage">
+                    <span>123456789</span>
+                </div>
+                <input class="btnRightOn" type="button" value="right"></input>
+            </div>
+        </div>
+        <div class="divTextInput">
+            <input class="textKeyIn" type="text"></input>
+            <input class="btnSendText" type="button" value="send"></input>
+        </div>
+    </div>
+</body>
+
+</html>

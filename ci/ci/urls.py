@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r"^$", core_views.renderMainPage),
     url(r"^main/$", core_views.renderMainPage),
+    url(r"^chat/$", core_views.renderChatPage),
 ]

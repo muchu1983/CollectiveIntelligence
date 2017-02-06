@@ -14,3 +14,8 @@ def renderMainPage(request):
         request.session["has_session"] = True
     return render(request, "main.html", {})
     
+def renderChatPage(request):
+    if not request.session.get("has_session", None):
+        request.session["has_session"] = True
+    return render(request, "chat.html", {})
+    
