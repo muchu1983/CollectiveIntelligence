@@ -62,17 +62,23 @@ class ChatConsumer(JsonWebsocketConsumer):
     #接收訊息
     def receive(self, content, **kwargs):
         strRoom = kwargs.get("room")
+        strType = content.get("type", None)
         strMsg = content.get("msg", None)
-        dicRespData = {"room": strRoom, "msg": "welcome"}
-        print("==")
-        print(strMsg)
-        print("==")
-        if strMsg == "join":
+        dicRespData = {"room": strRoom, "recv": content}
+        if strType == "sys" and strMsg == "join":
             #有新使用者加入
-            dicRespData.setdefault("recv", content)
+            dicRespData.setdefault("type", "sys")
+            dicRespData.setdefault("msg", "welcome")
             dicRespData.setdefault("user", self.message.user.username)
             self.group_send(strRoom, dicRespData)
-            #self.send(dicRespData)
+        elif strType == "chat":
+            #聊天訊息
+            dicRespData.setdefault("type", "chat")
+            dicRespData.setdefault("msg", strMsg)
+            dicRespData.setdefault("representative", content.get("representative", None))
+            dicRespData.setdefault("user", self.message.user.username)
+            self.group_send(strRoom, dicRespData)
+            
     #離線
     def disconnect(self, message, **kwargs):
         pass

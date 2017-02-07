@@ -64,6 +64,13 @@ html, body {
     text-align: left;
 }
 
+.divLeftMessage div{
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: auto;
+    text-align: left;
+}
+
 .divLeftChatFrame input{
     position: absolute;
     bottom: 5px;
@@ -98,6 +105,13 @@ html, body {
     border-color: red;
     border-style: solid;
     overflow-y: scroll;
+    text-align: right;
+}
+
+.divRightMessage div{
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: 5px;
     text-align: right;
 }
 
