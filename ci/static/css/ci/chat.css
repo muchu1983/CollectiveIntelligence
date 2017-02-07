@@ -51,15 +51,15 @@ html, body {
 }
 
 .divLeftChatFrame .divLeftMessage{
-    width: 50%;
+    width: 70%;
     height: 85%;
     position: absolute;
-    top: 5px;
+    top: 0px;
     right: 0px;
     margin: 0px;
     border-color: blue;
     border-style: solid;
-    overflow-y: scroll;
+    overflow-y: hidden;
     direction: rtl;
     text-align: left;
 }
@@ -70,6 +70,7 @@ html, body {
     margin-right: auto;
     text-align: left;
     direction: ltr;
+    word-break: break-all;
 }
 
 .divLeftChatFrame input{
@@ -97,15 +98,15 @@ html, body {
 }
 
 .divRightChatFrame .divRightMessage{
-    width: 50%;
+    width: 70%;
     height: 85%;
     position: absolute;
-    top: 5px;
+    top: 0px;
     left: 0px;
     margin: 0px;
     border-color: red;
     border-style: solid;
-    overflow-y: scroll;
+    overflow: hidden;
     text-align: right;
 }
 
@@ -113,7 +114,8 @@ html, body {
     margin-top: 5px;
     margin-left: auto;
     margin-right: 5px;
-    text-align: right;
+    text-align: left;
+    word-break: break-all;
 }
 
 .divRightChatFrame input{
