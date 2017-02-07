@@ -64,7 +64,7 @@
             jsonMsg = JSON.parse(eventMsg.data);
             console.log(jsonMsg);
             if (jsonMsg["type"] == "sys" && jsonMsg["msg"] == "welcome") {
-                appendChatMessageTo(true, true, "Aye Aye");
+                //appendChatMessageTo(true, true, "Aye Aye");
             };
             if (jsonMsg["type"] == "chat") {
                 //接收到左方訊息
