@@ -22,20 +22,20 @@
     //初始化左右方切換
     function initLeftAndRightSwitchBtn() {
         //預設為右方
-        $(".btnLeftOn").prop("disabled", false);
-        $(".btnRightOn").prop("disabled", true);
+        $(".btnLeftOn").prop("disabled", false).removeClass("ui-state-disabled");
+        $(".btnRightOn").prop("disabled", true).addClass("ui-state-disabled");
         strCurrentRepresentative = "right";
         $(".btnLeftOn").click(function(){
             //切換至左方
-            $(".btnLeftOn").prop("disabled", true);
-            $(".btnRightOn").prop("disabled", false);
+            $(".btnLeftOn").prop("disabled", true).addClass("ui-state-disabled");
+            $(".btnRightOn").prop("disabled", false).removeClass("ui-state-disabled");
             strCurrentRepresentative = "left";
             console.log("switch representative to left");
         });
         $(".btnRightOn").click(function(){
             //切換至右方
-            $(".btnLeftOn").prop("disabled", false);
-            $(".btnRightOn").prop("disabled", true);
+            $(".btnLeftOn").prop("disabled", false).removeClass("ui-state-disabled");
+            $(".btnRightOn").prop("disabled", true).addClass("ui-state-disabled");
             strCurrentRepresentative = "right";
             console.log("switch representative to right");
         });

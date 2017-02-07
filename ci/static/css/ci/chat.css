@@ -151,7 +151,7 @@ html, body {
 .divTextInput .textKeyIn{
     position: absolute;
     width: 65%;
-    height: 50%;
+    height: 25px;
     top: 5px;
     left: 10%;
 }
@@ -159,7 +159,6 @@ html, body {
 .divTextInput .btnSendText{
     position: absolute;
     width: 10%;
-    height: 50%;
     top: 5px;
-    left: calc(75% + 5px);
+    left: calc(75% + 10px);
 }
