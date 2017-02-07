@@ -65,7 +65,7 @@
             jsonMsg = JSON.parse(eventMsg.data);
             console.log(jsonMsg);
             if (jsonMsg["type"] == "sys" && jsonMsg["msg"] == "welcome") {
-                //appendChatMessageTo(true, true, "Aye Aye");
+                showSystemMessage("Aye aye! Welcome on board.");
             };
             if (jsonMsg["type"] == "chat") {
                 //接收到左方訊息
@@ -78,6 +78,15 @@
                 };
             };
         }
+    };
+    
+    //顯示系統訊息
+    function showSystemMessage(strMessage){
+        console.log("sys msg: " + strMessage);
+        $(".divSystemMessage").text(strMessage);
+        $(".divSystemMessage").fadeIn("slow", function () {
+            $(this).delay(9487).fadeOut("slow");
+        });
     };
     
     //加入訊息至左邊或右邊
