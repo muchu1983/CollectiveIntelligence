@@ -122,6 +122,10 @@ html, body {
     right: 45%;
 }
 
+.divEmptyMsg {
+    width: 100%;
+}
+
 .divTextInput {
     width: 90%;
     height: 10%;

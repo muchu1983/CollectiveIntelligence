@@ -85,7 +85,12 @@
         if (isToLeft == true){
             //文字 div 需加上 dir="ltr" 使文字方向由左至右
             $(".divLeftMessage").append("<div dir=\"ltr\">" + strMessage + "</div>");
-            $(".divLeftMessage").animate({scrollTop: $(".divLeftMessage").prop("scrollHeight")}, 500);
+            $(".divLeftMessage").animate({scrollTop: $(".divLeftMessage").prop("scrollHeight")}, 1000);
+            //對面加入一個空白 div
+            $(".divRightMessage").append("<div class=\"divEmptyMsg\"></div>");
+            //動態設定空白 div 的高度為對面訊息方塊的高度
+            $(".divRightMessage div").last().css("height", $(".divLeftMessage div").last().height());
+            $(".divRightMessage").animate({scrollTop: $(".divRightMessage").prop("scrollHeight")}, 1000);
             //訊息過長時，移除最前面的訊息
             if ($(".divLeftMessage div").length > 100){
                 $(".divLeftMessage div").first().remove();
@@ -94,7 +99,12 @@
         if (isToRight == true){
             //文字 div 需加上 dir="ltr" 使文字方向由左至右
             $(".divRightMessage").append("<div dir=\"ltr\">" + strMessage + "</div>");
-            $(".divRightMessage").animate({scrollTop: $(".divRightMessage").prop("scrollHeight")}, 500);
+            $(".divRightMessage").animate({scrollTop: $(".divRightMessage").prop("scrollHeight")}, 1000);
+            //對面加入一個空白 div
+            $(".divLeftMessage").append("<div class=\"divEmptyMsg\"></div>");
+            //動態設定空白 div 的高度為對面訊息方塊的高度
+            $(".divLeftMessage div").last().css("height", $(".divRightMessage div").last().height());
+            $(".divLeftMessage").animate({scrollTop: $(".divLeftMessage").prop("scrollHeight")}, 1000);
             //訊息過長時，移除最前面的訊息
             if ($(".divRightMessage div").length > 100){
                 $(".divRightMessage div").first().remove();
