@@ -16,7 +16,7 @@ function initCanvasMain() {
 
 //建立 web socket 連線
 function connectToBattleChannel(){
-    var strWsBattleUrl = "ws://" + window.location.host + "/battle/field_1/?session_key=" + strSessionKey;
+    var strWsBattleUrl = "ws://" + window.location.host + "/ws/battle/field_1/?session_key=" + strSessionKey;
     websocketBattle = new WebSocket(strWsBattleUrl);
     //web socket 建立完成
     websocketBattle.onopen = function(){

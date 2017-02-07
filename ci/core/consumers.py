@@ -50,23 +50,29 @@ class ChatConsumer(JsonWebsocketConsumer):
     strict_ordering = False
     slight_ordering = False
     
+    #加入房間
     def connection_groups(self, **kwargs):
-        print(self.path)
-        print(self.message)
-        print(kwargs)
         return [kwargs.get("room")]
         
+    #建立連線
     def connect(self, message, **kwargs):
         #回傳同意建立連線
         self.message.reply_channel.send({"accept": True})
         
+    #接收訊息
     def receive(self, content, **kwargs):
-        dicRespData = {
-            "data": content,
-            "user": self.message.user.username,
-            "room": kwargs.get("room")
-        }
-        self.group_send(kwargs.get("room"), dicRespData)
-        
+        strRoom = kwargs.get("room")
+        strMsg = content.get("msg", None)
+        dicRespData = {"room": strRoom, "msg": "welcome"}
+        print("==")
+        print(strMsg)
+        print("==")
+        if strMsg == "join":
+            #有新使用者加入
+            dicRespData.setdefault("recv", content)
+            dicRespData.setdefault("user", self.message.user.username)
+            self.group_send(strRoom, dicRespData)
+            #self.send(dicRespData)
+    #離線
     def disconnect(self, message, **kwargs):
         pass
