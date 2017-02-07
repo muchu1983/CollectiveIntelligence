@@ -69,6 +69,7 @@ html, body {
     margin-left: 5px;
     margin-right: auto;
     text-align: left;
+    direction: ltr;
 }
 
 .divLeftChatFrame input{

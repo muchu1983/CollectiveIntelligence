@@ -83,7 +83,8 @@
     //加入訊息至左邊或右邊
     function appendChatMessageTo(isToLeft, isToRight, strMessage){
         if (isToLeft == true){
-            $(".divLeftMessage").append("<div>" + strMessage + "</div>");
+            //文字 div 需加上 dir="ltr" 使文字方向由左至右
+            $(".divLeftMessage").append("<div dir=\"ltr\">" + strMessage + "</div>");
             $(".divLeftMessage").animate({scrollTop: $(".divLeftMessage").prop("scrollHeight")}, 500);
             //訊息過長時，移除最前面的訊息
             if ($(".divLeftMessage div").length > 100){
@@ -91,7 +92,8 @@
             };
         };
         if (isToRight == true){
-            $(".divRightMessage").append("<div>" + strMessage + "</div>");
+            //文字 div 需加上 dir="ltr" 使文字方向由左至右
+            $(".divRightMessage").append("<div dir=\"ltr\">" + strMessage + "</div>");
             $(".divRightMessage").animate({scrollTop: $(".divRightMessage").prop("scrollHeight")}, 500);
             //訊息過長時，移除最前面的訊息
             if ($(".divRightMessage div").length > 100){
