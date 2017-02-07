@@ -16,6 +16,7 @@
         initLeftAndRightSwitchBtn();
         connectToChatChannel(strRoom);
         initTextInputDiv();
+        initKeyBindings();
     };
     
     //初始化左右方切換
@@ -103,7 +104,20 @@
     function initTextInputDiv(){
         $(".btnSendText").click(function(){
             var strMsg = $(".textKeyIn").val();
+            $(".textKeyIn").val(""); //清除輸入框
             sendChatMessage({"type":"chat", "msg":strMsg, "representative":strCurrentRepresentative});
+        });
+    };
+    
+    //初始化鍵盤綁定
+    function initKeyBindings(){
+        //輸入框綁定 Enter 鍵
+        $(".textKeyIn").keyup(function(keyEvent){
+            var code = keyEvent.which;
+            if (code==13) {
+                keyEvent.preventDefault();
+                $(".btnSendText").click();
+            };
         });
     };
     
