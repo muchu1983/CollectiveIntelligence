@@ -133,3 +133,6 @@ CHANNEL_LAYERS = {
         "ROUTING": "ci.routing.channel_routing",
     },
 }
+
+#allowed hosts
+ALLOWED_HOSTS = ["114.38.244.153", "localhost", "127.0.0.1"]
