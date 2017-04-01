@@ -3,13 +3,15 @@
 
 前置作業
 安裝 Visual Studio 2010 Express
+安裝 Redis Server windows: https://github.com/MSOpenTech/redis/releases
 
 使用 pip 安裝的第三方庫
 python -m pip install virtualenv
 python -m pip install pypiwin32
-python -m pip install "Django<1.9" (1.8.13)
+python -m pip install asgi_redis
+python -m pip install "Django<1.9" (1.8.17)
 python -m pip install "channels==1.0.2" (1.0.2)
-python -m pip install mysql-connector
+python -m pip install "mysql-connector==2.1.4" (2.1.4)
 
 資料庫
 MySQL 5.6.28.0

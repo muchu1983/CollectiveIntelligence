@@ -7,6 +7,7 @@ This file is part of BSD license
 <https://opensource.org/licenses/BSD-3-Clause>
 """
 from channels.generic.websockets import JsonWebsocketConsumer
+from channels import Group
 from core.battle_field import BattleField
 
 #戰鬥 websockets 訊息處理器

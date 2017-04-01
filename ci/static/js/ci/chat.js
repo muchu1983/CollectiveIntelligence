@@ -7,7 +7,7 @@
 (function($) {
     
     $(document).ready(initChat);
-    var strRoom = "bennu-with-bella";
+    var strRoom = "to_bella";
     var websocketChat = null;
     var strCurrentRepresentative = null;
     
