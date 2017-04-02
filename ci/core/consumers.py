@@ -71,16 +71,14 @@ class ChatConsumer(JsonWebsocketConsumer):
             dicRespData.setdefault("ci_type", "ci_sys")
             dicRespData.setdefault("ci_msg", "ci_welcome")
             dicRespData.setdefault("ci_user", self.message.user.username)
-            #self.group_send(strRoom, dicRespData) #need to fix group_send
-            self.send(dicRespData)
+            self.group_send(strRoom, dicRespData)
         elif strType == "ci_chat":
             #聊天訊息
             dicRespData.setdefault("ci_type", "ci_chat")
             dicRespData.setdefault("ci_msg", strMsg)
             dicRespData.setdefault("ci_representative", content.get("ci_representative", None))
             dicRespData.setdefault("ci_user", self.message.user.username)
-            #self.group_send(strRoom, dicRespData) #need to fix group_send
-            self.send(dicRespData)
+            self.group_send(strRoom, dicRespData)
             
     #離線
     def disconnect(self, message, **kwargs):

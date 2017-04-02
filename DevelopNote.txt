@@ -9,9 +9,15 @@
 python -m pip install virtualenv (15.1.0)
 python -m pip install pypiwin32 (219)
 python -m pip install asgi_redis (1.2.0)
-python -m pip install "Django<1.9" (1.8.17)
-python -m pip install "channels==1.0.2" (1.0.2)
 python -m pip install "mysql-connector==2.1.4" (2.1.4)
+python -m pip install "Django<1.9" (1.8.17)
+python -m pip install "channels==1.0.3" (1.0.3)
+
+修補
+asgi_redis (1.2.0) 的 core.py 147 行必須先註解掉才可順利執行
+如下：
+..\CI_ENV\Lib\site-packages\asgi_redis\core.py:
+147 #assert "__asgi_channel__" not in message
 
 資料庫
 MySQL 5.6.28.0
