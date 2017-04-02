@@ -53,7 +53,7 @@
         //web socket 建立完成
         websocketChat.onopen = function(){
             //連線已邁立，送出 join 訊息
-            sendChatMessage({"type":"sys", "msg":"join"});
+            sendChatMessage({"ci_type":"ci_sys", "ci_msg":"ci_join"});
         };
         //接收並處理 battle channel 訊息
         handleChatMessage();
@@ -64,17 +64,17 @@
         websocketChat.onmessage = function(eventMsg) {
             jsonMsg = JSON.parse(eventMsg.data);
             console.log(jsonMsg);
-            if (jsonMsg["type"] == "sys" && jsonMsg["msg"] == "welcome") {
+            if (jsonMsg["ci_type"] == "ci_sys" && jsonMsg["ci_msg"] == "ci_welcome") {
                 showSystemMessage("Aye aye! Welcome on board.");
             };
-            if (jsonMsg["type"] == "chat") {
+            if (jsonMsg["ci_type"] == "ci_chat") {
                 //接收到左方訊息
-                if (jsonMsg["representative"] == "left"){
-                    appendChatMessageTo(true, false, jsonMsg["msg"]);
+                if (jsonMsg["ci_representative"] == "left"){
+                    appendChatMessageTo(true, false, jsonMsg["ci_msg"]);
                 };
                 //接收到右方訊息
-                if (jsonMsg["representative"] == "right"){
-                    appendChatMessageTo(false, true, jsonMsg["msg"]);
+                if (jsonMsg["ci_representative"] == "right"){
+                    appendChatMessageTo(false, true, jsonMsg["ci_msg"]);
                 };
             };
         }
@@ -126,7 +126,7 @@
         $(".btnSendText").click(function(){
             var strMsg = $(".textKeyIn").val();
             $(".textKeyIn").val(""); //清除輸入框
-            sendChatMessage({"type":"chat", "msg":strMsg, "representative":strCurrentRepresentative});
+            sendChatMessage({"ci_type":"ci_chat", "ci_msg":strMsg, "ci_representative":strCurrentRepresentative});
         });
     };
     

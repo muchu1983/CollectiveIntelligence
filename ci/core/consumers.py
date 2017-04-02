@@ -53,7 +53,7 @@ class ChatConsumer(JsonWebsocketConsumer):
     
     #加入房間
     def connection_groups(self, **kwargs):
-        return [kwargs.get("room")]
+        return [kwargs.get("ci_room")]
         
     #建立連線
     def connect(self, message, **kwargs):
@@ -62,23 +62,25 @@ class ChatConsumer(JsonWebsocketConsumer):
         
     #接收訊息
     def receive(self, content, **kwargs):
-        strRoom = kwargs.get("room")
-        strType = content.get("type", None)
-        strMsg = content.get("msg", None)
-        dicRespData = {"room": strRoom, "recv": content}
-        if strType == "sys" and strMsg == "join":
+        strRoom = kwargs.get("ci_room")
+        strType = content.get("ci_type", None)
+        strMsg = content.get("ci_msg", None)
+        dicRespData = {"ci_recv": content}
+        if strType == "ci_sys" and strMsg == "ci_join":
             #有新使用者加入
-            dicRespData.setdefault("type", "sys")
-            dicRespData.setdefault("msg", "welcome")
-            dicRespData.setdefault("user", self.message.user.username)
-            self.group_send(strRoom, dicRespData)
-        elif strType == "chat":
+            dicRespData.setdefault("ci_type", "ci_sys")
+            dicRespData.setdefault("ci_msg", "ci_welcome")
+            dicRespData.setdefault("ci_user", self.message.user.username)
+            #self.group_send(strRoom, dicRespData) #need to fix group_send
+            self.send(dicRespData)
+        elif strType == "ci_chat":
             #聊天訊息
-            dicRespData.setdefault("type", "chat")
-            dicRespData.setdefault("msg", strMsg)
-            dicRespData.setdefault("representative", content.get("representative", None))
-            dicRespData.setdefault("user", self.message.user.username)
-            self.group_send(strRoom, dicRespData)
+            dicRespData.setdefault("ci_type", "ci_chat")
+            dicRespData.setdefault("ci_msg", strMsg)
+            dicRespData.setdefault("ci_representative", content.get("ci_representative", None))
+            dicRespData.setdefault("ci_user", self.message.user.username)
+            #self.group_send(strRoom, dicRespData) #need to fix group_send
+            self.send(dicRespData)
             
     #離線
     def disconnect(self, message, **kwargs):
