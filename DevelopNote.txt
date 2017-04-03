@@ -25,3 +25,4 @@ MySQL 5.6.28.0
 Django 架構
 startproject ci
 startapp core
+startapp chat

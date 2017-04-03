@@ -8,43 +8,9 @@ This file is part of BSD license
 """
 from channels.generic.websockets import JsonWebsocketConsumer
 from channels import Group
-from core.battle_field import BattleField
 
-#戰鬥 websockets 訊息處理器
-class BattleConsumer(JsonWebsocketConsumer):
-    
-    http_user = True
-    channel_session_user = True
-    strict_ordering = False
-    slight_ordering = False
-    
-    #加入戰場
-    def connection_groups(self, **kwargs):
-        return [kwargs.get("field")]
-    
-    #建立連線
-    def connect(self, message, **kwargs):
-        #回傳同意建立連線
-        message.reply_channel.send({"accept": True})
-    
-    #接收命令
-    def receive(self, content, **kwargs):
-        strMsg = content.get("msg", None)
-        strField = kwargs.get("field")
-        dicRespData = {"field": strField, "msg":strMsg}
-        if strMsg == "sync":#同步
-            lstDicFieldStatus = BattleField.getInstance().dicField.get(strField, [])
-            dicRespData.setdefault("lstDicFieldStatus", lstDicFieldStatus)
-            self.send(dicRespData)
-        elif strMsg == "hello":#新命令
-            self.group_send(strField, dicRespData)
-    
-    #離線
-    def disconnect(self, message, **kwargs):
-        pass
-
-#核心 websockets 訊息處理器
-class CoreConsumer(JsonWebsocketConsumer):
+#聊天 websockets 訊息處理器
+class ChatConsumer(JsonWebsocketConsumer):
     
     http_user = True
     channel_session_user = True
@@ -83,3 +49,4 @@ class CoreConsumer(JsonWebsocketConsumer):
     #離線
     def disconnect(self, message, **kwargs):
         pass
+        
