@@ -6,9 +6,11 @@ This file is part of BSD license
 
 <https://opensource.org/licenses/BSD-3-Clause>
 """
+import uuid
 from channels.generic.websockets import JsonWebsocketConsumer
 from channels import Group
 from core.battle_field import BattleField
+from core.models import BeDispatchedUID
 
 #戰鬥 websockets 訊息處理器
 class BattleConsumer(JsonWebsocketConsumer):
@@ -43,42 +45,37 @@ class BattleConsumer(JsonWebsocketConsumer):
     def disconnect(self, message, **kwargs):
         pass
 
-#核心 websockets 訊息處理器
-class CoreConsumer(JsonWebsocketConsumer):
+#核心 UID管理 websockets 處理器
+class UidManageConsumer(JsonWebsocketConsumer):
     
     http_user = True
     channel_session_user = True
     strict_ordering = False
     slight_ordering = False
     
-    #加入房間
+    #無群組
     def connection_groups(self, **kwargs):
-        return [kwargs.get("ci_room")]
+        return []
         
     #建立連線
     def connect(self, message, **kwargs):
-        #回傳同意建立連線
+        #回傳 同意建立連線
         self.message.reply_channel.send({"accept": True})
         
     #接收訊息
     def receive(self, content, **kwargs):
-        strRoom = kwargs.get("ci_room")
-        strType = content.get("ci_type", None)
-        strMsg = content.get("ci_msg", None)
-        dicRespData = {"ci_recv": content}
-        if strType == "ci_sys" and strMsg == "ci_join":
-            #有新使用者加入
-            dicRespData.setdefault("ci_type", "ci_sys")
-            dicRespData.setdefault("ci_msg", "ci_welcome")
-            dicRespData.setdefault("ci_user", self.message.user.username)
-            self.group_send(strRoom, dicRespData)
-        elif strType == "ci_chat":
-            #聊天訊息
-            dicRespData.setdefault("ci_type", "ci_chat")
-            dicRespData.setdefault("ci_msg", strMsg)
-            dicRespData.setdefault("ci_representative", content.get("ci_representative", None))
-            dicRespData.setdefault("ci_user", self.message.user.username)
-            self.group_send(strRoom, dicRespData)
+        strAction = content.get("ci_action", None)
+        dicRespData = {"ci_recv_content": content}
+        #建立 UID
+        if strAction == "ci_create_uid":
+            objBeDispatchedUID = BeDispatchedUID.objects.create()
+            dicRespData.setdefault("ci_uid", str(objBeDispatchedUID.uuidUID))
+            self.send(dicRespData)
+        #刪除 UID
+        elif strAction == "ci_delete_uid":
+            strTargetUID = content.get("ci_target_uid", None)
+            qsetBeDispatchedUID = BeDispatchedUID.objects.filter(uuidUID=uuid.UUID("{%s}"%strTargetUID))
+            qsetBeDispatchedUID.delete()
             
     #離線
     def disconnect(self, message, **kwargs):
