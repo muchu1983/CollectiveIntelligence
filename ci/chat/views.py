@@ -8,4 +8,7 @@ This file is part of BSD license
 """
 from django.shortcuts import render
 
-# Create your views here.
+def renderChatPage(request):
+    if not request.session.get("has_session", None):
+        request.session["has_session"] = True
+    return render(request, "chat.html", {})

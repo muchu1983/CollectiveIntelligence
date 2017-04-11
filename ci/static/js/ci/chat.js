@@ -74,7 +74,7 @@
     /* clean function ***************************************************************************/
     
     function clean() {
-        window.onbeforeunload = function(event) {
+        window.onunload = window.onbeforeunload = function(event) {
             //處理 core websocket 關閉之前
             handleBeforeCoreWsClose();
         };

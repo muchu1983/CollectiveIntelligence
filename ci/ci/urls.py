@@ -22,11 +22,19 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.auth.views import login as builtin_login
+from django.contrib.auth.views import logout as builtin_logout
 from core import views as core_views
+from chat import views as chat_views
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r"^$", core_views.renderMainPage),
+    url(r"^admin/", include(admin.site.urls)),
+    #使用者帳號
+    url(r"^accounts/register/$", core_views.register),
+    url(r"^accounts/login/$", builtin_login),
+    url(r"^accounts/logout/$", builtin_logout),
+    #主頁
     url(r"^main/$", core_views.renderMainPage),
-    url(r"^chat/$", core_views.renderChatPage),
+    #CI聊天
+    url(r"^chat/$", chat_views.renderChatPage),
 ]

@@ -137,3 +137,6 @@ CHANNEL_LAYERS = {
 
 #allowed hosts
 ALLOWED_HOSTS = ["chat.c8ei10e.com", "localhost", "127.0.0.1"]
+
+#redirect after login
+LOGIN_REDIRECT_URL = "/main/"
