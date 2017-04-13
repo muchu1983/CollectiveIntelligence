@@ -24,6 +24,12 @@ def register(request):
     
 #主頁面
 def renderMainPage(request):
-    if not request.session.get("has_session", None):
-        request.session["has_session"] = True
-    return render(request, "main.html", {})
+    #取得顯示名稱
+    strDisplayName = None
+    if request.user.is_authenticated():
+        #已登入
+        strDisplayName = request.user.ciuser.strDisplayName
+    else:
+        #未登入
+        strDisplayName = "未登入"
+    return render(request, "main.html", {"strDisplayName":strDisplayName})

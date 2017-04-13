@@ -12,22 +12,24 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-#使用者 個人資料
+#CI使用者
 class CIUser(models.Model):
     #一對一 Django 使用者
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    #多對一 自身關聯 
+    #多對一 老大 CI使用者
     chief = models.ForeignKey("self", default=None, null=True, on_delete=models.SET_NULL)
     #PV值
     intPointVolume = models.IntegerField(default=0, null=False)
+    #顯示名稱
+    strDisplayName = models.CharField(max_length=30, null=True)
     
-#建立使用者時一併建立 個人資料
+#建立 Django 使用者時一併建立 CIUser
 @receiver(post_save, sender=User)
 def createCIUser(sender, instance, created, **kwargs):
     if created:
-        CIUser.objects.create(user=instance)
+        CIUser.objects.create(user=instance, strDisplayName=instance.username)
 
-#儲存使用者時一併儲存 個人資料
+#儲存 Django 使用者時一併儲存 CIUser
 @receiver(post_save, sender=User)
 def saveCIUser(sender, instance, **kwargs):
     instance.ciuser.save()
