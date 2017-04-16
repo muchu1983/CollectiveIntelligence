@@ -26,7 +26,18 @@ def register(request):
             return redirect("/accounts/login/")
     else:
         formRegisterUser = UserCreationForm()
-    return render(request, "registration/register.html", locals())
+    return render(request, "core/accounts/register.html", locals())
+    
+#個人資料
+def profile(request):
+    if request.method == "POST":
+        formRegisterUser = UserCreationForm(request.POST)
+        if formRegisterUser.is_valid():
+            user = formRegisterUser.save()
+            return redirect("/accounts/login/")
+    else:
+        formRegisterUser = UserCreationForm()
+    return render(request, "core/accounts/register.html", locals())
     
 @login_required
 #傳送 Email 認證信
@@ -104,4 +115,4 @@ def renderMainPage(request):
     else:
         #未登入
         strDisplayName = "未登入"
-    return render(request, "main.html", {"strDisplayName":strDisplayName})
+    return render(request, "core/main.html", {"strDisplayName":strDisplayName})
