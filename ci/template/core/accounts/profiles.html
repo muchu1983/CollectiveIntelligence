@@ -29,6 +29,10 @@ This file is part of BSD license
         <!-- CSRF 保護 -->
         {% csrf_token %}
         <h3>{{strUsername}} 的個人資料</h3>
+        <label for="reset_password_1">重設密碼: </label>
+        <input id="reset_password_1" type="password" name="reset_password_1" maxlength="20">
+        <label for="reset_password_2">密碼確認: </label>
+        <input id="reset_password_2" type="password" name="reset_password_2" maxlength="20">
         {{formUser.as_p}}
         {{formCIUser.as_p}}
         <input type="submit" value="完成">

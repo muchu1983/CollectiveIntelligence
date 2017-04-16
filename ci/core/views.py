@@ -37,7 +37,16 @@ def profiles(request):
     #使用者帳號(不可修改)
     strUsername = request.user.username
     if request.method == "POST":
-        #開始更新個人資料
+        #密碼更改
+        strResetPassword1 = request.POST.get("reset_password_1", None)
+        strResetPassword2 = request.POST.get("reset_password_2", None)
+        if strResetPassword1 and strResetPassword2 and strResetPassword1 == strResetPassword2:
+            request.user.set_password(strResetPassword1)
+            request.user.save()
+            messages.success(request, "密碼已重新設定-完成")
+        else:
+            messages.error(request, "密碼重新設定-失敗")
+        #讀取新 個人資料
         formUser = UserForm(request.POST, instance=request.user)
         formCIUser = CIUserForm(request.POST, instance=request.user.ciuser)
         if formUser.is_valid() and formCIUser.is_valid():
