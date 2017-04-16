@@ -35,6 +35,7 @@ urlpatterns = [
     url(r"^accounts/logout/$", builtin_logout),
     url(r"^accounts/sendEmailVerification/$", core_views.sendEmailVerification),
     url(r"^accounts/verifyEmail/$", core_views.verifyEmail),
+    url(r"^accounts/profiles/$", core_views.profiles),
     #主頁
     url(r"^main/$", core_views.renderMainPage),
     #CI聊天

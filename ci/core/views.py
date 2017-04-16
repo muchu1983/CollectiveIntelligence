@@ -14,7 +14,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib import messages
 from core.models import CIUser
+from core.forms import CIUserForm
+from core.forms import UserForm
 from ci.utility.email import EmailUtility
 
 #用戶註冊
@@ -29,18 +32,32 @@ def register(request):
     return render(request, "core/accounts/register.html", locals())
     
 #個人資料
-def profile(request):
-    if request.method == "POST":
-        formRegisterUser = UserCreationForm(request.POST)
-        if formRegisterUser.is_valid():
-            user = formRegisterUser.save()
-            return redirect("/accounts/login/")
-    else:
-        formRegisterUser = UserCreationForm()
-    return render(request, "core/accounts/register.html", locals())
-    
 @login_required
+def profiles(request):
+    #使用者帳號(不可修改)
+    strUsername = request.user.username
+    if request.method == "POST":
+        #開始更新個人資料
+        formUser = UserForm(request.POST, instance=request.user)
+        formCIUser = CIUserForm(request.POST, instance=request.user.ciuser)
+        if formUser.is_valid() and formCIUser.is_valid():
+            #分兩段儲存
+            formUser.save()
+            formCIUser.save()
+            messages.success(request, "個人資料已更新")
+            return redirect("/accounts/profiles/")
+    else:
+        #顯示目前個人資料設定
+        formUser = UserForm(instance=request.user)
+        formCIUser = CIUserForm(instance=request.user.ciuser)
+    return render(request, "core/accounts/profiles.html", {
+        "strUsername":strUsername,
+        "formUser":formUser,
+        "formCIUser":formCIUser
+    })
+    
 #傳送 Email 認證信
+@login_required
 def sendEmailVerification(request):
     if request.user.is_authenticated():
         #已登入

@@ -8,16 +8,16 @@ This file is part of BSD license
 """
 from django import forms
 from django.contrib.auth.models import User
-from core.model import CIUser
+from core.models import CIUser
 
 class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ("email")
+        fields = ("email", )
 
 class CIUserForm(forms.ModelForm):
 
     class Meta:
         model = CIUser
-        fields = ("strDisplayName")
+        fields = ("strDisplayName", )
