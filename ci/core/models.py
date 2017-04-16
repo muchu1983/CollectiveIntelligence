@@ -21,7 +21,14 @@ class CIUser(models.Model):
     #PV值
     intPointVolume = models.IntegerField(default=0, null=False)
     #顯示名稱
-    strDisplayName = models.CharField(max_length=30, null=True)
+    strDisplayName = models.CharField(max_length=255, null=True)
+    #email 驗證 UUID
+    strEmailVerificationKey = models.CharField(max_length=36, null=True)
+    #email 驗證 過期時間
+    dtEmailVerificationKeyExpire = models.DateTimeField(null=True)
+    #email 驗證 已通過
+    isEmailVerified = models.BooleanField(default=False, null=False)
+    
     
 #建立 Django 使用者時一併建立 CIUser
 @receiver(post_save, sender=User)
