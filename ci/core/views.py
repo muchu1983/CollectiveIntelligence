@@ -112,8 +112,6 @@ def sendEmailVerification(request):
 def verifyEmail(request):
     strCIUserUID = request.GET.get("strCIUserUID", None)
     strKeyUUID = request.GET.get("strKeyUUID", None)
-    print(strCIUserUID)
-    print(strKeyUUID)
     #目前時間
     dtNow = timezone.now()
     #查找 CIUser
@@ -125,7 +123,9 @@ def verifyEmail(request):
     if len(qsetMatchedCIUser) > 0: #認證成功
         #更新帳號 為 已認證
         intAffectedRows = qsetMatchedCIUser.update(isEmailVerified=True)
-        print(intAffectedRows)
+    else: #認證失敗
+        #todo
+        pass
     #todo 將用戶導向通知頁
     #return render(request, "notice.html", {"strMessage":"Email (%s) verification SUCCESS. your account level updated."%strEmail})
     return redirect("/accounts/login/")
