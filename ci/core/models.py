@@ -16,6 +16,8 @@ from django.dispatch import receiver
 class CIUser(models.Model):
     #一對一 Django 使用者
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    #UID DB索引鍵 建立後不可更改 搜尋使用UID可避免 username 曝光
+    strCIUserUID = models.CharField(db_index=True, editable=False, max_length=36, default=str(uuid.uuid4()), null=False)
     #多對一 老大 CI使用者
     chief = models.ForeignKey("self", default=None, null=True, on_delete=models.SET_NULL)
     #PV值
@@ -28,7 +30,6 @@ class CIUser(models.Model):
     dtEmailVerificationKeyExpire = models.DateTimeField(null=True)
     #email 驗證 已通過
     isEmailVerified = models.BooleanField(default=False, null=False)
-    
     
 #建立 Django 使用者時一併建立 CIUser
 @receiver(post_save, sender=User)

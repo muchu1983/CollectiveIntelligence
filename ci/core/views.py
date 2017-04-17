@@ -68,29 +68,31 @@ def profiles(request):
 #傳送 Email 認證信
 @login_required
 def sendEmailVerification(request):
-    if request.user.is_authenticated():
-        #已登入
-        strUsername = request.user.username
-        #生成 Email 認證信
-        #產生 UUID
-        strUUID = str(uuid.uuid4())
-        #儲存 email 認證資訊
-        request.user.ciuser.strEmailVerificationKey = strUUID
-        #過期時間為1天
+    if request.user.is_authenticated(): #已登入
+        #顯示名稱
+        strDisplayName = request.user.ciuser.strDisplayName
+        #使用者 UID
+        strCIUserUID = request.user.ciuser.strCIUserUID
+        #產生 認證金鑰
+        strKeyUUID = str(uuid.uuid4())
+        #儲存 認證金鑰
+        request.user.ciuser.strEmailVerificationKey = strKeyUUID
+        #儲存 過期時間為 1天
         request.user.ciuser.dtEmailVerificationKeyExpire = timezone.now() + timezone.timedelta(days=1)
         request.user.save()
+        #生成 Email 認證信
         strMsg = (
             "<div><img src=\"http://www.c8ei10e.com/static/img/logo.png\" width=\"80\"/></div>"
             "<h2>Dear %s,</h2>"
             "<div>"
                 "<p>Welcome to c8ei10e.</p>"
                 "<p>Please click this "
-                    "<a href=\"http://127.0.0.1:9487/accounts/verifyEmail/?strUsername=%s&strUUID=%s\">"
+                    "<a href=\"http://127.0.0.1:9487/accounts/verifyEmail/?strCIUserUID=%s&strKeyUUID=%s\">"
                         "link"
                     "</a>"
                 " to confirm your registration.</p>"
                 "<p><a href=\"http://www.c8ei10e.com\">http://www.c8ei10e.com</a></p>"
-            "</div>"%(strUsername, strUsername, strUUID)
+            "</div>"%(strDisplayName, strCIUserUID, strKeyUUID)
         )
         #寄出 email
         emailUtil = EmailUtility()
@@ -104,23 +106,20 @@ def sendEmailVerification(request):
             strAccount="public.muchu1983@gmail.com",
             strPassword="bee520520bee"
         )
-    return redirect("/accounts/login/")
+    return redirect("/accounts/profiles/")
     
 #檢查 Email 驗證碼正確性
 def verifyEmail(request):
-    strUsername = request.GET.get("strUsername", None)
-    strUUID = request.GET.get("strUUID", None)
-    print(strUsername)
-    print(strUUID)
+    strCIUserUID = request.GET.get("strCIUserUID", None)
+    strKeyUUID = request.GET.get("strKeyUUID", None)
+    print(strCIUserUID)
+    print(strKeyUUID)
+    #目前時間
     dtNow = timezone.now()
-    #查找 User
-    qsetMatchedUser = User.objects.filter(
-        username=strUsername
-    )
     #查找 CIUser
     qsetMatchedCIUser = CIUser.objects.filter(
-        user=qsetMatchedUser.first(),
-        strEmailVerificationKey=strUUID,
+        strCIUserUID=strCIUserUID,
+        strEmailVerificationKey=strKeyUUID,
         dtEmailVerificationKeyExpire__gte=dtNow
     )
     if len(qsetMatchedCIUser) > 0: #認證成功
