@@ -1,0 +1,45 @@
+<!-- 
+Copyright (C) 2017, MuChu Hsu
+Contributed by Muchu Hsu (muchu1983@gmail.com)
+This file is part of BSD license
+
+<https://opensource.org/licenses/BSD-3-Clause>
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Collective Intelligence</title>
+    <!-- css -->
+    <link type="text/css" rel="stylesheet" href="/static/css/jquery-ui-1.12.1/jquery-ui.min.css" >
+    <!-- js -->
+    <!-- jQuery -->
+    <script type="text/javascript" src="/static/js/jquery-3.1.1/jquery-3.1.1.min.js"></script>
+    <!-- jQuery UI -->
+    <script type="text/javascript" src="/static/js/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <!-- Paper.js -->
+    <script type="text/javascript" src="/static/js/paperjs-v0.10.2/paper-full.min.js"></script>
+    {% block block_head%}
+    {% endblock block_head%}
+</head>
+<body>
+    {% block block_content%}
+        <div>base.html block_content</div>
+    {% endblock block_content%}
+    {% block block_footer%}
+    <footer>
+        <div>
+            <span>Copyright (C) 2017, MuChu Hsu </span> 
+            <span>
+                <a href="mailto:muchu1983@gmail.com">
+                    <font color="red">muchu1983@gmail.com</font>
+                </a>
+            </span>
+        </div>
+    </footer>
+    {% endblock block_footer%}
+</body>
+
+</html>
