@@ -4,10 +4,10 @@
 <!-- override block_head -->
 {% block block_head%}
 <!-- css -->
-<link type="text/css" rel="stylesheet" href="/static/css/ci/main.css" >
+<link type="text/css" rel="stylesheet" href="/static/ci/css/main.css" >
 <!-- js -->
-<script type="text/javascript" src="/static/js/ci/main.js"></script>
-<script type="text/paperscript" src="/static/js/ci/canvas_main.paper.js" canvas="canvas_main"></script>
+<script type="text/javascript" src="/static/ci/js/main.js"></script>
+<script type="text/paperscript" src="/static/ci/js/canvas_main.paper.js" canvas="canvas_main"></script>
 <!-- custom script in this page -->
 <script type="text/javascript">
     var strSessionKey = "{{request.session.session_key}}"
@@ -22,4 +22,5 @@
     <a href="/accounts/logout/">登出</a>
     <a href="/accounts/sendEmailVerification/">發送email認證信</a>
     <a href="/accounts/profiles/">個人資料</a>
+    <canvas id="canvas_main" resize="true"></canvas>
 {% endblock block_content%}
