@@ -18,8 +18,8 @@ class CIUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     #UID DB索引鍵 建立後不可更改 搜尋使用UID可避免 username 曝光
     strCIUserUID = models.CharField(db_index=True, editable=False, max_length=36, default=str(uuid.uuid4()), null=False)
-    #多對一 老大 CI使用者
-    chief = models.ForeignKey("self", default=None, null=True, on_delete=models.SET_NULL)
+    #多對一 領導人 CI使用者
+    leader = models.ForeignKey("self", default=None, null=True, on_delete=models.SET_NULL)
     #PV值
     intPointVolume = models.IntegerField(default=0, null=False)
     #顯示名稱
