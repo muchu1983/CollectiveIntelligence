@@ -18,16 +18,39 @@ class RaidUtility:
         
     #重置 使用者的 領導人 並重置 PV 值
     def resetLeaderAndPV(self, user, strLeaderUID):
-        pass
+        #尋找 領導人
+        ciuserLeader = CIUser.objects.get(
+            strCIUserUID = strLeaderUID
+        )
+        #重設
+        user.ciuser.leader = ciuserLeader
+        user.ciuser.intPointVolume = 0
+        #儲存
+        user.save()
         
     #取得 使用者的 領導人
     def getLeader(self, user):
-        pass
+        ciuserLeader = user.ciuser.leader
+        if ciuserLeader is not None:
+            return ciuserLeader.user
+        else:
+            #使用者 尚無 領導人
+            return None
     
     #取得 使用者的 追隨者 列表
-    def getLstFollower(self, user):
-        pass
+    def getQsetFollower(self, user):
+        #尋找 追隨者
+        qsetCIUserFollower = CIUser.objects.filter(
+            leader = user.ciuser
+        )
+        return qsetCIUserFollower
         
     #計算 使用者的 團隊 PV
     def calculateRaidPV(self, user):
-        pass
+        #自身 PV 值
+        intRaidPV = user.ciuser.intPointVolume
+        #加上 所有 追隨者 PV
+        for ciuserFollower in self.getQsetFollower(user):
+            intRaidPV += ciuserFollower.intPointVolume
+        return intRaidPV
+        
