@@ -36,20 +36,32 @@ def register(request):
 def profiles(request):
     #使用者帳號(不可修改)
     strUsername = request.user.username
+    #email 驗證狀態
+    isEmailVerified = request.user.ciuser.isEmailVerified
     if request.method == "POST":
         #密碼更改
         strResetPassword1 = request.POST.get("reset_password_1", None)
         strResetPassword2 = request.POST.get("reset_password_2", None)
-        if strResetPassword1 and strResetPassword2 and strResetPassword1 == strResetPassword2:
+        if strResetPassword1 and strResetPassword2 and strResetPassword1 != "" and strResetPassword1 == strResetPassword2:
             request.user.set_password(strResetPassword1)
             request.user.save()
             messages.success(request, "密碼已重新設定-完成")
         else:
             messages.error(request, "密碼重新設定-失敗")
+        #暫存舊的 email
+        strOldEmail = request.user.email
         #讀取新 個人資料
         formUser = UserForm(request.POST, instance=request.user)
         formCIUser = CIUserForm(request.POST, instance=request.user.ciuser)
         if formUser.is_valid() and formCIUser.is_valid():
+            #讀取新的 email
+            strNewEmail = request.user.email
+            #更改 email 驗證狀態
+            if strOldEmail != strNewEmail:
+                #設為未認證
+                request.user.ciuser.isEmailVerified = False
+                #亂數設定一個新的認證碼
+                request.user.ciuser.strEmailVerificationKey = str(uuid.uuid4())
             #分兩段儲存
             formUser.save()
             formCIUser.save()
@@ -61,6 +73,7 @@ def profiles(request):
         formCIUser = CIUserForm(instance=request.user.ciuser)
     return render(request, "core/accounts/profiles.html", {
         "strUsername":strUsername,
+        "isEmailVerified":isEmailVerified,
         "formUser":formUser,
         "formCIUser":formCIUser
     })
@@ -69,10 +82,14 @@ def profiles(request):
 @login_required
 def sendEmailVerification(request):
     if request.user.is_authenticated(): #已登入
+        #Server domain
+        strServerDomain = "http://www.c8ei10e.com:9487/"
         #顯示名稱
         strDisplayName = request.user.ciuser.strDisplayName
         #使用者 UID
         strCIUserUID = request.user.ciuser.strCIUserUID
+        #使用者 email
+        strEmail = request.user.email
         #產生 認證金鑰
         strKeyUUID = str(uuid.uuid4())
         #儲存 認證金鑰
@@ -82,17 +99,22 @@ def sendEmailVerification(request):
         request.user.save()
         #生成 Email 認證信
         strMsg = (
-            "<div><img src=\"http://www.c8ei10e.com/static/img/logo.png\" width=\"80\"/></div>"
-            "<h2>Dear %s,</h2>"
+            "<div><img src=\"{strServerDomain}static/ci/img/logo.png\" width=\"80\"/></div>"
+            "<h2>Dear {strDisplayName},</h2>"
             "<div>"
                 "<p>Welcome to c8ei10e.</p>"
                 "<p>Please click this "
-                    "<a href=\"http://127.0.0.1:9487/accounts/verifyEmail/?strCIUserUID=%s&strKeyUUID=%s\">"
+                    "<a href=\"{strServerDomain}accounts/verifyEmail/?strCIUserUID={strCIUserUID}&strKeyUUID={strKeyUUID}\">"
                         "link"
                     "</a>"
-                " to confirm your registration.</p>"
-                "<p><a href=\"http://www.c8ei10e.com\">http://www.c8ei10e.com</a></p>"
-            "</div>"%(strDisplayName, strCIUserUID, strKeyUUID)
+                " to verify your email.</p>"
+                "<p><a href=\"{strServerDomain}\">{strServerDomain}</a></p>"
+            "</div>".format(
+                strServerDomain=strServerDomain,
+                strDisplayName=strDisplayName,
+                strCIUserUID=strCIUserUID,
+                strKeyUUID=strKeyUUID
+            )
         )
         #寄出 email
         emailUtil = EmailUtility()
@@ -101,7 +123,7 @@ def sendEmailVerification(request):
             strFrom="c8ei10e",
             strTo="me",
             strMsg=strMsg,
-            lstStrTarget=["public.muchu1983@gmail.com"],
+            lstStrTarget=[strEmail],
             strSmtp="smtp.gmail.com:587",
             strAccount="public.muchu1983@gmail.com",
             strPassword="bee520520bee"

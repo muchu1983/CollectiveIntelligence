@@ -2,28 +2,31 @@
 {% extends "core/base_core.html" %}
 
 <!-- override block_head -->
-{% block block_head%}
+{% block block_head %}
+<!-- js -->
+<script type="text/javascript" src="/static/ci/js/profiles.js"></script>
 <!-- custom script in this page -->
 <script type="text/javascript">
     var strSessionKey = "{{request.session.session_key}}"
 </script>
-{% endblock block_head%}
+{% endblock block_head %}
 
 <!-- override block_content -->
-{% block block_content%}
+{% block block_content %}
 <!-- 個人資料 POST form -->
 <form action="" method="post">
     <!-- CSRF 保護 -->
     {% csrf_token %}
-    <h3>{{strUsername}} 的個人資料</h3>
+    <h3>{{ strUsername }} 的個人資料</h3>
     <label for="reset_password_1">重設密碼: </label>
     <input id="reset_password_1" type="password" name="reset_password_1" maxlength="20">
     <label for="reset_password_2">密碼確認: </label>
     <input id="reset_password_2" type="password" name="reset_password_2" maxlength="20">
-    {{formUser.as_p}}
-    {{formCIUser.as_p}}
+    {{ formUser.as_p }}
+    {{ formCIUser.as_p }}
     <input type="submit" value="完成">
 </form>
-<!-- email 認證信 -->
-<a href="/accounts/sendEmailVerification/">發送email認證信</a>
-{% endblock block_content%}
+<!-- email 認證 -->
+<span>email verified: {{ isEmailVerified }}</span>
+<button type="button" class="btnSendEmailVerification btn btn-primary">寄發 email 認證信</button>
+{% endblock block_content %}
