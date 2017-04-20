@@ -1,37 +1,22 @@
-<!-- 
-Copyright (C) 2017, MuChu Hsu
-Contributed by Muchu Hsu (muchu1983@gmail.com)
-This file is part of BSD license
+<!-- extends core/base_core.html-->
+{% extends "core/base_core.html" %}
 
-<https://opensource.org/licenses/BSD-3-Clause>
--->
-<!DOCTYPE html>
-<html lang="en">
+<!-- override block_head -->
+{% block block_head%}
+<!-- custom script in this page -->
+<script type="text/javascript">
+    var strSessionKey = "{{request.session.session_key}}"
+</script>
+{% endblock block_head%}
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Collective Intelligence</title>
-    <!-- css -->
-    <!-- js -->
-    <!-- jQuery -->
-    <script type="text/javascript" src="/static/jquery-3.1.1/jquery-3.1.1.min.js"></script>
-    <!-- Paper.js -->
-    <script type="text/javascript" src="/static/paperjs-v0.10.2/paper-full.min.js"></script>
-    <!-- CI js or paper.js -->
-    <!-- custom script in this page -->
-    <script type="text/javascript">
-        var strSessionKey = "{{request.session.session_key}}"
-    </script>
-</head>
-<body>
-    <h1>註冊新帳號</h1>
-    <form action="" method="post">
-        <!-- CSRF 保護 -->
-        {% csrf_token %}
-        {{ formRegisterUser.as_p }}
-        <input type="submit" value="註冊">
-    </form>
-</body>
-
-</html>
+<!-- override block_content -->
+{% block block_content%}
+<h1>註冊新帳號</h1>
+<!-- 註冊 form -->
+<form action="" method="post">
+    <!-- CSRF 保護 -->
+    {% csrf_token %}
+    {{ formRegisterUser.as_p }}
+    <input type="submit" value="註冊">
+</form>
+{% endblock block_content%}
