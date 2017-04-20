@@ -32,7 +32,7 @@ urlpatterns = [
     #使用者帳號
     url(r"^accounts/register/$", core_views.register),
     url(r"^accounts/login/$", builtin_login, {"template_name": "core/accounts/login.html"}),
-    url(r"^accounts/logout/$", builtin_logout),
+    url(r"^accounts/logout/$", builtin_logout, {"template_name": "core/main.html"}),
     url(r"^accounts/sendEmailVerification/$", core_views.sendEmailVerification),
     url(r"^accounts/verifyEmail/$", core_views.verifyEmail),
     url(r"^accounts/profiles/$", core_views.profiles),

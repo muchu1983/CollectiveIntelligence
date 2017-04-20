@@ -27,20 +27,27 @@ This file is part of BSD license
     <script type="text/javascript" src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <!-- Paper.js -->
     <script type="text/javascript" src="/static/paperjs-v0.10.2/paper-full.min.js"></script>
-    {% block block_head%}
+    {% block block_head %}
     <!-- base.html block_head -->
-    {% endblock block_head%}
+    {% endblock block_head %}
 </head>
 <body>
     <!-- Bootstrap container -->
     <div class="container">
-        {% block block_sidebar_raid%}
+        {% block block_header %}
+        <!-- base.html block_header -->
+        <a href="/main/">首頁</a>
+        <a href="/accounts/login/">登入</a>
+        <a href="/accounts/logout/">登出</a>
+        <a href="/accounts/profiles/">個人資料</a>
+        {% endblock block_header %}
+        {% block block_sidebar_raid %}
         <!-- base.html block_sidebar_raid -->
-        {% endblock block_sidebar_raid%}
-        {% block block_content%}
+        {% endblock block_sidebar_raid %}
+        {% block block_content %}
         <!-- base.html block_content -->
-        {% endblock block_content%}
-        {% block block_footer%}
+        {% endblock block_content %}
+        {% block block_footer %}
         <!-- base.html block_footer -->
         <div>
             <span>Copyright (C) 2017, MuChu Hsu </span> 
@@ -50,7 +57,7 @@ This file is part of BSD license
                 </a>
             </span>
         </div>
-        {% endblock block_footer%}
+        {% endblock block_footer %}
     </div>
 </body>
 

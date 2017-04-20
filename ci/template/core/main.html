@@ -2,7 +2,7 @@
 {% extends "core/base_core.html" %}
 
 <!-- override block_head -->
-{% block block_head%}
+{% block block_head %}
 <!-- css -->
 <link type="text/css" rel="stylesheet" href="/static/ci/css/main.css" >
 <!-- js -->
@@ -12,14 +12,10 @@
 <script type="text/javascript">
     var strSessionKey = "{{request.session.session_key}}"
 </script>
-{% endblock block_head%}
+{% endblock block_head %}
 
 <!-- override block_content -->
-{% block block_content%}
+{% block block_content %}
     <span>{{ strDisplayName }}</span>
-    <a href="/accounts/register/">註冊</a>
-    <a href="/accounts/login/">登入</a>
-    <a href="/accounts/logout/">登出</a>
-    <a href="/accounts/profiles/">個人資料</a>
     <canvas id="canvas_main" resize="true"></canvas>
-{% endblock block_content%}
+{% endblock block_content %}
