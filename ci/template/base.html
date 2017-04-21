@@ -36,17 +36,34 @@ This file is part of BSD license
     <div class="container">
         {% block block_header %}
         <!-- base.html block_header -->
-        <a href="/main/">首頁</a>
-        <a href="/accounts/login/">登入</a>
-        <a href="/accounts/logout/">登出</a>
-        <a href="/accounts/profiles/">個人資料</a>
+        <!-- 導覽列 -->
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/core/raid/">團隊</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/core/main/">首頁</a></li>
+                    <li><a href="/core/teamwork/">協作</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/accounts/register/">註冊</a></li>
+                    <li><a href="/accounts/login/">登入</a></li>
+                    <li><a href="/accounts/logout/">登出</a></li>
+                    <li><a href="/accounts/profiles/">個人資料</a></li>
+                </ul>
+            </div>
+        </nav>
         {% endblock block_header %}
+        
         {% block block_sidebar_raid %}
         <!-- base.html block_sidebar_raid -->
         {% endblock block_sidebar_raid %}
+        
         {% block block_content %}
         <!-- base.html block_content -->
         {% endblock block_content %}
+        
         {% block block_footer %}
         <!-- base.html block_footer -->
         <div>

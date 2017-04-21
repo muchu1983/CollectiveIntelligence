@@ -139,4 +139,4 @@ CHANNEL_LAYERS = {
 ALLOWED_HOSTS = ["www.c8ei10e.com", "localhost", "127.0.0.1"]
 
 #redirect after login
-LOGIN_REDIRECT_URL = "/main/"
+LOGIN_REDIRECT_URL = "/core/main/"
