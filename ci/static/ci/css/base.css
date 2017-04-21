@@ -18,7 +18,7 @@
 }
 /* 團隊 navbar */
 #raidNavbar {
-  clear: left;
+  float: left;
 }
 #raidNavbar .navbar-nav>li {
   clear: left;
@@ -26,6 +26,7 @@
 /* 團隊按鈕 */
 .navbar-toggle {
     float: left;
+    margin-right: 0px;
 }
 /* 團隊 navbar 加上 scroll bar */
 #raidNavbar ul{
