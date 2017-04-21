@@ -18,6 +18,8 @@ This file is part of BSD license
     <link type="text/css" rel="stylesheet" href="/static/jquery-ui-1.12.1/jquery-ui.min.css" >
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" >
+    <!-- ci -->
+    <link type="text/css" rel="stylesheet" href="/static/ci/css/base.css" >
     <!-- js -->
     <!-- jQuery -->
     <script type="text/javascript" src="/static/jquery-3.1.1/jquery-3.1.1.min.js"></script>
@@ -33,62 +35,84 @@ This file is part of BSD license
 </head>
 <body>
     <!-- Bootstrap container -->
-    <div class="container">
-        {% block block_header %}
-        <!-- base.html block_header -->
-        <!-- 導覽列 -->
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">團隊</a>
-                        <ul class="dropdown-menu" style="height: auto; max-height: 200px; overflow-x: hidden;">
-                            <li><p class="navbar-text">我的領導人</p></li>
-                            <li><a href="#">leader displayname</a></li>
-                            <li><p class="navbar-text">個人資訊</p></li>
-                            <li><a href="#">displayname</a></li>
-                            <li><p class="navbar-text">我的追隨者</p></li>
-                            <li><a href="#">追隨者1</a></li>
-                            <li><a href="#">追隨者2</a></li>
-                            <li><a href="#">追隨者3</a></li>
-                            <li><a href="#">追隨者1</a></li>
-                            <li><a href="#">追隨者2</a></li>
-                            <li><a href="#">追隨者3</a></li>
-                            <li><a href="#">追隨者1</a></li>
-                            <li><a href="#">追隨者2</a></li>
-                            <li><a href="#">追隨者3</a></li>
-                            <li><a href="#">追隨者1</a></li>
-                            <li><a href="#">追隨者2</a></li>
-                            <li><a href="#">追隨者3</a></li>
-                            <li><a href="#">追隨者1</a></li>
-                            <li><a href="#">追隨者2</a></li>
-                            <li><a href="#">追隨者3</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/core/teamwork/">協作</a></li>
-                    <li><a href="/core/main/">首頁</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/accounts/register/">註冊</a></li>
-                    <li><a href="/accounts/login/">登入</a></li>
-                    <li><a href="/accounts/logout/">登出</a></li>
-                    <li><a href="/accounts/profiles/">個人資料</a></li>
-                </ul>
+    {% block block_header %}
+    <!-- base.html block_header -->
+    <!-- 導覽列 -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+        
+            <!-- 團隊 toggle button -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#raidNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+                
+            <!-- header nav -->
+            <div class="navbar-header">
+                <!-- 首頁 -->
+                <a class="navbar-brand" href="/core/main/">C8eI10e</a>
             </div>
-        </nav>
-        {% endblock block_header %}
+            
+            <!-- 靠左 nav -->
+            <ul class="nav navbar-nav navbar-left">
+                
+                <!-- 協作 -->
+                <li><a href="/core/teamwork/">協作</a></li>
+            </ul>
+            
+            <!-- 靠右 nav -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <!-- 顯示名稱 dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">顯示名稱<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/accounts/register/">註冊</a></li>
+                        <li><a href="/accounts/login/">登入</a></li>
+                        <li><a href="/accounts/logout/">登出</a></li>
+                        <li><a href="/accounts/profiles/">個人資料</a></li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <!-- 團隊 可收縮 nav -->
+            <div class="collapse navbar-collapse navbar-left" id="raidNavbar">
+                <ul class="nav navbar-nav">
+                    <li><span class="navbar-text">我的領導人</span></li>
+                    <li><a href="#">leader displayname</a></li>
+                    <li><span class="navbar-text">個人資訊</span></li>
+                    <li><a href="#">displayname</a></li>
+                    <li><span class="navbar-text">追隨者</span></li>
+                    <li><a href="#">追隨者1</a></li>
+                    <li><a href="#">追隨者2</a></li>
+                    <li><a href="#">追隨者3</a></li>
+                    <li><a href="#">追隨者1</a></li>
+                    <li><a href="#">追隨者2</a></li>
+                    <li><a href="#">追隨者3</a></li>
+                    <li><a href="#">追隨者1</a></li>
+                    <li><a href="#">追隨者2</a></li>
+                    <li><a href="#">追隨者3</a></li>
+                    <li><a href="#">追隨者1</a></li>
+                    <li><a href="#">追隨者2</a></li>
+                    <li><a href="#">追隨者3</a></li>
+                    <li><a href="#">追隨者1</a></li>
+                    <li><a href="#">追隨者2</a></li>
+                    <li><a href="#">追隨者3</a></li>
+                </ul>
+            </li>
+        </div>
+    </nav>
+    {% endblock block_header %}
         
-        {% block block_sidebar_raid %}
-        <!-- base.html block_sidebar_raid -->
-        {% endblock block_sidebar_raid %}
-        
+    <div class="container">
         {% block block_content %}
         <!-- base.html block_content -->
         {% endblock block_content %}
-        
-        {% block block_footer %}
-        <!-- base.html block_footer -->
-        <div>
+    </div>
+    {% block block_footer %}
+    <!-- base.html block_footer -->
+    <div>
             <span>Copyright (C) 2017, MuChu Hsu </span> 
             <span>
                 <a href="mailto:muchu1983@gmail.com">
@@ -96,8 +120,7 @@ This file is part of BSD license
                 </a>
             </span>
         </div>
-        {% endblock block_footer %}
-    </div>
+    {% endblock block_footer %}
 </body>
 
 </html>
