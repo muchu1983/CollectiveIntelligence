@@ -40,24 +40,31 @@ This file is part of BSD license
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
         
-            <!-- 團隊 toggle button -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#raidPanel">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            
             <!-- header nav -->
+            <!--
             <div class="navbar-header">
-                <!-- 首頁 -->
-                <a class="navbar-brand" href="/core/main/">C8eI10e</a>
             </div>
+            -->
             
             <!-- 靠左 nav -->
             <ul class="nav navbar-nav navbar-left">
-                
+                <li>
+                    <!-- 團隊 toggle button -->
+                    <a type="button" data-toggle="collapse" href="#raidPanel">
+                        <span class="glyphicon glyphicon-dashboard"></span>
+                        團隊
+                    </a>
+                </li>
+                <!-- 首頁 -->
+                <li><a type="button" href="/core/main/">
+                    <span class="glyphicon glyphicon-home"></span>
+                    C8eI10e
+                </a></li>
                 <!-- 協作 -->
-                <li><a href="/core/teamwork/">協作</a></li>
+                <li><a type="button" href="/core/teamwork/">
+                    <span class="glyphicon glyphicon-blackboard"></span>
+                    協作
+                </a></li>
             </ul>
             
             <!-- 靠右 nav -->
@@ -65,7 +72,9 @@ This file is part of BSD license
                 
                 <!-- 顯示名稱 dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">顯示名稱<span class="caret"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="glyphicon glyphicon-user"></span><span class="text-primary">{{ request.user.ciuser.strDisplayName }}</span>
+                    </a>
                     <ul class="dropdown-menu">
                         <li><a href="/accounts/register/">註冊</a></li>
                         <li><a href="/accounts/login/">登入</a></li>
@@ -84,20 +93,18 @@ This file is part of BSD license
     
         <!-- 團隊 可收縮 Panel Group -->
         <div class="panel-group panel-collapse collapse" id="raidPanel">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">團隊</h4>
-                </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">團隊</div>
                 <div>
-                    <p class="bg-primary">我的領導人</p>
+                    <p class="bg-info">我的領導人</p>
                     <ul class="list-group">
                         <li class="list-group-item"><a href="#">leader displayname</a></li>
                     </ul>
-                    <p class="bg-primary">個人資訊</p>
+                    <p class="bg-info">個人資訊</p>
                     <ul class="list-group">
                         <li class="list-group-item"><a href="#">displayname</a></li>
                     </ul>
-                    <p class="bg-primary">我的追隨者</p>
+                    <p class="bg-info">我的追隨者</p>
                     <ul class="list-group">
                         <li class="list-group-item"><a href="#">追隨者1</a></li>
                         <li class="list-group-item"><a href="#">追隨者1</a></li>
