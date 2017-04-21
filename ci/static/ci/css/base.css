@@ -1,36 +1,16 @@
-/* 設定 bootstrap collapse 按鈕 無論螢幕大小永遠顯示 */
-/*
-.navbar-header {
-  float: none;
-}
-.navbar-nav{
-  float: none!important;
-}
-*/
+/* 設定 團隊按鈕 無論螢幕大小永遠顯示 */
 .navbar-toggle {
-  display: block;
-}
-.navbar-collapse.collapse {
-  display: none!important;
-}
-.navbar-collapse.collapse.in{
-  display:block !important;
-}
-/* 團隊 navbar */
-#raidNavbar {
-  float: left;
-}
-#raidNavbar .navbar-nav>li {
-  clear: left;
-}
-/* 團隊按鈕 */
-.navbar-toggle {
+    display: block;
     float: left;
     margin-right: 0px;
 }
-/* 團隊 navbar 加上 scroll bar */
-#raidNavbar ul{
-    height: auto;
-    max-height: 200px;
-    overflow-x: hidden;
+/* 團隊 Panel */
+#raidPanel {
+    float: left;
+    padding: 0px;
+    top: 0px;
+    left: 0px;
+    height: 300px;
+    width: 46%;
+    overflow-y: auto;
 }
