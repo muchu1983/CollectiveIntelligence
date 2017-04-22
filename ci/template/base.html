@@ -39,12 +39,6 @@ This file is part of BSD license
     <!-- 導覽列 -->
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-        
-            <!-- header nav -->
-            <!--
-            <div class="navbar-header">
-            </div>
-            -->
             
             <!-- 靠左 nav -->
             <ul class="nav navbar-nav navbar-left">
@@ -70,16 +64,19 @@ This file is part of BSD license
             <!-- 靠右 nav -->
             <ul class="nav navbar-nav navbar-right">
                 
-                <!-- 顯示名稱 dropdown -->
+                <!-- 帳號 dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <span class="glyphicon glyphicon-user"></span><span class="text-primary">{{ request.user.ciuser.strDisplayName }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="/accounts/register/">註冊</a></li>
-                        <li><a href="/accounts/login/">登入</a></li>
+                        {% if request.user.is_authenticated  %}
                         <li><a href="/accounts/logout/">登出</a></li>
                         <li><a href="/accounts/profiles/">個人資料</a></li>
+                        {% else %}
+                        <li><a href="/accounts/login/">登入</a></li>
+                        {% endif %}
                     </ul>
                 </li>
             </ul>
