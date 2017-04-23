@@ -9,14 +9,14 @@
 <script type="text/javascript" src="/static/ci/js/searchCIUser.js"></script>
 <!-- custom script in this page -->
 <script type="text/javascript">
-    var strSessionKey = "{{request.session.session_key}}"
+    var strSessionKey = "{{ request.session.session_key }}"
 </script>
 {% endblock block_head %}
 
 <!-- override block_content -->
 {% block block_content %}
 <!-- 搜尋輸入框 -->
-<form action="/core/searchCIUser/" method="post">
+<form action={{ strFormActionUrl }} method="post">
     <!-- CSRF 保護 -->
     {%  csrf_token %}
     <div class="input-group">
@@ -36,4 +36,7 @@
     <li>{{ matchedCIUser.strDisplayName }}</li>
 {% endfor %}
 </ul>
+{% block block_after_search %}
+<!-- searchCIUser.html block_after_search -->
+{% endblock block_after_search %}
 {% endblock block_content %}

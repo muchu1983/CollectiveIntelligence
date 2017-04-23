@@ -155,6 +155,8 @@ def verifyEmail(request):
     
 #尋找 CI User
 def searchCIUser(request):
+    #form 的 action 目標 url
+    strFormActionUrl = "/core/searchCIUser/"
     #尋找結果字串
     strSearchResult = None
     #尋找結果
@@ -169,6 +171,26 @@ def searchCIUser(request):
     else:
         strSearchResult = "請輸入搜尋字串"
     return render(request, "core/searchCIUser.html", locals())
+    
+#尋找 CI 領導者
+@login_required
+def searchLeader(request):
+    #form 的 action 目標 url
+    strFormActionUrl = "/core/searchLeader/"
+    #尋找結果字串
+    strSearchResult = None
+    #尋找結果
+    qsetMatchedCIUser = None
+    if request.method == "POST":
+        strKeyword = request.POST.get("strKeyword", None)
+        #比對 strDisplayName
+        queryObject = Q(strDisplayName__iregex="^.*{strDisplayName}.*$".format(strDisplayName=strKeyword))
+        #查尋
+        qsetMatchedCIUser = CIUser.objects.filter(queryObject)
+        strSearchResult = "查尋 {strKeyword} 共找到 {intResultCount} 個用戶".format(strKeyword=strKeyword, intResultCount=qsetMatchedCIUser.count())
+    else:
+        strSearchResult = "請輸入搜尋字串"
+    return render(request, "core/searchLeader.html", locals())
     
 #主頁面
 def renderMainPage(request):
