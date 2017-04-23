@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.db.models import Q
 from core.models import CIUser
 from core.forms import CIUserForm
 from core.forms import UserForm
@@ -151,6 +152,23 @@ def verifyEmail(request):
     #todo 將用戶導向通知頁
     #return render(request, "notice.html", {"strMessage":"Email (%s) verification SUCCESS. your account level updated."%strEmail})
     return redirect("/accounts/login/")
+    
+#尋找 CI User
+def searchCIUser(request):
+    #尋找結果字串
+    strSearchResult = None
+    #尋找結果
+    qsetMatchedCIUser = None
+    if request.method == "POST":
+        strKeyword = request.POST.get("strKeyword", None)
+        #比對 strDisplayName
+        queryObject = Q(strDisplayName__iregex="^.*{strDisplayName}.*$".format(strDisplayName=strKeyword))
+        #查尋
+        qsetMatchedCIUser = CIUser.objects.filter(queryObject)
+        strSearchResult = "查尋 {strKeyword} 共找到 {intResultCount} 個用戶".format(strKeyword=strKeyword, intResultCount=qsetMatchedCIUser.count())
+    else:
+        strSearchResult = "請輸入搜尋字串"
+    return render(request, "core/searchCIUser.html", locals())
     
 #主頁面
 def renderMainPage(request):

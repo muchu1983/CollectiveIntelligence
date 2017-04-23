@@ -1,0 +1,39 @@
+<!-- extends core/base_core.html-->
+{% extends "core/base_core.html" %}
+
+<!-- override block_head -->
+{% block block_head %}
+<!-- css -->
+<link type="text/css" rel="stylesheet" href="/static/ci/css/searchCIUser.css" >
+<!-- js -->
+<script type="text/javascript" src="/static/ci/js/searchCIUser.js"></script>
+<!-- custom script in this page -->
+<script type="text/javascript">
+    var strSessionKey = "{{request.session.session_key}}"
+</script>
+{% endblock block_head %}
+
+<!-- override block_content -->
+{% block block_content %}
+<!-- 搜尋輸入框 -->
+<form action="/core/searchCIUser/" method="post">
+    <!-- CSRF 保護 -->
+    {%  csrf_token %}
+    <div class="input-group">
+        <input type="text" id="strKeyword" name="strKeyword" class="form-control" placeholder="Search">
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </div>
+    </div>
+</form>
+<!-- 搜尋結果字串 -->
+<center><p class="bg-info">{{ strSearchResult }}</span></p>
+<!-- 搜尋結果 -->
+<ul>
+{% for matchedCIUser in qsetMatchedCIUser %}
+    <li>{{ matchedCIUser.strDisplayName }}</li>
+{% endfor %}
+</ul>
+{% endblock block_content %}
