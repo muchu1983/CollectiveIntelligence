@@ -3,24 +3,35 @@
 
 <!-- override block_head -->
 {% block block_head %}
+<!-- searchLeader.html block_head -->
 <!-- css -->
+<link type="text/css" rel="stylesheet" href="/static/ci/css/searchCIUser.css" >
 <link type="text/css" rel="stylesheet" href="/static/ci/css/searchLeader.css" >
 <!-- js -->
+<script type="text/javascript" src="/static/ci/js/searchCIUser.js"></script>
 <script type="text/javascript" src="/static/ci/js/searchLeader.js"></script>
 <!-- custom script in this page -->
 <script type="text/javascript">
-    var strSessionKey = "{{ request.session.session_key }}"
+    var strSessionKey = "{{ request.session.session_key }}";
+    var strCsrfToken = "{{ csrf_token }}";
 </script>
 {% endblock block_head %}
 
-<!-- override block_after_search -->
-{% block block_after_search %}
-<!-- searchLeader.html block_after_search -->
-<form action="/core/resetLeader/" method="post">
-    <!-- CSRF 保護 -->
-    {%  csrf_token %}
-    <button class="btn btn-default" type="submit">
-        確定
-    </button>
-</form>
-{% endblock block_after_search %}
+<!-- override block_content -->
+{% block block_content %}
+<!-- searchLeader.html block_content -->
+{{ block.super }} <!-- 複製上層 template block_content 的內容 -->
+<!-- 確認重設領導人 Dialog -->
+<div id="dialogConfirmResetLeader" title="重設領導人?">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+        每次重設領導人將一併把個人 PV 值歸 0，是否確定要重設領導人?
+    </p>
+</div>
+{% endblock block_content %}
+
+<!-- override block_extra_action -->
+{% block block_extra_action %}
+<!-- searchLeader.html block_extra_action -->
+<a type="button" class="btn btn-default btnResetLeader" href="javascript: void(0)">設為領導人</a>
+{% endblock block_extra_action %}

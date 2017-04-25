@@ -153,7 +153,7 @@ def verifyEmail(request):
     #return render(request, "notice.html", {"strMessage":"Email (%s) verification SUCCESS. your account level updated."%strEmail})
     return redirect("/accounts/login/")
     
-#尋找 CI User
+#尋找 CI 使用者
 def searchCIUser(request):
     #form 的 action 目標 url
     strFormActionUrl = "/core/searchCIUser/"
@@ -172,7 +172,7 @@ def searchCIUser(request):
         strSearchResult = "請輸入搜尋字串"
     return render(request, "core/searchCIUser.html", locals())
     
-#尋找 CI 領導者
+#尋找 CI 領導人
 @login_required
 def searchLeader(request):
     #form 的 action 目標 url
@@ -191,6 +191,15 @@ def searchLeader(request):
     else:
         strSearchResult = "請輸入搜尋字串"
     return render(request, "core/searchLeader.html", locals())
+    
+#CI 使用者 檢視頁
+def ciuserViewer(request):
+    pass
+    
+#重設 領導人
+@login_required
+def resetLeader(request):
+    pass
     
 #主頁面
 def renderMainPage(request):
