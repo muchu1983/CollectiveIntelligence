@@ -16,8 +16,10 @@
     function initBtnResetLeader(){
         //點擊 設為領導人
         $(".btnResetLeader").click(function(){
-            //先暫存 strCIUserUID
+            //先暫存選擇的 strCIUserUID
             var strCIUserUID = $(this).prev().prev(".strCIUserUID").val();
+            //todo 確認 不是選擇自已
+            
             //popup 確認重設領導人 將重置 個人值 PV
             $("#dialogConfirmResetLeader").dialog({
                 resizable: false,

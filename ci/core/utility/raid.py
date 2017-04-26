@@ -37,6 +37,17 @@ class RaidUtility:
             #使用者 尚無 領導人
             return None
     
+    #檢查 是否為使用者的 上層領導人之一
+    def isLeaderOrLeaderOfLeader(self, user, strLeaderUID):
+        isLeaderOrLeaderOfLeader = False
+        userLeader = self.getLeader(user=user)
+        while userLeader is not None:
+            if userLeader.ciuser.strCIUserUID == strLeaderUID:
+                isLeaderOrLeaderOfLeader = True
+                break
+            userLeader = self.getLeader(user=userLeader)
+        return isLeaderOrLeaderOfLeader
+    
     #取得 使用者的 追隨者 列表
     def getQsetFollower(self, user):
         #尋找 追隨者
@@ -50,7 +61,7 @@ class RaidUtility:
         #自身 PV 值
         intRaidPV = user.ciuser.intPointVolume
         #加上 所有 追隨者 PV
-        for ciuserFollower in self.getQsetFollower(user):
+        for ciuserFollower in self.getQsetFollower(user=user):
             intRaidPV += ciuserFollower.intPointVolume
         return intRaidPV
         

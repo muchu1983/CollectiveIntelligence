@@ -20,6 +20,7 @@ from core.models import CIUser
 from core.forms import CIUserForm
 from core.forms import UserForm
 from ci.utility.email import EmailUtility
+from core.utility.raid import RaidUtility
 
 #用戶註冊
 def register(request):
@@ -181,12 +182,23 @@ def searchLeader(request):
     strSearchResult = None
     #尋找結果
     qsetMatchedCIUser = None
+    #團隊操作工具
+    raidUtil = RaidUtility()
     if request.method == "POST":
         strKeyword = request.POST.get("strKeyword", None)
         #比對 strDisplayName
         queryObject = Q(strDisplayName__iregex="^.*{strDisplayName}.*$".format(strDisplayName=strKeyword))
         #查尋
         qsetMatchedCIUser = CIUser.objects.filter(queryObject)
+        #移除自己(user)
+        qsetMatchedCIUser = qsetMatchedCIUser.exclude(strCIUserUID=request.user.ciuser.strCIUserUID)
+        #移除上層領導人有自己(user) 的選擇 - 避免領導人無限迴圈
+        for matchedCIUser in qsetMatchedCIUser:
+            print(matchedCIUser.strDisplayName)
+            print(raidUtil.isLeaderOrLeaderOfLeader(user=matchedCIUser.user, strLeaderUID=request.user.ciuser.strCIUserUID))
+            if raidUtil.isLeaderOrLeaderOfLeader(user=matchedCIUser.user, strLeaderUID=request.user.ciuser.strCIUserUID):
+                qsetMatchedCIUser = qsetMatchedCIUser.exclude(strCIUserUID=matchedCIUser.strCIUserUID)
+        #todo 若更換的對像為 原有領導人的領導人 是否該移除 (再討論)
         strSearchResult = "查尋 {strKeyword} 共找到 {intResultCount} 個用戶".format(strKeyword=strKeyword, intResultCount=qsetMatchedCIUser.count())
     else:
         strSearchResult = "請輸入搜尋字串"
@@ -199,7 +211,23 @@ def ciuserViewer(request):
 #重設 領導人
 @login_required
 def resetLeader(request):
-    pass
+    #尋找結果字串
+    strSearchResult = None
+    #團隊操作工具
+    raidUtil = RaidUtility()
+    if request.method == "POST":
+        strCIUserUID = request.POST.get("strCIUserUID", None)
+        if strCIUserUID:
+            #重設 領導人 並重置 PV 值
+            raidUtil.resetLeaderAndPV(user=request.user, strLeaderUID=strCIUserUID)
+            #完成字串
+            strSearchResult = "已完成重設領導人"
+        else:
+            #無效字串
+            strSearchResult = "無效的設定"
+    else:
+        strSearchResult = "請輸入搜尋字串"
+    return render(request, "core/searchLeader.html", locals())
     
 #主頁面
 def renderMainPage(request):

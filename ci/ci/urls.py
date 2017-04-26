@@ -36,9 +36,12 @@ urlpatterns = [
     url(r"^accounts/sendEmailVerification/$", core_views.sendEmailVerification),
     url(r"^accounts/verifyEmail/$", core_views.verifyEmail),
     url(r"^accounts/profiles/$", core_views.profiles),
-    #主頁
+    #搜尋
     url(r"^core/searchCIUser/$", core_views.searchCIUser),
     url(r"^core/searchLeader/$", core_views.searchLeader),
+    #團隊
+    url(r"^core/resetLeader/$", core_views.resetLeader),
+    #主頁
     url(r"^core/main/$", core_views.renderMainPage),
     #CI聊天
     url(r"^chat/$", chat_views.renderChatPage),
