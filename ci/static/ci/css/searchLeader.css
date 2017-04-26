@@ -1,3 +1,5 @@
-#dialogConfirmResetLeader {
+.dialogHidden {
     display: none;
+    float: left;
+    margin: 12px 12px 20px 0;
 }

@@ -16,6 +16,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db.models import Q
+from django.http import JsonResponse
 from core.models import CIUser
 from core.forms import CIUserForm
 from core.forms import UserForm
@@ -192,10 +193,12 @@ def searchLeader(request):
         qsetMatchedCIUser = CIUser.objects.filter(queryObject)
         #移除自己(user)
         qsetMatchedCIUser = qsetMatchedCIUser.exclude(strCIUserUID=request.user.ciuser.strCIUserUID)
-        #移除上層領導人有自己(user) 的選擇 - 避免領導人無限迴圈
+        #若已有領導人，移除原有的領導人
+        ciuserLeader = request.user.ciuser.leader
+        if ciuserLeader is not None:
+            qsetMatchedCIUser = qsetMatchedCIUser.exclude(strCIUserUID=ciuserLeader.strCIUserUID)
+        #移除 該選項的上層領導人有自己(user) 的選項 - 避免領導人無限迴圈
         for matchedCIUser in qsetMatchedCIUser:
-            print(matchedCIUser.strDisplayName)
-            print(raidUtil.isLeaderOrLeaderOfLeader(user=matchedCIUser.user, strLeaderUID=request.user.ciuser.strCIUserUID))
             if raidUtil.isLeaderOrLeaderOfLeader(user=matchedCIUser.user, strLeaderUID=request.user.ciuser.strCIUserUID):
                 qsetMatchedCIUser = qsetMatchedCIUser.exclude(strCIUserUID=matchedCIUser.strCIUserUID)
         #todo 若更換的對像為 原有領導人的領導人 是否該移除 (再討論)
@@ -211,8 +214,8 @@ def ciuserViewer(request):
 #重設 領導人
 @login_required
 def resetLeader(request):
-    #尋找結果字串
-    strSearchResult = None
+    #重設領導人結果 字串
+    strResetResult = None
     #團隊操作工具
     raidUtil = RaidUtility()
     if request.method == "POST":
@@ -221,13 +224,13 @@ def resetLeader(request):
             #重設 領導人 並重置 PV 值
             raidUtil.resetLeaderAndPV(user=request.user, strLeaderUID=strCIUserUID)
             #完成字串
-            strSearchResult = "已完成重設領導人"
+            strResetResult = "已完成重設領導人為 {strLeaderDisplayName}".format(strLeaderDisplayName=request.user.ciuser.leader.strDisplayName)
         else:
-            #無效字串
-            strSearchResult = "無效的設定"
+            #無效的領導人 UID
+            strResetResult = "無效的領導人 UID"
     else:
-        strSearchResult = "請輸入搜尋字串"
-    return render(request, "core/searchLeader.html", locals())
+        strResetResult = "只允許 POST 方式設定領導人"
+    return JsonResponse({"reset_result":strResetResult}, safe=False)
     
 #主頁面
 def renderMainPage(request):

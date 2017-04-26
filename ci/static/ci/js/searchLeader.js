@@ -28,7 +28,7 @@
                 modal: true,
                 buttons: {
                     "確定要重設": function() {
-                        $( this ).dialog("close");
+                        $(this).dialog("close");
                         console.log("確定要 重設領導人"); //確定
                         //POST 資料
                         dicPostData = {
@@ -39,7 +39,9 @@
                         console.log(dicPostData);
                         $.post("/core/resetLeader/", dicPostData, function(jsonResp){
                             console.log(jsonResp);
-                            return false;
+                            //顯示設定結果
+                            $("#strResetResult").html(jsonResp["reset_result"]);
+                            $("#dialogResetLeaderResult").dialog();
                         }, "json");
                     },
                     "取消": function() {

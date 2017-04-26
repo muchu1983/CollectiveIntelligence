@@ -22,10 +22,16 @@
 <!-- searchLeader.html block_content -->
 {{ block.super }} <!-- 複製上層 template block_content 的內容 -->
 <!-- 確認重設領導人 Dialog -->
-<div id="dialogConfirmResetLeader" title="重設領導人?">
+<div id="dialogConfirmResetLeader" class="dialogHidden" title="重設領導人?">
     <p>
-        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+        <span class="ui-icon ui-icon-alert"></span>
         每次重設領導人將一併把個人 PV 值歸 0，是否確定要重設領導人?
+    </p>
+</div>
+<!-- 重設領導人 結果 Dialog -->
+<div id="dialogResetLeaderResult" class="dialogHidden" title="結果">
+    <p id="strResetResult">
+        <span class="ui-icon ui-icon-info"></span>
     </p>
 </div>
 {% endblock block_content %}
