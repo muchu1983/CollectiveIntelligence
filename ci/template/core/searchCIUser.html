@@ -8,11 +8,6 @@
 <link type="text/css" rel="stylesheet" href="/static/ci/css/searchCIUser.css" >
 <!-- js -->
 <script type="text/javascript" src="/static/ci/js/searchCIUser.js"></script>
-<!-- custom script in this page -->
-<script type="text/javascript">
-    var strSessionKey = "{{ request.session.session_key }}";
-    var strCsrfToken = "{{ csrf_token }}";
-</script>
 {% endblock block_head %}
 
 <!-- override block_content -->

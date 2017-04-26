@@ -6,48 +6,43 @@
 
 (function($) {
     
-    $(document).ready(initSearchLeader);
+    $(document).ready(initBase);
     
-    function initSearchLeader() {
-        initBtnResetLeader();
+    function initBase() {
+        initBtnClearLeader();
     };
     
-    //設為領導人按鈕
-    function initBtnResetLeader(){
-        //點擊 設為領導人
-        $(".btnResetLeader").click(function(){
-            //先暫存選擇的 strCIUserUID
-            var strCIUserUID = $(this).prev().prev(".strCIUserUID").val();
-            //todo 確認 不是選擇自已
-            
-            //popup 確認重設領導人 將重置 個人值 PV
-            $("#dialogConfirmResetLeader").dialog({
+    //停止追隨領導人按鈕
+    function initBtnClearLeader(){
+        //點擊 停止追隨
+        $(".btnClearLeader").click(function(){
+            //popup 確認清除領導人
+            $("#dialogConfirmClearLeader").dialog({
                 resizable: false,
                 height: "auto",
                 width: 300,
                 modal: true,
                 buttons: {
-                    "確定要重設": function() {
+                    "確定要清除": function() {
                         $(this).dialog("close");
-                        console.log("確定要 重設領導人"); //確定
+                        console.log("確定要 清除領導人"); //確定
                         //POST 資料
                         dicPostData = {
-                            "strCIUserUID": strCIUserUID,
                             "csrfmiddlewaretoken": strCsrfToken
                         };
                         console.log(dicPostData);
                         //POST
-                        $.post("/core/resetLeader/", dicPostData, function(jsonResp){
+                        $.post("/core/clearLeader/", dicPostData, function(jsonResp){
                             console.log(jsonResp);
                             //顯示設定結果
-                            $("#strResetResult").html(jsonResp["reset_result"]);
-                            $("#dialogResetLeaderResult").dialog({
+                            $("#strClearResult").html(jsonResp["clear_result"]);
+                            $("#dialogClearLeaderResult").dialog({
                                 modal: true,
                                 buttons: {
                                     Ok: function() {
                                         $(this).dialog("close");
                                         //更新頁面
-                                        window.location.replace("/core/searchLeader/");
+                                        window.location.replace(window.location.href);
                                     }
                                 }
                             });
@@ -55,7 +50,7 @@
                     },
                     "取消": function() {
                         $( this ).dialog("close");
-                        console.log("取消 重設領導人"); //取消
+                        console.log("取消 清除領導人"); //取消
                     }
                 }
             });

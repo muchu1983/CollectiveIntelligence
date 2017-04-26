@@ -28,6 +28,13 @@ class RaidUtility:
         #儲存
         user.save()
         
+    #清除 使用者的 領導人
+    def clearLeader(self, user):
+        #清除
+        user.ciuser.leader = None
+        #儲存
+        user.save()
+        
     #取得 使用者的 領導人
     def getLeader(self, user):
         ciuserLeader = user.ciuser.leader

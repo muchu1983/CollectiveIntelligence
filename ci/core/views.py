@@ -232,6 +232,22 @@ def resetLeader(request):
         strResetResult = "只允許 POST 方式設定領導人"
     return JsonResponse({"reset_result":strResetResult}, safe=False)
     
+#清除 領導人
+@login_required
+def clearLeader(request):
+    #清除領導人結果 字串
+    strClearResult = None
+    #團隊操作工具
+    raidUtil = RaidUtility()
+    if request.method == "POST":
+        #清除 領導人
+        raidUtil.clearLeader(user=request.user)
+        #完成字串
+        strClearResult = "已完成清除領導人"
+    else:
+        strClearResult = "只允許 POST 方式設定領導人"
+    return JsonResponse({"clear_result":strClearResult}, safe=False)
+    
 #主頁面
 def renderMainPage(request):
     #取得顯示名稱

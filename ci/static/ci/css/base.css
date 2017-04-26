@@ -19,3 +19,9 @@ body {
     width: 82%;
     overflow-y: scroll;
 }
+/* 隱藏各種提示對話框 */
+.dialogHidden {
+    display: none;
+    float: left;
+    margin: 12px 12px 20px 0;
+}

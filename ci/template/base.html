@@ -29,6 +29,13 @@ This file is part of BSD license
     <script type="text/javascript" src="/static/jquery-ui-1.12.1/jquery-ui.min.js"></script>
     <!-- Paper.js -->
     <script type="text/javascript" src="/static/paperjs-v0.10.2/paper-full.min.js"></script>
+    <!-- ci -->
+    <script type="text/javascript" src="/static/ci/js/base.js"></script>
+    <!-- custom script in this page -->
+    <script type="text/javascript">
+        var strSessionKey = "{{ request.session.session_key }}";
+        var strCsrfToken = "{{ csrf_token }}";
+    </script>
     {% block block_head %}
     <!-- base.html block_head -->
     {% endblock block_head %}
@@ -95,9 +102,17 @@ This file is part of BSD license
                 <div>
                     <ul class="list-group">
                         <li class="list-group-item"><p class="bg-info">我的領導人</p></li>
-                        <li class="list-group-item"><a type="button" href="#">leader displayname</a></li>
+                        <li class="list-group-item">
+                            {% if request.user.ciuser.leader %}
+                            <a type="button" href="#">{{ request.user.ciuser.leader.strDisplayName }}</a>
+                            <a type="button" class="btn btn-default btnClearLeader" href="javascript: void(0)">停止追隨</a>
+                            {% else %}
+                            <span>尚無領導人</span>
+                            <a type="button" class="btn btn-default" href="/core/searchLeader/">開始尋找</a>
+                            {% endif %}
+                        </li>
                         <li class="list-group-item"><p class="bg-info">個人資訊</p></li>
-                        <li class="list-group-item"><a href="#">displayname</a></li>
+                        <li class="list-group-item"><a href="#">{{ request.user.ciuser.strDisplayName }}</a></li>
                         <li class="list-group-item"><p class="bg-info">我的追隨者</p></li>
                         <li class="list-group-item"><a href="#">追隨者1</a></li>
                         <li class="list-group-item"><a href="#">追隨者1</a></li>
@@ -109,6 +124,19 @@ This file is part of BSD license
         {% block block_content %}
         <!-- base.html block_content -->
         {% endblock block_content %}
+        <!-- 確認清除領導人 Dialog -->
+        <div id="dialogConfirmClearLeader" class="dialogHidden" title="清除領導人?">
+            <p>
+                <span class="ui-icon ui-icon-alert"></span>
+                下次設定領導人將一併把個人 PV 值歸 0，是否確定要清除領導人?
+            </p>
+        </div>
+        <!-- 清除領導人 結果 Dialog -->
+        <div id="dialogClearLeaderResult" class="dialogHidden" title="結果">
+            <p id="strClearResult">
+                <span class="ui-icon ui-icon-info"></span>
+            </p>
+        </div>
     </div>
     {% block block_footer %}
     <!-- base.html block_footer -->

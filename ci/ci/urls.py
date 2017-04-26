@@ -41,6 +41,7 @@ urlpatterns = [
     url(r"^core/searchLeader/$", core_views.searchLeader),
     #團隊
     url(r"^core/resetLeader/$", core_views.resetLeader),
+    url(r"^core/clearLeader/$", core_views.clearLeader),
     #主頁
     url(r"^core/main/$", core_views.renderMainPage),
     #CI聊天
