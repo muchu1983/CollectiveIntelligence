@@ -13,5 +13,38 @@
 <!-- override block_content -->
 {% block block_content %}
 <!-- ciuserViewer.html block_content -->
-
+<div class="row">
+    <!-- 頭像 -->
+    <img class="col-xs-2" src="/static/ci/img/default-thumbnail.png" height="100" width="100">
+    <!-- 資料列 -->
+    <div class="row col-xs-10">
+        <!-- 顯示名稱 -->
+        <div class="row">
+            <div class="col-xs-2">
+                <span>顯示名稱:</span>
+            </div>
+            <div class="col-xs-2">
+                <span>馬克貝努</span>
+            </div>
+        </div>
+        <!-- 個人 PV -->
+        <div class="row">
+            <div class="col-xs-2">
+                <span>個人 PV:</span>
+            </div>
+            <div class="col-xs-2">
+                <span>1000</span>
+            </div>
+        </div>
+        <!-- 團隊 PV -->
+        <div class="row">
+            <div class="col-xs-2">
+                <span>團隊 PV:</span>
+            </div>
+            <div class="col-xs-2">
+                <span>5000</span>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock block_content %}

@@ -271,6 +271,10 @@ def retrieveLstDicFollower(request):
         strRetrieveLstDicFollower = "只允許 POST 方式取得 追隨者"
     return JsonResponse({"retrieve_result":strRetrieveLstDicFollower, "lstDicFollower":lstDicFollower}, safe=False)
     
+#CI用戶檢視頁
+def ciuserViewer(request):
+    return render(request, "core/ciuserViewer.html", {})
+    
 #主頁面
 def renderMainPage(request):
     #取得顯示名稱

@@ -39,11 +39,13 @@ urlpatterns = [
     #搜尋
     url(r"^core/searchCIUser/$", core_views.searchCIUser),
     url(r"^core/searchLeader/$", core_views.searchLeader),
+    #用戶
+    url(r"^core/ciuserViewer/$", core_views.ciuserViewer),
     #團隊
     url(r"^core/resetLeader/$", core_views.resetLeader),
     url(r"^core/clearLeader/$", core_views.clearLeader),
     url(r"^core/retrieveLstDicFollower/$", core_views.retrieveLstDicFollower),
-    #主頁
+    #首頁
     url(r"^core/main/$", core_views.renderMainPage),
     #CI聊天
     url(r"^chat/$", chat_views.renderChatPage),
