@@ -12,10 +12,10 @@
 <script type="text/javascript" src="/static/ci/js/searchLeader.js"></script>
 {% endblock block_head %}
 
-<!-- override block_content -->
-{% block block_content %}
-<!-- searchLeader.html block_content -->
-{{ block.super }} <!-- 複製上層 template block_content 的內容 -->
+<!-- override block_hidden -->
+{% block block_hidden %}
+<!-- searchLeader.html block_hidden -->
+{{ block.super }} <!-- 複製上層 template block_hidden 的內容 -->
 <!-- 確認重設領導人 Dialog -->
 <div id="dialogConfirmResetLeader" class="dialogHidden" title="重設領導人?">
     <p>
@@ -29,7 +29,7 @@
         <span class="ui-icon ui-icon-info"></span>
     </p>
 </div>
-{% endblock block_content %}
+{% endblock block_hidden %}
 
 <!-- override block_extra_action -->
 {% block block_extra_action %}

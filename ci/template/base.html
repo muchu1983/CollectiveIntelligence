@@ -122,6 +122,9 @@ This file is part of BSD license
         {% block block_content %}
         <!-- base.html block_content -->
         {% endblock block_content %}
+        
+        {% block block_hidden %}
+        <!-- base.html block_hidden -->
         <!-- 確認清除領導人 Dialog -->
         <div id="dialogConfirmClearLeader" class="dialogHidden" title="清除領導人?">
             <p>
@@ -135,10 +138,11 @@ This file is part of BSD license
                 <span class="ui-icon ui-icon-info"></span>
             </p>
         </div>
-    </div>
-    {% block block_footer %}
-    <!-- base.html block_footer -->
-    <div>
+        {% endblock block_hidden %}
+        
+        {% block block_footer %}
+        <!-- base.html block_footer -->
+        <div>
             <span>Copyright (C) 2017, MuChu Hsu </span> 
             <span>
                 <a href="mailto:muchu1983@gmail.com">
@@ -146,7 +150,8 @@ This file is part of BSD license
                 </a>
             </span>
         </div>
-    {% endblock block_footer %}
+        {% endblock block_footer %}
+    </div>
 </body>
 
 </html>
