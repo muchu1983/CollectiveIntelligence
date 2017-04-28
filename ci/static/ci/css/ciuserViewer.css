@@ -1,0 +1,9 @@
+/* 聊天頻道 iframe */
+#iframeChatChannel {
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: 100%;
+    height: 50vh;
+    position: relative;
+}

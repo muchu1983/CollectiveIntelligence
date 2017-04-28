@@ -40,7 +40,7 @@ urlpatterns = [
     url(r"^core/searchCIUser/$", core_views.searchCIUser),
     url(r"^core/searchLeader/$", core_views.searchLeader),
     #用戶
-    url(r"^core/ciuserViewer/$", core_views.ciuserViewer),
+    url(r"^core/ciuserViewer/(?P<strCIUserUID>[0-9a-f-]{36})/$", core_views.ciuserViewer),
     #團隊
     url(r"^core/resetLeader/$", core_views.resetLeader),
     url(r"^core/clearLeader/$", core_views.clearLeader),

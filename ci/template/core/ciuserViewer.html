@@ -13,18 +13,19 @@
 <!-- override block_content -->
 {% block block_content %}
 <!-- ciuserViewer.html block_content -->
-<div class="row">
+<!-- 標題列 -->
+<div id="divHeader" class="row">
     <!-- 頭像 -->
-    <img class="row col-xs-2" src="/static/ci/img/default-thumbnail.png" height="100" width="100">
+    <img class="col-xs-2" src="/static/ci/img/default-thumbnail.png" height="80" width="80">
     <!-- 資料列 -->
-    <div class="row col-xs-10">
+    <div class="col-xs-10 row">
         <!-- 顯示名稱 -->
         <div class="row">
             <div class="col-xs-2">
                 <span>顯示名稱:</span>
             </div>
             <div class="col-xs-2">
-                <span>馬克貝努</span>
+                <span>{{ ciuserTarget.strDisplayName }}</span>
             </div>
         </div>
         <!-- 個人 PV -->
@@ -33,7 +34,7 @@
                 <span>個人 PV:</span>
             </div>
             <div class="col-xs-2">
-                <span>1000</span>
+                <span>{{ ciuserTarget.intPointVolume }}</span>
             </div>
         </div>
         <!-- 團隊 PV -->
@@ -42,8 +43,38 @@
                 <span>團隊 PV:</span>
             </div>
             <div class="col-xs-2">
-                <span>5000</span>
+                <span>99999</span>
             </div>
+        </div>
+    </div>
+</div>
+<!-- 水平線 -->
+<hr>
+<div id="divContent" class="row">
+    <!-- 聊天頻道 -->
+    <div class="col-xs-6">
+        <iframe id="iframeChatChannel" src="/chat/channel/{{ ciuserTarget.strCIUserUID }}">
+        </iframe>
+    </div>
+    <!-- 任務欄 -->
+    <div class="col-xs-6">
+        <!-- 已接受任務 -->
+        <div>
+            <button class="bg-primary">已接受任務<span class="badge">5</span></button>
+            <ul class="list-group">
+                <li class="list-group-item">First item</li>
+                <li class="list-group-item">Second item</li>
+                <li class="list-group-item">Third item</li>
+            </ul>
+        </div>
+        <!-- 已發佈任務 -->
+        <div>
+            <button class="bg-primary">已發佈任務<span class="badge">5</span></button>
+            <ul class="list-group">
+                <li class="list-group-item">First item</li>
+                <li class="list-group-item">Second item</li>
+                <li class="list-group-item">Third item</li>
+            </ul>
         </div>
     </div>
 </div>

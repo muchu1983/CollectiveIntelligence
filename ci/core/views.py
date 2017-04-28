@@ -272,8 +272,11 @@ def retrieveLstDicFollower(request):
     return JsonResponse({"retrieve_result":strRetrieveLstDicFollower, "lstDicFollower":lstDicFollower}, safe=False)
     
 #CI用戶檢視頁
-def ciuserViewer(request):
-    return render(request, "core/ciuserViewer.html", {})
+def ciuserViewer(request, strCIUserUID=None):
+    ciuserTarget = None
+    if strCIUserUID is not None:
+        ciuserTarget = CIUser.objects.filter(strCIUserUID=strCIUserUID).first()
+    return render(request, "core/ciuserViewer.html", locals())
     
 #主頁面
 def renderMainPage(request):

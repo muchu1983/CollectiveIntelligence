@@ -130,7 +130,7 @@ This file is part of BSD license
                         <li class="list-group-item"><p class="bg-info">我的領導人</p></li>
                         <li class="list-group-item">
                             {% if request.user.ciuser.leader %}
-                            <a type="button" href="#">{{ request.user.ciuser.leader.strDisplayName }}</a>
+                            <a type="button" href="/core/ciuserViewer/{{ request.user.ciuser.leader.strCIUserUID }}/">{{ request.user.ciuser.leader.strDisplayName }}</a>
                             <a type="button" class="btn btn-default btnClearLeader" href="javascript: void(0)">停止追隨</a>
                             {% else %}
                             <span>尚無領導人</span>
@@ -138,7 +138,7 @@ This file is part of BSD license
                             {% endif %}
                         </li>
                         <li class="list-group-item"><p class="bg-info">個人資訊</p></li>
-                        <li class="list-group-item"><a href="/core/ciuserViewer/">{{ request.user.ciuser.strDisplayName }}</a></li>
+                        <li class="list-group-item"><a href="/core/ciuserViewer/{{ request.user.ciuser.strCIUserUID }}/">{{ request.user.ciuser.strDisplayName }}</a></li>
                         <li id="labelMyFollower" class="list-group-item"><p class="bg-info">我的追隨者</p></li>
                     </ul>
                 </div>
