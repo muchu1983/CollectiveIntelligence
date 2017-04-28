@@ -273,9 +273,15 @@ def retrieveLstDicFollower(request):
     
 #CI用戶檢視頁
 def ciuserViewer(request, strCIUserUID=None):
+    raidUtil = RaidUtility()
     ciuserTarget = None
+    intRaidPV = 0
     if strCIUserUID is not None:
+        #查尋該用戶
         ciuserTarget = CIUser.objects.filter(strCIUserUID=strCIUserUID).first()
+        if ciuserTarget is not None:
+            #計算 團隊 PV
+            intRaidPV = raidUtil.calculateRaidPV(ciuserTarget.user)
     return render(request, "core/ciuserViewer.html", locals())
     
 #主頁面
