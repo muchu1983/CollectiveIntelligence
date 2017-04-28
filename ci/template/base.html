@@ -48,44 +48,63 @@ This file is part of BSD license
         <div class="container-fluid col-xs-12 row">
             
             <!-- 靠左 nav -->
-            <ul class="nav navbar-nav navbar-left col-xs-10 row">
+            <ul class="nav navbar-nav navbar-left col-xs-9 row">
                 <li class="col-xs-2">
                     <!-- 團隊 toggle button -->
-                    <a type="button" data-toggle="collapse" href="#raidPanel">
-                        <span class="glyphicon glyphicon-dashboard"></span>
+                    <a class="text-center" type="button" data-toggle="collapse" href="#raidPanel">
+                        <span class="glyphicon glyphicon-dashboard"></span><br>
                         團隊
                     </a>
                 </li>
                 <!-- 協作 -->
                 <li class="col-xs-2">
-                    <a type="button" href="/core/teamwork/">
-                        <span class="glyphicon glyphicon-blackboard"></span>
+                    <a class="text-center" type="button" href="/core/teamwork/">
+                        <span class="glyphicon glyphicon-blackboard"></span><br>
                         協作
                     </a>
                 </li>
                 <!-- 首頁 -->
                 <li class="col-xs-2">
-                    <a type="button" href="/core/main/">
-                        <span class="glyphicon glyphicon-home"></span>
+                    <a class="text-center" type="button" href="/core/main/">
+                        <span class="glyphicon glyphicon-home"></span><br>
                         首頁
                     </a>
                 </li>
             </ul>
             
             <!-- 靠右 nav -->
-            <ul class="nav navbar-nav navbar-right col-xs-2">
+            <ul class="nav navbar-nav navbar-right col-xs-3">
+                
+                <!-- 語言 dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle text-center" data-toggle="dropdown" href="#">
+                        <span class="glyphicon glyphicon-globe"></span><br><span class="text-primary">語言</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/core/i18n/">台港合旗</a></li>
+                        <li><a href="/core/i18n/">中共國旗</a></li>
+                        <li><a href="/core/i18n/">英美合旗</a></li>
+                        <li><a href="/core/i18n/">日本國旗</a></li>
+                    </ul>
+                </li>
                 
                 <!-- 帳號 dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="glyphicon glyphicon-user"></span><span class="text-primary">{{ request.user.ciuser.strDisplayName }}</span>
+                    <a class="dropdown-toggle text-center" data-toggle="dropdown" href="#">
+                        <span class="glyphicon glyphicon-user"></span><br>
+                        {% if request.user.is_authenticated  %}
+                        <span class="text-primary">{{ request.user.ciuser.strDisplayName }}</span>
+                        {% else %}
+                        <span class="text-info">未登入</span>
+                        {% endif %}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/accounts/register/">註冊</a></li>
                         {% if request.user.is_authenticated  %}
+                        <li><a href="/accounts/profiles/">用戶設定</a></li>
+                        <li><a href="/accounts/register/">註冊</a></li>
                         <li><a href="/accounts/logout/">登出</a></li>
-                        <li><a href="/accounts/profiles/">個人資料</a></li>
                         {% else %}
+                        <li><a href="/accounts/register/">註冊</a></li>
                         <li><a href="/accounts/login/">登入</a></li>
                         {% endif %}
                     </ul>
@@ -119,7 +138,7 @@ This file is part of BSD license
                             {% endif %}
                         </li>
                         <li class="list-group-item"><p class="bg-info">個人資訊</p></li>
-                        <li class="list-group-item"><a href="#">{{ request.user.ciuser.strDisplayName }}</a></li>
+                        <li class="list-group-item"><a href="/core/ciuserViewer/">{{ request.user.ciuser.strDisplayName }}</a></li>
                         <li id="labelMyFollower" class="list-group-item"><p class="bg-info">我的追隨者</p></li>
                     </ul>
                 </div>
