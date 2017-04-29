@@ -15,9 +15,3 @@ def channel(request, strCIUserUID=None):
     userTarget = raidUtil.getUserByCIUSerUID(strCIUserUID=strCIUserUID)
     return render(request, "chat/channel.html", locals())
 
-
-#
-def renderChatPage(request):
-    if not request.session.get("has_session", None):
-        request.session["has_session"] = True
-    return render(request, "chat.html", {})

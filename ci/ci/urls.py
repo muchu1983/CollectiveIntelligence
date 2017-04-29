@@ -49,5 +49,4 @@ urlpatterns = [
     url(r"^core/main/$", core_views.renderMainPage),
     #聊天
     url(r"^chat/channel/(?P<strCIUserUID>[0-9a-f-]{36})/$", chat_views.channel),
-    #url(r"^chat/$", chat_views.renderChatPage),
 ]

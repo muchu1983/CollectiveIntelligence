@@ -12,6 +12,10 @@ from core import consumers as core_consumers
 from chat import consumers as chat_consumers
 
 channel_routing = [
+    #chat
+    route_class(chat_consumers.ChannelConsumer, path=r"^/ws/chat/channel/(?P<strChannelRoom>[0-9a-f-]{36})/$"),
+    
+    #todo delete below
     route_class(core_consumers.UidManageConsumer, path=r"^/ws/core/uidmanage/$"),
     route_class(chat_consumers.ChatConsumer, path=r"^/ws/chat/(?P<ci_room>[a-zA-Z0-9_]+)/$"),
     route_class(core_consumers.BattleConsumer, path=r"^/ws/battle/(?P<field>[a-zA-Z0-9_]+)/$"),

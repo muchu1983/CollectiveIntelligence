@@ -7,7 +7,16 @@
 <!-- css -->
 <link type="text/css" rel="stylesheet" href="/static/ci/css/channel.css" >
 <!-- js -->
+<script type="text/javascript" src="/static/ci/js/websocket_utility.js"></script>
 <script type="text/javascript" src="/static/ci/js/channel.js"></script>
+<script type="text/javascript">
+    var strChannelRoom = "{{ userTarget.ciuser.strCIUserUID }}";
+    var strCsrfToken = "{{ csrf_token }}";
+    var strVisitorCIUserUID = null;
+    {% if request.user.is_authenticated  %}
+        strVisitorCIUserUID = "{{ request.user.ciuser.strCIUserUID }}";
+    {% endif %}
+</script>
 {% endblock block_head %}
 
 <!-- override block_content -->
