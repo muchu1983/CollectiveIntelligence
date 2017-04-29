@@ -7,11 +7,13 @@
 /* websocket utility function */
 
 //連線至 websocket
-function connectToWs(strWsUrl, jsonOnopenMsg) {
+function connectToWs(strWsUrl) {
     var websocketTo = new WebSocket(strWsUrl);
     //web socket 建立完成
     websocketTo.onopen = function(){
-        //連線已邁立，送出首發訊息
+        //連線已邁立
+        //傳送 type:sys hello
+        jsonOnopenMsg = buildWsJsonMessage("type:sys", "hello");
         sendWsMessage(websocketTo, jsonOnopenMsg);
     };
     return websocketTo;
@@ -26,16 +28,24 @@ function sendWsMessage(websocketTo, jsonMsg) {
 function handleWsMessage(websocketFrom, funcJsonMsgHandler){
     websocketFrom.onmessage = function(eventMsg) {
         jsonMsg = JSON.parse(eventMsg.data);
-        console.log("receive json:");
+        console.log("receive json message from websocket:");
         console.log(jsonMsg);
         funcJsonMsgHandler(jsonMsg);
     };
 };
 
 //建構 標準的 websocket 訊息
-function buildWsJsonMessage(strMsg){
+function buildWsJsonMessage(strType, strMsg){
+    /*
+        strType:
+        type:sys 系統訊息
+        type:action 動作
+        type:yell 大喊
+        type:whisper 密語
+    */
     jsonMsg = {
         "strVisitorCIUserUID": strVisitorCIUserUID,
+        "strType": strType,
         "strMsg": strMsg
     };
     return jsonMsg;

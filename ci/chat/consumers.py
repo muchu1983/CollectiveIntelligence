@@ -35,17 +35,32 @@ class ChannelConsumer(JsonWebsocketConsumer):
         raidUtil = RaidUtility()
         strChannelRoom = kwargs.get("strChannelRoom")
         strVisitorCIUserUID = content.get("strVisitorCIUserUID", None)
+        strType = content.get("strType", None)
         strMsg = content.get("strMsg", None)
-        #有新使用者加入頻道
-        if strMsg == "hello":
-            #嘗試取得 使用者 物件
-            userVisitor = raidUtil.getUserByCIUSerUID(strCIUserUID=strVisitorCIUserUID)
-            #建構回覆訊息
-            strRespMsg = "hello anonymous"
-            if userVisitor is not None:
-                strRespMsg = "hello {strVisitorDisplayName}".format(strVisitorDisplayName=userVisitor.ciuser.strDisplayName)
-            jsonRespMsg = wsUtil.buildWsJsonMessage(strMsg=strRespMsg)
+        #嘗試取得 使用者 物件
+        userVisitor = raidUtil.getUserByCIUSerUID(strCIUserUID=strVisitorCIUserUID)
+        #系統訊息
+        if strType == "type:sys":
+            #有新使用者加入頻道
+            if strMsg == "hello":
+                #建構回覆訊息
+                strRespMsg = "Anonymous joined."
+                if userVisitor is not None:
+                    strRespMsg = "{strVisitorDisplayName} joined.".format(strVisitorDisplayName=userVisitor.ciuser.strDisplayName)
+                jsonRespMsg = wsUtil.buildWsJsonMessage(strRole="role:sys", strAlign="align:center", strMsg=strRespMsg)
+                self.group_send(strChannelRoom, jsonRespMsg)
+        #動作訊息
+        elif strType == "type:action":
+            pass
+        #大喊訊息
+        elif strType == "type:yell":
+            jsonRespMsg = wsUtil.buildWsJsonMessage(strRole="role:sys", strAlign="align:center", strMsg=strMsg)
             self.group_send(strChannelRoom, jsonRespMsg)
+        #密語訊息
+        elif strType == "type:whisper":
+            pass
+        else:
+            pass
             
     #離線
     def disconnect(self, message, **kwargs):

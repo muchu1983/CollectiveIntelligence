@@ -15,8 +15,19 @@ class WebsocketUtility:
         pass
         
     #建構 標準的 websocket 訊息
-    def buildWsJsonMessage(self, strMsg=None):
+    def buildWsJsonMessage(self, strRole=None, strAlign=None, strMsg=None):
+        """
+        strRole:
+        role:sys
+        role:leader
+        role:host
+        role:follower
+        role:ciuser
+        role:anonymous
+        """
         jsonMsg = {
+            "strRole": strRole,
+            "strAlign": strAlign,
             "strMsg": strMsg
         }
         return jsonMsg;
