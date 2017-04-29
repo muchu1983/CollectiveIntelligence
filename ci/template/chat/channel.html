@@ -1,0 +1,28 @@
+<!-- extends chat/base_chat.html -->
+{% extends "chat/base_chat.html" %}
+
+<!-- override block_head -->
+{% block block_head %}
+<!-- channel.html block_head -->
+<!-- css -->
+<link type="text/css" rel="stylesheet" href="/static/ci/css/channel.css" >
+<!-- js -->
+<script type="text/javascript" src="/static/ci/js/channel.js"></script>
+{% endblock block_head %}
+
+<!-- override block_content -->
+{% block block_content %}
+<!-- channel.html block_content -->
+<!-- 頻道名稱 -->
+<div>
+    <p>{{ userTarget.ciuser.strDisplayName }} 的頻道</p>
+</div>
+<!-- 聊天內容 -->
+<div>
+    <ul class="list-group">
+        <li class="list-group-item">聊天內容</li>
+        <li class="list-group-item">聊天內容</li>
+        <li class="list-group-item">聊天內容</li>
+    </ul>
+</div>
+{% endblock block_content %}
