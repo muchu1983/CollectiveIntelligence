@@ -23,7 +23,7 @@
     
     //初始化 websocket
     function initConnectToWebsocket() {
-        var strWsUrl = "ws://" + window.location.host + "/ws/chat/channel/" + strChannelRoom + "/?session_key=" + strSessionKey;
+        var strWsUrl = "ws://" + window.location.host + "/ws/chat/channel/" + strHostCIUserUID + "/?session_key=" + strSessionKey;
         /* 連線至 websocket */
         wsChannel = connectToWs(strWsUrl);
     };
