@@ -10,7 +10,7 @@
 <script type="text/javascript" src="/static/ci/js/websocket_utility.js"></script>
 <script type="text/javascript" src="/static/ci/js/channel.js"></script>
 <script type="text/javascript">
-    var strHostCIUserUID = "{{ userTarget.ciuser.strCIUserUID }}";
+    var strHostCIUserUID = "{{ userHost.ciuser.strCIUserUID }}";
     var strCsrfToken = "{{ csrf_token }}";
     var strVisitorCIUserUID = null;
     {% if request.user.is_authenticated  %}
@@ -24,7 +24,7 @@
 <!-- channel.html block_content -->
 <!-- 頻道名稱 -->
 <div>
-    <p>{{ userTarget.ciuser.strDisplayName }} 的頻道</p>
+    <p>{{ userHost.ciuser.strDisplayName }} 的頻道</p>
 </div>
 <!-- 聊天內容 -->
 <div>

@@ -12,6 +12,6 @@ from core.utility.raid import RaidUtility
 #聊天頻道
 def channel(request, strCIUserUID=None):
     raidUtil = RaidUtility()
-    userTarget = raidUtil.getUserByCIUSerUID(strCIUserUID=strCIUserUID)
+    userHost = raidUtil.getUserByCIUSerUID(strCIUserUID=strCIUserUID)
     return render(request, "chat/channel.html", locals())
 

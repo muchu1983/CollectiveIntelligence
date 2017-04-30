@@ -1,4 +1,36 @@
+/*聊天訊息內容*/
 #ulChatMessage{
-    height: 65vh;
+    height: 75vh;
     overflow: auto;
+    background-color: lavender;
+}
+/*訊息角色*/
+#ulChatMessage .roleAnonymous{
+    color: lightgray;
+    background-color: lavender;
+}
+
+#ulChatMessage .roleCiuser{
+    color: white;
+    background-color: lavender;
+}
+
+#ulChatMessage .roleFollower{
+    color: forestgreen;
+    background-color: lavender;
+}
+
+#ulChatMessage .roleHost{
+    color: royalblue;
+    background-color: lavender;
+}
+
+#ulChatMessage .roleLeader{
+    color: darkorchid;
+    background-color: lavender;
+}
+
+#ulChatMessage .roleSys{
+    color: coral;
+    background-color: lavender;
 }

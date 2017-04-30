@@ -31,16 +31,25 @@
     //初始化 websocket 訊息處理
     function initHandleWsMessage() {
         handleWsMessage(wsChannel, function(jsonMsg){
-            //角色
-            if (jsonMsg["strRole"] == "role:sys"){
-                
-            }
-            //對齊方向
-            if (jsonMsg["strAlign"] == "align:center"){
-                
-            }
+            //角色 與 class 對應表
+            var dicRoleClassMapping = {
+                "role:sys": "roleSys",
+                "role:leader": "roleLeader",
+                "role:host": "roleHost",
+                "role:follower": "roleFollower",
+                "role:ciuser": "roleCiuser",
+                "role:anonymous": "roleAnonymous",
+            };
+            var strRole = jsonMsg["strRole"];
+            //對齊方向 與 class 對應表
+            var dicAlignClassMapping = {
+                "align:center":"text-center",
+                "align:left":"text-left",
+                "align:right":"text-right",
+            };
+            var strAlign = jsonMsg["strAlign"];
             //加入訊息至聊天內容 #ulChatMessage
-            $("#ulChatMessage").append(buildMessageLiTag(jsonMsg["strMsg"], null, null));
+            $("#ulChatMessage").append(buildMessageLiTag(jsonMsg["strMsg"], dicRoleClassMapping[strRole], dicAlignClassMapping[strAlign]));
             //訊息過長時，移除最前面的訊息
             if ($("#ulChatMessage li").length > 100){
                 $("#ulChatMessage li").first().remove();
@@ -75,9 +84,9 @@
     /* utility function */
     
     //建立訊息 li
-    function buildMessageLiTag(strMsg, strColor, strAlign){
+    function buildMessageLiTag(strMsg, strClassRole, strClassTextAlign){
         strLiTag = 
-        "<li class=\"list-group-item\">" +
+        "<li class=\"list-group-item " + strClassRole + " " + strClassTextAlign + "\">" +
             strMsg +
         "</li>";
         return strLiTag;
