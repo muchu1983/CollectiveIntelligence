@@ -4,6 +4,10 @@
     overflow: auto;
     background-color: lavender;
 }
+/*訊息顏色說明*/
+#ulMsgColorGuide {
+    background-color: lavender;
+}
 /*訊息角色*/
 .roleAnonymous{
     color: lightgray;
