@@ -15,7 +15,7 @@ class WebsocketUtility:
         pass
         
     #建構 標準的 websocket 訊息
-    def buildWsJsonMessage(self, strRole=None, strAlign=None, strMsg=None):
+    def buildWsJsonMessage(self, strRole=None, strMsgAlign=None, strMsg=None, strVisitorDisplayName=None):
         """
         strRole:
         role:sys
@@ -27,7 +27,8 @@ class WebsocketUtility:
         """
         jsonMsg = {
             "strRole": strRole,
-            "strAlign": strAlign,
-            "strMsg": strMsg
+            "strMsgAlign": strMsgAlign,
+            "strMsg": strMsg,
+            "strVisitorDisplayName":strVisitorDisplayName
         }
         return jsonMsg;

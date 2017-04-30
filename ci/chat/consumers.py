@@ -38,11 +38,14 @@ class ChannelConsumer(JsonWebsocketConsumer):
         strVisitorCIUserUID = content.get("strVisitorCIUserUID", None)
         strType = content.get("strType", None)
         strMsg = content.get("strMsg", None)
+        strMsgAlign = content.get("strMsgAlign", None)
         #嘗試取得 使用者 物件
         userVisitor = raidUtil.getUserByCIUSerUID(strCIUserUID=strVisitorCIUserUID)
         userHost = raidUtil.getUserByCIUSerUID(strCIUserUID=kwargs.get("strHostCIUserUID", None))
         #判斷 造訪者 的角色
         strRole = self.determineVisitorRole(userVisitor, userHost)
+        #造訪者 顯示名稱
+        strVisitorDisplayName = userVisitor.ciuser.strDisplayName if userVisitor else "Anonymous"
         #系統訊息
         if strType == "type:sys":
             #有新使用者加入頻道
@@ -53,14 +56,15 @@ class ChannelConsumer(JsonWebsocketConsumer):
                     strRespMsg = "Anonymous joined."
                 else:
                     strRespMsg = "{strVisitorDisplayName} joined.".format(strVisitorDisplayName=userVisitor.ciuser.strDisplayName)
-                jsonRespMsg = wsUtil.buildWsJsonMessage(strRole=strRole, strAlign="align:center", strMsg=strRespMsg)
+                #建構系統訊息
+                jsonRespMsg = wsUtil.buildWsJsonMessage(strRole=strRole, strMsgAlign=strMsgAlign, strMsg=strRespMsg, strVisitorDisplayName=strVisitorDisplayName)
                 self.group_send(strChannelRoom, jsonRespMsg)
         #動作訊息
         elif strType == "type:action":
             pass
         #大喊訊息
         elif strType == "type:yell":
-            jsonRespMsg = wsUtil.buildWsJsonMessage(strRole=strRole, strAlign="align:center", strMsg=strMsg)
+            jsonRespMsg = wsUtil.buildWsJsonMessage(strRole=strRole, strMsgAlign=strMsgAlign, strMsg=strMsg, strVisitorDisplayName=strVisitorDisplayName)
             self.group_send(strChannelRoom, jsonRespMsg)
         #密語訊息
         elif strType == "type:whisper":

@@ -22,9 +22,29 @@
 <!-- override block_content -->
 {% block block_content %}
 <!-- channel.html block_content -->
-<!-- 頻道名稱 -->
-<div>
-    <p>{{ userHost.ciuser.strDisplayName }} 的頻道</p>
+
+<!-- 頻道標頭 -->
+<div class="row">
+    <!-- 頻道名稱 -->
+    <p class="col-xs-8">{{ userHost.ciuser.strDisplayName }} 的頻道</p>
+    <!-- 文字方向切換鈕 -->
+    <div class="col-xs-2">
+        <input type="checkbox" id="checkboxMsgAlign" data-toggle="toggle" data-on="right" data-off="left" data-offstyle="primary" data-size="mini">
+    </div>
+    <!-- 文字顏色說明 -->
+    <div class="col-xs-1 dropdown">
+        <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-text-color"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+            <li><span class="roleAnonymous">路人</a></li>
+            <li><span class="roleCiuser">用戶</a></li>
+            <li><span class="roleFollower">追隨者</a></li>
+            <li><span class="roleHost">頻道主持人</a></li>
+            <li><span class="roleLeader">頻道主的領導人</a></li>
+            <li><span class="roleSys">系統訊息</a></li>
+        </ul>
+    </div>
 </div>
 <!-- 聊天內容 -->
 <div>

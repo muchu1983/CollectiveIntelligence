@@ -42,14 +42,14 @@
             };
             var strRole = jsonMsg["strRole"];
             //對齊方向 與 class 對應表
-            var dicAlignClassMapping = {
+            var dicMsgAlignClassMapping = {
                 "align:center":"text-center",
                 "align:left":"text-left",
                 "align:right":"text-right",
             };
-            var strAlign = jsonMsg["strAlign"];
+            var strMsgAlign = jsonMsg["strMsgAlign"];
             //加入訊息至聊天內容 #ulChatMessage
-            $("#ulChatMessage").append(buildMessageLiTag(jsonMsg["strMsg"], dicRoleClassMapping[strRole], dicAlignClassMapping[strAlign]));
+            $("#ulChatMessage").append(buildMessageLiTag(jsonMsg["strMsg"], dicRoleClassMapping[strRole], dicMsgAlignClassMapping[strMsgAlign]));
             //訊息過長時，移除最前面的訊息
             if ($("#ulChatMessage li").length > 100){
                 $("#ulChatMessage li").first().remove();
@@ -62,9 +62,17 @@
     //初始化 傳送訊息按鈕
     function initBtnSendChatMsg(){
         $("#btnSendChatMsg").click(function(){
+            //訊息內容
             var strChatMsg = $("#inputChatMsg").val();
             $("#inputChatMsg").val(""); //清除輸入框
-            jsonChatMsg = buildWsJsonMessage("type:yell", strChatMsg);
+            //訊息對齊方向
+            var strMsgAlign = null;
+            if ($("#checkboxMsgAlign").prop("checked")) {
+                strMsgAlign = "align:right";
+            } else {
+                strMsgAlign = "align:left";
+            };
+            jsonChatMsg = buildWsJsonMessage("type:yell", strChatMsg, strMsgAlign);
             sendWsMessage(wsChannel, jsonChatMsg);
         });
     }

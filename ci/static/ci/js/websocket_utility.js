@@ -13,7 +13,7 @@ function connectToWs(strWsUrl) {
     websocketTo.onopen = function(){
         //連線已邁立
         //傳送 type:sys hello
-        jsonOnopenMsg = buildWsJsonMessage("type:sys", "hello");
+        jsonOnopenMsg = buildWsJsonMessage("type:sys", "hello", "align:center");
         sendWsMessage(websocketTo, jsonOnopenMsg);
     };
     return websocketTo;
@@ -35,7 +35,7 @@ function handleWsMessage(websocketFrom, funcJsonMsgHandler){
 };
 
 //建構 標準的 websocket 訊息
-function buildWsJsonMessage(strType, strMsg){
+function buildWsJsonMessage(strType, strMsg, strMsgAlign){
     /*
         strType:
         type:sys 系統訊息
@@ -46,7 +46,8 @@ function buildWsJsonMessage(strType, strMsg){
     jsonMsg = {
         "strVisitorCIUserUID": strVisitorCIUserUID,
         "strType": strType,
-        "strMsg": strMsg
+        "strMsg": strMsg,
+        "strMsgAlign": strMsgAlign
     };
     return jsonMsg;
 };

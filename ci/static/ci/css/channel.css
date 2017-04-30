@@ -5,32 +5,32 @@
     background-color: lavender;
 }
 /*訊息角色*/
-#ulChatMessage .roleAnonymous{
+.roleAnonymous{
     color: lightgray;
     background-color: lavender;
 }
 
-#ulChatMessage .roleCiuser{
+.roleCiuser{
     color: white;
     background-color: lavender;
 }
 
-#ulChatMessage .roleFollower{
+.roleFollower{
     color: forestgreen;
     background-color: lavender;
 }
 
-#ulChatMessage .roleHost{
+.roleHost{
     color: royalblue;
     background-color: lavender;
 }
 
-#ulChatMessage .roleLeader{
+.roleLeader{
     color: darkorchid;
     background-color: lavender;
 }
 
-#ulChatMessage .roleSys{
+.roleSys{
     color: coral;
     background-color: lavender;
 }
