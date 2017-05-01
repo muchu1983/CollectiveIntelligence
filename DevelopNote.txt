@@ -26,3 +26,4 @@ Django 架構
 startproject ci
 startapp core
 startapp chat
+startapp quest
