@@ -17,6 +17,5 @@ channel_routing = [
     
     #todo delete below
     route_class(core_consumers.UidManageConsumer, path=r"^/ws/core/uidmanage/$"),
-    route_class(chat_consumers.ChatConsumer, path=r"^/ws/chat/(?P<ci_room>[a-zA-Z0-9_]+)/$"),
     route_class(core_consumers.BattleConsumer, path=r"^/ws/battle/(?P<field>[a-zA-Z0-9_]+)/$"),
 ]
