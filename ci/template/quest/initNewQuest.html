@@ -1,0 +1,24 @@
+<!-- extends quest/base_quest.html-->
+{% extends "quest/base_quest.html" %}
+
+<!-- override block_head -->
+{% block block_head %}
+<!-- initNewQuest.html block_head -->
+<!-- css -->
+<link type="text/css" rel="stylesheet" href="/static/ci/css/initNewQuest.css" >
+<!-- js -->
+<script type="text/javascript" src="/static/ci/js/initNewQuest.js"></script>
+{% endblock block_head %}
+
+<!-- override block_content -->
+{% block block_content %}
+<!-- initNewQuest.html block_content -->
+<h1>發起新任務</h1>
+<!-- 發起新任務 form -->
+<form action="" method="post">
+    <!-- CSRF 保護 -->
+    {% csrf_token %}
+    {{ formCIQuest.as_p }}
+    <input type="submit" value="發起">
+</form>
+{% endblock block_content %}

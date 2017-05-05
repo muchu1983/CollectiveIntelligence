@@ -26,6 +26,7 @@ from django.contrib.auth.views import login as builtin_login
 from django.contrib.auth.views import logout as builtin_logout
 from core import views as core_views
 from chat import views as chat_views
+from quest import views as quest_views
 
 urlpatterns = [
     url(r"^admin/", include(admin.site.urls)),
@@ -49,4 +50,6 @@ urlpatterns = [
     url(r"^core/main/$", core_views.renderMainPage),
     #聊天
     url(r"^chat/channel/(?P<strCIUserUID>[0-9a-f-]{36})/$", chat_views.channel),
+    #任務
+    url(r"^quest/initNewQuest/$", quest_views.initNewQuest),
 ]
