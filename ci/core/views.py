@@ -64,7 +64,7 @@ def profiles(request):
                 #設為未認證
                 request.user.ciuser.isEmailVerified = False
                 #亂數設定一個新的認證碼
-                request.user.ciuser.strEmailVerificationKey = str(uuid.uuid4())
+                request.user.ciuser.strEmailVerificationKey = str(uuid.uuid1())
             #分兩段儲存
             formUser.save()
             formCIUser.save()
@@ -94,7 +94,7 @@ def sendEmailVerification(request):
         #使用者 email
         strEmail = request.user.email
         #產生 認證金鑰
-        strKeyUUID = str(uuid.uuid4())
+        strKeyUUID = str(uuid.uuid1())
         #儲存 認證金鑰
         request.user.ciuser.strEmailVerificationKey = strKeyUUID
         #儲存 過期時間為 1天
@@ -275,10 +275,10 @@ def retrieveLstDicFollower(request):
 def ciuserViewer(request, strCIUserUID=None):
     raidUtil = RaidUtility()
     intRaidPV = 0
-    userTarget = raidUtil.getUserByCIUSerUID(strCIUserUID=strCIUserUID)
-    if userTarget is not None:
+    userHost = raidUtil.getUserByCIUSerUID(strCIUserUID=strCIUserUID)
+    if userHost is not None:
         #計算 團隊 PV
-        intRaidPV = raidUtil.calculateRaidPV(userTarget)
+        intRaidPV = raidUtil.calculateRaidPV(userHost)
     return render(request, "core/ciuserViewer.html", locals())
     
 #主頁面
