@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     "channels",
     "core",
     "chat",
+    "quest",
 )
 
 MIDDLEWARE_CLASSES = (

@@ -14,10 +14,10 @@ from django.dispatch import receiver
 
 #CI使用者
 class CIUser(models.Model):
-    #一對一 Django 使用者
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
     #UID DB索引鍵 建立後不可更改 搜尋使用UID可避免 username 曝光
     strCIUserUID = models.CharField(db_index=True, editable=False, max_length=36, default=str(uuid.uuid4()), null=False)
+    #一對一 Django 使用者
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     #多對一 領導人 CI使用者
     leader = models.ForeignKey("self", default=None, null=True, on_delete=models.SET_NULL)
     #PV值
