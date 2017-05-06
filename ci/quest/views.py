@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from quest.forms import CIQuestForm
 from quest.models import CIQuest
 from django.db.models import Q
+from quest.utility.quest import QuestUtility
 
 #發起新任務
 @login_required
@@ -56,3 +57,10 @@ def searchCIQuest(request):
     else:
         strSearchResult = "請輸入搜尋字串"
     return render(request, "quest/searchCIQuest.html", locals())
+    
+#任務檢視頁
+@login_required
+def questViewer(request, strQID=None):
+    questUtil = QuestUtility()
+    questTarget = questUtil.getCIQuestByQID(strQID=strQID)
+    return render(request, "quest/questViewer.html", locals())

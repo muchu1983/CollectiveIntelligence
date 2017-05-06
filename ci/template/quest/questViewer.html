@@ -1,0 +1,30 @@
+<!-- extends quest/base_quest.html-->
+{% extends "quest/base_quest.html" %}
+
+<!-- override block_head -->
+{% block block_head %}
+<!-- questViewer.html block_head -->
+<!-- css -->
+<link type="text/css" rel="stylesheet" href="/static/ci/css/questViewer.css" >
+<!-- js -->
+<script type="text/javascript" src="/static/ci/js/questViewer.js"></script>
+{% endblock block_head %}
+
+<!-- override block_content -->
+{% block block_content %}
+<!-- questViewer.html block_content -->
+<!-- 任務狀態 -->
+<!-- 任務標題 -->
+<div id="divHeadline" class="row">
+    {{ questTarget.strHeadline }}
+</div>
+<!-- 任務標籤 -->
+<hr><!-- 水平線 -->
+<!-- 任務內容 -->
+<div id="divContent" class="row">
+    {{ questTarget.strContent }}
+</div>
+<!-- 剩餘時間 -->
+<!-- 任務獎勵 -->
+<!-- 互動按鈕 -->
+{% endblock block_content %}
