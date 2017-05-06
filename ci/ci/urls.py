@@ -52,4 +52,5 @@ urlpatterns = [
     url(r"^chat/channel/(?P<strCIUserUID>[0-9a-f-]{36})/$", chat_views.channel),
     #任務
     url(r"^quest/initNewQuest/$", quest_views.initNewQuest),
+    url(r"^quest/searchCIQuest/$", quest_views.searchCIQuest),
 ]
