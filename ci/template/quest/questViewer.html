@@ -27,4 +27,41 @@
 <!-- 剩餘時間 -->
 <!-- 任務獎勵 -->
 <!-- 互動按鈕 -->
+<div id="divInteractiveBtn" class="row">
+    {% if questTarget.strState == "new" %}
+    <!-- 任務狀態 - new -->
+        {% if isInitiator %}
+        <!-- 發起人 -->
+        取消任務 - 發起人
+        {% else %}
+        <!-- 除發起人以外的人 -->
+        按贊 - 除發起人以外的人
+        接受任務 - 除發起人以外的人
+        {% endif %}
+    {% elif questTarget.strState == "processing" %}
+    <!-- 任務狀態 - processing -->
+        {% if isInitiator %}
+        <!-- 發起人 -->
+        達成 - 發起人
+        失敗 - 發起人
+        {% elif isExecutor %}
+        <!-- 執行人 -->
+        放棄任務 - 執行人
+        {% else %}
+        <!-- 非發起人亦非執行人 -->
+        {% endif %}
+    {% elif questTarget.strState == "completed" %}
+    <!-- 任務狀態 - completed -->
+        {% if isExecutor %}
+        <!-- 執行人 -->
+        完成任務 - 執行人
+        {% else %}
+        <!-- 除執行人以外的人 -->
+        {% endif %}
+    {% elif questTarget.strState == "ended" %}
+    <!-- 任務狀態 - ended -->
+        無按鈕
+    {% else %}
+    {% endif %}
+</div>
 {% endblock block_content %}

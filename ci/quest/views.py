@@ -63,4 +63,12 @@ def searchCIQuest(request):
 def questViewer(request, strQID=None):
     questUtil = QuestUtility()
     questTarget = questUtil.getCIQuestByQID(strQID=strQID)
+    isInitiator = False
+    isExecutor = False
+    if request.user.ciuser.strCIUserUID == questTarget.ciuserInitiator.strCIUserUID:
+        #request 為 發起人
+        isInitiator = True
+    if questTarget.ciuserExecutor and request.user.ciuser.strCIUserUID == questTarget.ciuserExecutor.strCIUserUID:
+        #request 為 執行人
+        isExecutor = True
     return render(request, "quest/questViewer.html", locals())
