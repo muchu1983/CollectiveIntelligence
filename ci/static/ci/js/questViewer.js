@@ -76,7 +76,18 @@
         });
         //接受任務 btnAcceptQuest
         $("#btnAcceptQuest").click(function(){
-            
+            //POST 資料
+            dicPostData = {
+                "strQID": strQID,
+                "csrfmiddlewaretoken": strCsrfToken
+            };
+            console.log(dicPostData);
+            //POST
+            $.post("/quest/acceptQuest/", dicPostData, function(jsonResp){
+                console.log(jsonResp);
+                //更新頁面
+                window.location.replace("/quest/searchCIQuest/");
+            }, "json");
         });
         //目標達成 btnQuestReached
         $("#btnQuestReached").click(function(){
@@ -88,7 +99,18 @@
         });
         //放棄任務 btnAbandonQuest
         $("#btnAbandonQuest").click(function(){
-            
+            //POST 資料
+            dicPostData = {
+                "strQID": strQID,
+                "csrfmiddlewaretoken": strCsrfToken
+            };
+            console.log(dicPostData);
+            //POST
+            $.post("/quest/abandonQuest/", dicPostData, function(jsonResp){
+                console.log(jsonResp);
+                //更新頁面
+                window.location.replace("/quest/searchCIQuest/");
+            }, "json");
         });
         //完成任務 btnAccomplishQuest
         $("#btnAccomplishQuest").click(function(){

@@ -122,3 +122,34 @@ def likeOrDislikeQuest(request):
         strResult = "只允許 POST 方式操作任務"
     return JsonResponse({"isLiked":isLiked, "strResult":strResult}, safe=False)
     
+#接受 任務
+@login_required
+def acceptQuest(request):
+    #結果 字串
+    strResult = None
+    if request.method == "POST":
+        #接受任務
+        strQID = request.POST.get("strQID", None)
+        questUtil = QuestUtility()
+        questUtil.acceptQuest(ciuserRequest=request.user.ciuser, strQID=strQID)
+        #完成字串
+        strResult = "已完成 接受任務"
+    else:
+        strResult = "只允許 POST 方式操作任務"
+    return JsonResponse({"result":strResult}, safe=False)
+    
+#放棄 任務
+@login_required
+def abandonQuest(request):
+    #結果 字串
+    strResult = None
+    if request.method == "POST":
+        #放棄任務
+        strQID = request.POST.get("strQID", None)
+        questUtil = QuestUtility()
+        questUtil.abandonQuest(ciuserRequest=request.user.ciuser, strQID=strQID)
+        #完成字串
+        strResult = "已完成 放棄任務"
+    else:
+        strResult = "只允許 POST 方式操作任務"
+    return JsonResponse({"result":strResult}, safe=False)

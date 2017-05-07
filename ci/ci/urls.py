@@ -56,4 +56,6 @@ urlpatterns = [
     url(r"^quest/questViewer/(?P<strQID>[0-9a-f-]{36})/$", quest_views.questViewer),
     url(r"^quest/deleteQuest/$", quest_views.deleteQuest),
     url(r"^quest/likeOrDislikeQuest/$", quest_views.likeOrDislikeQuest),
+    url(r"^quest/acceptQuest/$", quest_views.acceptQuest),
+    url(r"^quest/abandonQuest/$", quest_views.abandonQuest),
 ]

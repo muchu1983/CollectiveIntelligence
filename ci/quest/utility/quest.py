@@ -29,3 +29,26 @@ class QuestUtility:
         #確認是否為 發起人
         if questTarget.ciuserInitiator == ciuserRequest:
             questTarget.delete()
+    
+    #接受任務
+    def acceptQuest(self, ciuserRequest=None, strQID=None):
+        questTarget = self.getCIQuestByQID(strQID=strQID)
+        #確認是否為 除發起人以外的人
+        if questTarget.ciuserInitiator == ciuserRequest:
+            pass
+        else:
+            #儲存 ciuserExecutor 及 strState
+            questTarget.ciuserExecutor = ciuserRequest
+            questTarget.strState = "processing"
+            questTarget.save()
+    
+    #放棄任務
+    def abandonQuest(self, ciuserRequest=None, strQID=None):
+        questTarget = self.getCIQuestByQID(strQID=strQID)
+        #確認是否為 執行人
+        if questTarget.ciuserExecutor == ciuserRequest:
+            #儲存 ciuserExecutor 及 strState
+            questTarget.ciuserExecutor = None
+            questTarget.strState = "new"
+            questTarget.save()
+    
