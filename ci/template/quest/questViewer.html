@@ -92,7 +92,7 @@
         <!-- 除執行人以外的人 -->
         <span>無相關操作</span>
         {% endif %}
-    {% elif questTarget.strState == "ended" %}
+    {% elif "ended" in questTarget.strState %}
     <!-- 任務狀態 - ended -->
         <span>無相關操作</span>
     {% else %}
