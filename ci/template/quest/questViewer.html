@@ -69,7 +69,7 @@
         <button id="btnQuestReached" class="btn btn-danger btn-xs" type="button">
             目標達成
         </button>
-        <button id="btnQuestFailed" class="btn btn-danger btn-xs" type="button">
+        <button id="btnQuestUnreached" class="btn btn-danger btn-xs" type="button">
             任務失敗
         </button>
         {% elif isExecutor %}
@@ -90,6 +90,25 @@
         </button>
         {% else %}
         <!-- 除執行人以外的人 -->
+        <span>無相關操作</span>
+        {% endif %}
+    {% elif questTarget.strState == "incompleted" %}
+    <!-- 任務狀態 - incompleted -->
+        {% if isInitiator %}
+        <!-- 發起人 -->
+        <button id="btnRenewQuest" class="btn btn-danger btn-xs" type="button">
+            renew
+        </button>
+        <button id="btnTerminateQuest" class="btn btn-danger btn-xs" type="button">
+            terminate
+        </button>
+        {% elif isExecutor %}
+        <!-- 執行人 -->
+        <button id="btnGoAwayQuest" class="btn btn-danger btn-xs" type="button">
+            got it
+        </button>
+        {% else %}
+        <!-- 非發起人亦非執行人 -->
         <span>無相關操作</span>
         {% endif %}
     {% elif "ended" in questTarget.strState %}

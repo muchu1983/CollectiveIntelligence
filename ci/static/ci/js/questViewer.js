@@ -1,4 +1,4 @@
-//Copyright (C) 2017, MuChu Hsu
+//Copyright © 2017, MuChu Hsu
 //Contributed by Muchu Hsu (muchu1983@gmail.com)
 //This file is part of BSD license
 //
@@ -93,8 +93,8 @@
         $("#btnQuestReached").click(function(){
             
         });
-        //任務失敗 btnQuestFailed
-        $("#btnQuestFailed").click(function(){
+        //任務失敗 btnQuestUnreached
+        $("#btnQuestUnreached").click(function(){
             
         });
         //放棄任務 btnAbandonQuest

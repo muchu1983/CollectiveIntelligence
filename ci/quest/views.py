@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Copyright (C) 2017, MuChu Hsu
+Copyright © 2017, MuChu Hsu
 Contributed by Muchu Hsu (muchu1983@gmail.com)
 This file is part of BSD license
 
