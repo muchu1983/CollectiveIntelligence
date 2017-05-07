@@ -89,3 +89,36 @@ def deleteQuest(request):
     else:
         strResult = "只允許 POST 方式操作任務"
     return JsonResponse({"result":strResult}, safe=False)
+    
+#喜歡或取消喜歡 任務
+@login_required
+def likeOrDislikeQuest(request):
+    #結果
+    strResult = None
+    isLiked = None
+    if request.method == "POST":
+        #取得任務
+        strQID = request.POST.get("strQID", None)
+        questUtil = QuestUtility()
+        questTarget = questUtil.getCIQuestByQID(strQID=strQID)
+        #加入或移出 setLikedCIUser
+        if request.user.ciuser in questTarget.setLikedCIUser.all():
+            #調整 獎勵 PV
+            questTarget.intRewardPV = questTarget.intRewardPV-1
+            questTarget.save()
+            #移出 ciuser
+            questTarget.setLikedCIUser.remove(request.user.ciuser)
+            isLiked = False
+        else:
+            #調整 獎勵 PV
+            questTarget.intRewardPV = questTarget.intRewardPV+1
+            questTarget.save()
+            #加入 ciuser
+            questTarget.setLikedCIUser.add(request.user.ciuser)
+            isLiked = True
+        #完成字串
+        strResult = "已切換 喜歡狀態"
+    else:
+        strResult = "只允許 POST 方式操作任務"
+    return JsonResponse({"isLiked":isLiked, "strResult":strResult}, safe=False)
+    

@@ -43,9 +43,36 @@
                 }
             );
         });
-        //按贊 btnLikeQuest
-        $("#btnLikeQuest").click(function(){
-            
+        //按贊 btnLikeOrDislikeQuest
+        $("#btnLikeOrDislikeQuest").tooltip();
+        $("#btnLikeOrDislikeQuest").click(function(){
+            //POST 資料
+            dicPostData = {
+                "strQID": strQID,
+                "csrfmiddlewaretoken": strCsrfToken
+            };
+            console.log(dicPostData);
+            //POST
+            $.post("/quest/likeOrDislikeQuest/", dicPostData, function(jsonResp){
+                console.log(jsonResp);
+                //更新頁面
+                var isLiked = jsonResp["isLiked"];
+                if (isLiked){
+                    //將贊數 +1
+                    $("#strLikedCount").html(parseInt($.trim($("#strLikedCount").html())) + 1);
+                    //將獎勵PV +1
+                    $("#strRewardPV").html(parseInt($.trim($("#strRewardPV").html())) + 1);
+                    //更改 tooltip
+                    $("#btnLikeOrDislikeQuest").attr("title", "取消喜歡");
+                } else {
+                    //將贊數 -1
+                    $("#strLikedCount").html(parseInt($.trim($("#strLikedCount").html())) - 1);
+                    //將獎勵PV -1
+                    $("#strRewardPV").html(parseInt($.trim($("#strRewardPV").html())) - 1);
+                    //更改 tooltip
+                    $("#btnLikeOrDislikeQuest").attr("title", "我喜歡");
+                }
+            }, "json");
         });
         //接受任務 btnAcceptQuest
         $("#btnAcceptQuest").click(function(){

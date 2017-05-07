@@ -29,20 +29,35 @@
 </div>
 <!-- 剩餘時間 -->
 <!-- 任務獎勵 -->
+<div id="divReward" class="row">
+    獎勵： <span id="strRewardPV">{{ questTarget.intRewardPV }}</span> PV
+</div>
 <!-- 互動按鈕 -->
 <div id="divInteractiveBtn" class="row">
     {% if questTarget.strState == "new" %}
     <!-- 任務狀態 - new -->
         {% if isInitiator %}
         <!-- 發起人 -->
+        <button class="btn btn-danger btn-xs" type="button" disabled="true">
+            <span class="glyphicon glyphicon-thumbs-up"></span>
+            <span class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
+        </button>
         <button id="btnDeleteQuest" class="btn btn-danger btn-xs" type="button">
             刪除任務
         </button>
         {% else %}
         <!-- 除發起人以外的人 -->
-        <button id="btnLikeQuest" class="btn btn-danger btn-xs" type="button">
-            <span class="glyphicon glyphicon-thumbs-up"></span>
-        </button>
+            {% if request.user.ciuser in questTarget.setLikedCIUser.all %}
+                <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-xs" type="button" title="取消喜歡">
+                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                    <span id="strLikedCount" class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
+                </button>
+            {% else %}
+                <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-xs" type="button" title="我喜歡">
+                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                    <span id="strLikedCount" class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
+                </button>
+            {% endif %}
         <button id="btnAcceptQuest" class="btn btn-danger btn-xs" type="button">
             接受任務
         </button>
