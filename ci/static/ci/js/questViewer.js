@@ -89,12 +89,12 @@
                 window.location.replace("/quest/searchCIQuest/");
             }, "json");
         });
-        //目標達成 btnQuestReached
+        //成功達成目標 btnQuestReached
         $("#btnQuestReached").click(function(){
             
         });
-        //任務失敗 btnQuestUnreached
-        $("#btnQuestUnreached").click(function(){
+        //終結任務 btnTerminateQuest
+        $("#btnTerminateQuest").click(function(){
             
         });
         //放棄任務 btnAbandonQuest
@@ -114,6 +114,10 @@
         });
         //完成任務 btnAccomplishQuest
         $("#btnAccomplishQuest").click(function(){
+            
+        });
+        //任務已失敗 btnQuestUnreachable
+        $("#btnQuestUnreachable").click(function(){
             
         });
     };
