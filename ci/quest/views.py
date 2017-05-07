@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from quest.forms import CIQuestForm
 from quest.models import CIQuest
 from django.db.models import Q
+from django.http import JsonResponse
 from quest.utility.quest import QuestUtility
 
 #發起新任務
@@ -72,3 +73,19 @@ def questViewer(request, strQID=None):
         #request 為 執行人
         isExecutor = True
     return render(request, "quest/questViewer.html", locals())
+    
+#刪除 任務
+@login_required
+def deleteQuest(request):
+    #結果 字串
+    strResult = None
+    if request.method == "POST":
+        #刪除任務
+        strQID = request.POST.get("strQID", None)
+        questUtil = QuestUtility()
+        questUtil.deleteQuest(ciuserRequest=request.user.ciuser, strQID=strQID)
+        #完成字串
+        strResult = "已完成 刪除任務"
+    else:
+        strResult = "只允許 POST 方式操作任務"
+    return JsonResponse({"result":strResult}, safe=False)

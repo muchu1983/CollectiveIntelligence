@@ -8,6 +8,9 @@
 <link type="text/css" rel="stylesheet" href="/static/ci/css/questViewer.css" >
 <!-- js -->
 <script type="text/javascript" src="/static/ci/js/questViewer.js"></script>
+<script type="text/javascript">
+    var strQID = "{{ questTarget.strQID }}";
+</script>
 {% endblock block_head %}
 
 <!-- override block_content -->
@@ -81,3 +84,16 @@
     {% endif %}
 </div>
 {% endblock block_content %}
+
+<!-- override block_hidden -->
+{% block block_hidden %}
+<!-- questViewer.html block_hidden -->
+{{ block.super }} <!-- 複製上層 template block_hidden 的內容 -->
+<!-- 確認刪除任務 Dialog -->
+<div id="dialogConfirmDeleteQuest" class="dialogHidden" title="刪除任務?">
+    <p>
+        <span class="ui-icon ui-icon-alert"></span>
+        確定要刪除任務?
+    </p>
+</div>
+{% endblock block_hidden %}

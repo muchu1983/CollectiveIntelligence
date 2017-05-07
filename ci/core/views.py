@@ -207,10 +207,6 @@ def searchLeader(request):
         strSearchResult = "請輸入搜尋字串"
     return render(request, "core/searchLeader.html", locals())
     
-#CI 使用者 檢視頁
-def ciuserViewer(request):
-    pass
-    
 #重設 領導人
 @login_required
 def resetLeader(request):

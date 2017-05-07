@@ -22,3 +22,10 @@ class QuestUtility:
             #查尋該任務
             questTarget = CIQuest.objects.filter(strQID=strQID).first()
         return questTarget
+    
+    #刪除任務
+    def deleteQuest(self, ciuserRequest=None, strQID=None):
+        questTarget = self.getCIQuestByQID(strQID=strQID)
+        #確認是否為 發起人
+        if questTarget.ciuserInitiator == ciuserRequest:
+            questTarget.delete()
