@@ -32,35 +32,51 @@
     <!-- 任務狀態 - new -->
         {% if isInitiator %}
         <!-- 發起人 -->
-        取消任務 - 發起人
+        <button id="btnDeleteQuest" class="btn btn-danger btn-xs" type="button">
+            刪除任務
+        </button>
         {% else %}
         <!-- 除發起人以外的人 -->
-        按贊 - 除發起人以外的人
-        接受任務 - 除發起人以外的人
+        <button id="btnLikeQuest" class="btn btn-danger btn-xs" type="button">
+            <span class="glyphicon glyphicon-thumbs-up"></span>
+        </button>
+        <button id="btnAcceptQuest" class="btn btn-danger btn-xs" type="button">
+            接受任務
+        </button>
         {% endif %}
     {% elif questTarget.strState == "processing" %}
     <!-- 任務狀態 - processing -->
         {% if isInitiator %}
         <!-- 發起人 -->
-        達成 - 發起人
-        失敗 - 發起人
+        <button id="btnQuestReached" class="btn btn-danger btn-xs" type="button">
+            目標達成
+        </button>
+        <button id="btnQuestFailed" class="btn btn-danger btn-xs" type="button">
+            任務失敗
+        </button>
         {% elif isExecutor %}
         <!-- 執行人 -->
-        放棄任務 - 執行人
+        <button id="btnAbandonQuest" class="btn btn-danger btn-xs" type="button">
+            放棄任務
+        </button>
         {% else %}
         <!-- 非發起人亦非執行人 -->
+        <span>無相關操作</span>
         {% endif %}
     {% elif questTarget.strState == "completed" %}
     <!-- 任務狀態 - completed -->
         {% if isExecutor %}
         <!-- 執行人 -->
-        完成任務 - 執行人
+        <button id="btnAccomplishQuest" class="btn btn-danger btn-xs" type="button">
+            完成任務
+        </button>
         {% else %}
         <!-- 除執行人以外的人 -->
+        <span>無相關操作</span>
         {% endif %}
     {% elif questTarget.strState == "ended" %}
     <!-- 任務狀態 - ended -->
-        無按鈕
+        <span>無相關操作</span>
     {% else %}
     {% endif %}
 </div>

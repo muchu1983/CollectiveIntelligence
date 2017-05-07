@@ -23,7 +23,7 @@ class CIQuest(models.Model):
     #多對一 執行人
     ciuserExecutor = models.ForeignKey(CIUser, on_delete=models.SET_NULL, related_name="executor", default=None, null=True)
     #多對多 按贊人
-    setAgreedCIUser = models.ManyToManyField(CIUser)
+    setLikedCIUser = models.ManyToManyField(CIUser)
     #多對多 任務標籤
     setCIQuestTag = models.ManyToManyField(CIQuestTag)
     #任務狀態

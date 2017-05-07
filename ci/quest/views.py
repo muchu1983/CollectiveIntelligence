@@ -31,7 +31,7 @@ def initNewQuest(request):
                 strState="new"
             )
             ciquest.save()
-            return redirect("/quest/listNewQuest/")
+            return redirect("/quest/searchCIQuest/")
     else:
         formCIQuest = CIQuestForm()
     return render(request, "quest/initNewQuest.html", locals())
