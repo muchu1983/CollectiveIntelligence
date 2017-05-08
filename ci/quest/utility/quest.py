@@ -38,6 +38,27 @@ class QuestUtility:
         #確認是否為 發起人
         if questTarget.ciuserInitiator == ciuserRequest and questTarget.strState == "new":
             questTarget.delete()
+            
+    #喜歡或取消喜歡
+    def likeOrDislikeQuest(self, ciuserRequest=None, strQID=None):
+        questTarget = self.getCIQuestByQID(strQID=strQID)
+        isLiked = None
+        #加入或移出 setLikedCIUser
+        if ciuserRequest in questTarget.setLikedCIUser.all():
+            #調整 獎勵 PV
+            questTarget.intRewardPV = questTarget.intRewardPV-1
+            questTarget.save()
+            #移出 ciuser
+            questTarget.setLikedCIUser.remove(ciuserRequest)
+            isLiked = False
+        else:
+            #調整 獎勵 PV
+            questTarget.intRewardPV = questTarget.intRewardPV+1
+            questTarget.save()
+            #加入 ciuser
+            questTarget.setLikedCIUser.add(ciuserRequest)
+            isLiked = True
+        return isLiked
     
     #接受任務
     def acceptQuest(self, ciuserRequest=None, strQID=None):
