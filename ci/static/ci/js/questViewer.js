@@ -76,6 +76,35 @@
         });
         //接受任務 btnAcceptQuest
         $("#btnAcceptQuest").click(function(){
+            strDialogSelector = "#dialogConfirmAcceptQuest";
+            showConfirmDialog(
+                strDialogSelector,
+                function(){
+                    //OK
+                    $(this).dialog("close");
+                    console.log("確定要 接受任務");
+                    //POST 資料
+                    dicPostData = {
+                        "strQID": strQID,
+                        "csrfmiddlewaretoken": strCsrfToken
+                    };
+                    console.log(dicPostData);
+                    //POST
+                    $.post("/quest/acceptQuest/", dicPostData, function(jsonResp){
+                        console.log(jsonResp);
+                        //更新頁面
+                        window.location.reload();
+                    }, "json");
+                },
+                function(){
+                    //Cancel
+                    $(this).dialog("close");
+                    console.log("取消 接受任務");
+                }
+            );
+        });
+        //成功達成目標 btnQuestReached
+        $("#btnQuestReached").click(function(){
             //POST 資料
             dicPostData = {
                 "strQID": strQID,
@@ -83,19 +112,40 @@
             };
             console.log(dicPostData);
             //POST
-            $.post("/quest/acceptQuest/", dicPostData, function(jsonResp){
+            $.post("/quest/questReached/", dicPostData, function(jsonResp){
                 console.log(jsonResp);
                 //更新頁面
-                window.location.replace("/quest/searchCIQuest/");
+                window.location.reload();
             }, "json");
-        });
-        //成功達成目標 btnQuestReached
-        $("#btnQuestReached").click(function(){
-            
         });
         //終結任務 btnTerminateQuest
         $("#btnTerminateQuest").click(function(){
-            
+            strDialogSelector = "#dialogConfirmTerminateQuest";
+            showConfirmDialog(
+                strDialogSelector,
+                function(){
+                    //OK
+                    $(this).dialog("close");
+                    console.log("確定要 終結任務");
+                    //POST 資料
+                    dicPostData = {
+                        "strQID": strQID,
+                        "csrfmiddlewaretoken": strCsrfToken
+                    };
+                    console.log(dicPostData);
+                    //POST
+                    $.post("/quest/terminateQuest/", dicPostData, function(jsonResp){
+                        console.log(jsonResp);
+                        //更新頁面
+                        window.location.reload();
+                    }, "json");
+                },
+                function(){
+                    //Cancel
+                    $(this).dialog("close");
+                    console.log("取消 終結任務");
+                }
+            );
         });
         //放棄任務 btnAbandonQuest
         $("#btnAbandonQuest").click(function(){
@@ -114,11 +164,33 @@
         });
         //完成任務 btnAccomplishQuest
         $("#btnAccomplishQuest").click(function(){
-            
+            //POST 資料
+            dicPostData = {
+                "strQID": strQID,
+                "csrfmiddlewaretoken": strCsrfToken
+            };
+            console.log(dicPostData);
+            //POST
+            $.post("/quest/accomplishQuest/", dicPostData, function(jsonResp){
+                console.log(jsonResp);
+                //更新頁面
+                window.location.replace("/quest/searchCIQuest/");
+            }, "json");
         });
         //任務已失敗 btnQuestUnreachable
         $("#btnQuestUnreachable").click(function(){
-            
+            //POST 資料
+            dicPostData = {
+                "strQID": strQID,
+                "csrfmiddlewaretoken": strCsrfToken
+            };
+            console.log(dicPostData);
+            //POST
+            $.post("/quest/questUnreachable/", dicPostData, function(jsonResp){
+                console.log(jsonResp);
+                //更新頁面
+                window.location.replace("/quest/searchCIQuest/");
+            }, "json");
         });
     };
     

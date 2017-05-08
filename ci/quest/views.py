@@ -153,3 +153,67 @@ def abandonQuest(request):
     else:
         strResult = "只允許 POST 方式操作任務"
     return JsonResponse({"result":strResult}, safe=False)
+    
+#任務 成功達成目標
+@login_required
+def questReached(request):
+    #結果 字串
+    strResult = None
+    if request.method == "POST":
+        #成功達成目標
+        strQID = request.POST.get("strQID", None)
+        questUtil = QuestUtility()
+        questUtil.questReached(ciuserRequest=request.user.ciuser, strQID=strQID)
+        #完成字串
+        strResult = "已完成 成功達成目標"
+    else:
+        strResult = "只允許 POST 方式操作任務"
+    return JsonResponse({"result":strResult}, safe=False)
+    
+#終結任務
+@login_required
+def terminateQuest(request):
+    #結果 字串
+    strResult = None
+    if request.method == "POST":
+        #終結任務
+        strQID = request.POST.get("strQID", None)
+        questUtil = QuestUtility()
+        questUtil.terminateQuest(ciuserRequest=request.user.ciuser, strQID=strQID)
+        #完成字串
+        strResult = "已完成 終結任務"
+    else:
+        strResult = "只允許 POST 方式操作任務"
+    return JsonResponse({"result":strResult}, safe=False)
+    
+#完成任務
+@login_required
+def accomplishQuest(request):
+    #結果 字串
+    strResult = None
+    if request.method == "POST":
+        #完成任務
+        strQID = request.POST.get("strQID", None)
+        questUtil = QuestUtility()
+        questUtil.accomplishQuest(ciuserRequest=request.user.ciuser, strQID=strQID)
+        #完成字串
+        strResult = "已完成 完成任務"
+    else:
+        strResult = "只允許 POST 方式操作任務"
+    return JsonResponse({"result":strResult}, safe=False)
+    
+#任務已失敗
+@login_required
+def questUnreachable(request):
+    #結果 字串
+    strResult = None
+    if request.method == "POST":
+        #任務已失敗
+        strQID = request.POST.get("strQID", None)
+        questUtil = QuestUtility()
+        questUtil.questUnreachable(ciuserRequest=request.user.ciuser, strQID=strQID)
+        #完成字串
+        strResult = "已完成 任務已失敗"
+    else:
+        strResult = "只允許 POST 方式操作任務"
+    return JsonResponse({"result":strResult}, safe=False)

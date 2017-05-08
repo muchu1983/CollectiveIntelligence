@@ -58,4 +58,8 @@ urlpatterns = [
     url(r"^quest/likeOrDislikeQuest/$", quest_views.likeOrDislikeQuest),
     url(r"^quest/acceptQuest/$", quest_views.acceptQuest),
     url(r"^quest/abandonQuest/$", quest_views.abandonQuest),
+    url(r"^quest/questReached/$", quest_views.questReached),
+    url(r"^quest/terminateQuest/$", quest_views.terminateQuest),
+    url(r"^quest/accomplishQuest/$", quest_views.accomplishQuest),
+    url(r"^quest/questUnreachable/$", quest_views.questUnreachable),
 ]

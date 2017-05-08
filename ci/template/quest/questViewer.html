@@ -81,8 +81,8 @@
         <!-- 非發起人亦非執行人 -->
         <span>無相關操作</span>
         {% endif %}
-    {% elif questTarget.strState == "completed" %}
-    <!-- 任務狀態 - completed -->
+    {% elif questTarget.strState == "complete" %}
+    <!-- 任務狀態 - complete -->
         {% if isExecutor %}
         <!-- 執行人 -->
         <button id="btnAccomplishQuest" class="btn btn-danger btn-xs" type="button">
@@ -92,8 +92,8 @@
         <!-- 除執行人以外的人 -->
         <span>無相關操作</span>
         {% endif %}
-    {% elif questTarget.strState == "incompleted" %}
-    <!-- 任務狀態 - incompleted -->
+    {% elif questTarget.strState == "incomplete" %}
+    <!-- 任務狀態 - incomplete -->
         {% if isExecutor %}
         <!-- 執行人 -->
         <button id="btnQuestUnreachable" class="btn btn-danger btn-xs" type="button">
@@ -115,11 +115,27 @@
 {% block block_hidden %}
 <!-- questViewer.html block_hidden -->
 {{ block.super }} <!-- 複製上層 template block_hidden 的內容 -->
+<!-- 確認接受任務 Dialog -->
+<div id="dialogConfirmAcceptQuest" class="dialogHidden" title="接受任務?">
+    <p>
+        <span class="ui-icon ui-icon-alert"></span>
+        <p>任務成功 將獲得 {{ questTarget.intRewardPV }} 點個人 PV</p>
+        <p>任務失敗 將扣除 {% widthratio questTarget.intRewardPV 2 1 %} 點個人 PV</p>
+        <p>確定要接受任務?</p>
+    </p>
+</div>
 <!-- 確認刪除任務 Dialog -->
 <div id="dialogConfirmDeleteQuest" class="dialogHidden" title="刪除任務?">
     <p>
         <span class="ui-icon ui-icon-alert"></span>
         確定要刪除任務?
+    </p>
+</div>
+<!-- 確認終結任務 Dialog -->
+<div id="dialogConfirmTerminateQuest" class="dialogHidden" title="終結任務?">
+    <p>
+        <span class="ui-icon ui-icon-alert"></span>
+        您將會被扣除 {% widthratio questTarget.intRewardPV 2 1 %} 點個人 PV！確定要終結任務?
     </p>
 </div>
 {% endblock block_hidden %}

@@ -10,7 +10,16 @@ import logging
 from quest.models import CIQuest
 
 class QuestUtility:
-    
+    """
+    strState route graph:
+                                      ↑-- reached --> "complete" -- accomplish --> "end_success"
+                                      ↑
+                                      ↑-- terminate --> "incomplete" -- unreachable --> "end_failure"
+                                      ↑
+    init --> "new" -- accept --> "processing"
+               ↑                      ↓
+               ↑------ abandon -------↓
+    """
     #建構子
     def __init__(self):
         pass
@@ -50,3 +59,51 @@ class QuestUtility:
             questTarget.strState = "new"
             questTarget.save()
     
+    #成功達成目標
+    def questReached(self, ciuserRequest=None, strQID=None):
+        questTarget = self.getCIQuestByQID(strQID=strQID)
+        #確認是否為 發起人
+        if questTarget.ciuserInitiator == ciuserRequest and questTarget.strState == "processing":
+            #儲存 strState
+            questTarget.strState = "complete"
+            questTarget.save()
+            
+    #終結任務
+    def terminateQuest(self, ciuserRequest=None, strQID=None):
+        questTarget = self.getCIQuestByQID(strQID=strQID)
+        #確認是否為 發起人
+        if questTarget.ciuserInitiator == ciuserRequest and questTarget.strState == "processing":
+            #儲存 strState
+            questTarget.strState = "incomplete"
+            questTarget.save()
+            #扣除 發起人 個人PV，扣除數量為本任務的 1/2 獎勵PV 值
+            questTarget.ciuserInitiator.intPointVolume = questTarget.ciuserInitiator.intPointVolume-questTarget.intRewardPV/2
+            if questTarget.ciuserInitiator.intPointVolume < 0:
+                questTarget.ciuserInitiator.intPointVolume = 0
+            questTarget.ciuserInitiator.save()
+            
+    #完成任務
+    def accomplishQuest(self, ciuserRequest=None, strQID=None):
+        questTarget = self.getCIQuestByQID(strQID=strQID)
+        #確認是否為 執行人
+        if questTarget.ciuserExecutor == ciuserRequest and questTarget.strState == "complete":
+            #儲存 strState
+            questTarget.strState = "end_success"
+            questTarget.save()
+            #增加 執行人 個人PV，增加數量為本任務的 獎勵PV 值
+            questTarget.ciuserExecutor.intPointVolume = questTarget.ciuserExecutor.intPointVolume+questTarget.intRewardPV
+            questTarget.ciuserExecutor.save()
+            
+    #任務已失敗
+    def questUnreachable(self, ciuserRequest=None, strQID=None):
+        questTarget = self.getCIQuestByQID(strQID=strQID)
+        #確認是否為 執行人
+        if questTarget.ciuserExecutor == ciuserRequest and questTarget.strState == "incomplete":
+            #儲存 strState
+            questTarget.strState = "end_failure"
+            questTarget.save()
+            #扣除 執行人 個人PV，扣除數量為本任務的 1/2 獎勵PV 值
+            questTarget.ciuserExecutor.intPointVolume = questTarget.ciuserExecutor.intPointVolume-questTarget.intRewardPV/2
+            if questTarget.ciuserExecutor.intPointVolume < 0:
+                questTarget.ciuserExecutor.intPointVolume = 0
+            questTarget.ciuserExecutor.save()
