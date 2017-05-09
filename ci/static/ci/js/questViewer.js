@@ -33,7 +33,7 @@
                     $.post("/quest/deleteQuest/", dicPostData, function(jsonResp){
                         console.log(jsonResp);
                         //更新頁面
-                        window.location.replace("/quest/searchCIQuest/");
+                        window.location.reload();
                     }, "json");
                 },
                 function(){
@@ -159,7 +159,7 @@
             $.post("/quest/abandonQuest/", dicPostData, function(jsonResp){
                 console.log(jsonResp);
                 //更新頁面
-                window.location.replace("/quest/searchCIQuest/");
+                window.location.reload();
             }, "json");
         });
         //完成任務 btnAccomplishQuest
@@ -174,7 +174,7 @@
             $.post("/quest/accomplishQuest/", dicPostData, function(jsonResp){
                 console.log(jsonResp);
                 //更新頁面
-                window.location.replace("/quest/searchCIQuest/");
+                window.location.reload();
             }, "json");
         });
         //任務已失敗 btnQuestUnreachable
@@ -189,7 +189,7 @@
             $.post("/quest/questUnreachable/", dicPostData, function(jsonResp){
                 console.log(jsonResp);
                 //更新頁面
-                window.location.replace("/quest/searchCIQuest/");
+                window.location.reload();
             }, "json");
         });
     };

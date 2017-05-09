@@ -38,8 +38,8 @@ body {
 .divHiddenQuestViewerIFrame {
     position: fixed;
     display: none;
-    top: 20vh;
-    left: 25vw;
+    top: 15vh;
+    left: 10vw;
     z-index: -20;
     border: 0px;
     padding: 0px;
@@ -58,8 +58,8 @@ body {
 .divShowQuestViewerIFrame {
     position: fixed;
     display: block;
-    top: 20vh;
-    left: 25vw;
+    top: 15vh;
+    left: 10vw;
     z-index: 20;
     border: 2px solid red;
     border-radius: 5px;
@@ -68,8 +68,8 @@ body {
 }
 
 .divShowQuestViewerIFrame iframe {
-    width: 50vw;
-    height: 50vh;
+    width: 80vw;
+    height: 70vh;
     border: 0px;
     display: block;
     visibility: visible;
