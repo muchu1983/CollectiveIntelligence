@@ -19,9 +19,9 @@ class CIQuest(models.Model):
     #QID DB 索引鍵 建立後不可更改 操作 Quest 使用 QID
     strQID = models.CharField(db_index=True, editable=False, max_length=36, default=uuid.uuid1, null=False)
     #多對一 發起人
-    ciuserInitiator = models.ForeignKey(CIUser, on_delete=models.CASCADE, related_name="initiator", null=False)
+    ciuserInitiator = models.ForeignKey(CIUser, on_delete=models.CASCADE, related_name="initiator_set", null=False)
     #多對一 執行人
-    ciuserExecutor = models.ForeignKey(CIUser, on_delete=models.SET_NULL, related_name="executor", default=None, null=True)
+    ciuserExecutor = models.ForeignKey(CIUser, on_delete=models.SET_NULL, related_name="executor_set", default=None, null=True)
     #多對多 按贊人
     setLikedCIUser = models.ManyToManyField(CIUser)
     #多對多 任務標籤
