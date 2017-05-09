@@ -42,6 +42,7 @@ body {
     left: 25vw;
     z-index: -20;
     border: 0px;
+    padding: 0px;
 }
 
 .divHiddenQuestViewerIFrame iframe {
@@ -50,6 +51,7 @@ body {
     border: 0px;
     display: none;
     visibility: hidden;
+    padding: 0px;
 }
 
 /* 顯示的任務檢視 iframe */
@@ -61,6 +63,8 @@ body {
     z-index: 20;
     border: 2px solid red;
     border-radius: 5px;
+    padding: 0px;
+    overflow-y: scroll;
 }
 
 .divShowQuestViewerIFrame iframe {
@@ -71,4 +75,5 @@ body {
     visibility: visible;
     border: 2px solid green;
     border-radius: 5px;
+    padding: 0px;
 }
