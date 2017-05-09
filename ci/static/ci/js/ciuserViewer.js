@@ -10,6 +10,7 @@
     
     function initCiuserViewer() {
         initLinkViewCIQuest();
+        initCIQuestFilter();
     };
     
     //初始化 任務連結
@@ -23,5 +24,35 @@
             $("#divQuestViewerIFrame").removeClass("divHiddenQuestViewerIFrame").addClass("divShowQuestViewerIFrame");
         });
     };
+    
+    //初始化 任務列表過瀘器
+    function initCIQuestFilter(){
+        //執行中任務 列表
+        $(".filterExecutorCIQuest input[type=checkbox]").click(function () {
+            console.log("hi");
+            if ($(".filterExecutorCIQuest input[type=checkbox]:checked").length) {
+                console.log("hihi");
+                $(".liExecutorCIQuest").hide();
+                $(".filterExecutorCIQuest input[type=checkbox]:checked").each(function () {
+                    $(".liExecutorCIQuest[data-" + $(this).prop("name") + "*=\"" + $(this).val() + "\"]").show();
+                });
+            } else {
+                console.log("hihihi");
+                $(".liExecutorCIQuest").show();
+            }
+        });
+        //發起的任務 列表
+        $(".filterInitiatorCIQuest input[type=checkbox]").click(function () {
+            if ($(".filterInitiatorCIQuest input[type=checkbox]:checked").length) {
+                $(".liInitiatorCIQuest").hide();
+                $(".filterInitiatorCIQuest input[type=checkbox]:checked").each(function () {
+                    $(".liInitiatorCIQuest[data-" + $(this).prop("name") + "*=\"" + $(this).val() + "\"]").show();
+                });
+            } else {
+                $(".liInitiatorCIQuest").show();
+            }
+        });
+    };
+    
     
 })(jQuery);

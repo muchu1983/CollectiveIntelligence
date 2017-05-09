@@ -64,9 +64,22 @@
                 執行中任務
                 <span class="badge">{{ userHost.ciuser.executor_set.all.count }}</span>
             </button>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-filter"></span>
+                </button>
+                <ul class="dropdown-menu filterExecutorCIQuest">
+                    <li><input type="checkbox" name="quest-state" value="new"></input>new</li>
+                    <li><input type="checkbox" name="quest-state" value="processing"></input>processing</li>
+                    <li><input type="checkbox" name="quest-state" value="complete"></input>complete</li>
+                    <li><input type="checkbox" name="quest-state" value="incomplete"></input>incomplete</li>
+                    <li><input type="checkbox" name="quest-state" value="end_success"></input>end_success</li>
+                    <li><input type="checkbox" name="quest-state" value="end_failure"></input>end_failure</li>
+                </ul>
+            </div>
             <ul class="list-group">
             {% for matchedCIQuest in userHost.ciuser.executor_set.all %}
-                <li class="list-group-item">
+                <li class="list-group-item liExecutorCIQuest" data-quest-state={{ matchedCIQuest.strState }}>
                     <!-- 任務QID 隱藏 -->
                     <input type="hidden" class="strQID" name="strQID" value={{ matchedCIQuest.strQID }}></input>
                     <a class="linkViewCIQuest" href="javascript: void(0);">{{ matchedCIQuest.strHeadline }}</a>
@@ -80,9 +93,22 @@
                 發起的任務
                 <span class="badge">{{ userHost.ciuser.initiator_set.all.count }}</span>
             </button>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-filter"></span>
+                </button>
+                <ul class="dropdown-menu filterInitiatorCIQuest">
+                    <li><input type="checkbox" name="quest-state" value="new"></input>new</li>
+                    <li><input type="checkbox" name="quest-state" value="processing"></input>processing</li>
+                    <li><input type="checkbox" name="quest-state" value="complete"></input>complete</li>
+                    <li><input type="checkbox" name="quest-state" value="incomplete"></input>incomplete</li>
+                    <li><input type="checkbox" name="quest-state" value="end_success"></input>end_success</li>
+                    <li><input type="checkbox" name="quest-state" value="end_failure"></input>end_failure</li>
+                </ul>
+            </div>
             <ul class="list-group">
             {% for matchedCIQuest in userHost.ciuser.initiator_set.all %}
-                <li class="list-group-item">
+                <li class="list-group-item liInitiatorCIQuest" data-quest-state={{ matchedCIQuest.strState }}>
                     <!-- 任務QID 隱藏 -->
                     <input type="hidden" class="strQID" name="strQID" value={{ matchedCIQuest.strQID }}></input>
                     <a class="linkViewCIQuest" href="javascript: void(0);">{{ matchedCIQuest.strHeadline }}</a>
