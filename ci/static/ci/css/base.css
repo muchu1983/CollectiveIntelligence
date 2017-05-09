@@ -28,9 +28,47 @@ body {
     width: 40%;
     overflow-y: auto;
 }
-/* 隱藏各種提示對話框 */
+/* 隱藏的各種提示對話框 */
 .dialogHidden {
     display: none;
     float: left;
-    margin: 12px 12px 20px 0;
+    margin: 12px 12px 20px 0px;
+}
+/* 隱藏的任務檢視 iframe */
+.divHiddenQuestViewerIFrame {
+    position: fixed;
+    display: none;
+    top: 20vh;
+    left: 25vw;
+    z-index: -20;
+    border: 0px;
+}
+
+.divHiddenQuestViewerIFrame iframe {
+    width: 0px;
+    height: 0px;
+    border: 0px;
+    display: none;
+    visibility: hidden;
+}
+
+/* 顯示的任務檢視 iframe */
+.divShowQuestViewerIFrame {
+    position: fixed;
+    display: block;
+    top: 20vh;
+    left: 25vw;
+    z-index: 20;
+    border: 2px solid red;
+    border-radius: 5px;
+}
+
+.divShowQuestViewerIFrame iframe {
+    width: 50vw;
+    height: 50vh;
+    border: 0px;
+    display: block;
+    visibility: visible;
+    border: 2px solid green;
+    border-radius: 5px;
 }

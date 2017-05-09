@@ -65,9 +65,11 @@
                 <span class="badge">{{ userHost.ciuser.executor_set.all.count }}</span>
             </button>
             <ul class="list-group">
-            {% for matchedCIRequest in userHost.ciuser.executor_set.all %}
+            {% for matchedCIQuest in userHost.ciuser.executor_set.all %}
                 <li class="list-group-item">
-                    <a href="/quest/questViewer/{{ matchedCIRequest.strQID }}/">{{ matchedCIRequest.strHeadline }}</a>
+                    <!-- 任務QID 隱藏 -->
+                    <input type="hidden" class="strQID" name="strQID" value={{ matchedCIQuest.strQID }}></input>
+                    <a class="linkViewCIQuest" href="javascript: void(0);">{{ matchedCIQuest.strHeadline }}</a>
                 </li>
             {% endfor %}
             </ul>
@@ -79,9 +81,11 @@
                 <span class="badge">{{ userHost.ciuser.initiator_set.all.count }}</span>
             </button>
             <ul class="list-group">
-            {% for matchedCIRequest in userHost.ciuser.initiator_set.all %}
+            {% for matchedCIQuest in userHost.ciuser.initiator_set.all %}
                 <li class="list-group-item">
-                    <a href="/quest/questViewer/{{ matchedCIRequest.strQID }}/">{{ matchedCIRequest.strHeadline }}</a>
+                    <!-- 任務QID 隱藏 -->
+                    <input type="hidden" class="strQID" name="strQID" value={{ matchedCIQuest.strQID }}></input>
+                    <a class="linkViewCIQuest" href="javascript: void(0);">{{ matchedCIQuest.strHeadline }}</a>
                 </li>
             {% endfor %}
             </ul>

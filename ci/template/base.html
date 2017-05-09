@@ -169,6 +169,13 @@ This file is part of BSD license
                 <span class="ui-icon ui-icon-info"></span>
             </p>
         </div>
+        <!-- 任務檢視 iframe -->
+        <div id="divQuestViewerIFrame" class="divHiddenQuestViewerIFrame">
+            <button id="btnCloseQuestViewerIFrame" class="btn btn-danger btn-xs col-xs-2" type="button">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+            <iframe id="iframeQuestViewer" class="col-xs-12" src="about:blank" width="0" height="0"></iframe>
+        </div>
         {% endblock block_hidden %}
         
         {% block block_footer %}

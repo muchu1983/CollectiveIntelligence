@@ -11,6 +11,7 @@
     function initBase() {
         retrieveLstDicFollower();
         initBtnClearLeader();
+        initBtnCloseQuestViewerIFrame();
     };
     
     //讀取追隨者物件清單
@@ -77,6 +78,16 @@
                     }
                 }
             });
+        });
+    };
+    
+    //初始化關閉 任務檢視 iframe 按鈕
+    function initBtnCloseQuestViewerIFrame(){
+        $("#btnCloseQuestViewerIFrame").click(function(){
+            //hide questViewer iframe
+            $("#divQuestViewerIFrame").removeClass("divShowQuestViewerIFrame").addClass("divHiddenQuestViewerIFrame");
+            //設定 questViewer iframe src
+            $("#iframeQuestViewer").attr("src", "about:blank");
         });
     };
     

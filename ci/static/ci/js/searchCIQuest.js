@@ -6,15 +6,15 @@
 
 (function($) {
     
-    $(document).ready(initCiuserViewer);
+    $(document).ready(initSearchCIQuest);
     
-    function initCiuserViewer() {
-        initLinkViewCIQuest();
+    function initSearchCIQuest() {
+        initBtnViewCIQuest();
     };
     
-    //初始化 任務連結
-    function initLinkViewCIQuest(){
-        $(".linkViewCIQuest").click(function(){
+    //初始化檢視按鈕
+    function initBtnViewCIQuest(){
+        $(".btnViewCIQuest").click(function(){
             //先暫存選擇的 strQID
             var strQID = $(this).prev(".strQID").val();
             //設定 questViewer iframe src
