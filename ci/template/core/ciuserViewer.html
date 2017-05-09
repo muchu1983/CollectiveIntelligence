@@ -64,6 +64,7 @@
                 執行中任務
                 <span class="badge">{{ userHost.ciuser.executor_set.all.count }}</span>
             </button>
+            <!-- 狀態過瀘 dropdown -->
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-filter"></span>
@@ -77,6 +78,7 @@
                     <li><input type="checkbox" name="quest-state" value="end_failure"></input>end_failure</li>
                 </ul>
             </div>
+            <!-- 列表 -->
             <ul class="list-group">
             {% for matchedCIQuest in userHost.ciuser.executor_set.all %}
                 <li class="list-group-item liExecutorCIQuest" data-quest-state={{ matchedCIQuest.strState }}>
@@ -93,6 +95,7 @@
                 發起的任務
                 <span class="badge">{{ userHost.ciuser.initiator_set.all.count }}</span>
             </button>
+            <!-- 狀態過瀘 dropdown -->
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-filter"></span>
@@ -106,6 +109,7 @@
                     <li><input type="checkbox" name="quest-state" value="end_failure"></input>end_failure</li>
                 </ul>
             </div>
+            <!-- 列表 -->
             <ul class="list-group">
             {% for matchedCIQuest in userHost.ciuser.initiator_set.all %}
                 <li class="list-group-item liInitiatorCIQuest" data-quest-state={{ matchedCIQuest.strState }}>

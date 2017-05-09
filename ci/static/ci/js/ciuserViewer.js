@@ -29,30 +29,32 @@
     function initCIQuestFilter(){
         //執行中任務 列表
         $(".filterExecutorCIQuest input[type=checkbox]").click(function () {
-            console.log("hi");
             if ($(".filterExecutorCIQuest input[type=checkbox]:checked").length) {
-                console.log("hihi");
-                $(".liExecutorCIQuest").hide();
+                //有勾選
+                $(".liExecutorCIQuest").hide(); //先隱藏
+                //重新顯示 data-quest-state vaule 符合勾選的項目
                 $(".filterExecutorCIQuest input[type=checkbox]:checked").each(function () {
                     $(".liExecutorCIQuest[data-" + $(this).prop("name") + "*=\"" + $(this).val() + "\"]").show();
                 });
             } else {
-                console.log("hihihi");
+                //無勾選
                 $(".liExecutorCIQuest").show();
             }
         });
         //發起的任務 列表
         $(".filterInitiatorCIQuest input[type=checkbox]").click(function () {
             if ($(".filterInitiatorCIQuest input[type=checkbox]:checked").length) {
-                $(".liInitiatorCIQuest").hide();
+                //有勾選
+                $(".liInitiatorCIQuest").hide(); //先隱藏
+                //重新顯示 data-quest-state vaule 符合勾選的項目
                 $(".filterInitiatorCIQuest input[type=checkbox]:checked").each(function () {
                     $(".liInitiatorCIQuest[data-" + $(this).prop("name") + "*=\"" + $(this).val() + "\"]").show();
                 });
             } else {
+                //無勾選
                 $(".liInitiatorCIQuest").show();
             }
         });
     };
-    
     
 })(jQuery);
