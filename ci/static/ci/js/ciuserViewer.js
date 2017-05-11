@@ -11,6 +11,8 @@
     function initCiuserViewer() {
         initLinkViewCIQuest();
         initCIQuestFilter();
+        filterExecutorCIQuest();
+        filterInitiatorCIQuest();
     };
     
     //初始化 任務連結
@@ -27,34 +29,44 @@
     
     //初始化 任務列表過瀘器
     function initCIQuestFilter(){
-        //執行中任務 列表
+        //接受的任務 列表
         $(".filterExecutorCIQuest input[type=checkbox]").click(function () {
-            if ($(".filterExecutorCIQuest input[type=checkbox]:checked").length) {
-                //有勾選
-                $(".liExecutorCIQuest").hide(); //先隱藏
-                //重新顯示 data-quest-state vaule 符合勾選的項目
-                $(".filterExecutorCIQuest input[type=checkbox]:checked").each(function () {
-                    $(".liExecutorCIQuest[data-" + $(this).prop("name") + "*=\"" + $(this).val() + "\"]").show();
-                });
-            } else {
-                //無勾選
-                $(".liExecutorCIQuest").show();
-            }
+            filterExecutorCIQuest();
         });
         //發起的任務 列表
         $(".filterInitiatorCIQuest input[type=checkbox]").click(function () {
-            if ($(".filterInitiatorCIQuest input[type=checkbox]:checked").length) {
-                //有勾選
-                $(".liInitiatorCIQuest").hide(); //先隱藏
-                //重新顯示 data-quest-state vaule 符合勾選的項目
-                $(".filterInitiatorCIQuest input[type=checkbox]:checked").each(function () {
-                    $(".liInitiatorCIQuest[data-" + $(this).prop("name") + "*=\"" + $(this).val() + "\"]").show();
-                });
-            } else {
-                //無勾選
-                $(".liInitiatorCIQuest").show();
-            }
+            filterInitiatorCIQuest();
         });
+    };
+    
+    //過瀘 接受的任務 列表
+    function filterExecutorCIQuest(){
+        if ($(".filterExecutorCIQuest input[type=checkbox]:checked").length) {
+            //有勾選
+            $(".liExecutorCIQuest").hide(); //先隱藏
+            //重新顯示 data-quest-state vaule 符合勾選的項目
+            $(".filterExecutorCIQuest input[type=checkbox]:checked").each(function () {
+                $(".liExecutorCIQuest[data-" + $(this).prop("name") + "*=\"" + $(this).val() + "\"]").show();
+            });
+        } else {
+            //無勾選
+            $(".liExecutorCIQuest").show();
+        }
+    };
+    
+    //過瀘 發起的任務 列表
+    function filterInitiatorCIQuest(){
+        if ($(".filterInitiatorCIQuest input[type=checkbox]:checked").length) {
+            //有勾選
+            $(".liInitiatorCIQuest").hide(); //先隱藏
+            //重新顯示 data-quest-state vaule 符合勾選的項目
+            $(".filterInitiatorCIQuest input[type=checkbox]:checked").each(function () {
+                $(".liInitiatorCIQuest[data-" + $(this).prop("name") + "*=\"" + $(this).val() + "\"]").show();
+            });
+        } else {
+            //無勾選
+            $(".liInitiatorCIQuest").show();
+        }
     };
     
 })(jQuery);

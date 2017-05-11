@@ -61,7 +61,7 @@
         <!-- 執行中任務 -->
         <div>
             <button class="bg-primary">
-                執行中任務
+                接受的任務
                 <span class="badge">{{ userHost.ciuser.executor_set.all.count }}</span>
             </button>
             <!-- 狀態過瀘 dropdown -->
@@ -70,10 +70,9 @@
                     <span class="glyphicon glyphicon-filter"></span>
                 </button>
                 <ul class="dropdown-menu filterExecutorCIQuest">
-                    <li><input type="checkbox" name="quest-state" value="new"></input>new</li>
-                    <li><input type="checkbox" name="quest-state" value="processing"></input>processing</li>
-                    <li><input type="checkbox" name="quest-state" value="complete"></input>complete</li>
-                    <li><input type="checkbox" name="quest-state" value="incomplete"></input>incomplete</li>
+                    <li><input type="checkbox" name="quest-state" value="processing" checked></input>processing</li>
+                    <li><input type="checkbox" name="quest-state" value="complete" checked></input>complete</li>
+                    <li><input type="checkbox" name="quest-state" value="incomplete" checked></input>incomplete</li>
                     <li><input type="checkbox" name="quest-state" value="end_success"></input>end_success</li>
                     <li><input type="checkbox" name="quest-state" value="end_failure"></input>end_failure</li>
                 </ul>
@@ -101,8 +100,8 @@
                     <span class="glyphicon glyphicon-filter"></span>
                 </button>
                 <ul class="dropdown-menu filterInitiatorCIQuest">
-                    <li><input type="checkbox" name="quest-state" value="new"></input>new</li>
-                    <li><input type="checkbox" name="quest-state" value="processing"></input>processing</li>
+                    <li><input type="checkbox" name="quest-state" value="new" checked></input>new</li>
+                    <li><input type="checkbox" name="quest-state" value="processing" checked></input>processing</li>
                     <li><input type="checkbox" name="quest-state" value="complete"></input>complete</li>
                     <li><input type="checkbox" name="quest-state" value="incomplete"></input>incomplete</li>
                     <li><input type="checkbox" name="quest-state" value="end_success"></input>end_success</li>
