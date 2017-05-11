@@ -11,6 +11,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from quest.forms import CIQuestForm
 from quest.models import CIQuest
+from quest.models import CIQuestTag
 from django.db.models import Q
 from django.http import JsonResponse
 from quest.utility.quest import QuestUtility
@@ -19,6 +20,8 @@ from quest.utility.quest import QuestUtility
 @login_required
 def initNewQuest(request):
     if request.method == "POST":
+        strQuestTags = request.POST.get("inputQuestTags", None)
+        lstStrQuestTag = strQuestTags.split(",")
         formCIQuest = CIQuestForm(request.POST)
         if formCIQuest.is_valid():
             #取得 from 資料
@@ -32,6 +35,12 @@ def initNewQuest(request):
                 strState="new"
             )
             ciquest.save()
+            #儲存 tag 關係 model
+            for strQuestTag in lstStrQuestTag:
+                #查尋 或 建立 tag
+                (ciquesttag, isCreated) = CIQuestTag.objects.get_or_create(strName=strQuestTag)
+                #建立關聯
+                ciquest.setCIQuestTag.add(ciquesttag)
             return redirect("/quest/searchCIQuest/")
     else:
         formCIQuest = CIQuestForm()

@@ -25,7 +25,10 @@
 <form action="" method="post">
     <!-- CSRF 保護 -->
     {% csrf_token %}
+    <!-- tags -->
+    <input id="inputQuestTags" name="inputQuestTags" value=""></input>
+    <!-- 任務內容 -->
     {{ formCIQuest.as_p }}
-    <input type="submit" value="發起">
+    <input type="submit" value="發起"></input>
 </form>
 {% endblock block_content %}
