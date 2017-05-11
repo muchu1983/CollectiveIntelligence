@@ -58,14 +58,14 @@
     </div>
     <!-- 任務欄 -->
     <div class="col-xs-6">
-        <!-- 執行中任務 -->
-        <div>
-            <button class="bg-primary">
+        <!-- 接受的任務 -->
+        <div class="row">
+            <button class="bg-primary col-xs-5">
                 接受的任務
                 <span class="badge">{{ userHost.ciuser.executor_set.all.count }}</span>
             </button>
             <!-- 狀態過瀘 dropdown -->
-            <div class="dropdown">
+            <div class="dropdown col-xs-1">
                 <button class="btn btn-primary dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-filter"></span>
                 </button>
@@ -77,8 +77,10 @@
                     <li><input type="checkbox" name="quest-state" value="end_failure"></input>end_failure</li>
                 </ul>
             </div>
+        </div>
+        <div class="row">
             <!-- 列表 -->
-            <ul class="list-group">
+            <ul class="list-group col-xs-6">
             {% for matchedCIQuest in userHost.ciuser.executor_set.all %}
                 <li class="list-group-item liExecutorCIQuest" data-quest-state={{ matchedCIQuest.strState }}>
                     <!-- 任務QID 隱藏 -->
@@ -89,13 +91,13 @@
             </ul>
         </div>
         <!-- 發起的任務 -->
-        <div>
-            <button class="bg-primary">
+        <div class="row">
+            <button class="bg-primary col-xs-5">
                 發起的任務
                 <span class="badge">{{ userHost.ciuser.initiator_set.all.count }}</span>
             </button>
             <!-- 狀態過瀘 dropdown -->
-            <div class="dropdown">
+            <div class="dropdown col-xs-1">
                 <button class="btn btn-primary dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-filter"></span>
                 </button>
@@ -108,8 +110,10 @@
                     <li><input type="checkbox" name="quest-state" value="end_failure"></input>end_failure</li>
                 </ul>
             </div>
+        </div>
+        <div class="row">
             <!-- 列表 -->
-            <ul class="list-group">
+            <ul class="list-group col-xs-6">
             {% for matchedCIQuest in userHost.ciuser.initiator_set.all %}
                 <li class="list-group-item liInitiatorCIQuest" data-quest-state={{ matchedCIQuest.strState }}>
                     <!-- 任務QID 隱藏 -->
