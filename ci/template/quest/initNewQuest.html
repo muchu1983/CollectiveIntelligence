@@ -25,10 +25,23 @@
 <form action="" method="post">
     <!-- CSRF 保護 -->
     {% csrf_token %}
-    <!-- tags -->
-    <input id="inputQuestTags" name="inputQuestTags" value=""></input>
+    <!-- 任務標題 -->
+    <div>
+        {{ formCIQuest.strHeadline.errors }}
+        <label for="{{ formCIQuest.strHeadline.id_for_label }}">任務標題：</label>
+        {{ formCIQuest.strHeadline }}
+    </div>
+    <!-- 任務 tags -->
+    <div>
+        <label for="inputQuestTags">任務標籤：</label>
+        <input id="inputQuestTags" name="inputQuestTags" value=""></input>
+    </div>
     <!-- 任務內容 -->
-    {{ formCIQuest.as_p }}
+    <div>
+        {{ formCIQuest.strContent.errors }}
+        <label for="{{ formCIQuest.strContent.id_for_label }}">任務內容：</label>
+        {{ formCIQuest.strContent }}
+    </div>
     <input type="submit" value="發起"></input>
 </form>
 {% endblock block_content %}

@@ -14,7 +14,11 @@
     
     //初始化 任務標籤 輸入框
     function initInputQuestTags(){
-        $("#inputQuestTags").tagsInput();
+        $("#inputQuestTags").tagsInput({
+            "height":"40px",
+            "width":"300px",
+            "defaultText":"新增標籤"
+        });
     };
     
 })(jQuery);
