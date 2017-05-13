@@ -259,7 +259,8 @@ def retrieveLstDicFollower(request):
         for ciuserFollower in qsetCIUserFollower:
             dicFollower = {
                 "strDisplayName": ciuserFollower.strDisplayName,
-                "strCIUserUID": ciuserFollower.strCIUserUID
+                "strCIUserUID": ciuserFollower.strCIUserUID,
+                "intPointVolume": ciuserFollower.intPointVolume
             }
             lstDicFollower.append(dicFollower)
         strRetrieveLstDicFollower = "完成取得 追隨者"

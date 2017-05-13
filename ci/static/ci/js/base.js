@@ -29,7 +29,8 @@
                     "<li class=\"list-group-item\">"+
                         "<a class=\"roleFollower\" href=\"/core/ciuserViewer/" + dicFollower["strCIUserUID"] + "/\">" +
                         dicFollower["strDisplayName"] +
-                        "</a>"+
+                        "</a> "+
+                        "<span>" + dicFollower["intPointVolume"] + " PV</span>"+
                     "</li>"
                 );
             });
