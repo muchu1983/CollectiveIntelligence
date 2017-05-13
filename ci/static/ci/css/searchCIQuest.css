@@ -8,3 +8,9 @@ This file is part of BSD license
 ul li {
     list-style-type: none;
 }
+
+/* 任務狀態圖示 */
+.spanQuestStateIcon {
+    font-size: 20px;
+    color: gold;
+}

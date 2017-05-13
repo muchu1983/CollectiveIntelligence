@@ -45,16 +45,16 @@
         <!-- 狀態圖說明 -->
         <div class="col-xs-1 dropdown text-center">
             <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-                <span class="glyphicon glyphicon-info-sign"></span>
+                <span class="spanQuestStateIcon glyphicon glyphicon-info-sign"></span>
             </button>
             <ul class="dropdown-menu dropdown-menu-left">
-                <li><span class="glyphicon glyphicon-exclamation-sign"></span> 尚無人申請</li>
-                <li><span class="glyphicon glyphicon-plus-sign"></span> 配對中</li>
-                <li><span class="glyphicon glyphicon-question-sign"></span> 正在執行中</li>
-                <li><span class="glyphicon glyphicon-ok-sign"></span> 目標達成</li>
-                <li><span class="glyphicon glyphicon-remove-sign"></span> 目標已無法達成</li>
-                <li><span class="glyphicon glyphicon-ok"></span> 已終結-成功</li>
-                <li><span class="glyphicon glyphicon-remove"></span> 已終結-失敗</li>
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-exclamation-sign"></span> 尚無人申請</li>
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-plus-sign"></span> 配對中</li>
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-question-sign"></span> 正在執行中</li>
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-ok-sign"></span> 目標達成</li>
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-remove-sign"></span> 目標已無法達成</li>
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-ok"></span> 已終結-成功</li>
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-remove"></span> 已終結-失敗</li>
             </ul>
         </div>
         <span class="col-xs-5 text-left">任務標題</span>
@@ -66,19 +66,19 @@
     <li class="list-group-item row">
         <!-- 任務狀態圖示 -->
         {% if matchedCIQuest.strState == "new" %}
-        <span class="col-xs-1 glyphicon glyphicon-exclamation-sign text-center"></span>
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-exclamation-sign text-center"></span>
         {% elif matchedCIQuest.strState == "matching" %}
-        <span class="col-xs-1 glyphicon glyphicon-plus-sign text-center"></span>
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-plus-sign text-center"></span>
         {% elif matchedCIQuest.strState == "processing" %}
-        <span class="col-xs-1 glyphicon glyphicon-question-sign text-center"></span>
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-question-sign text-center"></span>
         {% elif matchedCIQuest.strState == "complete" %}
-        <span class="col-xs-1 glyphicon glyphicon-ok-sign text-center"></span>
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-ok-sign text-center"></span>
         {% elif matchedCIQuest.strState == "incomplete" %}
-        <span class="col-xs-1 glyphicon glyphicon-remove-sign text-center"></span>
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-remove-sign text-center"></span>
         {% elif matchedCIQuest.strState == "end_success" %}
-        <span class="col-xs-1 glyphicon glyphicon-ok text-center"></span>
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-ok text-center"></span>
         {% elif matchedCIQuest.strState == "end_failure" %}
-        <span class="col-xs-1 glyphicon glyphicon-remove text-center"></span>
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-remove text-center"></span>
         {% else %}
         {% endif %}
         <!-- 任務標題 -->

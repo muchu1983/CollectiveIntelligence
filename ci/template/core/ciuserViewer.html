@@ -86,19 +86,19 @@
                 <li class="list-group-item liExecutorCIQuest row" data-quest-state={{ matchedCIQuest.strState }}>
                     <!-- 任務狀態圖示 -->
                     {% if matchedCIQuest.strState == "new" %}
-                    <span class="glyphicon glyphicon-exclamation-sign text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-exclamation-sign text-center col-xs-2"></span>
                     {% elif matchedCIQuest.strState == "matching" %}
-                    <span class="glyphicon glyphicon-plus-sign text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-plus-sign text-center col-xs-2"></span>
                     {% elif matchedCIQuest.strState == "processing" %}
-                    <span class="glyphicon glyphicon-question-sign text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-question-sign text-center col-xs-2"></span>
                     {% elif matchedCIQuest.strState == "complete" %}
-                    <span class="glyphicon glyphicon-ok-sign text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-ok-sign text-center col-xs-2"></span>
                     {% elif matchedCIQuest.strState == "incomplete" %}
-                    <span class="glyphicon glyphicon-remove-sign text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-remove-sign text-center col-xs-2"></span>
                     {% elif matchedCIQuest.strState == "end_success" %}
-                    <span class="glyphicon glyphicon-ok text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-ok text-center col-xs-2"></span>
                     {% elif matchedCIQuest.strState == "end_failure" %}
-                    <span class="glyphicon glyphicon-remove text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-remove text-center col-xs-2"></span>
                     {% else %}
                     {% endif %}
                     <!-- 任務QID 隱藏 -->
@@ -140,19 +140,19 @@
                 <li class="list-group-item liInitiatorCIQuest row" data-quest-state={{ matchedCIQuest.strState }}>
                     <!-- 任務狀態圖示 -->
                     {% if matchedCIQuest.strState == "new" %}
-                    <span class="glyphicon glyphicon-exclamation-sign text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-exclamation-sign text-center col-xs-2"></span>
                     {% elif matchedCIQuest.strState == "matching" %}
-                    <span class="glyphicon glyphicon-plus-sign text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-plus-sign text-center col-xs-2"></span>
                     {% elif matchedCIQuest.strState == "processing" %}
-                    <span class="glyphicon glyphicon-question-sign text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-question-sign text-center col-xs-2"></span>
                     {% elif matchedCIQuest.strState == "complete" %}
-                    <span class="glyphicon glyphicon-ok-sign text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-ok-sign text-center col-xs-2"></span>
                     {% elif matchedCIQuest.strState == "incomplete" %}
-                    <span class="glyphicon glyphicon-remove-sign text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-remove-sign text-center col-xs-2"></span>
                     {% elif matchedCIQuest.strState == "end_success" %}
-                    <span class="glyphicon glyphicon-ok text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-ok text-center col-xs-2"></span>
                     {% elif matchedCIQuest.strState == "end_failure" %}
-                    <span class="glyphicon glyphicon-remove text-center col-xs-2"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-remove text-center col-xs-2"></span>
                     {% else %}
                     {% endif %}
                     <!-- 任務QID 隱藏 -->
