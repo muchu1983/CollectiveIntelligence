@@ -12,7 +12,21 @@
 <form action="" method="post">
     <!-- CSRF 保護 -->
     {% csrf_token %}
-    {{ formRegisterUser.as_p }}
-    <input type="submit" value="註冊">
+    <div>
+        {{ formRegisterUser.username.errors }}
+        <label for="{{ formRegisterUser.username.id_for_label }}">輸入帳號：</label>
+        {{ formRegisterUser.username }}
+    </div>
+    <div>
+        {{ formRegisterUser.password1.errors }}
+        <label for="{{ formRegisterUser.password1.id_for_label }}">輸入密碼：</label>
+        {{ formRegisterUser.password1 }}
+    </div>
+    <div>
+        {{ formRegisterUser.password2.errors }}
+        <label for="{{ formRegisterUser.password2.id_for_label }}">密碼確認：</label>
+        {{ formRegisterUser.password2 }}
+    </div>
+    <input type="submit" class="btn btn-sm btn-primary" value="註冊">
 </form>
 {% endblock block_content%}

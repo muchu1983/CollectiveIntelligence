@@ -14,15 +14,25 @@
     <!-- CSRF 保護 -->
     {% csrf_token %}
     <h3>{{ strUsername }} 的個人資料</h3>
-    <label for="reset_password_1">重設密碼: </label>
-    <input id="reset_password_1" type="password" name="reset_password_1" maxlength="20">
-    <label for="reset_password_2">密碼確認: </label>
-    <input id="reset_password_2" type="password" name="reset_password_2" maxlength="20">
-    {{ formUser.as_p }}
-    {{ formCIUser.as_p }}
-    <input type="submit" value="完成">
+    <label for="reset_password_1">重設密碼：</label>
+    <input id="reset_password_1" type="password" name="reset_password_1" maxlength="20" placeholder="非必填">
+    <label for="reset_password_2">密碼確認：</label>
+    <input id="reset_password_2" type="password" name="reset_password_2" maxlength="20" placeholder="非必填">
+    <!-- User -->
+    <div>
+        {{ formUser.email.errors }}
+        <label for="{{ formUser.email.id_for_label }}">電子信箱：</label>
+        {{ formUser.email }}
+    </div>
+    <!-- CIUser -->
+    <div>
+        {{ formCIUser.strDisplayName.errors }}
+        <label for="{{ formRegisterUser.strDisplayName.id_for_label }}">顯示名稱：</label>
+        {{ formCIUser.strDisplayName }}
+    </div>
+    <input type="submit" class="btn btn-sm btn-primary" value="完成">
 </form>
 <!-- email 認證 -->
 <span>email verified: {{ isEmailVerified }}</span>
-<button type="button" class="btnSendEmailVerification btn btn-primary">寄發 email 認證信</button>
+<button type="button" class="btnSendEmailVerification btn btn-sm btn-primary">寄發 email 認證信</button>
 {% endblock block_content %}
