@@ -25,9 +25,9 @@
         $.post("/core/retrieveLstDicFollower/", dicPostData, function(jsonResp){
             $.each(jsonResp["lstDicFollower"], function(intIndex, dicFollower) {
                 //加入
-                $("#labelMyFollower").after(
+                $("#liHiddenMyFollowerAddPoint").after(
                     "<li class=\"list-group-item\">"+
-                        "<a href=\"/core/ciuserViewer/" + dicFollower["strCIUserUID"] + "/\">" +
+                        "<a class=\"roleFollower\" href=\"/core/ciuserViewer/" + dicFollower["strCIUserUID"] + "/\">" +
                         dicFollower["strDisplayName"] +
                         "</a>"+
                     "</li>"
