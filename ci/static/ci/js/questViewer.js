@@ -74,15 +74,15 @@
                 }
             }, "json");
         });
-        //接受任務 btnAcceptQuest
-        $("#btnAcceptQuest").click(function(){
-            strDialogSelector = "#dialogConfirmAcceptQuest";
+        //申請執行任務 btnApplyQuest
+        $("#btnApplyQuest").click(function(){
+            strDialogSelector = "#dialogConfirmApplyQuest";
             showConfirmDialog(
                 strDialogSelector,
                 function(){
                     //OK
                     $(this).dialog("close");
-                    console.log("確定要 接受任務");
+                    console.log("確定要 申請執行任務");
                     //POST 資料
                     dicPostData = {
                         "strQID": strQID,
@@ -90,7 +90,7 @@
                     };
                     console.log(dicPostData);
                     //POST
-                    $.post("/quest/acceptQuest/", dicPostData, function(jsonResp){
+                    $.post("/quest/applyQuest/", dicPostData, function(jsonResp){
                         console.log(jsonResp);
                         //更新頁面
                         window.location.reload();
@@ -99,9 +99,54 @@
                 function(){
                     //Cancel
                     $(this).dialog("close");
-                    console.log("取消 接受任務");
+                    console.log("取消 申請執行任務");
                 }
             );
+        });
+        //接受申請
+        $("#btnAcceptApplication").click(function(){
+            //POST 資料
+            dicPostData = {
+                "strQID": strQID,
+                "csrfmiddlewaretoken": strCsrfToken
+            };
+            console.log(dicPostData);
+            //POST
+            $.post("/quest/acceptApplication/", dicPostData, function(jsonResp){
+                console.log(jsonResp);
+                //更新頁面
+                window.location.reload();
+            }, "json");
+        });
+        //拒絕申請
+        $("#btnRejectApplication").click(function(){
+            //POST 資料
+            dicPostData = {
+                "strQID": strQID,
+                "csrfmiddlewaretoken": strCsrfToken
+            };
+            console.log(dicPostData);
+            //POST
+            $.post("/quest/rejectApplication/", dicPostData, function(jsonResp){
+                console.log(jsonResp);
+                //更新頁面
+                window.location.reload();
+            }, "json");
+        });
+        //取消申請
+        $("#btnCancelApplication").click(function(){
+            //POST 資料
+            dicPostData = {
+                "strQID": strQID,
+                "csrfmiddlewaretoken": strCsrfToken
+            };
+            console.log(dicPostData);
+            //POST
+            $.post("/quest/cancelApplication/", dicPostData, function(jsonResp){
+                console.log(jsonResp);
+                //更新頁面
+                window.location.reload();
+            }, "json");
         });
         //成功達成目標 btnQuestReached
         $("#btnQuestReached").click(function(){
@@ -149,18 +194,32 @@
         });
         //放棄任務 btnAbandonQuest
         $("#btnAbandonQuest").click(function(){
-            //POST 資料
-            dicPostData = {
-                "strQID": strQID,
-                "csrfmiddlewaretoken": strCsrfToken
-            };
-            console.log(dicPostData);
-            //POST
-            $.post("/quest/abandonQuest/", dicPostData, function(jsonResp){
-                console.log(jsonResp);
-                //更新頁面
-                window.location.reload();
-            }, "json");
+            strDialogSelector = "#dialogConfirmAbandonQuest";
+            showConfirmDialog(
+                strDialogSelector,
+                function(){
+                    //OK
+                    $(this).dialog("close");
+                    console.log("確定要 放棄任務");
+                    //POST 資料
+                    dicPostData = {
+                        "strQID": strQID,
+                        "csrfmiddlewaretoken": strCsrfToken
+                    };
+                    console.log(dicPostData);
+                    //POST
+                    $.post("/quest/abandonQuest/", dicPostData, function(jsonResp){
+                        console.log(jsonResp);
+                        //更新頁面
+                        window.location.reload();
+                    }, "json");
+                },
+                function(){
+                    //Cancel
+                    $(this).dialog("close");
+                    console.log("取消 放棄任務");
+                }
+            );
         });
         //完成任務 btnAccomplishQuest
         $("#btnAccomplishQuest").click(function(){

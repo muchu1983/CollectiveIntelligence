@@ -119,18 +119,66 @@ def likeOrDislikeQuest(request):
         strResult = "只允許 POST 方式操作任務"
     return JsonResponse({"isLiked":isLiked, "strResult":strResult}, safe=False)
     
-#接受 任務
+#申請執行任務
 @login_required
-def acceptQuest(request):
+def applyQuest(request):
     #結果 字串
     strResult = None
     if request.method == "POST":
-        #接受任務
+        #申請執行任務
         strQID = request.POST.get("strQID", None)
         questUtil = QuestUtility()
-        questUtil.acceptQuest(ciuserRequest=request.user.ciuser, strQID=strQID)
+        questUtil.applyQuest(ciuserRequest=request.user.ciuser, strQID=strQID)
         #完成字串
-        strResult = "已完成 接受任務"
+        strResult = "已完成 申請執行任務"
+    else:
+        strResult = "只允許 POST 方式操作任務"
+    return JsonResponse({"result":strResult}, safe=False)
+    
+#接受申請
+@login_required
+def acceptApplication(request):
+    #結果 字串
+    strResult = None
+    if request.method == "POST":
+        #申請執行任務
+        strQID = request.POST.get("strQID", None)
+        questUtil = QuestUtility()
+        questUtil.acceptApplication(ciuserRequest=request.user.ciuser, strQID=strQID)
+        #完成字串
+        strResult = "已完成 接受申請"
+    else:
+        strResult = "只允許 POST 方式操作任務"
+    return JsonResponse({"result":strResult}, safe=False)
+    
+#拒絕申請
+@login_required
+def rejectApplication(request):
+    #結果 字串
+    strResult = None
+    if request.method == "POST":
+        #申請執行任務
+        strQID = request.POST.get("strQID", None)
+        questUtil = QuestUtility()
+        questUtil.rejectApplication(ciuserRequest=request.user.ciuser, strQID=strQID)
+        #完成字串
+        strResult = "已完成 拒絕申請"
+    else:
+        strResult = "只允許 POST 方式操作任務"
+    return JsonResponse({"result":strResult}, safe=False)
+    
+#取消申請
+@login_required
+def cancelApplication(request):
+    #結果 字串
+    strResult = None
+    if request.method == "POST":
+        #申請執行任務
+        strQID = request.POST.get("strQID", None)
+        questUtil = QuestUtility()
+        questUtil.cancelApplication(ciuserRequest=request.user.ciuser, strQID=strQID)
+        #完成字串
+        strResult = "已完成 取消申請"
     else:
         strResult = "只允許 POST 方式操作任務"
     return JsonResponse({"result":strResult}, safe=False)

@@ -70,11 +70,12 @@
                     <span class="glyphicon glyphicon-filter"></span>
                 </button>
                 <ul class="dropdown-menu filterExecutorCIQuest">
-                    <li><input type="checkbox" name="quest-state" value="processing" checked></input>processing</li>
-                    <li><input type="checkbox" name="quest-state" value="complete" checked></input>complete</li>
-                    <li><input type="checkbox" name="quest-state" value="incomplete" checked></input>incomplete</li>
-                    <li><input type="checkbox" name="quest-state" value="end_success"></input>end_success</li>
-                    <li><input type="checkbox" name="quest-state" value="end_failure"></input>end_failure</li>
+                    <li><input type="checkbox" name="quest-state" value="matching" checked></input>配對中</li>
+                    <li><input type="checkbox" name="quest-state" value="processing" checked></input>正在執行中</li>
+                    <li><input type="checkbox" name="quest-state" value="complete" checked></input>目標達成</li>
+                    <li><input type="checkbox" name="quest-state" value="incomplete" checked></input>目標已無法達成</li>
+                    <li><input type="checkbox" name="quest-state" value="end_success"></input>已終結-成功</li>
+                    <li><input type="checkbox" name="quest-state" value="end_failure"></input>已終結-失敗</li>
                 </ul>
             </div>
         </div>
@@ -83,9 +84,13 @@
             <ul class="list-group col-xs-6">
             {% for matchedCIQuest in userHost.ciuser.executor_set.all %}
                 <li class="list-group-item liExecutorCIQuest" data-quest-state={{ matchedCIQuest.strState }}>
+                    <!-- 任務狀態圖示 -->
+                    
                     <!-- 任務QID 隱藏 -->
                     <input type="hidden" class="strQID" name="strQID" value={{ matchedCIQuest.strQID }}></input>
                     <a class="linkViewCIQuest" href="javascript: void(0);">{{ matchedCIQuest.strHeadline }}</a>
+                    <!-- 任務獎勵 -->
+                    
                 </li>
             {% endfor %}
             </ul>
@@ -102,12 +107,13 @@
                     <span class="glyphicon glyphicon-filter"></span>
                 </button>
                 <ul class="dropdown-menu filterInitiatorCIQuest">
-                    <li><input type="checkbox" name="quest-state" value="new" checked></input>new</li>
-                    <li><input type="checkbox" name="quest-state" value="processing" checked></input>processing</li>
-                    <li><input type="checkbox" name="quest-state" value="complete"></input>complete</li>
-                    <li><input type="checkbox" name="quest-state" value="incomplete"></input>incomplete</li>
-                    <li><input type="checkbox" name="quest-state" value="end_success"></input>end_success</li>
-                    <li><input type="checkbox" name="quest-state" value="end_failure"></input>end_failure</li>
+                    <li><input type="checkbox" name="quest-state" value="new" checked></input>尚無人申請</li>
+                    <li><input type="checkbox" name="quest-state" value="matching" checked></input>配對中</li>
+                    <li><input type="checkbox" name="quest-state" value="processing" checked></input>正在執行中</li>
+                    <li><input type="checkbox" name="quest-state" value="complete"></input>目標達成</li>
+                    <li><input type="checkbox" name="quest-state" value="incomplete"></input>目標已無法達成</li>
+                    <li><input type="checkbox" name="quest-state" value="end_success"></input>已終結-成功</li>
+                    <li><input type="checkbox" name="quest-state" value="end_failure"></input>已終結-失敗</li>
                 </ul>
             </div>
         </div>

@@ -73,9 +73,28 @@
                     <span id="strLikedCount" class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
                 </button>
             {% endif %}
-        <button id="btnAcceptQuest" class="btn btn-danger btn-xs" type="button">
-            接受任務
+        <button id="btnApplyQuest" class="btn btn-danger btn-xs" type="button">
+            申請執行任務
         </button>
+        {% endif %}
+    {% elif questTarget.strState == "matching" %}
+    <!-- 任務狀態 - matching -->
+        {% if isInitiator %}
+        <!-- 發起人 -->
+        <button id="btnAcceptApplication" class="btn btn-danger btn-xs" type="button">
+            接受申請
+        </button>
+        <button id="btnRejectApplication" class="btn btn-danger btn-xs" type="button">
+            拒絕申請
+        </button>
+        {% elif isExecutor %}
+        <!-- 執行人 -->
+        <button id="btnCancelApplication" class="btn btn-danger btn-xs" type="button">
+            取消申請
+        </button>
+        {% else %}
+        <!-- 非發起人亦非執行人 -->
+        <span>無相關操作</span>
         {% endif %}
     {% elif questTarget.strState == "processing" %}
     <!-- 任務狀態 - processing -->
@@ -130,13 +149,14 @@
 {% block block_hidden %}
 <!-- questViewer.html block_hidden -->
 {{ block.super }} <!-- 複製上層 template block_hidden 的內容 -->
-<!-- 確認接受任務 Dialog -->
-<div id="dialogConfirmAcceptQuest" class="dialogHidden" title="接受任務?">
+<!-- 確認申請執行任務 Dialog -->
+<div id="dialogConfirmApplyQuest" class="dialogHidden" title="申請執行任務?">
     <p>
         <span class="ui-icon ui-icon-alert"></span>
+        <p>等待 發起人 接受申請後再開始執行任務，開始執行後如果：</p>
         <p>任務成功 將獲得 {{ questTarget.intRewardPV }} 點個人 PV</p>
-        <p>任務失敗 將扣除 {% widthratio questTarget.intRewardPV 2 1 %} 點個人 PV</p>
-        <p>確定要接受任務?</p>
+        <p>中途放棄任務 將扣除 {% widthratio questTarget.intRewardPV 2 1 %} 點個人 PV</p>
+        <p>確定要 申請執行任務?</p>
     </p>
 </div>
 <!-- 確認刪除任務 Dialog -->
@@ -151,6 +171,13 @@
     <p>
         <span class="ui-icon ui-icon-alert"></span>
         您將會被扣除 {% widthratio questTarget.intRewardPV 2 1 %} 點個人 PV！確定要終結任務?
+    </p>
+</div>
+<!-- 確認放棄任務 Dialog -->
+<div id="dialogConfirmAbandonQuest" class="dialogHidden" title="放棄任務?">
+    <p>
+        <span class="ui-icon ui-icon-alert"></span>
+        您將會被扣除 {% widthratio questTarget.intRewardPV 2 1 %} 點個人 PV！確定要放棄任務?
     </p>
 </div>
 {% endblock block_hidden %}
