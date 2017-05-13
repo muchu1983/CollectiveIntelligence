@@ -20,7 +20,7 @@ from quest.utility.quest import QuestUtility
 @login_required
 def initNewQuest(request):
     if request.method == "POST":
-        strQuestTags = request.POST.get("inputQuestTags", None)
+        strQuestTags = request.POST.get("inputQuestTags", "")
         lstStrQuestTag = strQuestTags.split(",")
         formCIQuest = CIQuestForm(request.POST)
         if formCIQuest.is_valid():
