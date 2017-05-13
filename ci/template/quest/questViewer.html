@@ -31,24 +31,67 @@
 <!-- override block_content -->
 {% block block_content %}
 <!-- questViewer.html block_content -->
-<!-- 任務狀態 -->
-<!-- 任務標題 -->
-<div id="divHeadline" class="row">
-    {{ questTarget.strHeadline }}
+<!-- 主要資料區 -->
+<div id="divQuestMajorData" class="row">
+    <div class="col-xs-8">
+        <!-- 任務標題 -->
+        <div id="divQuestHeadline" class="text-left">
+            <h4>{{ questTarget.strHeadline }}</h4>
+        </div>
+        <!-- 相關角色 -->
+        <div id="divQuestRoles">
+            <span class="text-left">發起：
+                <a target="_blank" href="/core/ciuserViewer/{{ questTarget.ciuserInitiator.strCIUserUID }}/">
+                {{ questTarget.ciuserInitiator.strDisplayName }}
+                </a>
+            </span>
+            <span class="test-right">執行：
+                <a target="_blank" href="/core/ciuserViewer/{{ questTarget.ciuserExecutor.strCIUserUID }}/">
+                {{ questTarget.ciuserExecutor.strDisplayName }}
+                </a>
+            </span>
+        </div>
+    </div>
+    <!-- 任務狀態 -->
+    <div id="divQuestState" class="col-xs-4 text-right">
+        <!-- 任務狀態圖示 -->
+        {% if questTarget.strState == "new" %}
+        <span class="glyphicon glyphicon-exclamation-sign"></span>
+        {% elif questTarget.strState == "matching" %}
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        {% elif questTarget.strState == "processing" %}
+        <span class="glyphicon glyphicon-question-sign"></span>
+        {% elif questTarget.strState == "complete" %}
+        <span class="glyphicon glyphicon-ok-sign"></span>
+        {% elif questTarget.strState == "incomplete" %}
+        <span class="glyphicon glyphicon-remove-sign"></span>
+        {% elif questTarget.strState == "end_success" %}
+        <span class="glyphicon glyphicon-ok"></span>
+        {% elif questTarget.strState == "end_failure" %}
+        <span class="glyphicon glyphicon-remove"></span>
+        {% else %}
+        {% endif %}
+    </div>
 </div>
-<!-- 任務標籤 -->
-<hr><!-- 水平線 -->
-<!-- 任務內容 -->
-<div id="divContent" class="row">
-    {{ questTarget.strContent }}
+<!-- 次要資料區 -->
+<div id="divQuestMinorData" class="row">
+    
+    <!-- 任務標籤 -->
+    <div id="divQuestTags">
+        <span>tags here</span>
+    </div>
+    <!-- 任務內容 -->
+    <div id="divQuestContent">
+        {{ questTarget.strContent }}
+    </div>
+    <!-- 剩餘時間 -->
+    <!-- 任務獎勵 -->
+    <div id="divQuestReward">
+        <h4>獎勵： <span id="strRewardPV">{{ questTarget.intRewardPV }}</span> PV</h4>
+    </div>
 </div>
-<!-- 剩餘時間 -->
-<!-- 任務獎勵 -->
-<div id="divReward" class="row">
-    獎勵： <span id="strRewardPV">{{ questTarget.intRewardPV }}</span> PV
-</div>
-<!-- 互動按鈕 -->
-<div id="divInteractiveBtn" class="row">
+<!-- 互動按鈕區 -->
+<div id="divQuestInteractiveBtn" class="row text-right">
     {% if questTarget.strState == "new" %}
     <!-- 任務狀態 - new -->
         {% if isInitiator %}

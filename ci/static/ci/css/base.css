@@ -56,12 +56,19 @@ body {
     float: left;
     margin: 12px 12px 20px 0px;
 }
+
+/* 任務檢視 iframe 關閉按鈕 */
+#btnCloseQuestViewerIFrame{
+    position: relative;
+    float: right;
+}
+
 /* 隱藏的任務檢視 iframe */
 .divHiddenQuestViewerIFrame {
     position: fixed;
     display: none;
-    top: 15vh;
-    left: 10vw;
+    top: 10vh;
+    left: 25vw;
     z-index: -20;
     border: 0px;
     padding: 0px;
@@ -80,22 +87,23 @@ body {
 .divShowQuestViewerIFrame {
     position: fixed;
     display: block;
-    top: 15vh;
-    left: 10vw;
+    background-color: black;
+    top: 10vh;
+    left: 25vw;
     z-index: 20;
-    border: 2px solid red;
+    border: 2px solid gold;
     border-radius: 5px;
     padding: 0px;
-    overflow-y: scroll;
+    overflow-y: none;
 }
 
 .divShowQuestViewerIFrame iframe {
-    width: 80vw;
-    height: 70vh;
+    width: 50vw;
+    height: 80vh;
     border: 0px;
     display: block;
     visibility: visible;
-    border: 2px solid green;
+    border: 2px solid goldenrod;
     border-radius: 5px;
     padding: 0px;
 }
