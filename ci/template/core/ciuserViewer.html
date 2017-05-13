@@ -21,28 +21,28 @@
     <div class="col-xs-10 row">
         <!-- 顯示名稱 -->
         <div class="row">
-            <div class="col-xs-2">
-                <span>顯示名稱:</span>
+            <div class="col-xs-2 text-right">
+                <span>顯示名稱：</span>
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-10 text-left">
                 <span>{{ userHost.ciuser.strDisplayName }}</span>
             </div>
         </div>
         <!-- 個人 PV -->
         <div class="row">
-            <div class="col-xs-2">
-                <span>個人 PV:</span>
+            <div class="col-xs-2 text-right">
+                <span>個人 PV：</span>
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-10 text-left">
                 <span>{{ userHost.ciuser.intPointVolume }}</span>
             </div>
         </div>
         <!-- 團隊 PV -->
         <div class="row">
-            <div class="col-xs-2">
-                <span>團隊 PV:</span>
+            <div class="col-xs-2 text-right">
+                <span>團隊 PV：</span>
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-10 text-left">
                 <span>{{ intRaidPV }}</span>
             </div>
         </div>
@@ -60,16 +60,16 @@
     <div class="col-xs-6">
         <!-- 接受的任務 -->
         <div class="row">
-            <button class="bg-primary col-xs-5">
+            <div class="bg-primary col-xs-10">
                 接受的任務
                 <span class="badge">{{ userHost.ciuser.executor_set.all.count }}</span>
-            </button>
+            </div>
             <!-- 狀態過瀘 dropdown -->
-            <div class="dropdown col-xs-1">
+            <div class="dropdown col-xs-2">
                 <button class="btn btn-primary dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-filter"></span>
                 </button>
-                <ul class="dropdown-menu filterExecutorCIQuest">
+                <ul class="dropdown-menu dropdown-menu-right filterExecutorCIQuest">
                     <li><input type="checkbox" name="quest-state" value="matching" checked></input>配對中</li>
                     <li><input type="checkbox" name="quest-state" value="processing" checked></input>正在執行中</li>
                     <li><input type="checkbox" name="quest-state" value="complete" checked></input>目標達成</li>
@@ -81,32 +81,48 @@
         </div>
         <div class="row">
             <!-- 列表 -->
-            <ul class="list-group col-xs-6">
-            {% for matchedCIQuest in userHost.ciuser.executor_set.all %}
-                <li class="list-group-item liExecutorCIQuest" data-quest-state={{ matchedCIQuest.strState }}>
+            <ul class="list-group col-xs-12">
+                {% for matchedCIQuest in userHost.ciuser.executor_set.all %}
+                <li class="list-group-item liExecutorCIQuest row" data-quest-state={{ matchedCIQuest.strState }}>
                     <!-- 任務狀態圖示 -->
-                    
+                    {% if matchedCIQuest.strState == "new" %}
+                    <span class="glyphicon glyphicon-exclamation-sign text-center col-xs-2"></span>
+                    {% elif matchedCIQuest.strState == "matching" %}
+                    <span class="glyphicon glyphicon-plus-sign text-center col-xs-2"></span>
+                    {% elif matchedCIQuest.strState == "processing" %}
+                    <span class="glyphicon glyphicon-question-sign text-center col-xs-2"></span>
+                    {% elif matchedCIQuest.strState == "complete" %}
+                    <span class="glyphicon glyphicon-ok-sign text-center col-xs-2"></span>
+                    {% elif matchedCIQuest.strState == "incomplete" %}
+                    <span class="glyphicon glyphicon-remove-sign text-center col-xs-2"></span>
+                    {% elif matchedCIQuest.strState == "end_success" %}
+                    <span class="glyphicon glyphicon-ok text-center col-xs-2"></span>
+                    {% elif matchedCIQuest.strState == "end_failure" %}
+                    <span class="glyphicon glyphicon-remove text-center col-xs-2"></span>
+                    {% else %}
+                    {% endif %}
                     <!-- 任務QID 隱藏 -->
                     <input type="hidden" class="strQID" name="strQID" value={{ matchedCIQuest.strQID }}></input>
-                    <a class="linkViewCIQuest" href="javascript: void(0);">{{ matchedCIQuest.strHeadline }}</a>
+                    <!-- 任務標題 -->
+                    <a class="linkViewCIQuest text-left col-xs-8" href="javascript: void(0);">{{ matchedCIQuest.strHeadline }}</a>
                     <!-- 任務獎勵 -->
-                    
+                    <span class="text-right col-xs-2">{{ matchedCIQuest.intRewardPV }} PV</span>
                 </li>
-            {% endfor %}
+                {% endfor %}
             </ul>
         </div>
         <!-- 發起的任務 -->
         <div class="row">
-            <button class="bg-primary col-xs-5">
+            <div class="bg-primary col-xs-10">
                 發起的任務
                 <span class="badge">{{ userHost.ciuser.initiator_set.all.count }}</span>
-            </button>
+            </div>
             <!-- 狀態過瀘 dropdown -->
-            <div class="dropdown col-xs-1">
+            <div class="dropdown col-xs-2">
                 <button class="btn btn-primary dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-filter"></span>
                 </button>
-                <ul class="dropdown-menu filterInitiatorCIQuest">
+                <ul class="dropdown-menu dropdown-menu-right filterInitiatorCIQuest">
                     <li><input type="checkbox" name="quest-state" value="new" checked></input>尚無人申請</li>
                     <li><input type="checkbox" name="quest-state" value="matching" checked></input>配對中</li>
                     <li><input type="checkbox" name="quest-state" value="processing" checked></input>正在執行中</li>
@@ -119,12 +135,32 @@
         </div>
         <div class="row">
             <!-- 列表 -->
-            <ul class="list-group col-xs-6">
+            <ul class="list-group col-xs-12">
             {% for matchedCIQuest in userHost.ciuser.initiator_set.all %}
-                <li class="list-group-item liInitiatorCIQuest" data-quest-state={{ matchedCIQuest.strState }}>
+                <li class="list-group-item liInitiatorCIQuest row" data-quest-state={{ matchedCIQuest.strState }}>
+                    <!-- 任務狀態圖示 -->
+                    {% if matchedCIQuest.strState == "new" %}
+                    <span class="glyphicon glyphicon-exclamation-sign text-center col-xs-2"></span>
+                    {% elif matchedCIQuest.strState == "matching" %}
+                    <span class="glyphicon glyphicon-plus-sign text-center col-xs-2"></span>
+                    {% elif matchedCIQuest.strState == "processing" %}
+                    <span class="glyphicon glyphicon-question-sign text-center col-xs-2"></span>
+                    {% elif matchedCIQuest.strState == "complete" %}
+                    <span class="glyphicon glyphicon-ok-sign text-center col-xs-2"></span>
+                    {% elif matchedCIQuest.strState == "incomplete" %}
+                    <span class="glyphicon glyphicon-remove-sign text-center col-xs-2"></span>
+                    {% elif matchedCIQuest.strState == "end_success" %}
+                    <span class="glyphicon glyphicon-ok text-center col-xs-2"></span>
+                    {% elif matchedCIQuest.strState == "end_failure" %}
+                    <span class="glyphicon glyphicon-remove text-center col-xs-2"></span>
+                    {% else %}
+                    {% endif %}
                     <!-- 任務QID 隱藏 -->
                     <input type="hidden" class="strQID" name="strQID" value={{ matchedCIQuest.strQID }}></input>
-                    <a class="linkViewCIQuest" href="javascript: void(0);">{{ matchedCIQuest.strHeadline }}</a>
+                    <!-- 任務標題 -->
+                    <a class="linkViewCIQuest text-left col-xs-8" href="javascript: void(0);">{{ matchedCIQuest.strHeadline }}</a>
+                    <!-- 任務獎勵 -->
+                    <span class="text-right col-xs-2">{{ matchedCIQuest.intRewardPV }} PV</span>
                 </li>
             {% endfor %}
             </ul>

@@ -64,7 +64,7 @@
     <!-- 任務 -->
     {% for matchedCIQuest in qsetMatchedCIQuest %}
     <li class="list-group-item row">
-        <!-- 任務狀態 -->
+        <!-- 任務狀態圖示 -->
         {% if matchedCIQuest.strState == "new" %}
         <span class="col-xs-1 glyphicon glyphicon-exclamation-sign text-center"></span>
         {% elif matchedCIQuest.strState == "matching" %}
