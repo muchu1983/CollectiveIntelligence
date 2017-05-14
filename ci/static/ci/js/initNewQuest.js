@@ -9,6 +9,7 @@
     $(document).ready(initNewQuest);
     
     function initNewQuest() {
+        initTinymce();
         initInputQuestTags();
     };
     
@@ -18,6 +19,14 @@
             "height":"40px",
             "width":"300px",
             "defaultText":"新增標籤"
+        });
+    };
+    
+    //初始化 tinymce
+    function initTinymce(){
+        tinymce.init({
+            selector:"textarea",
+            width: "50vw"
         });
     };
     

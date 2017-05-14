@@ -119,7 +119,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
@@ -144,7 +144,7 @@ ALLOWED_HOSTS = ["www.c8ei10e.com", "localhost", "127.0.0.1"]
 LOGIN_REDIRECT_URL = "/core/main/"
 
 #tinymce
-TINYMCE_JS_URL = "http://debug.example.org/tiny_mce/tiny_mce_src.js"
+#TINYMCE_JS_URL = os.path.join(STATIC_URL, "tinymce_4.6.1/tinymce/js/tinymce/tinymce.min.js").replace("\\", "/")
 TINYMCE_DEFAULT_CONFIG = {
     "plugins": "table,spellchecker,paste,searchreplace",
     "theme": "advanced",

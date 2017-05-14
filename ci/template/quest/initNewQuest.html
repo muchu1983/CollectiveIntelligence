@@ -39,8 +39,10 @@
     <!-- 任務內容 -->
     <div>
         {{ formCIQuest.strContent.errors }}
-        <label for="{{ formCIQuest.strContent.id_for_label }}">任務內容：</label>
-        {{ formCIQuest.strContent }}
+        <span><b>任務內容：</b></span>
+        <div>
+            {{ formCIQuest.strContent }}
+        </div>
     </div>
     <input type="submit" value="發起"></input>
 </form>
