@@ -9,10 +9,17 @@
     $(document).ready(initBase);
     
     function initBase() {
+        initTinymce();
         retrieveLstDicFollower();
         initBtnClearLeader();
         initBtnCloseQuestViewerIFrame();
     };
+    
+    //初始化 tinymce
+    function initTinymce(){
+        tinymce.init({selector:"textarea"});
+    };
+    
     
     //讀取追隨者物件清單
     function retrieveLstDicFollower(){

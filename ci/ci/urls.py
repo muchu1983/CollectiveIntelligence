@@ -30,6 +30,8 @@ from quest import views as quest_views
 
 urlpatterns = [
     url(r"^admin/", include(admin.site.urls)),
+    #tinymce
+    url(r"^tinymce/", include("tinymce.urls")),
     #使用者帳號
     url(r"^accounts/register/$", core_views.register),
     url(r"^accounts/login/$", builtin_login, {"template_name": "core/accounts/login.html"}),

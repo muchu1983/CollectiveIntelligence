@@ -8,6 +8,7 @@ This file is part of BSD license
 """
 import uuid
 from django.db import models
+from tinymce import models as tinymce_models
 from core.models import CIUser
 
 #CI任務標籤
@@ -31,7 +32,7 @@ class CIQuest(models.Model):
     #任務標題
     strHeadline = models.CharField(max_length=255, null=False)
     #任務內容
-    strContent = models.TextField(null=False)
+    strContent = tinymce_models.HTMLField(null=False)
     #任務 過期時間
     dtExpire = models.DateTimeField(null=True)
     #獎勵 隨按贊人增加而增加
