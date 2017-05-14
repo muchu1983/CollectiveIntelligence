@@ -26,11 +26,11 @@
             $.each(jsonResp["lstDicFollower"], function(intIndex, dicFollower) {
                 //加入
                 $("#liHiddenMyFollowerAddPoint").after(
-                    "<li class=\"list-group-item\">"+
-                        "<a class=\"roleFollower\" href=\"/core/ciuserViewer/" + dicFollower["strCIUserUID"] + "/\">" +
+                    "<li class=\"list-group-item row\">"+
+                        "<a class=\"roleFollower col-xs-8\" href=\"/core/ciuserViewer/" + dicFollower["strCIUserUID"] + "/\">" +
                         dicFollower["strDisplayName"] +
                         "</a> "+
-                        "<span>" + dicFollower["intPointVolume"] + " PV</span>"+
+                        "<span class=\"col-xs-2\">" + dicFollower["intPointVolume"] + " PV</span>"+
                     "</li>"
                 );
             });

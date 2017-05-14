@@ -28,21 +28,23 @@ body {
     width: 40%;
     overflow-y: auto;
 }
-
-/*訊息 角色顏色*/
+#raidPanel li{
+    margin-left: 5px;
+    margin-right: 5px;
+    border-left: none;
+    border-right: none;
+}
+/*團隊 角色顏色*/
 .roleFollower{
     color: forestgreen;
-    background-color: lavender;
 }
 
 .roleHost{
     color: royalblue;
-    background-color: lavender;
 }
 
 .roleLeader{
     color: darkorchid;
-    background-color: lavender;
 }
 
 /* 我的追隨者 隱藏加入點 */

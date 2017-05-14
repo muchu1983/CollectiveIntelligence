@@ -146,25 +146,26 @@ This file is part of BSD license
                             <span class="roleFollower">追隨者</span>
                         </li>
                         <!-- 領導人 -->
-                        <li class="list-group-item">
+                        <li class="list-group-item row">
                             {% if request.user.is_authenticated  %}
                                 {% if request.user.ciuser.leader %}
-                                <a class="roleLeader" href="/core/ciuserViewer/{{ request.user.ciuser.leader.strCIUserUID }}/">{{ request.user.ciuser.leader.strDisplayName }}</a>
-                                <span>{{ request.user.ciuser.leader.intPointVolume }} PV</span>
-                                <a type="button" class="btn btn-danger btn-xs btnClearLeader" href="javascript: void(0)">停止追隨</a>
+                                <a class="roleLeader col-xs-8" href="/core/ciuserViewer/{{ request.user.ciuser.leader.strCIUserUID }}/">{{ request.user.ciuser.leader.strDisplayName }}</a>
+                                <span class="col-xs-2">{{ request.user.ciuser.leader.intPointVolume }} PV</span>
+                                <a type="button" class="btn btn-danger btn-xs btnClearLeader col-xs-2" href="javascript: void(0)">停止追隨</a>
                                 {% else %}
-                                <span>尚無領導人</span>
-                                <a type="button" class="btn btn-primary btn-xs" href="/core/searchLeader/">開始尋找</a>
+                                <span class="col-xs-8">尚無領導人</span>
+                                <span class="col-xs-2"></span>
+                                <a type="button" class="btn btn-primary btn-xs col-xs-2" href="/core/searchLeader/">開始尋找</a>
                                 {% endif %}
                             {% else %}
                             <span>未登入</span>
                             {% endif %}
                         </li>
                         <!-- 自己 -->
-                        <li class="list-group-item">
+                        <li class="list-group-item row">
                             {% if request.user.is_authenticated  %}
-                            <a class="roleHost" href="/core/ciuserViewer/{{ request.user.ciuser.strCIUserUID }}/">{{ request.user.ciuser.strDisplayName }}</a>
-                            <span>{{ request.user.ciuser.intPointVolume }} PV</span>
+                            <a class="roleHost col-xs-8" href="/core/ciuserViewer/{{ request.user.ciuser.strCIUserUID }}/">{{ request.user.ciuser.strDisplayName }}</a>
+                            <span class="col-xs-2">{{ request.user.ciuser.intPointVolume }} PV</span>
                             {% else %}
                             <span>未登入</span>
                             {% endif %}
