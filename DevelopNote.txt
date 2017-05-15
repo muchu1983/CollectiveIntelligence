@@ -29,3 +29,6 @@ startproject ci
 startapp core
 startapp chat
 startapp quest
+
+google reCAPTCHA admin page
+https://www.google.com/recaptcha/admin#site/337733280
