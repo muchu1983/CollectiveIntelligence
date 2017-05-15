@@ -3,6 +3,7 @@
 
 <!-- override block_head -->
 {% block block_head%}
+
 {% endblock block_head%}
 
 <!-- override block_content -->
@@ -26,6 +27,10 @@
         {{ formRegisterUser.password2.errors }}
         <label for="{{ formRegisterUser.password2.id_for_label }}">密碼確認：</label>
         {{ formRegisterUser.password2 }}
+    </div>
+    <!-- 我不是機器人 -->
+    <div>
+        {{ formRegisterUser.captcha }}
     </div>
     <input type="submit" class="btn btn-sm btn-primary" value="註冊">
 </form>

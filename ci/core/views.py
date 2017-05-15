@@ -10,7 +10,6 @@ import uuid
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import JsonResponse
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -18,20 +17,21 @@ from django.contrib import messages
 from django.db.models import Q
 from django.http import JsonResponse
 from core.models import CIUser
-from core.forms import CIUserForm
-from core.forms import UserForm
+from core.forms import RegisterUserForm
+from core.forms import ProfilesCIUserForm
+from core.forms import ProfilesUserForm
 from ci.utility.email import EmailUtility
 from core.utility.raid import RaidUtility
 
 #用戶註冊
 def register(request):
     if request.method == "POST":
-        formRegisterUser = UserCreationForm(request.POST)
+        formRegisterUser = RegisterUserForm(request.POST)
         if formRegisterUser.is_valid():
             user = formRegisterUser.save()
             return redirect("/accounts/login/")
     else:
-        formRegisterUser = UserCreationForm()
+        formRegisterUser = RegisterUserForm()
     return render(request, "core/accounts/register.html", locals())
     
 #個人資料
@@ -54,8 +54,8 @@ def profiles(request):
         #暫存舊的 email
         strOldEmail = request.user.email
         #讀取新 個人資料
-        formUser = UserForm(request.POST, instance=request.user)
-        formCIUser = CIUserForm(request.POST, instance=request.user.ciuser)
+        formUser = ProfilesUserForm(request.POST, instance=request.user)
+        formCIUser = ProfilesCIUserForm(request.POST, instance=request.user.ciuser)
         if formUser.is_valid() and formCIUser.is_valid():
             #讀取新的 email
             strNewEmail = request.user.email
@@ -72,8 +72,8 @@ def profiles(request):
             return redirect("/accounts/profiles/")
     else:
         #顯示目前個人資料設定
-        formUser = UserForm(instance=request.user)
-        formCIUser = CIUserForm(instance=request.user.ciuser)
+        formUser = ProfilesUserForm(instance=request.user)
+        formCIUser = ProfilesCIUserForm(instance=request.user.ciuser)
     return render(request, "core/accounts/profiles.html", {
         "strUsername":strUsername,
         "isEmailVerified":isEmailVerified,

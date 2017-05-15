@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     "channels",
     "tinymce",
+    "captcha",
     "core",
     "chat",
     "quest",
@@ -153,3 +154,8 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 TINYMCE_SPELLCHECKER = False
 TINYMCE_COMPRESSOR = True
+
+#google reCAPTCHA
+RECAPTCHA_PUBLIC_KEY = "6LegZiEUAAAAAPmTPfbp1OJ9ICnNZJ_LsaDbQfaG"
+RECAPTCHA_PRIVATE_KEY = "6LegZiEUAAAAAOs0tBCYmtHJ7YF_L_KqJFQ1vYV_"
+NOCAPTCHA = True
