@@ -5,40 +5,54 @@ This file is part of BSD license
 
 <https://opensource.org/licenses/BSD-3-Clause>
 */
+/*主要資料區*/
 #divQuestMajorData{
     position: relative;
-    height: 20vh;
+    height: 15vh;
     background-color: white;
     border-bottom : 2px solid gold;
 }
+/*次要資料區*/
 #divQuestMinorData{
     position: relative;
-    height: 70vh;
+    height: 75vh;
     background-color: white;
     border: 0px;
     overflow-y: auto;
 }
+/*互動按鈕區*/
 #divQuestInteractiveBtn{
     height: 10vh;
     background-color: black;
     border-top: 2px solid gold;
 }
+/*互動按鈕*/
+#divQuestInteractiveBtn button{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+/*任務標題*/
 #divQuestHeadline{
     
 }
+/*相關角色*/
 #divQuestRoles{
     
 }
+/*任務狀態*/
 #divQuestState{
     font-size: 50px;
     color: gold;
 }
+/*任務標籤*/
 #divQuestTags{
     
 }
+/*任務內容*/
 #divQuestContent{
     
 }
+/*任務獎勵*/
 #divQuestReward{
     
 }

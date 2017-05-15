@@ -39,16 +39,20 @@
             <h4>{{ questTarget.strHeadline }}</h4>
         </div>
         <!-- 相關角色 -->
-        <div id="divQuestRoles">
-            <span class="text-left">發起：
+        <div id="divQuestRoles" class="row">
+            <span class="col-xs-6 text-left">發起人：
                 <a target="_blank" href="/core/ciuserViewer/{{ questTarget.ciuserInitiator.strCIUserUID }}/">
                 {{ questTarget.ciuserInitiator.strDisplayName }}
                 </a>
             </span>
-            <span class="test-right">執行：
+            <span class="col-xs-6 text-right">執行人：
+                {% if questTarget.ciuserExecutor %}
                 <a target="_blank" href="/core/ciuserViewer/{{ questTarget.ciuserExecutor.strCIUserUID }}/">
-                {{ questTarget.ciuserExecutor.strDisplayName }}
+                    {{ questTarget.ciuserExecutor.strDisplayName }}
                 </a>
+                {% else %}
+                <span>尚無人申請</span>
+                {% endif %}
             </span>
         </div>
     </div>

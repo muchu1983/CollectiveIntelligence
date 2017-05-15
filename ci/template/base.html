@@ -56,9 +56,8 @@ This file is part of BSD license
     <!-- 導覽列 -->
     <nav class="navbar navbar-inverse row">
         <div class="container-fluid col-xs-12 row">
-            
             <!-- 靠左 nav -->
-            <ul class="nav navbar-nav navbar-left col-xs-9 row">
+            <ul class="nav navbar-nav navbar-left col-xs-6 row">
                 <li class="col-xs-2">
                     <!-- 團隊 toggle button -->
                     <a class="text-center" type="button" data-toggle="collapse" href="#raidPanel">
@@ -80,13 +79,15 @@ This file is part of BSD license
                         首頁
                     </a>
                 </li>
+                <li class="col-xs-6">
+                </li>
             </ul>
-            
             <!-- 靠右 nav -->
-            <ul class="nav navbar-nav navbar-right col-xs-3">
-                
+            <ul class="nav navbar-nav navbar-right col-xs-6 row">
+                <li class="col-xs-8">
+                </li>
                 <!-- 語言 dropdown -->
-                <li class="dropdown">
+                <li class="dropdown col-xs-2">
                     <a class="dropdown-toggle text-center" data-toggle="dropdown" href="#">
                         <span class="glyphicon glyphicon-globe"></span><br><span class="text-primary">語言</span>
                     </a>
@@ -97,9 +98,8 @@ This file is part of BSD license
                         <li><a href="/core/i18n/">日本國旗</a></li>
                     </ul>
                 </li>
-                
                 <!-- 帳號 dropdown -->
-                <li class="dropdown">
+                <li class="dropdown col-xs-2">
                     <a class="dropdown-toggle text-center" data-toggle="dropdown" href="#">
                         <span class="glyphicon glyphicon-user"></span><br>
                         {% if request.user.is_authenticated  %}
@@ -120,7 +120,6 @@ This file is part of BSD license
                     </ul>
                 </li>
             </ul>
-            
         </div>
     </nav>
     {% endblock block_header %}
