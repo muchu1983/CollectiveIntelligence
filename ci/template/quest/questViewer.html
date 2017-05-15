@@ -82,7 +82,10 @@
     
     <!-- 任務標籤 -->
     <div id="divQuestTags">
-        <span>tags here</span>
+        <span>標籤：</span>
+        {% for ciquesttag in questTarget.setCIQuestTag.all %}
+        <span class="label label-primary">{{ ciquesttag.strName }}</span>
+        {% endfor %}
     </div>
     <!-- 任務內容 -->
     <div id="divQuestContent">
