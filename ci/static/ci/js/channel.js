@@ -49,11 +49,12 @@
             $.each(jsonResp["lstDicHistoryMessage"], function(intIndex, dicHistoryMessage) {
                 var strRole = dicHistoryMessage["strRole"];
                 var strMsgAlign = dicHistoryMessage["strMsgAlign"];
+                var strVisitorDisplayName = dicHistoryMessage["strVisitorDisplayName"];
                 //加入歷史訊息至聊天內容 #ulChatMessage
-                $("#ulChatMessage").append(buildMessageLiTag(dicHistoryMessage["strMsg"], dicRoleClassMapping[strRole], dicMsgAlignClassMapping[strMsgAlign]));
+                $("#ulChatMessage").append(buildMessageLiTag(dicHistoryMessage["strMsg"], dicRoleClassMapping[strRole], dicMsgAlignClassMapping[strMsgAlign], strVisitorDisplayName));
             });
             //顯示 自動讀取歷史訊息完畢
-            $("#ulChatMessage").append(buildMessageLiTag("自動讀取歷史訊息完畢", dicRoleClassMapping["role:sys"], dicMsgAlignClassMapping["align:center"]));
+            $("#ulChatMessage").append(buildMessageLiTag("自動讀取歷史訊息完畢", dicRoleClassMapping["role:sys"], dicMsgAlignClassMapping["align:center"], "系統訊息"));
             //捲動至最下層
             $("#ulChatMessage").animate({scrollTop: $("#ulChatMessage").prop("scrollHeight")}, 500);
         });
@@ -71,8 +72,9 @@
         handleWsMessage(wsChannel, function(jsonMsg){
             var strRole = jsonMsg["strRole"];
             var strMsgAlign = jsonMsg["strMsgAlign"];
+            var strVisitorDisplayName = jsonMsg["strVisitorDisplayName"];
             //加入訊息至聊天內容 #ulChatMessage
-            $("#ulChatMessage").append(buildMessageLiTag(jsonMsg["strMsg"], dicRoleClassMapping[strRole], dicMsgAlignClassMapping[strMsgAlign]));
+            $("#ulChatMessage").append(buildMessageLiTag(jsonMsg["strMsg"], dicRoleClassMapping[strRole], dicMsgAlignClassMapping[strMsgAlign], strVisitorDisplayName));
             //訊息過長時，移除最前面的訊息
             if ($("#ulChatMessage li").length > 666){
                 $("#ulChatMessage li").first().remove();
@@ -115,10 +117,11 @@
     /* utility function */
     
     //建立訊息 li
-    function buildMessageLiTag(strMsg, strClassRole, strClassTextAlign){
+    function buildMessageLiTag(strMsg, strClassRole, strClassTextAlign, strVisitorDisplayName){
         strLiTag = 
         "<li class=\"list-group-item " + strClassRole + " " + strClassTextAlign + "\">" +
-            strMsg +
+            "<div>" + strVisitorDisplayName + "</div>" +
+            "<div>" + strMsg + "</div>" +
         "</li>";
         return strLiTag;
     };
