@@ -33,6 +33,8 @@ class CIQuest(models.Model):
     strHeadline = models.CharField(max_length=255, null=False)
     #任務內容
     strContent = tinymce_models.HTMLField(null=False)
+    #任務 建立時間
+    dtCreated = models.DateTimeField(auto_now=True, null=False)
     #任務 過期時間
     dtExpire = models.DateTimeField(null=True)
     #獎勵 隨按贊人增加而增加
