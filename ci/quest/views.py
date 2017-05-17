@@ -71,7 +71,7 @@ def searchCIQuest(request):
         queryState = Q(strState="new")
         queryObject = queryState
         qsetMatchedCIQuest = CIQuest.objects.filter(queryObject).order_by("-dtCreated").distinct()
-        strSearchResult = "目前顯示最新的等待申請中任務，請輸入字串搜尋更多任務"
+        strSearchResult = "目前顯示最新的可申請任務"
     return render(request, "quest/searchCIQuest.html", locals())
     
 #任務檢視頁
