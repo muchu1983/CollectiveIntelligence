@@ -46,7 +46,7 @@
             $(".liExecutorCIQuest").hide(); //先隱藏
             //重新顯示 data-quest-state vaule 符合勾選的項目
             $(".filterExecutorCIQuest input[type=checkbox]:checked").each(function () {
-                $(".liExecutorCIQuest[data-" + $(this).prop("name") + "*=\"" + $(this).val() + "\"]").show();
+                $(".liExecutorCIQuest[data-" + $(this).prop("name") + "=\"" + $(this).val() + "\"]").show();
             });
         } else {
             //無勾選
@@ -61,7 +61,7 @@
             $(".liInitiatorCIQuest").hide(); //先隱藏
             //重新顯示 data-quest-state vaule 符合勾選的項目
             $(".filterInitiatorCIQuest input[type=checkbox]:checked").each(function () {
-                $(".liInitiatorCIQuest[data-" + $(this).prop("name") + "*=\"" + $(this).val() + "\"]").show();
+                $(".liInitiatorCIQuest[data-" + $(this).prop("name") + "=\"" + $(this).val() + "\"]").show();
             });
         } else {
             //無勾選
