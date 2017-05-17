@@ -29,11 +29,8 @@
     /* initial function */
     //初始化 頻道 頁面
     function initChannel() {
+        //先讀取 頻道歷史訊息
         loadHistoryMessage();
-        initConnectToWebsocket();
-        initHandleWsMessage();
-        initBtnSendChatMsg();
-        initKeyBindings();
     };
     
     //讀取 頻道歷史訊息
@@ -57,6 +54,12 @@
             $("#ulChatMessage").append(buildMessageLiTag("自動讀取歷史訊息完畢", dicRoleClassMapping["role:sys"], dicMsgAlignClassMapping["align:center"], "系統訊息"));
             //捲動至最下層
             $("#ulChatMessage").animate({scrollTop: $("#ulChatMessage").prop("scrollHeight")}, 500);
+        }).done(function(){
+            //再執行初始化...
+            initConnectToWebsocket();
+            initHandleWsMessage();
+            initBtnSendChatMsg();
+            initKeyBindings();
         });
     };
     
