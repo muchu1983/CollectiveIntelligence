@@ -26,7 +26,14 @@ def loadHistoryMessage(request, strCIUserUID=None):
     strLoadResult = None
     lstDicHistoryMessage = []
     if request.method == "POST":
+        #排序 舊到新
         qsetCIChatMsgHistory = CIChatMessage.objects.filter(strChannelID=strCIUserUID).order_by("dtCreated")
+        #保留最新 666 筆
+        if qsetCIChatMsgHistory.count() > 666:
+            #反轉取得最新 666 筆 id 列表
+            lstIdToKeepCIChatMsgHistory = qsetCIChatMsgHistory.reverse()[:666].values_list("id", flat=True)
+            #除了這 666 筆 id 以外皆刪除
+            qsetCIChatMsgHistory.exclude(pk__in=list(lstIdToKeepCIChatMsgHistory)).delete()
         for cichatmsgHistory in qsetCIChatMsgHistory:
             #轉為 json 物件
             dicHistoryMessage = wsUtil.buildWsJsonMessage(

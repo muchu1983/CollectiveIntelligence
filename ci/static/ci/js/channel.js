@@ -74,7 +74,7 @@
             //加入訊息至聊天內容 #ulChatMessage
             $("#ulChatMessage").append(buildMessageLiTag(jsonMsg["strMsg"], dicRoleClassMapping[strRole], dicMsgAlignClassMapping[strMsgAlign]));
             //訊息過長時，移除最前面的訊息
-            if ($("#ulChatMessage li").length > 100){
+            if ($("#ulChatMessage li").length > 666){
                 $("#ulChatMessage li").first().remove();
             };
             //捲動至最下層
