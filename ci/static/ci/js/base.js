@@ -27,10 +27,10 @@
                 //加入
                 $("#liHiddenMyFollowerAddPoint").after(
                     "<li class=\"list-group-item row\">"+
-                        "<a class=\"roleFollower col-xs-8\" href=\"/core/ciuserViewer/" + dicFollower["strCIUserUID"] + "/\">" +
+                        "<a class=\"roleFollower col-xs-6\" href=\"/core/ciuserViewer/" + dicFollower["strCIUserUID"] + "/\">" +
                         dicFollower["strDisplayName"] +
                         "</a> "+
-                        "<span class=\"col-xs-2\">" + dicFollower["intPointVolume"] + " PV</span>"+
+                        "<span class=\"col-xs-3\">" + dicFollower["intPointVolume"] + " PV</span>"+
                     "</li>"
                 );
             });
