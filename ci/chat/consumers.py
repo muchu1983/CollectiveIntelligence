@@ -52,11 +52,11 @@ class ChannelConsumer(JsonWebsocketConsumer):
             #有新使用者加入頻道
             if strMsg == "ci_ws_established":
                 #建構回覆訊息
-                strRespMsg = "{strVisitorDisplayName} 加入頻道".format(strVisitorDisplayName=strVisitorDisplayName)
+                strSysRespMsg = "{strVisitorDisplayName} 加入頻道".format(strVisitorDisplayName=strVisitorDisplayName)
                 #建構系統訊息
-                jsonRespMsg = wsUtil.buildWsJsonMessage(strRole=strRole, strMsgAlign=strMsgAlign, strMsg=strRespMsg, strVisitorDisplayName=strVisitorDisplayName)
+                jsonRespMsg = wsUtil.buildWsJsonMessage(strRole=strRole, strMsgAlign=strMsgAlign, strMsg=strSysRespMsg, strVisitorDisplayName=strVisitorDisplayName)
                 #記錄訊息
-                CIChatMessage.objects.create(strChannelID=strChannelRoom, ciuserSender=userVisitor.ciuser if userVisitor else None, strMessageContent=strRespMsg, strMessageAlign=strMsgAlign, strRole=strRole)
+                CIChatMessage.objects.create(strChannelID=strChannelRoom, ciuserSender=userVisitor.ciuser if userVisitor else None, strMessageContent=strSysRespMsg, strMessageAlign=strMsgAlign, strRole=strRole)
                 #廣播訊息至頻道
                 self.group_send(strChannelRoom, jsonRespMsg)
         #動作訊息

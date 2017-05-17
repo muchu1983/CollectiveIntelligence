@@ -52,6 +52,7 @@ urlpatterns = [
     url(r"^core/main/$", core_views.renderMainPage),
     #聊天
     url(r"^chat/channel/(?P<strCIUserUID>[0-9a-f-]{36})/$", chat_views.channel),
+    url(r"^chat/loadHistoryMessage/(?P<strCIUserUID>[0-9a-f-]{36})/$", chat_views.loadHistoryMessage),
     #任務
     url(r"^quest/initNewQuest/$", quest_views.initNewQuest),
     url(r"^quest/searchCIQuest/$", quest_views.searchCIQuest),

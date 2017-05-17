@@ -248,7 +248,7 @@ def clearLeader(request):
 @login_required
 def retrieveLstDicFollower(request):
     #取得追隨者結果 字串
-    strRetrieveLstDicFollower = None
+    strRetrieveResult = None
     #追隨者 列表
     lstDicFollower = []
     #團隊操作工具
@@ -263,10 +263,10 @@ def retrieveLstDicFollower(request):
                 "intPointVolume": ciuserFollower.intPointVolume
             }
             lstDicFollower.append(dicFollower)
-        strRetrieveLstDicFollower = "完成取得 追隨者"
+        strRetrieveResult = "完成取得 追隨者"
     else:
-        strRetrieveLstDicFollower = "只允許 POST 方式取得 追隨者"
-    return JsonResponse({"retrieve_result":strRetrieveLstDicFollower, "lstDicFollower":lstDicFollower}, safe=False)
+        strRetrieveResult = "只允許 POST 方式取得 追隨者"
+    return JsonResponse({"retrieve_result":strRetrieveResult, "lstDicFollower":lstDicFollower}, safe=False)
     
 #CI用戶檢視頁
 def ciuserViewer(request, strCIUserUID=None):
