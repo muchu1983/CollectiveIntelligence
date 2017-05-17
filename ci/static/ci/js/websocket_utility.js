@@ -13,7 +13,7 @@ function connectToWs(strWsUrl) {
     websocketTo.onopen = function(){
         //連線已邁立
         //傳送 type:sys hello
-        jsonOnopenMsg = buildWsJsonMessage("type:sys", "hello", "align:center");
+        jsonOnopenMsg = buildWsJsonMessage("type:sys", "ci_ws_established", "align:center");
         sendWsMessage(websocketTo, jsonOnopenMsg);
     };
     return websocketTo;

@@ -11,6 +11,7 @@ from channels.generic.websockets import JsonWebsocketConsumer
 from channels import Group
 from chat.utility.websocket import WebsocketUtility
 from core.utility.raid import RaidUtility
+from chat.models import CIChatMessage
 
 class ChannelConsumer(JsonWebsocketConsumer):
     
@@ -45,17 +46,13 @@ class ChannelConsumer(JsonWebsocketConsumer):
         #判斷 造訪者 的角色
         strRole = self.determineVisitorRole(userVisitor, userHost)
         #造訪者 顯示名稱
-        strVisitorDisplayName = userVisitor.ciuser.strDisplayName if userVisitor else "Anonymous"
+        strVisitorDisplayName = userVisitor.ciuser.strDisplayName if userVisitor else "路人"
         #系統訊息
         if strType == "type:sys":
             #有新使用者加入頻道
-            if strMsg == "hello":
+            if strMsg == "ci_ws_established":
                 #建構回覆訊息
-                strRespMsg = None
-                if strRole == "role:anonymous":
-                    strRespMsg = "Anonymous joined."
-                else:
-                    strRespMsg = "{strVisitorDisplayName} joined.".format(strVisitorDisplayName=userVisitor.ciuser.strDisplayName)
+                strRespMsg = "{strVisitorDisplayName} 加入頻道".format(strVisitorDisplayName=strVisitorDisplayName)
                 #建構系統訊息
                 jsonRespMsg = wsUtil.buildWsJsonMessage(strRole=strRole, strMsgAlign=strMsgAlign, strMsg=strRespMsg, strVisitorDisplayName=strVisitorDisplayName)
                 self.group_send(strChannelRoom, jsonRespMsg)
@@ -65,6 +62,8 @@ class ChannelConsumer(JsonWebsocketConsumer):
         #大喊訊息
         elif strType == "type:yell":
             jsonRespMsg = wsUtil.buildWsJsonMessage(strRole=strRole, strMsgAlign=strMsgAlign, strMsg=strMsg, strVisitorDisplayName=strVisitorDisplayName)
+            #記錄訊息
+            CIChatMessage.objects.create(strChannelID=strChannelRoom, ciuserSender=userVisitor.ciuser if userVisitor else None, strMessageContent=strMsg, strMessageAlign=strMsgAlign)
             self.group_send(strChannelRoom, jsonRespMsg)
         #密語訊息
         elif strType == "type:whisper":
