@@ -5,6 +5,7 @@ This file is part of BSD license
 
 <https://opensource.org/licenses/BSD-3-Clause>
 */
+/* 搜尋結果 li */
 ul li {
     list-style-type: none;
 }
@@ -13,4 +14,9 @@ ul li {
 .spanQuestStateIcon {
     font-size: 20px;
     color: gold;
+}
+
+/* 搜尋 tag 時動態產生的 form*/
+#formPostSearchTag{
+    display: none;
 }

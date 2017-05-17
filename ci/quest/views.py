@@ -60,11 +60,11 @@ def searchCIQuest(request):
         #比對 strContent 條件
         queryContent = Q(strContent__iregex="^.*{strKeyword}.*$".format(strKeyword=strKeyword))
         #比對 setCIQuestTag 條件
-        queryTagName = Q(setCIQuestTag__strName__iregex="^.*{strKeyword}.*$".format(strKeyword=strKeyword))
+        queryTagName = Q(setCIQuestTag__strName=strKeyword)
         #聯集所有條件
         queryObject = queryHeadline | queryContent | queryTagName
         #查尋
-        qsetMatchedCIQuest = CIQuest.objects.filter(queryObject)
+        qsetMatchedCIQuest = CIQuest.objects.filter(queryObject).distinct()
         strSearchResult = "查尋 {strKeyword} 共找到 {intResultCount} 個任務".format(strKeyword=strKeyword, intResultCount=qsetMatchedCIQuest.count())
     else:
         strSearchResult = "請輸入搜尋字串"

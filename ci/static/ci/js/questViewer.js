@@ -12,6 +12,7 @@
         initInteractiveButtons();
     };
     
+    //初始化 任務 互動按鈕
     function initInteractiveButtons(){
         console.log("QID: " + strQID);
         //刪除任務 btnDeleteQuest

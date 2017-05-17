@@ -9,7 +9,24 @@
     $(document).ready(initSearchCIQuest);
     
     function initSearchCIQuest() {
+        initQuestTagSpan();
         initBtnViewCIQuest();
+    };
+    
+    //初始化 任務標籤
+    function initQuestTagSpan(){
+        $(".spanQuestTag").click(function(){
+            //即時產生 搜尋的 POST form 
+            var formPostSearchTag = 
+                "<form id=\"formPostSearchTag\" action=\"/quest/searchCIQuest/\" method=\"post\">"+
+                    "<input type=\"text\" id=\"strKeyword\" name=\"strKeyword\" value=" + $(this).html() + "></input>"+
+                    "<input type=\"text\" id=\"csrfmiddlewaretoken\" name=\"csrfmiddlewaretoken\" value=" + strCsrfToken + "></input>"+
+                "</form>";
+            //加至 body 最後面
+            $("body").append(formPostSearchTag);
+            //POST
+            $("#formPostSearchTag").submit();
+        });
     };
     
     //初始化檢視按鈕
