@@ -19,5 +19,7 @@ class CIChatMessage(models.Model):
     strMessageContent = models.CharField(max_length=255, null=False)
     #訊息對齊方向
     strMessageAlign = models.CharField(max_length=255, null=False)
+    #訊息角色
+    strRole = models.CharField(max_length=255, null=False)
     #任務 建立時間
     dtCreated = models.DateTimeField(auto_now=True, null=False)

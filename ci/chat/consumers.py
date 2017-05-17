@@ -55,6 +55,9 @@ class ChannelConsumer(JsonWebsocketConsumer):
                 strRespMsg = "{strVisitorDisplayName} 加入頻道".format(strVisitorDisplayName=strVisitorDisplayName)
                 #建構系統訊息
                 jsonRespMsg = wsUtil.buildWsJsonMessage(strRole=strRole, strMsgAlign=strMsgAlign, strMsg=strRespMsg, strVisitorDisplayName=strVisitorDisplayName)
+                #記錄訊息
+                CIChatMessage.objects.create(strChannelID=strChannelRoom, ciuserSender=userVisitor.ciuser if userVisitor else None, strMessageContent=strRespMsg, strMessageAlign=strMsgAlign, strRole=strRole)
+                #廣播訊息至頻道
                 self.group_send(strChannelRoom, jsonRespMsg)
         #動作訊息
         elif strType == "type:action":
@@ -63,7 +66,8 @@ class ChannelConsumer(JsonWebsocketConsumer):
         elif strType == "type:yell":
             jsonRespMsg = wsUtil.buildWsJsonMessage(strRole=strRole, strMsgAlign=strMsgAlign, strMsg=strMsg, strVisitorDisplayName=strVisitorDisplayName)
             #記錄訊息
-            CIChatMessage.objects.create(strChannelID=strChannelRoom, ciuserSender=userVisitor.ciuser if userVisitor else None, strMessageContent=strMsg, strMessageAlign=strMsgAlign)
+            CIChatMessage.objects.create(strChannelID=strChannelRoom, ciuserSender=userVisitor.ciuser if userVisitor else None, strMessageContent=strMsg, strMessageAlign=strMsgAlign, strRole=strRole)
+            #廣播訊息至頻道
             self.group_send(strChannelRoom, jsonRespMsg)
         #密語訊息
         elif strType == "type:whisper":
