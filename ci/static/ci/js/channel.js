@@ -6,7 +6,7 @@
 
 (function($) {
     
-    $(document).ready(initChannel);
+    $(document).ready(beforeInitChannel);
     
     /* global variable */
     var wsChannel = null;
@@ -27,10 +27,19 @@
     };
     
     /* initial function */
-    //初始化 頻道 頁面
-    function initChannel() {
+    //初始化 頻道 之前
+    function beforeInitChannel() {
         //先讀取 頻道歷史訊息
         loadHistoryMessage();
+    };
+    
+    //初始化 頻道 頁面
+    function initChannel() {
+        //再執行初始化...
+        initConnectToWebsocket();
+        initHandleWsMessage();
+        initBtnSendChatMsg();
+        initKeyBindings();
     };
     
     //讀取 頻道歷史訊息
@@ -55,11 +64,8 @@
             //捲動至最下層
             $("#ulChatMessage").animate({scrollTop: $("#ulChatMessage").prop("scrollHeight")}, 500);
         }).done(function(){
-            //再執行初始化...
-            initConnectToWebsocket();
-            initHandleWsMessage();
-            initBtnSendChatMsg();
-            initKeyBindings();
+            //讀取完頻道歷史訊息，再初始化 頻道 頁面
+            initChannel();
         });
     };
     
