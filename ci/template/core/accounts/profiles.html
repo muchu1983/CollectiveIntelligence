@@ -9,11 +9,22 @@
 
 <!-- override block_content -->
 {% block block_content %}
+<h3>{{ strUsername }} 的個人資料</h3>
+<!-- 頭像 -->
+<div class="text-left">
+    <img src="/{{ request.user.ciuser.avatarThumbnail.url }}" height="100" width="100">
+</div>
+<!-- 頭像 POST form -->
+<form action="/accounts/uploadAvatarThumbnail/" method="post" enctype="multipart/form-data">
+    <!-- CSRF 保護 -->
+    {% csrf_token %}
+    <input type="file" class="btn btn-xs btn-default" name="avatarThumbnail"></input>
+    <input type="submit" class="btn btn-sm btn-primary" value="上傳頭像"></input>
+</form>
 <!-- 個人資料 POST form -->
 <form action="" method="post">
     <!-- CSRF 保護 -->
     {% csrf_token %}
-    <h3>{{ strUsername }} 的個人資料</h3>
     <label for="reset_password_1">重設密碼：</label>
     <input id="reset_password_1" type="password" name="reset_password_1" maxlength="20" placeholder="非必填">
     <label for="reset_password_2">密碼確認：</label>
@@ -30,7 +41,7 @@
         <label for="{{ formRegisterUser.strDisplayName.id_for_label }}">顯示名稱：</label>
         {{ formCIUser.strDisplayName }}
     </div>
-    <input type="submit" class="btn btn-sm btn-primary" value="完成">
+    <input type="submit" class="btn btn-sm btn-primary" value="變更資料">
 </form>
 <!-- email 認證 -->
 <span>email verified: {{ isEmailVerified }}</span>

@@ -38,3 +38,12 @@ class ProfilesCIUserForm(forms.ModelForm):
     class Meta:
         model = CIUser
         fields = ("strDisplayName", )
+        
+#上傳個人頭像 表單
+class UploadAvatarThumbnailForm(forms.ModelForm):
+    
+    avatarThumbnail = forms.ImageField()
+    
+    class Meta:
+        model = CIUser
+        fields = ("avatarThumbnail", )

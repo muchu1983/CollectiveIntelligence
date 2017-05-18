@@ -39,6 +39,7 @@ urlpatterns = [
     url(r"^accounts/sendEmailVerification/$", core_views.sendEmailVerification),
     url(r"^accounts/verifyEmail/$", core_views.verifyEmail),
     url(r"^accounts/profiles/$", core_views.profiles),
+    url(r"^accounts/uploadAvatarThumbnail/$", core_views.uploadAvatarThumbnail),
     #搜尋
     url(r"^core/searchCIUser/$", core_views.searchCIUser),
     url(r"^core/searchLeader/$", core_views.searchLeader),

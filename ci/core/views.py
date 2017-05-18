@@ -20,6 +20,7 @@ from core.models import CIUser
 from core.forms import RegisterUserForm
 from core.forms import ProfilesCIUserForm
 from core.forms import ProfilesUserForm
+from core.forms import UploadAvatarThumbnailForm
 from ci.utility.email import EmailUtility
 from core.utility.raid import RaidUtility
 
@@ -80,6 +81,16 @@ def profiles(request):
         "formUser":formUser,
         "formCIUser":formCIUser
     })
+    
+#上傳個人頭像
+@login_required
+def uploadAvatarThumbnail(request):
+    if request.method == "POST":
+        thumbnailForm = UploadAvatarThumbnailForm(request.POST, request.FILES)
+        if thumbnailForm.is_valid():
+            request.user.ciuser.avatarThumbnail = thumbnailForm.cleaned_data["avatarThumbnail"]
+            request.user.save()
+    return redirect("/accounts/profiles/")
     
 #傳送 Email 認證信
 @login_required
