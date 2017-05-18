@@ -45,21 +45,23 @@ class QuestUtility:
     def likeOrDislikeQuest(self, ciuserRequest=None, strQID=None):
         questTarget = self.getCIQuestByQID(strQID=strQID)
         isLiked = None
-        #加入或移出 setLikedCIUser
-        if ciuserRequest in questTarget.setLikedCIUser.all():
-            #調整 獎勵 PV
-            questTarget.intRewardPV = questTarget.intRewardPV-1
-            questTarget.save()
-            #移出 ciuser
-            questTarget.setLikedCIUser.remove(ciuserRequest)
-            isLiked = False
-        else:
-            #調整 獎勵 PV
-            questTarget.intRewardPV = questTarget.intRewardPV+1
-            questTarget.save()
-            #加入 ciuser
-            questTarget.setLikedCIUser.add(ciuserRequest)
-            isLiked = True
+        #確認任務狀態
+        if questTarget.strState == "new":
+            #加入或移出 setLikedCIUser
+            if ciuserRequest in questTarget.setLikedCIUser.all():
+                #調整 獎勵 PV
+                questTarget.intRewardPV = questTarget.intRewardPV-1
+                questTarget.save()
+                #移出 ciuser
+                questTarget.setLikedCIUser.remove(ciuserRequest)
+                isLiked = False
+            else:
+                #調整 獎勵 PV
+                questTarget.intRewardPV = questTarget.intRewardPV+1
+                questTarget.save()
+                #加入 ciuser
+                questTarget.setLikedCIUser.add(ciuserRequest)
+                isLiked = True
         return isLiked
     
     #申請執行任務
