@@ -6,6 +6,7 @@ This file is part of BSD license
 
 <https://opensource.org/licenses/BSD-3-Clause>
 """
+import os
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
@@ -16,6 +17,16 @@ from imagekit.processors import ResizeToFill
 
 #CI使用者
 class CIUser(models.Model):
+    
+    #重新命名頭像圖片路徑
+    def renameAvatarThumbnailFilePath(instance, filename):
+        strAvatarsBasePath="static/ci/img/avatars/"
+        strFilenameExt = filename.split(".")[-1]
+        #亂數產生新 filename
+        strNewFilename = "{}.{}".format(uuid.uuid1().hex, strFilenameExt)
+        #組合完整路徑
+        return os.path.join(strAvatarsBasePath, strNewFilename)
+        
     #UID DB索引鍵 建立後不可更改 搜尋使用UID可避免 username 曝光
     strCIUserUID = models.CharField(db_index=True, editable=False, max_length=36, default=uuid.uuid1, null=False)
     #一對一 Django 使用者
@@ -23,7 +34,13 @@ class CIUser(models.Model):
     #多對一 領導人 CI使用者
     leader = models.ForeignKey("self", default=None, null=True, on_delete=models.SET_NULL)
     #頭像
-    avatarThumbnail = ProcessedImageField(default="static/ci/img/avatars/default-thumbnail.jpg", upload_to="static/ci/img/avatars/", processors=[ResizeToFill(100, 100)], format="JPEG", options={"quality": 90})
+    avatarThumbnail = ProcessedImageField(
+        default="static/ci/img/avatars/default-thumbnail.jpg",
+        upload_to=renameAvatarThumbnailFilePath,
+        processors=[ResizeToFill(100, 100)],
+        format="JPEG",
+        options={"quality": 90}
+    )
     #PV值
     intPointVolume = models.IntegerField(default=0, null=False)
     #顯示名稱
