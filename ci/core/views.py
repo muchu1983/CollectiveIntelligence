@@ -168,6 +168,8 @@ def verifyEmail(request):
     
 #尋找 CI 使用者
 def searchCIUser(request):
+    #頁面標題
+    strPageTitle = "搜尋用戶"
     #form 的 action 目標 url
     strFormActionUrl = "/core/searchCIUser/"
     #尋找結果字串
@@ -188,6 +190,8 @@ def searchCIUser(request):
 #尋找 CI 領導人
 @login_required
 def searchLeader(request):
+    #頁面標題
+    strPageTitle = "搜尋領導人"
     #form 的 action 目標 url
     strFormActionUrl = "/core/searchLeader/"
     #尋找結果字串
