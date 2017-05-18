@@ -11,6 +11,110 @@ This file is part of BSD license
     overflow: auto;
     background-color: lavender;
 }
+#ulChatMessage li{
+    border: 0px;
+}
+/*造訪者名稱*/
+.visitor-name{
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 3px;
+    padding: 2px;
+}
+/*對話訊息泡泡*/
+.bubble {
+position: relative;
+width: 100%;
+padding: 2px;
+background: lavender;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+border: #7F7F7F solid 2px;
+margin-top: 15px;
+word-break: break-all;
+}
+/*中間型泡泡*/
+.bubble.center-bubble:after {
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 5px 10px;
+border-color: lavender transparent;
+display: block;
+width: 0;
+z-index: 1;
+margin-left: -5px;
+top: -10px;
+left: 50%;
+}
+.bubble.center-bubble:before {
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 6px 11px;
+border-color: #7F7F7F transparent;
+display: block;
+width: 0;
+z-index: 0;
+margin-left: -6px;
+top: -13px;
+left: 50%;
+}
+/*右邊型泡泡*/
+.bubble.right-bubble:after {
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 5px 10px;
+border-color: lavender transparent;
+display: block;
+width: 0;
+z-index: 1;
+margin-left: -5px;
+top: -10px;
+left: 95%;
+}
+.bubble.right-bubble:before {
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 6px 11px;
+border-color: #7F7F7F transparent;
+display: block;
+width: 0;
+z-index: 0;
+margin-left: -6px;
+top: -13px;
+left: 95%;
+}
+/*左邊型泡泡*/
+.bubble.left-bubble:after {
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 5px 10px;
+border-color: lavender transparent;
+display: block;
+width: 0;
+z-index: 1;
+margin-left: -5px;
+top: -10px;
+left: 5%;
+}
+.bubble.left-bubble:before {
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 6px 11px;
+border-color: #7F7F7F transparent;
+display: block;
+width: 0;
+z-index: 0;
+margin-left: -6px;
+top: -13px;
+left: 5%;
+}
 /*訊息顏色說明*/
 #ulMsgColorGuide {
     background-color: lavender;
@@ -20,27 +124,22 @@ This file is part of BSD license
     color: lightgray;
     background-color: lavender;
 }
-
 .roleCiuser{
     color: white;
     background-color: lavender;
 }
-
 .roleFollower{
     color: forestgreen;
     background-color: lavender;
 }
-
 .roleHost{
     color: royalblue;
     background-color: lavender;
 }
-
 .roleLeader{
     color: darkorchid;
     background-color: lavender;
 }
-
 .roleSys{
     color: coral;
     background-color: lavender;

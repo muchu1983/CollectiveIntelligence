@@ -10,7 +10,7 @@
     
     /* global variable */
     var wsChannel = null;
-    //角色 與 class 對應表
+    //角色 與 顏色 class 對應表
     var dicRoleClassMapping = {
         "role:sys": "roleSys",
         "role:leader": "roleLeader",
@@ -19,11 +19,17 @@
         "role:ciuser": "roleCiuser",
         "role:anonymous": "roleAnonymous",
     };
-    //對齊方向 與 class 對應表
+    //對齊方向 與 文字方向 class 對應表
     var dicMsgAlignClassMapping = {
         "align:center":"text-center",
         "align:left":"text-left",
         "align:right":"text-right",
+    };
+    //對齊方向 與 對話泡泡 class 對應表
+    var dicMsgBubbleClassMapping = {
+        "align:center":"bubble center-bubble",
+        "align:left":"bubble left-bubble",
+        "align:right":"bubble right-bubble",
     };
     
     /* initial function */
@@ -57,10 +63,10 @@
                 var strMsgAlign = dicHistoryMessage["strMsgAlign"];
                 var strVisitorDisplayName = dicHistoryMessage["strVisitorDisplayName"];
                 //加入歷史訊息至聊天內容 #ulChatMessage
-                $("#ulChatMessage").append(buildMessageLiTag(dicHistoryMessage["strMsg"], dicRoleClassMapping[strRole], dicMsgAlignClassMapping[strMsgAlign], strVisitorDisplayName));
+                $("#ulChatMessage").append(buildMessageLiTag(dicHistoryMessage["strMsg"], dicRoleClassMapping[strRole], dicMsgAlignClassMapping[strMsgAlign], dicMsgBubbleClassMapping[strMsgAlign], strVisitorDisplayName));
             });
             //顯示 自動讀取歷史訊息完畢
-            $("#ulChatMessage").append(buildMessageLiTag("自動讀取歷史訊息完畢", dicRoleClassMapping["role:sys"], dicMsgAlignClassMapping["align:center"], "系統訊息"));
+            $("#ulChatMessage").append(buildMessageLiTag("自動讀取歷史訊息完畢", dicRoleClassMapping["role:sys"], dicMsgAlignClassMapping["align:center"], dicMsgBubbleClassMapping["align:center"], "系統訊息"));
             //捲動至最下層
             $("#ulChatMessage").animate({scrollTop: $("#ulChatMessage").prop("scrollHeight")}, 500);
         }).done(function(){
@@ -83,7 +89,7 @@
             var strMsgAlign = jsonMsg["strMsgAlign"];
             var strVisitorDisplayName = jsonMsg["strVisitorDisplayName"];
             //加入訊息至聊天內容 #ulChatMessage
-            $("#ulChatMessage").append(buildMessageLiTag(jsonMsg["strMsg"], dicRoleClassMapping[strRole], dicMsgAlignClassMapping[strMsgAlign], strVisitorDisplayName));
+            $("#ulChatMessage").append(buildMessageLiTag(jsonMsg["strMsg"], dicRoleClassMapping[strRole], dicMsgAlignClassMapping[strMsgAlign], dicMsgBubbleClassMapping[strMsgAlign], strVisitorDisplayName));
             //訊息過長時，移除最前面的訊息
             if ($("#ulChatMessage li").length > 666){
                 $("#ulChatMessage li").first().remove();
@@ -126,11 +132,14 @@
     /* utility function */
     
     //建立訊息 li
-    function buildMessageLiTag(strMsg, strClassRole, strClassTextAlign, strVisitorDisplayName){
+    function buildMessageLiTag(strMsg, strClassRole, strClassTextAlign, strClassMsgBubble, strVisitorDisplayName){
+        
         strLiTag = 
         "<li class=\"list-group-item " + strClassRole + " " + strClassTextAlign + "\">" +
-            "<div>" + strVisitorDisplayName + "</div>" +
-            "<div>" + strMsg + "</div>" +
+            "<span class=\"visitor-name\">" + strVisitorDisplayName + "</span>" +
+            "<div class=\"" + strClassMsgBubble + "\">" +
+                    strMsg + 
+            "</div>" +
         "</li>";
         return strLiTag;
     };
