@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     "channels",
     "tinymce",
     "captcha",
+    "imagekit",
     "core",
     "chat",
     "quest",

@@ -11,6 +11,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 #CI使用者
 class CIUser(models.Model):
@@ -20,6 +22,8 @@ class CIUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     #多對一 領導人 CI使用者
     leader = models.ForeignKey("self", default=None, null=True, on_delete=models.SET_NULL)
+    #頭像
+    avatarThumbnail = ProcessedImageField(upload_to="static/ci/img/avatars/", processors=[ResizeToFill(100, 50)], format="JPEG", options={"quality": 60})
     #PV值
     intPointVolume = models.IntegerField(default=0, null=False)
     #顯示名稱
