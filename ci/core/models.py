@@ -23,7 +23,7 @@ class CIUser(models.Model):
     #多對一 領導人 CI使用者
     leader = models.ForeignKey("self", default=None, null=True, on_delete=models.SET_NULL)
     #頭像
-    avatarThumbnail = ProcessedImageField(upload_to="static/ci/img/avatars/", processors=[ResizeToFill(100, 50)], format="JPEG", options={"quality": 60})
+    avatarThumbnail = ProcessedImageField(default="/static/ci/img/avatars/default-thumbnail.jpg", upload_to="static/ci/img/avatars/", processors=[ResizeToFill(100, 50)], format="JPEG", options={"quality": 60})
     #PV值
     intPointVolume = models.IntegerField(default=0, null=False)
     #顯示名稱
