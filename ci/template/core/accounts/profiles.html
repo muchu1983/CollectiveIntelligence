@@ -20,7 +20,7 @@
         <form action="/accounts/uploadAvatarThumbnail/" method="post" enctype="multipart/form-data">
             <!-- CSRF 保護 -->
             {% csrf_token %}
-            <input type="file" class="btn btn-sm btn-default" name="avatarThumbnail"></input>
+            <input type="file" class="btn btn-sm btn-default" name="avatarThumbnail" accept="image/*"></input>
             <span>顯示長寬為 100 x 100 px，依等比例縮放</span>
             <input type="submit" class="btn btn-sm btn-primary" value="上傳頭像"></input>
         </form>
