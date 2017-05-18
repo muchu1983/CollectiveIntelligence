@@ -35,7 +35,10 @@
 <ul>
 {% for matchedCIUser in qsetMatchedCIUser %}
     <li class="row">
-        <!-- 用戶頭像 todo -->
+        <!-- 用戶頭像 -->
+        <div class="col-xs-2 text-center">
+            <img src="/{{ matchedCIUser.avatarThumbnail.url }}" height="50" width="50">
+        </div>
         <!-- 用戶名稱 -->
         <span class="col-xs-2">{{ matchedCIUser.strDisplayName }}</span>
         <!-- 用戶UID 隱藏 -->
