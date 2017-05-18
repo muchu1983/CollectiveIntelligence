@@ -5,6 +5,10 @@ This file is part of BSD license
 
 <https://opensource.org/licenses/BSD-3-Clause>
 */
+/*頻道名稱*/
+#channelName{
+    color: royalblue;
+}
 /*聊天訊息內容*/
 #ulChatMessage{
     height: 75vh;
@@ -15,7 +19,7 @@ This file is part of BSD license
     border: 0px;
 }
 /*造訪者名稱*/
-.visitor-name{
+.visitorName{
     border-radius: 5px;
     border-style: solid;
     border-width: 3px;
@@ -35,7 +39,7 @@ margin-top: 15px;
 word-break: break-all;
 }
 /*中間型泡泡*/
-.bubble.center-bubble:after {
+.bubble.bubbleCenter:after {
 content: '';
 position: absolute;
 border-style: solid;
@@ -48,7 +52,7 @@ margin-left: -5px;
 top: -10px;
 left: 50%;
 }
-.bubble.center-bubble:before {
+.bubble.bubbleCenter:before {
 content: '';
 position: absolute;
 border-style: solid;
@@ -62,7 +66,7 @@ top: -13px;
 left: 50%;
 }
 /*右邊型泡泡*/
-.bubble.right-bubble:after {
+.bubble.bubbleRight:after {
 content: '';
 position: absolute;
 border-style: solid;
@@ -75,7 +79,7 @@ margin-left: -5px;
 top: -10px;
 left: 95%;
 }
-.bubble.right-bubble:before {
+.bubble.bubbleRight:before {
 content: '';
 position: absolute;
 border-style: solid;
@@ -89,7 +93,7 @@ top: -13px;
 left: 95%;
 }
 /*左邊型泡泡*/
-.bubble.left-bubble:after {
+.bubble.bubbleLeft:after {
 content: '';
 position: absolute;
 border-style: solid;
@@ -102,7 +106,7 @@ margin-left: -5px;
 top: -10px;
 left: 5%;
 }
-.bubble.left-bubble:before {
+.bubble.bubbleLeft:before {
 content: '';
 position: absolute;
 border-style: solid;

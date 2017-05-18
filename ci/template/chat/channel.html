@@ -26,7 +26,7 @@
 <!-- 頻道標頭 -->
 <div class="row">
     <!-- 頻道名稱 -->
-    <p class="col-xs-8">{{ userHost.ciuser.strDisplayName }} 的頻道</p>
+    <h4 id="channelName" class="text-left col-xs-9">{{ userHost.ciuser.strDisplayName }} 的頻道</h4>
     <!-- 文字方向切換鈕 -->
     <div class="col-xs-2">
         <input type="checkbox" id="checkboxMsgAlign" data-toggle="toggle" data-on="right" data-off="left" data-offstyle="primary" data-size="mini">
@@ -47,12 +47,12 @@
     </div>
 </div>
 <!-- 聊天內容 -->
-<div>
-    <ul id="ulChatMessage" class="list-group">
+<div class="row">
+    <ul id="ulChatMessage" class="list-group col-xs-12">
     </ul>
 </div>
 <!-- 訊息輸入框 -->
-<div class="input-group">
+<div class="input-group row">
     <input type="text" id="inputChatMsg" name="inputChatMsg" class="form-control" placeholder="限制 255 字元：" maxlength="255">
     <div class="input-group-btn">
         <button id="btnSendChatMsg" class="btn btn-default" type="button">

@@ -27,9 +27,9 @@
     };
     //對齊方向 與 對話泡泡 class 對應表
     var dicMsgBubbleClassMapping = {
-        "align:center":"bubble center-bubble",
-        "align:left":"bubble left-bubble",
-        "align:right":"bubble right-bubble",
+        "align:center":"bubble bubbleCenter",
+        "align:left":"bubble bubbleLeft",
+        "align:right":"bubble bubbleRight",
     };
     
     /* initial function */
@@ -136,7 +136,7 @@
         
         strLiTag = 
         "<li class=\"list-group-item " + strClassRole + " " + strClassTextAlign + "\">" +
-            "<span class=\"visitor-name\">" + strVisitorDisplayName + "</span>" +
+            "<span class=\"visitorName\">" + strVisitorDisplayName + "</span>" +
             "<div class=\"" + strClassMsgBubble + "\">" +
                     strMsg + 
             "</div>" +
