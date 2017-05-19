@@ -13,37 +13,46 @@
 <!-- override block_content -->
 {% block block_content %}
 <!-- initNewQuest.html block_content -->
-<h1>發起新任務</h1>
-<!-- 發起新任務 form -->
-<p>
-    說明：
-    在尚未有用戶接受任務前，越多人按贊則任務的 獎勵PV 會越高。
-    當有用戶接受並開始執行任務後，就無法再繼續按贊了，獎勵PV也不再變動。
-    任務執行中發起人可隨時終結任務，但會扣除發起人的個人PV，
-    扣除的數量為該任務獎勵PV的 二分之一。
-</p>
-<form action="" method="post">
-    <!-- CSRF 保護 -->
-    {% csrf_token %}
-    <!-- 任務標題 -->
-    <div>
-        {{ formCIQuest.strHeadline.errors }}
-        <label for="{{ formCIQuest.strHeadline.id_for_label }}">任務標題：</label>
-        {{ formCIQuest.strHeadline }}
-    </div>
-    <!-- 任務 tags -->
-    <div>
-        <label for="inputQuestTags">任務標籤：</label>
-        <input id="inputQuestTags" name="inputQuestTags" value=""></input>
-    </div>
-    <!-- 任務內容 -->
-    <div>
-        {{ formCIQuest.strContent.errors }}
-        <span><b>任務內容：</b></span>
-        <div>
+<h3>發起新任務</h3>
+<div class="row">
+    <!-- 發起新任務 form -->
+    <form class="col-xs-6" action="" method="post">
+        <!-- CSRF 保護 -->
+        {% csrf_token %}
+        <!-- 任務標題 -->
+        <div class="row">
+            {{ formCIQuest.strHeadline.errors }}
+            <label for="{{ formCIQuest.strHeadline.id_for_label }}">任務標題：</label>
+            {{ formCIQuest.strHeadline }}
+        </div>
+        <!-- 任務 tags -->
+        <div class="row">
+            <label for="inputQuestTags">任務標籤：</label>
+            <input id="inputQuestTags" name="inputQuestTags" value=""></input>
+        </div>
+        <!-- 任務內容 -->
+        <div class="row">
+            <span><b>任務內容：</b></span>
+            {{ formCIQuest.strContent.errors }}
             {{ formCIQuest.strContent }}
         </div>
+        <!-- 發起按鈕 -->
+        <div class="row text-left">
+            <input type="submit" class="btn btn-danger btn-sm" value="發起"></input>
+        </div>
+    </form>
+    <!-- 說明 -->
+    <div class="col-xs-6">
+        <h4>說明：</h4>
+        <p>新創任務的初始 <span class="text-primary">獎勵PV</span> 為 0 PV</p>
+        <p>除<span class="bg-danger">發起人</span>外，所有用戶可對新創任務 <span class="text-primary">按贊</span></p>
+        <p>累積越多的贊，任務的 <span class="text-primary">獎勵PV</span> 也會越<span class="text-primary">高</span></p>
+        <p>有人<span class="text-primary">申請執行任務</span>之後，就無法再按贊了</p>
+        <p><span class="bg-danger">發起人</span><span class="text-primary">接受申請</span>後，任務即進入執行階段</p>
+        <p>執行階段期間，<span class="bg-danger">發起人</span>可強制 <span class="text-danger">終結任務</span></p>
+        <p><span class="text-danger">終結任務</span> <span class="bg-danger">發起人</span>將扣除 該任務 <span class="text-danger">1/2 的 獎勵PV</span></p>
+        <p>若 <span class="text-danger">任務被終結</span> <span class="bg-success">執行人</span>將<span class="text-danger">無法</span>獲得 獎勵PV</p>
+        <p>無論 <span class="text-primary">任務完成與否</span> <span class="bg-danger">發起人</span><span class="text-primary">均不會</span>獲得 獎勵PV</p>
     </div>
-    <input type="submit" class="btn btn-danger btn-sm" value="發起"></input>
-</form>
+</div>
 {% endblock block_content %}

@@ -17,8 +17,9 @@
     function initInputQuestTags(){
         $("#inputQuestTags").tagsInput({
             "height":"40px",
-            "width":"300px",
-            "defaultText":"新增標籤"
+            "width":"40vw",
+            "maxChars" : 255,
+            "defaultText":"新增"
         });
     };
     
@@ -26,7 +27,7 @@
     function initTinymce(){
         tinymce.init({
             selector:"textarea",
-            width: "50vw"
+            width: "46vw"
         });
     };
     
