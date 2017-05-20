@@ -24,6 +24,8 @@ var textUserRight = null;
 var groupQuest = null;
 var groupInitQuestLeft = null;
 var groupInitQuestRight = null;
+var rectInitQuestLeft = null;
+var rectInitQuestRight = null;
 
 //初始化 #canvas_main 畫布
 function initCanvasMain() {
@@ -95,7 +97,7 @@ function initCanvasItemObject() {
         point: [0, 0],
         size: [150, 30],
         radius: 10,
-        fillColor: "red",
+        fillColor: "pink",
         strokeColor: "black",
         strokeWidth: 2,
     });
@@ -115,7 +117,7 @@ function initCanvasItemObject() {
         point: [0, 0],
         size: [150, 30],
         radius: 10,
-        fillColor: "red",
+        fillColor: "pink",
         strokeColor: "black",
         strokeWidth: 2,
     });
@@ -161,21 +163,36 @@ function initCanvasItemObject() {
 
 //事件
 function initCanvasEvent() {
+    //滑鼠進入按鈕
+    groupInitQuestLeft.onMouseEnter = function(event){
+        rectInitQuestLeft.fillColor = "red";
+    };
+    groupInitQuestRight.onMouseEnter = function(event){
+        rectInitQuestRight.fillColor = "red";
+    };
+    //滑鼠離開按鈕
+    groupInitQuestLeft.onMouseLeave = function(event){
+        rectInitQuestLeft.fillColor = "pink";
+    };
+    groupInitQuestRight.onMouseLeave = function(event){
+        rectInitQuestRight.fillColor = "pink";
+    };
     //左方按下發起任務
-    groupInitQuestLeft.onClick = function(){
+    groupInitQuestLeft.onClick = function(event){
         groupQuest.visible = true;
         groupInitQuestLeft.visible = false;
         groupInitQuestRight.visible = false;
         textUserLeft.content = "發起人"
     };
     //右方按下發起任務
-    groupInitQuestRight.onClick = function(){
+    groupInitQuestRight.onClick = function(event){
         groupQuest.visible = true;
         groupInitQuestLeft.visible = false;
         groupInitQuestRight.visible = false;
         textUserRight.content = "發起人"
     };
 };
+
 //動畫
 function onFrame(event) {
     
