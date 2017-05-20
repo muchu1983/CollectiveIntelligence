@@ -22,20 +22,41 @@ $(document).ready(initCanvasMain);
 var textUserLeft = null;
 var textUserRight = null;
 var groupQuest = null;
-
+//發起任務
 var rectInitQuestLeft = null;
 var rectInitQuestRight = null;
 var textInitQuestLeft = null;
 var textInitQuestRight = null;
 var groupInitQuestLeft = null;
 var groupInitQuestRight = null;
-
+//刪除任務
 var rectDeleteQuestLeft = null;
 var rectDeleteQuestRight = null;
 var textDeleteQuestLeft = null;
 var textDeleteQuestRight = null;
 var groupDeleteQuestLeft = null;
 var groupDeleteQuestRight = null;
+//申請執行任務
+var rectApplyQuestLeft = null;
+var rectApplyQuestRight = null;
+var textApplyQuestLeft = null;
+var textApplyQuestRight = null;
+var groupApplyQuestLeft = null;
+var groupApplyQuestRight = null;
+//接受申請
+var rectAcceptApplicationLeft = null;
+var rectAcceptApplicationRight = null;
+var textAcceptApplicationLeft = null;
+var textAcceptApplicationRight = null;
+var groupAcceptApplicationLeft = null;
+var groupAcceptApplicationRight = null;
+//拒絕申請
+var rectRejectApplicationLeft = null;
+var rectRejectApplicationRight = null;
+var textRejectApplicationLeft = null;
+var textRejectApplicationRight = null;
+var groupRejectApplicationLeft = null;
+var groupRejectApplicationRight = null;
 
 //初始化 #canvas_main 畫布
 function initCanvasMain() {
@@ -184,6 +205,132 @@ function initCanvasItemObject() {
         fontSize: 20
     });
     
+    //左申請執行任務外框
+    rectApplyQuestLeft = new Path.Rectangle({
+        point: [0, 0],
+        size: [150, 30],
+        radius: 10,
+        fillColor: "pink",
+        strokeColor: "black",
+        strokeWidth: 2,
+    });
+    
+    //左申請執行任務文字
+    textApplyQuestLeft = new PointText({
+        point: [rectInitQuestLeft.bounds.width/2, rectInitQuestLeft.bounds.height/2+3],
+        justification: "center",
+        content: "申請執行任務",
+        fillColor: "black",
+        fontFamily: "MingLiU",
+        fontWeight: "normal",
+        fontSize: 20
+    });
+    
+    //右申請執行任務外框
+    rectApplyQuestRight = new Path.Rectangle({
+        point: [0, 0],
+        size: [150, 30],
+        radius: 10,
+        fillColor: "pink",
+        strokeColor: "black",
+        strokeWidth: 2,
+    });
+    
+    //右申請執行任務文字
+    textApplyQuestRight = new PointText({
+        point: [rectInitQuestLeft.bounds.width/2, rectInitQuestLeft.bounds.height/2+3],
+        justification: "center",
+        content: "申請執行任務",
+        fillColor: "black",
+        fontFamily: "MingLiU",
+        fontWeight: "normal",
+        fontSize: 20
+    });
+    
+    //左接受申請外框
+    rectAcceptApplicationLeft = new Path.Rectangle({
+        point: [0, 0],
+        size: [150, 30],
+        radius: 10,
+        fillColor: "pink",
+        strokeColor: "black",
+        strokeWidth: 2,
+    });
+    
+    //左接受申請文字
+    textAcceptApplicationLeft = new PointText({
+        point: [rectInitQuestLeft.bounds.width/2, rectInitQuestLeft.bounds.height/2+3],
+        justification: "center",
+        content: "接受申請",
+        fillColor: "black",
+        fontFamily: "MingLiU",
+        fontWeight: "normal",
+        fontSize: 20
+    });
+    
+    //右接受申請外框
+    rectAcceptApplicationRight = new Path.Rectangle({
+        point: [0, 0],
+        size: [150, 30],
+        radius: 10,
+        fillColor: "pink",
+        strokeColor: "black",
+        strokeWidth: 2,
+    });
+    
+    //右接受申請文字
+    textAcceptApplicationRight = new PointText({
+        point: [rectInitQuestLeft.bounds.width/2, rectInitQuestLeft.bounds.height/2+3],
+        justification: "center",
+        content: "接受申請",
+        fillColor: "black",
+        fontFamily: "MingLiU",
+        fontWeight: "normal",
+        fontSize: 20
+    });
+    
+    //左拒絕申請外框
+    rectRejectApplicationLeft = new Path.Rectangle({
+        point: [0, 0],
+        size: [150, 30],
+        radius: 10,
+        fillColor: "pink",
+        strokeColor: "black",
+        strokeWidth: 2,
+    });
+    
+    //左拒絕申請文字
+    textRejectApplicationLeft = new PointText({
+        point: [rectInitQuestLeft.bounds.width/2, rectInitQuestLeft.bounds.height/2+3],
+        justification: "center",
+        content: "拒絕申請",
+        fillColor: "black",
+        fontFamily: "MingLiU",
+        fontWeight: "normal",
+        fontSize: 20
+    });
+    
+    //右拒絕申請外框
+    rectRejectApplicationRight = new Path.Rectangle({
+        point: [0, 0],
+        size: [150, 30],
+        radius: 10,
+        fillColor: "pink",
+        strokeColor: "black",
+        strokeWidth: 2,
+    });
+    
+    //右拒絕申請文字
+    textRejectApplicationRight = new PointText({
+        point: [rectInitQuestLeft.bounds.width/2, rectInitQuestLeft.bounds.height/2+3],
+        justification: "center",
+        content: "拒絕申請",
+        fillColor: "black",
+        fontFamily: "MingLiU",
+        fontWeight: "normal",
+        fontSize: 20
+    });
+    
     //群組
     groupUserLeft = new Group({
         children: [rectUserLeft, textUserLeft],
@@ -200,6 +347,7 @@ function initCanvasItemObject() {
         position: view.center,
         visible: false,
     });
+    //發起任務
     groupInitQuestLeft = new Group({
         children: [rectInitQuestLeft, textInitQuestLeft],
         position: [view.size.width*1/4, view.size.height/2],
@@ -210,6 +358,7 @@ function initCanvasItemObject() {
         position: [view.size.width*3/4, view.size.height/2],
         visible: true,
     });
+    //刪除任務
     groupDeleteQuestLeft = new Group({
         children: [rectDeleteQuestLeft, textDeleteQuestLeft],
         position: [view.size.width*1/4, view.size.height/2],
@@ -220,6 +369,40 @@ function initCanvasItemObject() {
         position: [view.size.width*3/4, view.size.height/2],
         visible: false,
     });
+    //申請執行任務
+    groupApplyQuestLeft = new Group({
+        children: [rectApplyQuestLeft, textApplyQuestLeft],
+        position: [view.size.width*1/4, view.size.height/2],
+        visible: false,
+    });
+    groupApplyQuestRight = new Group({
+        children: [rectApplyQuestRight, textApplyQuestRight],
+        position: [view.size.width*3/4, view.size.height/2],
+        visible: false,
+    });
+    //接受申請
+    groupAcceptApplicationLeft = new Group({
+        children: [rectAcceptApplicationLeft, textAcceptApplicationLeft],
+        position: [view.size.width*1/4, view.size.height/2],
+        visible: false,
+    });
+    groupAcceptApplicationRight = new Group({
+        children: [rectAcceptApplicationRight, textAcceptApplicationRight],
+        position: [view.size.width*3/4, view.size.height/2],
+        visible: false,
+    });
+    //拒絕申請
+    groupRejectApplicationLeft = new Group({
+        children: [rectRejectApplicationLeft, textRejectApplicationLeft],
+        position: [view.size.width*1/4, view.size.height/2+50],
+        visible: false,
+    });
+    groupRejectApplicationRight = new Group({
+        children: [rectRejectApplicationRight, textRejectApplicationRight],
+        position: [view.size.width*3/4, view.size.height/2+50],
+        visible: false,
+    });
+    
 };
 
 //事件
@@ -229,11 +412,23 @@ function initCanvasEvent() {
     groupInitQuestRight.onMouseEnter = onMouseEnterButtonItem(rectInitQuestRight, textInitQuestRight);
     groupDeleteQuestLeft.onMouseEnter = onMouseEnterButtonItem(rectDeleteQuestLeft, textDeleteQuestLeft);
     groupDeleteQuestRight.onMouseEnter = onMouseEnterButtonItem(rectDeleteQuestRight, textDeleteQuestRight);
+    groupApplyQuestLeft.onMouseEnter = onMouseEnterButtonItem(rectApplyQuestLeft, textApplyQuestLeft);
+    groupApplyQuestRight.onMouseEnter = onMouseEnterButtonItem(rectApplyQuestRight, textApplyQuestRight);
+    groupAcceptApplicationLeft.onMouseEnter = onMouseEnterButtonItem(rectAcceptApplicationLeft, textAcceptApplicationLeft);
+    groupAcceptApplicationRight.onMouseEnter = onMouseEnterButtonItem(rectAcceptApplicationRight, textAcceptApplicationRight);
+    groupRejectApplicationLeft.onMouseEnter = onMouseEnterButtonItem(rectRejectApplicationLeft, textRejectApplicationLeft);
+    groupRejectApplicationRight.onMouseEnter = onMouseEnterButtonItem(rectRejectApplicationRight, textRejectApplicationRight);
     //滑鼠離開按鈕
     groupInitQuestLeft.onMouseLeave = onMouseLeaveButtonItem(rectInitQuestLeft, textInitQuestLeft);
     groupInitQuestRight.onMouseLeave = onMouseLeaveButtonItem(rectInitQuestRight, textInitQuestRight);
     groupDeleteQuestLeft.onMouseLeave = onMouseLeaveButtonItem(rectDeleteQuestLeft, textDeleteQuestLeft);
     groupDeleteQuestRight.onMouseLeave = onMouseLeaveButtonItem(rectDeleteQuestRight, textDeleteQuestRight);
+    groupApplyQuestLeft.onMouseLeave = onMouseLeaveButtonItem(rectApplyQuestLeft, textApplyQuestLeft);
+    groupApplyQuestRight.onMouseLeave = onMouseLeaveButtonItem(rectApplyQuestRight, textApplyQuestRight);
+    groupAcceptApplicationLeft.onMouseLeave = onMouseLeaveButtonItem(rectAcceptApplicationLeft, textAcceptApplicationLeft);
+    groupAcceptApplicationRight.onMouseLeave = onMouseLeaveButtonItem(rectAcceptApplicationRight, textAcceptApplicationRight);
+    groupRejectApplicationLeft.onMouseLeave = onMouseLeaveButtonItem(rectRejectApplicationLeft, textRejectApplicationLeft);
+    groupRejectApplicationRight.onMouseLeave = onMouseLeaveButtonItem(rectRejectApplicationRight, textRejectApplicationRight);
     //左方按下發起任務
     groupInitQuestLeft.onClick = function(event){
         groupQuest.visible = true;
@@ -241,6 +436,7 @@ function initCanvasEvent() {
         groupInitQuestRight.visible = false;
         textUserLeft.content = "發起人-A用戶"
         groupDeleteQuestLeft.visible = true;
+        groupApplyQuestRight.visible = true;
     };
     //右方按下發起任務
     groupInitQuestRight.onClick = function(event){
@@ -249,6 +445,7 @@ function initCanvasEvent() {
         groupInitQuestRight.visible = false;
         textUserRight.content = "發起人-B用戶"
         groupDeleteQuestRight.visible = true;
+        groupApplyQuestLeft.visible = true;
     };
     //左方按下刪除任務
     groupDeleteQuestLeft.onClick = function(event){
@@ -257,14 +454,30 @@ function initCanvasEvent() {
         groupInitQuestRight.visible = true;
         textUserLeft.content = "A用戶"
         groupDeleteQuestLeft.visible = false;
+        groupApplyQuestRight.visible = false;
     };
     //右方按下刪除任務
     groupDeleteQuestRight.onClick = function(event){
         groupQuest.visible = false;
         groupInitQuestLeft.visible = true;
         groupInitQuestRight.visible = true;
-        textUserLeft.content = "B用戶"
+        textUserRight.content = "B用戶"
         groupDeleteQuestRight.visible = false;
+        groupApplyQuestLeft.visible = false;
+    };
+    //左方按下申請執行任務
+    groupApplyQuestLeft.onClick = function(event){
+        textUserLeft.content = "A用戶-執行人"
+        groupDeleteQuestRight.visible = false;
+        groupAcceptApplicationRight.visible = true;
+        groupRejectApplicationRight.visible = true;
+    };
+    //右方按下申請執行任務
+    groupApplyQuestRight.onClick = function(event){
+        textUserRight.content = "B用戶-執行人"
+        groupDeleteQuestLeft.visible = false;
+        groupAcceptApplicationLeft.visible = true;
+        groupRejectApplicationLeft.visible = true;
     };
 };
 
