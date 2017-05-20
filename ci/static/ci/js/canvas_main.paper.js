@@ -57,6 +57,13 @@ var textRejectApplicationLeft = null;
 var textRejectApplicationRight = null;
 var groupRejectApplicationLeft = null;
 var groupRejectApplicationRight = null;
+//取消申請
+var rectCancelApplicationLeft = null;
+var rectCancelApplicationRight = null;
+var textCancelApplicationLeft = null;
+var textCancelApplicationRight = null;
+var groupCancelApplicationLeft = null;
+var groupCancelApplicationRight = null;
 
 //初始化 #canvas_main 畫布
 function initCanvasMain() {
@@ -331,6 +338,48 @@ function initCanvasItemObject() {
         fontSize: 20
     });
     
+    //左取消申請外框
+    rectCancelApplicationLeft = new Path.Rectangle({
+        point: [0, 0],
+        size: [150, 30],
+        radius: 10,
+        fillColor: "pink",
+        strokeColor: "black",
+        strokeWidth: 2,
+    });
+    
+    //左取消申請文字
+    textCancelApplicationLeft = new PointText({
+        point: [rectInitQuestLeft.bounds.width/2, rectInitQuestLeft.bounds.height/2+3],
+        justification: "center",
+        content: "取消申請",
+        fillColor: "black",
+        fontFamily: "MingLiU",
+        fontWeight: "normal",
+        fontSize: 20
+    });
+    
+    //右取消申請外框
+    rectCancelApplicationRight = new Path.Rectangle({
+        point: [0, 0],
+        size: [150, 30],
+        radius: 10,
+        fillColor: "pink",
+        strokeColor: "black",
+        strokeWidth: 2,
+    });
+    
+    //右取消申請文字
+    textCancelApplicationRight = new PointText({
+        point: [rectInitQuestLeft.bounds.width/2, rectInitQuestLeft.bounds.height/2+3],
+        justification: "center",
+        content: "取消申請",
+        fillColor: "black",
+        fontFamily: "MingLiU",
+        fontWeight: "normal",
+        fontSize: 20
+    });
+    
     //群組
     groupUserLeft = new Group({
         children: [rectUserLeft, textUserLeft],
@@ -402,6 +451,17 @@ function initCanvasItemObject() {
         position: [view.size.width*3/4, view.size.height/2+50],
         visible: false,
     });
+    //取消申請
+    groupCancelApplicationLeft = new Group({
+        children: [rectCancelApplicationLeft, textCancelApplicationLeft],
+        position: [view.size.width*1/4, view.size.height/2],
+        visible: false,
+    });
+    groupCancelApplicationRight = new Group({
+        children: [rectCancelApplicationRight, textCancelApplicationRight],
+        position: [view.size.width*3/4, view.size.height/2],
+        visible: false,
+    });
     
 };
 
@@ -418,6 +478,8 @@ function initCanvasEvent() {
     groupAcceptApplicationRight.onMouseEnter = onMouseEnterButtonItem(rectAcceptApplicationRight, textAcceptApplicationRight);
     groupRejectApplicationLeft.onMouseEnter = onMouseEnterButtonItem(rectRejectApplicationLeft, textRejectApplicationLeft);
     groupRejectApplicationRight.onMouseEnter = onMouseEnterButtonItem(rectRejectApplicationRight, textRejectApplicationRight);
+    groupCancelApplicationLeft.onMouseEnter = onMouseEnterButtonItem(rectCancelApplicationLeft, textCancelApplicationLeft);
+    groupCancelApplicationRight.onMouseEnter = onMouseEnterButtonItem(rectCancelApplicationRight, textCancelApplicationRight);
     //滑鼠離開按鈕
     groupInitQuestLeft.onMouseLeave = onMouseLeaveButtonItem(rectInitQuestLeft, textInitQuestLeft);
     groupInitQuestRight.onMouseLeave = onMouseLeaveButtonItem(rectInitQuestRight, textInitQuestRight);
@@ -429,12 +491,14 @@ function initCanvasEvent() {
     groupAcceptApplicationRight.onMouseLeave = onMouseLeaveButtonItem(rectAcceptApplicationRight, textAcceptApplicationRight);
     groupRejectApplicationLeft.onMouseLeave = onMouseLeaveButtonItem(rectRejectApplicationLeft, textRejectApplicationLeft);
     groupRejectApplicationRight.onMouseLeave = onMouseLeaveButtonItem(rectRejectApplicationRight, textRejectApplicationRight);
+    groupCancelApplicationLeft.onMouseLeave = onMouseLeaveButtonItem(rectCancelApplicationLeft, textCancelApplicationLeft);
+    groupCancelApplicationRight.onMouseLeave = onMouseLeaveButtonItem(rectCancelApplicationRight, textCancelApplicationRight);
     //左方按下發起任務
     groupInitQuestLeft.onClick = function(event){
         groupQuest.visible = true;
         groupInitQuestLeft.visible = false;
         groupInitQuestRight.visible = false;
-        textUserLeft.content = "發起人-A用戶"
+        textUserLeft.content = "發起人-A用戶";
         groupDeleteQuestLeft.visible = true;
         groupApplyQuestRight.visible = true;
     };
@@ -443,7 +507,7 @@ function initCanvasEvent() {
         groupQuest.visible = true;
         groupInitQuestLeft.visible = false;
         groupInitQuestRight.visible = false;
-        textUserRight.content = "發起人-B用戶"
+        textUserRight.content = "發起人-B用戶";
         groupDeleteQuestRight.visible = true;
         groupApplyQuestLeft.visible = true;
     };
@@ -452,7 +516,7 @@ function initCanvasEvent() {
         groupQuest.visible = false;
         groupInitQuestLeft.visible = true;
         groupInitQuestRight.visible = true;
-        textUserLeft.content = "A用戶"
+        textUserLeft.content = "A用戶";
         groupDeleteQuestLeft.visible = false;
         groupApplyQuestRight.visible = false;
     };
@@ -461,23 +525,75 @@ function initCanvasEvent() {
         groupQuest.visible = false;
         groupInitQuestLeft.visible = true;
         groupInitQuestRight.visible = true;
-        textUserRight.content = "B用戶"
+        textUserRight.content = "B用戶";
         groupDeleteQuestRight.visible = false;
         groupApplyQuestLeft.visible = false;
     };
     //左方按下申請執行任務
     groupApplyQuestLeft.onClick = function(event){
-        textUserLeft.content = "A用戶-執行人"
+        textUserLeft.content = "A用戶-執行人";
         groupDeleteQuestRight.visible = false;
+        groupApplyQuestLeft.visible = false;
         groupAcceptApplicationRight.visible = true;
         groupRejectApplicationRight.visible = true;
+        groupCancelApplicationLeft.visible = true;
     };
     //右方按下申請執行任務
     groupApplyQuestRight.onClick = function(event){
-        textUserRight.content = "B用戶-執行人"
+        textUserRight.content = "B用戶-執行人";
         groupDeleteQuestLeft.visible = false;
+        groupApplyQuestRight.visible = false;
         groupAcceptApplicationLeft.visible = true;
         groupRejectApplicationLeft.visible = true;
+        groupCancelApplicationRight.visible = true;
+    };
+    //左方按下接受申請
+    groupAcceptApplicationLeft.onClick = function(event){
+        groupAcceptApplicationLeft.visible = false;
+        groupRejectApplicationLeft.visible = false;
+        groupCancelApplicationRight.visible = false;
+    };
+    //右方按下接受申請
+    groupAcceptApplicationRight.onClick = function(event){
+        groupAcceptApplicationRight.visible = false;
+        groupRejectApplicationRight.visible = false;
+        groupCancelApplicationLeft.visible = false;
+    };
+    //左方按下拒絕申請
+    groupRejectApplicationLeft.onClick = function(event){
+        groupAcceptApplicationLeft.visible = false;
+        groupRejectApplicationLeft.visible = false;
+        textUserRight.content = "B用戶";
+        groupApplyQuestRight.visible = true;
+        groupDeleteQuestLeft.visible = true;
+        groupCancelApplicationRight.visible = false;
+    };
+    //右方按下拒絕申請
+    groupRejectApplicationRight.onClick = function(event){
+        groupAcceptApplicationRight.visible = false;
+        groupRejectApplicationRight.visible = false;
+        textUserLeft.content = "A用戶";
+        groupApplyQuestLeft.visible = true;
+        groupDeleteQuestRight.visible = true;
+        groupCancelApplicationLeft.visible = false;
+    };
+    //左方按下取消申請
+    groupCancelApplicationLeft.onClick = function(event){
+        groupCancelApplicationLeft.visible = false;
+        groupAcceptApplicationRight.visible = false;
+        groupRejectApplicationRight.visible = false;
+        textUserLeft.content = "A用戶";
+        groupApplyQuestLeft.visible = true;
+        groupDeleteQuestRight.visible = true;
+    };
+    //右方按下取消申請
+    groupCancelApplicationRight.onClick = function(event){
+        groupCancelApplicationRight.visible = false;
+        groupAcceptApplicationLeft.visible = false;
+        groupRejectApplicationLeft.visible = false;
+        textUserRight.content = "B用戶";
+        groupApplyQuestRight.visible = true;
+        groupDeleteQuestLeft.visible = true;
     };
 };
 
