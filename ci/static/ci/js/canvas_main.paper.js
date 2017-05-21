@@ -19,9 +19,19 @@ delete -- "new" -- apply --> "matching" -- accept --> "processing"
 $(document).ready(initCanvasMain);
 
 //全域變數
+//用戶
 var textUserLeft = null;
 var textUserRight = null;
+//任務
 var groupQuest = null;
+var textQuestState = null;
+var rasterQuestNew = null;
+var rasterQuestMatching = null;
+var rasterQuestProcessing = null;
+var rasterQuestComplete = null;
+var rasterQuestIncomplete = null;
+var rasterQuestEndSuccess = null;
+var rasterQuestEndFailure = null;
 //發起任務
 var groupInitQuestLeft = null;
 var groupInitQuestRight = null;
@@ -86,34 +96,39 @@ function initCanvasItemObject() {
     
     //用戶文字
     textUserLeft = new PointText({
-        point: [view.size.width/4, 20],
+        point: [view.size.width/4, 100],
         justification: "center",
         content: "A用戶",
         fillColor: "black",
         fontFamily: "sans-serif",
         fontWeight: "normal",
-        fontSize: 18
+        fontSize: 28
     });
     textUserRight = new PointText({
-        point: [view.size.width/4, 20],
+        point: [view.size.width/4, 100],
         justification: "center",
         content: "B用戶",
         fillColor: "black",
         fontFamily: "sans-serif",
         fontWeight: "normal",
-        fontSize: 18
+        fontSize: 28
     });
-    
+    //用戶圖示
+    rasterUserLeft = new Raster("iconUser");
+    rasterUserLeft.position = [100, 100];
+    rasterUserRight = new Raster("iconUser");
+    rasterUserRight.position = [view.size.width/2 - 100, 100];
     //任務外框
     circleQuest = new Path.Circle({
         center: view.center,
         radius: view.size.height/4,
         strokeColor: "black",
-        fillColor: "gold",
+        fillColor: "lightgoldenrodyellow",
         strokeWidth: 2,
     });
+    
     //任務文字
-    textQuest = new PointText({
+    textQuestTitle = new PointText({
         point: view.center-[0, view.size.height/4-20],
         justification: "center",
         content: "任務",
@@ -122,20 +137,29 @@ function initCanvasItemObject() {
         fontWeight: "normal",
         fontSize: 18
     });
+    textQuestState = new PointText({
+        point: view.center+[0, view.size.height/4-20],
+        justification: "center",
+        content: "",
+        fillColor: "black",
+        fontFamily: "sans-serif",
+        fontWeight: "normal",
+        fontSize: 18
+    });
     
     //群組
     groupUserLeft = new Group({
-        children: [rectUserLeft, textUserLeft],
+        children: [rectUserLeft, textUserLeft, rasterUserLeft],
         position: [view.size.width*1/4, view.size.height/2],
         visible: true,
     });
     groupUserRight = new Group({
-        children: [rectUserRight, textUserRight],
+        children: [rectUserRight, textUserRight, rasterUserRight],
         position: [view.size.width*3/4, view.size.height/2],
         visible: true,
     });
     groupQuest = new Group({
-        children: [circleQuest, textQuest],
+        children: [circleQuest, textQuestTitle, textQuestState],
         position: view.center,
         visible: false,
     });
@@ -174,6 +198,28 @@ function initCanvasItemObject() {
     groupQuestUnreachableRight = buildGroupButtonItem("任務已失敗", [view.size.width*3/4, view.size.height/2], false);
     //重置 按鈕
     groupReset = buildGroupButtonItem("重置", [view.size.width*1/2, view.size.height-50], false);
+    //任務圖示
+    rasterQuestNew = new Raster("iconQuestStateNew");
+    rasterQuestNew.position = view.center;
+    rasterQuestNew.visible = false;
+    rasterQuestMatching = new Raster("iconQuestStateMatching");
+    rasterQuestMatching.position = view.center;
+    rasterQuestMatching.visible = false;
+    rasterQuestProcessing = new Raster("iconQuestStateProcessing");
+    rasterQuestProcessing.position = view.center;
+    rasterQuestProcessing.visible = false;
+    rasterQuestComplete = new Raster("iconQuestStateComplete");
+    rasterQuestComplete.position = view.center;
+    rasterQuestComplete.visible = false;
+    rasterQuestIncomplete = new Raster("iconQuestStateIncomplete");
+    rasterQuestIncomplete.position = view.center;
+    rasterQuestIncomplete.visible = false;
+    rasterQuestEndSuccess = new Raster("iconQuestStateEndSuccess");
+    rasterQuestEndSuccess.position = view.center;
+    rasterQuestEndSuccess.visible = false;
+    rasterQuestEndFailure = new Raster("iconQuestStateEndFailure");
+    rasterQuestEndFailure.position = view.center;
+    rasterQuestEndFailure.visible = false;
 };
 
 //事件
@@ -186,6 +232,8 @@ function initCanvasEvent() {
         textUserLeft.content = "發起人-A用戶";
         groupDeleteQuestLeft.visible = true;
         groupApplyQuestRight.visible = true;
+        rasterQuestNew.visible = true;
+        textQuestState.content = "尚無人申請";
     };
     //右方按下發起任務
     groupInitQuestRight.onClick = function(event){
@@ -195,6 +243,8 @@ function initCanvasEvent() {
         textUserRight.content = "發起人-B用戶";
         groupDeleteQuestRight.visible = true;
         groupApplyQuestLeft.visible = true;
+        rasterQuestNew.visible = true;
+        textQuestState.content = "尚無人申請";
     };
     //左方按下刪除任務
     groupDeleteQuestLeft.onClick = function(event){
@@ -204,6 +254,8 @@ function initCanvasEvent() {
         textUserLeft.content = "A用戶";
         groupDeleteQuestLeft.visible = false;
         groupApplyQuestRight.visible = false;
+        rasterQuestNew.visible = false;
+        textQuestState.content = "";
     };
     //右方按下刪除任務
     groupDeleteQuestRight.onClick = function(event){
@@ -213,6 +265,8 @@ function initCanvasEvent() {
         textUserRight.content = "B用戶";
         groupDeleteQuestRight.visible = false;
         groupApplyQuestLeft.visible = false;
+        rasterQuestNew.visible = false;
+        textQuestState.content = "";
     };
     //左方按下申請執行任務
     groupApplyQuestLeft.onClick = function(event){
@@ -222,6 +276,9 @@ function initCanvasEvent() {
         groupAcceptApplicationRight.visible = true;
         groupRejectApplicationRight.visible = true;
         groupCancelApplicationLeft.visible = true;
+        rasterQuestNew.visible = false;
+        rasterQuestMatching.visible = true;
+        textQuestState.content = "配對中";
     };
     //右方按下申請執行任務
     groupApplyQuestRight.onClick = function(event){
@@ -231,6 +288,9 @@ function initCanvasEvent() {
         groupAcceptApplicationLeft.visible = true;
         groupRejectApplicationLeft.visible = true;
         groupCancelApplicationRight.visible = true;
+        rasterQuestNew.visible = false;
+        rasterQuestMatching.visible = true;
+        textQuestState.content = "配對中";
     };
     //左方按下拒絕申請
     groupRejectApplicationLeft.onClick = function(event){
@@ -240,6 +300,9 @@ function initCanvasEvent() {
         groupApplyQuestRight.visible = true;
         groupDeleteQuestLeft.visible = true;
         groupCancelApplicationRight.visible = false;
+        rasterQuestNew.visible = true;
+        rasterQuestMatching.visible = false;
+        textQuestState.content = "尚無人申請";
     };
     //右方按下拒絕申請
     groupRejectApplicationRight.onClick = function(event){
@@ -249,6 +312,9 @@ function initCanvasEvent() {
         groupApplyQuestLeft.visible = true;
         groupDeleteQuestRight.visible = true;
         groupCancelApplicationLeft.visible = false;
+        rasterQuestNew.visible = true;
+        rasterQuestMatching.visible = false;
+        textQuestState.content = "尚無人申請";
     };
     //左方按下取消申請
     groupCancelApplicationLeft.onClick = function(event){
@@ -258,6 +324,9 @@ function initCanvasEvent() {
         textUserLeft.content = "A用戶";
         groupApplyQuestLeft.visible = true;
         groupDeleteQuestRight.visible = true;
+        rasterQuestNew.visible = true;
+        rasterQuestMatching.visible = false;
+        textQuestState.content = "尚無人申請";
     };
     //右方按下取消申請
     groupCancelApplicationRight.onClick = function(event){
@@ -267,6 +336,9 @@ function initCanvasEvent() {
         textUserRight.content = "B用戶";
         groupApplyQuestRight.visible = true;
         groupDeleteQuestLeft.visible = true;
+        rasterQuestNew.visible = true;
+        rasterQuestMatching.visible = false;
+        textQuestState.content = "尚無人申請";
     };
     //左方按下接受申請
     groupAcceptApplicationLeft.onClick = function(event){
@@ -276,6 +348,9 @@ function initCanvasEvent() {
         groupAbandonQuestRight.visible = true;
         groupQuestReachedLeft.visible = true;
         groupTerminateQuestLeft.visible = true;
+        rasterQuestMatching.visible = false;
+        rasterQuestProcessing.visible = true;
+        textQuestState.content = "正在執行中";
     };
     //右方按下接受申請
     groupAcceptApplicationRight.onClick = function(event){
@@ -285,6 +360,9 @@ function initCanvasEvent() {
         groupAbandonQuestLeft.visible = true;
         groupQuestReachedRight.visible = true;
         groupTerminateQuestRight.visible = true;
+        rasterQuestMatching.visible = false;
+        rasterQuestProcessing.visible = true;
+        textQuestState.content = "正在執行中";
     };
     //左方按下放棄任務
     groupAbandonQuestLeft.onClick = function(event){
@@ -294,6 +372,9 @@ function initCanvasEvent() {
         textUserLeft.content = "A用戶";
         groupApplyQuestLeft.visible = true;
         groupDeleteQuestRight.visible = true;
+        rasterQuestProcessing.visible = false;
+        rasterQuestNew.visible = true;
+        textQuestState.content = "尚無人申請";
     };
     //右方按下放棄任務
     groupAbandonQuestRight.onClick = function(event){
@@ -303,6 +384,9 @@ function initCanvasEvent() {
         textUserRight.content = "B用戶";
         groupApplyQuestRight.visible = true;
         groupDeleteQuestLeft.visible = true;
+        rasterQuestProcessing.visible = false;
+        rasterQuestNew.visible = true;
+        textQuestState.content = "尚無人申請";
     };
     
     //左方按下成功達成目標
@@ -311,6 +395,9 @@ function initCanvasEvent() {
         groupTerminateQuestLeft.visible = false;
         groupAbandonQuestRight.visible = false;
         groupAccomplishQuestRight.visible = true;
+        rasterQuestProcessing.visible = false;
+        rasterQuestComplete.visible = true;
+        textQuestState.content = "目標達成";
     };
     //右方按下成功達成目標
     groupQuestReachedRight.onClick = function(event){
@@ -318,6 +405,9 @@ function initCanvasEvent() {
         groupTerminateQuestRight.visible = false;
         groupAbandonQuestLeft.visible = false;
         groupAccomplishQuestLeft.visible = true;
+        rasterQuestProcessing.visible = false;
+        rasterQuestComplete.visible = true;
+        textQuestState.content = "目標達成";
     };
     //左方按下終結任務
     groupTerminateQuestLeft.onClick = function(event){
@@ -325,6 +415,9 @@ function initCanvasEvent() {
         groupQuestReachedLeft.visible = false;
         groupAbandonQuestRight.visible = false;
         groupQuestUnreachableRight.visible = true;
+        rasterQuestProcessing.visible = false;
+        rasterQuestIncomplete.visible = true;
+        textQuestState.content = "目標已無法達成";
     };
     //右方按下終結任務
     groupTerminateQuestRight.onClick = function(event){
@@ -332,26 +425,41 @@ function initCanvasEvent() {
         groupQuestReachedRight.visible = false;
         groupAbandonQuestLeft.visible = false;
         groupQuestUnreachableLeft.visible = true;
+        rasterQuestProcessing.visible = false;
+        rasterQuestIncomplete.visible = true;
+        textQuestState.content = "目標已無法達成";
     };
     //左方按下完成任務
     groupAccomplishQuestLeft.onClick = function(event){
         groupAccomplishQuestLeft.visible = false;
         groupReset.visible = true;
+        rasterQuestComplete.visible = false;
+        rasterQuestEndSuccess.visible = true;
+        textQuestState.content = "已終結-成功";
     };
     //右方按下完成任務
     groupAccomplishQuestRight.onClick = function(event){
         groupAccomplishQuestRight.visible = false;
         groupReset.visible = true;
+        rasterQuestComplete.visible = false;
+        rasterQuestEndSuccess.visible = true;
+        textQuestState.content = "已終結-成功";
     };
     //左方按下任務已失敗
     groupQuestUnreachableLeft.onClick = function(event){
         groupQuestUnreachableLeft.visible = false;
         groupReset.visible = true;
+        rasterQuestIncomplete.visible = false;
+        rasterQuestEndFailure.visible = true;
+        textQuestState.content = "已終結-失敗";
     };
     //右方按下任務已失敗
     groupQuestUnreachableRight.onClick = function(event){
         groupQuestUnreachableRight.visible = false;
         groupReset.visible = true;
+        rasterQuestIncomplete.visible = false;
+        rasterQuestEndFailure.visible = true;
+        textQuestState.content = "已終結-失敗";
     };
     //按下重置
     groupReset.onClick = function(event){
@@ -361,6 +469,9 @@ function initCanvasEvent() {
         groupInitQuestRight.visible = true;
         textUserLeft.content = "A用戶";
         textUserRight.content = "B用戶";
+        rasterQuestEndSuccess.visible = false;
+        rasterQuestEndFailure.visible = false;
+        textQuestState.content = "";
     };
 };
 

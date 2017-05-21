@@ -11,3 +11,7 @@ canvas{
     border-color: lavender;
     width: 80%;
 }
+
+.hiddenIcon{
+    display:none;
+}
