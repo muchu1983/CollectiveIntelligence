@@ -335,7 +335,7 @@ function initCanvasEvent() {
     //按贊按鈕 滑鼠事件
     groupThumbsupLeft.onMouseEnter = function(event){
         rectThumbsupLeft.fillColor = "red";
-        textTooltipInfo.content = "按贊會增加任務的 獎勵PV";
+        textTooltipInfo.content = "按贊會增加 任務獎勵PV";
         groupTooltipInfo.visible = true;
     };
     groupThumbsupLeft.onMouseLeave = function(event){
@@ -349,7 +349,7 @@ function initCanvasEvent() {
     };
     groupThumbsupRight.onMouseEnter = function(event){
         rectThumbsupRight.fillColor = "red";
-        textTooltipInfo.content = "按贊會增加任務的 獎勵PV";
+        textTooltipInfo.content = "按贊會增加 任務獎勵PV";
         groupTooltipInfo.visible = true;
     };
     groupThumbsupRight.onMouseLeave = function(event){
