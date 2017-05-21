@@ -76,6 +76,9 @@ var groupAccomplishQuestRight = null;
 //任務已失敗
 var groupQuestUnreachableLeft = null;
 var groupQuestUnreachableRight = null;
+//提示資訊文字
+var textTooltipInfo = null;
+var groupTooltipInfo = null;
 //重置
 var groupReset = null;
 
@@ -186,7 +189,25 @@ function initCanvasItemObject() {
         fontWeight: "normal",
         fontSize: 18
     });
-    
+    //提示資訊外框
+    rectTooltipInfo = new Path.Rectangle({
+        point: [0, 0],
+        size: [view.size.width/2,30],
+        radius: 10,
+        strokeColor: "black",
+        fillColor: "orange",
+        strokeWidth: 2,
+    });
+    //提示資訊文字
+    textTooltipInfo = new PointText({
+        point: [rectTooltipInfo.bounds.width/2, rectTooltipInfo.bounds.height/2+3],
+        justification: "center",
+        content: "infomation",
+        fillColor: "black",
+        fontFamily: "MingLiU",
+        fontWeight: "normal",
+        fontSize: 20
+    });
     //左按贊按鈕
     rectThumbsupLeft = new Path.Rectangle({
         point: [0, 0],
@@ -215,6 +236,7 @@ function initCanvasItemObject() {
     rasterThumbsupRight.visible = true;
     
     /* 群組 */
+    //用戶
     groupUserLeft = new Group({
         children: [rectUserLeft, textUserLeft, rasterUserLeft, textUserPVLeft],
         position: [view.size.width*1/4, view.size.height/2],
@@ -225,13 +247,19 @@ function initCanvasItemObject() {
         position: [view.size.width*3/4, view.size.height/2],
         visible: true,
     });
+    //任務
     groupQuest = new Group({
         children: [circleQuest, textQuestTitle, textQuestRewardPV, textQuestState],
         position: view.center,
         visible: false,
     });
+    //提示資訊
+    groupTooltipInfo = new Group({
+        children: [rectTooltipInfo, textTooltipInfo],
+        position: view.bounds.bottomCenter+[0, -50],
+        visible: false,
+    });
     //按贊按鈕
-    
     groupThumbsupLeft = new Group({
         children: [rectThumbsupLeft, rasterThumbsupLeft],
         position: [view.size.width*1/4, view.size.height/2+50],
@@ -244,40 +272,40 @@ function initCanvasItemObject() {
     });
     
     //發起任務 按鈕
-    groupInitQuestLeft = buildGroupButtonItem("發起任務", [view.size.width*1/4, view.size.height/2], true);
-    groupInitQuestRight = buildGroupButtonItem("發起任務", [view.size.width*3/4, view.size.height/2], true);
+    groupInitQuestLeft = buildGroupButtonItem("發起任務", [view.size.width*1/4, view.size.height/2], true, null);
+    groupInitQuestRight = buildGroupButtonItem("發起任務", [view.size.width*3/4, view.size.height/2], true, null);
     //刪除任務 按鈕
-    groupDeleteQuestLeft = buildGroupButtonItem("刪除任務", [view.size.width*1/4, view.size.height/2], false);
-    groupDeleteQuestRight = buildGroupButtonItem("刪除任務", [view.size.width*3/4, view.size.height/2], false);
+    groupDeleteQuestLeft = buildGroupButtonItem("刪除任務", [view.size.width*1/4, view.size.height/2], false, null);
+    groupDeleteQuestRight = buildGroupButtonItem("刪除任務", [view.size.width*3/4, view.size.height/2], false, null);
     //申請執行任務 按鈕
-    groupApplyQuestLeft = buildGroupButtonItem("申請執行任務", [view.size.width*1/4, view.size.height/2], false);
-    groupApplyQuestRight = buildGroupButtonItem("申請執行任務", [view.size.width*3/4, view.size.height/2], false);
+    groupApplyQuestLeft = buildGroupButtonItem("申請執行任務", [view.size.width*1/4, view.size.height/2], false, null);
+    groupApplyQuestRight = buildGroupButtonItem("申請執行任務", [view.size.width*3/4, view.size.height/2], false, null);
     //接受申請 按鈕
-    groupAcceptApplicationLeft = buildGroupButtonItem("接受申請", [view.size.width*1/4, view.size.height/2], false);
-    groupAcceptApplicationRight = buildGroupButtonItem("接受申請", [view.size.width*3/4, view.size.height/2], false);
+    groupAcceptApplicationLeft = buildGroupButtonItem("接受申請", [view.size.width*1/4, view.size.height/2], false, null);
+    groupAcceptApplicationRight = buildGroupButtonItem("接受申請", [view.size.width*3/4, view.size.height/2], false, null);
     //拒絕申請 按鈕
-    groupRejectApplicationLeft = buildGroupButtonItem("拒絕申請", [view.size.width*1/4, view.size.height/2+50], false);
-    groupRejectApplicationRight = buildGroupButtonItem("拒絕申請", [view.size.width*3/4, view.size.height/2+50], false);
+    groupRejectApplicationLeft = buildGroupButtonItem("拒絕申請", [view.size.width*1/4, view.size.height/2+50], false, null);
+    groupRejectApplicationRight = buildGroupButtonItem("拒絕申請", [view.size.width*3/4, view.size.height/2+50], false, null);
     //取消申請 按鈕
-    groupCancelApplicationLeft = buildGroupButtonItem("取消申請", [view.size.width*1/4, view.size.height/2], false);
-    groupCancelApplicationRight = buildGroupButtonItem("取消申請", [view.size.width*3/4, view.size.height/2], false);
+    groupCancelApplicationLeft = buildGroupButtonItem("取消申請", [view.size.width*1/4, view.size.height/2], false, null);
+    groupCancelApplicationRight = buildGroupButtonItem("取消申請", [view.size.width*3/4, view.size.height/2], false, null);
     //成功達成目標 按鈕
-    groupQuestReachedLeft = buildGroupButtonItem("成功達成目標", [view.size.width*1/4, view.size.height/2], false);
-    groupQuestReachedRight = buildGroupButtonItem("成功達成目標", [view.size.width*3/4, view.size.height/2], false);
+    groupQuestReachedLeft = buildGroupButtonItem("成功達成目標", [view.size.width*1/4, view.size.height/2], false, null);
+    groupQuestReachedRight = buildGroupButtonItem("成功達成目標", [view.size.width*3/4, view.size.height/2], false, null);
     //終結任務 按鈕
-    groupTerminateQuestLeft = buildGroupButtonItem("終結任務", [view.size.width*1/4, view.size.height/2+50], false);
-    groupTerminateQuestRight = buildGroupButtonItem("終結任務", [view.size.width*3/4, view.size.height/2+50], false);
+    groupTerminateQuestLeft = buildGroupButtonItem("終結任務", [view.size.width*1/4, view.size.height/2+50], false, "發起人將扣除 1/2 任務獎勵PV");
+    groupTerminateQuestRight = buildGroupButtonItem("終結任務", [view.size.width*3/4, view.size.height/2+50], false, "發起人將扣除 1/2 任務獎勵PV");
     //放棄任務 按鈕
-    groupAbandonQuestLeft = buildGroupButtonItem("放棄任務", [view.size.width*1/4, view.size.height/2], false);
-    groupAbandonQuestRight = buildGroupButtonItem("放棄任務", [view.size.width*3/4, view.size.height/2], false);
+    groupAbandonQuestLeft = buildGroupButtonItem("放棄任務", [view.size.width*1/4, view.size.height/2], false, "執行人將扣除 1/2 任務獎勵PV");
+    groupAbandonQuestRight = buildGroupButtonItem("放棄任務", [view.size.width*3/4, view.size.height/2], false, "執行人將扣除 1/2 任務獎勵PV");
     //完成任務 按鈕
-    groupAccomplishQuestLeft = buildGroupButtonItem("完成任務", [view.size.width*1/4, view.size.height/2], false);
-    groupAccomplishQuestRight = buildGroupButtonItem("完成任務", [view.size.width*3/4, view.size.height/2], false);
+    groupAccomplishQuestLeft = buildGroupButtonItem("完成任務", [view.size.width*1/4, view.size.height/2], false, "執行人將獲得 任務獎勵PV");
+    groupAccomplishQuestRight = buildGroupButtonItem("完成任務", [view.size.width*3/4, view.size.height/2], false, "執行人將獲得 任務獎勵PV");
     //任務已失敗 按鈕
-    groupQuestUnreachableLeft = buildGroupButtonItem("任務已失敗", [view.size.width*1/4, view.size.height/2], false);
-    groupQuestUnreachableRight = buildGroupButtonItem("任務已失敗", [view.size.width*3/4, view.size.height/2], false);
+    groupQuestUnreachableLeft = buildGroupButtonItem("任務已失敗", [view.size.width*1/4, view.size.height/2], false, null);
+    groupQuestUnreachableRight = buildGroupButtonItem("任務已失敗", [view.size.width*3/4, view.size.height/2], false, null);
     //重置 按鈕
-    groupReset = buildGroupButtonItem("重置", [view.size.width*1/2, view.size.height-50], false);
+    groupReset = buildGroupButtonItem("重置", [view.size.width*1/2, view.size.height-50], false, null);
     /* 任務圖示 */
     rasterQuestNew = new Raster("iconQuestStateNew");
     rasterQuestNew.position = view.center;
@@ -307,9 +335,13 @@ function initCanvasEvent() {
     //按贊按鈕 滑鼠事件
     groupThumbsupLeft.onMouseEnter = function(event){
         rectThumbsupLeft.fillColor = "red";
+        textTooltipInfo.content = "按贊會增加任務獎勵PV";
+        groupTooltipInfo.visible = true;
     };
     groupThumbsupLeft.onMouseLeave = function(event){
         rectThumbsupLeft.fillColor = "pink";
+        textTooltipInfo.content = "infomation";
+        groupTooltipInfo.visible = false;
     };
     groupThumbsupLeft.onClick = function(event){
         intQuestRewardPV = intQuestRewardPV+10;
@@ -317,9 +349,13 @@ function initCanvasEvent() {
     };
     groupThumbsupRight.onMouseEnter = function(event){
         rectThumbsupRight.fillColor = "red";
+        textTooltipInfo.content = "按贊會增加任務獎勵PV";
+        groupTooltipInfo.visible = true;
     };
     groupThumbsupRight.onMouseLeave = function(event){
         rectThumbsupRight.fillColor = "pink";
+        textTooltipInfo.content = "infomation";
+        groupTooltipInfo.visible = false;
     };
     groupThumbsupRight.onClick = function(event){
         intQuestRewardPV = intQuestRewardPV+10;
@@ -617,24 +653,32 @@ function initCanvasEvent() {
 };
 
 //滑鼠進入按鈕
-function onMouseEnterButtonItem(bgItem, textItem){
+function onMouseEnterButtonItem(bgItem, textItem, strTooltip){
     function wrapper(event){
         bgItem.fillColor = "red";
         textItem.fillColor = "white";
+        if(strTooltip != null){
+            textTooltipInfo.content = strTooltip;
+            groupTooltipInfo.visible = true;
+        }
     }
     return wrapper;
 };
 //滑鼠離開按鈕
-function onMouseLeaveButtonItem(bgItem, textItem){
+function onMouseLeaveButtonItem(bgItem, textItem, strTooltip){
     function wrapper(event){
         bgItem.fillColor = "pink";
         textItem.fillColor = "black";
+        if(strTooltip != null){
+            textTooltipInfo.content = "infomation";
+            groupTooltipInfo.visible = false;
+        }
     }
     return wrapper;
 };
 
 //建構按鈕
-function buildGroupButtonItem(strBtnContent, pointPosition, isVisible){
+function buildGroupButtonItem(strBtnContent, pointPosition, isVisible, strTooltip){
     //外框
     rectBtnItem = new Path.Rectangle({
         point: [0, 0],
@@ -661,7 +705,7 @@ function buildGroupButtonItem(strBtnContent, pointPosition, isVisible){
         visible: isVisible,
     });
     //事件
-    groupBtnItem.onMouseEnter = onMouseEnterButtonItem(rectBtnItem, textBtnItem);
-    groupBtnItem.onMouseLeave = onMouseLeaveButtonItem(rectBtnItem, textBtnItem);
+    groupBtnItem.onMouseEnter = onMouseEnterButtonItem(rectBtnItem, textBtnItem, strTooltip);
+    groupBtnItem.onMouseLeave = onMouseLeaveButtonItem(rectBtnItem, textBtnItem, strTooltip);
     return groupBtnItem;
 };
