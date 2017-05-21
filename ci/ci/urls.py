@@ -50,6 +50,7 @@ urlpatterns = [
     url(r"^core/clearLeader/$", core_views.clearLeader),
     url(r"^core/retrieveLstDicFollower/$", core_views.retrieveLstDicFollower),
     #首頁
+    url(r"^$", core_views.renderMainPage),
     url(r"^core/main/$", core_views.renderMainPage),
     #聊天
     url(r"^chat/channel/(?P<strCIUserUID>[0-9a-f-]{36})/$", chat_views.channel),
