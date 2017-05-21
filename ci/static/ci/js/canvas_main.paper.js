@@ -40,6 +40,23 @@ var groupRejectApplicationRight = null;
 //取消申請
 var groupCancelApplicationLeft = null;
 var groupCancelApplicationRight = null;
+//成功達成目標 
+var groupQuestReachedLeft = null;
+var groupQuestReachedRight = null;
+//終結任務
+var groupTerminateQuestLeft = null;
+var groupTerminateQuestRight = null;
+//放棄任務
+var groupAbandonQuestLeft = null;
+var groupAbandonQuestRight = null;
+//完成任務
+var groupAccomplishQuestLeft = null;
+var groupAccomplishQuestRight = null;
+//任務已失敗
+var groupQuestUnreachableLeft = null;
+var groupQuestUnreachableRight = null;
+//重置
+var groupReset = null;
 
 //初始化 #canvas_main 畫布
 function initCanvasMain() {
@@ -140,6 +157,23 @@ function initCanvasItemObject() {
     //取消申請 按鈕
     groupCancelApplicationLeft = buildGroupButtonItem("取消申請", [view.size.width*1/4, view.size.height/2], false);
     groupCancelApplicationRight = buildGroupButtonItem("取消申請", [view.size.width*3/4, view.size.height/2], false);
+    //成功達成目標 按鈕
+    groupQuestReachedLeft = buildGroupButtonItem("成功達成目標", [view.size.width*1/4, view.size.height/2], false);
+    groupQuestReachedRight = buildGroupButtonItem("成功達成目標", [view.size.width*3/4, view.size.height/2], false);
+    //終結任務 按鈕
+    groupTerminateQuestLeft = buildGroupButtonItem("終結任務", [view.size.width*1/4, view.size.height/2+50], false);
+    groupTerminateQuestRight = buildGroupButtonItem("終結任務", [view.size.width*3/4, view.size.height/2+50], false);
+    //放棄任務 按鈕
+    groupAbandonQuestLeft = buildGroupButtonItem("放棄任務", [view.size.width*1/4, view.size.height/2], false);
+    groupAbandonQuestRight = buildGroupButtonItem("放棄任務", [view.size.width*3/4, view.size.height/2], false);
+    //完成任務 按鈕
+    groupAccomplishQuestLeft = buildGroupButtonItem("完成任務", [view.size.width*1/4, view.size.height/2], false);
+    groupAccomplishQuestRight = buildGroupButtonItem("完成任務", [view.size.width*3/4, view.size.height/2], false);
+    //任務已失敗 按鈕
+    groupQuestUnreachableLeft = buildGroupButtonItem("任務已失敗", [view.size.width*1/4, view.size.height/2], false);
+    groupQuestUnreachableRight = buildGroupButtonItem("任務已失敗", [view.size.width*3/4, view.size.height/2], false);
+    //重置 按鈕
+    groupReset = buildGroupButtonItem("重置", [view.size.width*1/2, view.size.height-50], false);
 };
 
 //事件
@@ -198,18 +232,6 @@ function initCanvasEvent() {
         groupRejectApplicationLeft.visible = true;
         groupCancelApplicationRight.visible = true;
     };
-    //左方按下接受申請
-    groupAcceptApplicationLeft.onClick = function(event){
-        groupAcceptApplicationLeft.visible = false;
-        groupRejectApplicationLeft.visible = false;
-        groupCancelApplicationRight.visible = false;
-    };
-    //右方按下接受申請
-    groupAcceptApplicationRight.onClick = function(event){
-        groupAcceptApplicationRight.visible = false;
-        groupRejectApplicationRight.visible = false;
-        groupCancelApplicationLeft.visible = false;
-    };
     //左方按下拒絕申請
     groupRejectApplicationLeft.onClick = function(event){
         groupAcceptApplicationLeft.visible = false;
@@ -245,6 +267,100 @@ function initCanvasEvent() {
         textUserRight.content = "B用戶";
         groupApplyQuestRight.visible = true;
         groupDeleteQuestLeft.visible = true;
+    };
+    //左方按下接受申請
+    groupAcceptApplicationLeft.onClick = function(event){
+        groupAcceptApplicationLeft.visible = false;
+        groupRejectApplicationLeft.visible = false;
+        groupCancelApplicationRight.visible = false;
+        groupAbandonQuestRight.visible = true;
+        groupQuestReachedLeft.visible = true;
+        groupTerminateQuestLeft.visible = true;
+    };
+    //右方按下接受申請
+    groupAcceptApplicationRight.onClick = function(event){
+        groupAcceptApplicationRight.visible = false;
+        groupRejectApplicationRight.visible = false;
+        groupCancelApplicationLeft.visible = false;
+        groupAbandonQuestLeft.visible = true;
+        groupQuestReachedRight.visible = true;
+        groupTerminateQuestRight.visible = true;
+    };
+    //左方按下放棄任務
+    groupAbandonQuestLeft.onClick = function(event){
+        groupAbandonQuestLeft.visible = false;
+        groupQuestReachedRight.visible = false;
+        groupTerminateQuestRight.visible = false;
+        textUserLeft.content = "A用戶";
+        groupApplyQuestLeft.visible = true;
+        groupDeleteQuestRight.visible = true;
+    };
+    //右方按下放棄任務
+    groupAbandonQuestRight.onClick = function(event){
+        groupAbandonQuestRight.visible = false;
+        groupQuestReachedLeft.visible = false;
+        groupTerminateQuestLeft.visible = false;
+        textUserRight.content = "B用戶";
+        groupApplyQuestRight.visible = true;
+        groupDeleteQuestLeft.visible = true;
+    };
+    
+    //左方按下成功達成目標
+    groupQuestReachedLeft.onClick = function(event){
+        groupQuestReachedLeft.visible = false;
+        groupTerminateQuestLeft.visible = false;
+        groupAbandonQuestRight.visible = false;
+        groupAccomplishQuestRight.visible = true;
+    };
+    //右方按下成功達成目標
+    groupQuestReachedRight.onClick = function(event){
+        groupQuestReachedRight.visible = false;
+        groupTerminateQuestRight.visible = false;
+        groupAbandonQuestLeft.visible = false;
+        groupAccomplishQuestLeft.visible = true;
+    };
+    //左方按下終結任務
+    groupTerminateQuestLeft.onClick = function(event){
+        groupTerminateQuestLeft.visible = false;
+        groupQuestReachedLeft.visible = false;
+        groupAbandonQuestRight.visible = false;
+        groupQuestUnreachableRight.visible = true;
+    };
+    //右方按下終結任務
+    groupTerminateQuestRight.onClick = function(event){
+        groupTerminateQuestRight.visible = false;
+        groupQuestReachedRight.visible = false;
+        groupAbandonQuestLeft.visible = false;
+        groupQuestUnreachableLeft.visible = true;
+    };
+    //左方按下完成任務
+    groupAccomplishQuestLeft.onClick = function(event){
+        groupAccomplishQuestLeft.visible = false;
+        groupReset.visible = true;
+    };
+    //右方按下完成任務
+    groupAccomplishQuestRight.onClick = function(event){
+        groupAccomplishQuestRight.visible = false;
+        groupReset.visible = true;
+    };
+    //左方按下任務已失敗
+    groupQuestUnreachableLeft.onClick = function(event){
+        groupQuestUnreachableLeft.visible = false;
+        groupReset.visible = true;
+    };
+    //右方按下任務已失敗
+    groupQuestUnreachableRight.onClick = function(event){
+        groupQuestUnreachableRight.visible = false;
+        groupReset.visible = true;
+    };
+    //按下重置
+    groupReset.onClick = function(event){
+        groupReset.visible = false;
+        groupQuest.visible = false;
+        groupInitQuestLeft.visible = true;
+        groupInitQuestRight.visible = true;
+        textUserLeft.content = "A用戶";
+        textUserRight.content = "B用戶";
     };
 };
 
