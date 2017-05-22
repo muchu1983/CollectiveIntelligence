@@ -45,6 +45,8 @@ class CIUser(models.Model):
     intPointVolume = models.IntegerField(default=0, null=False)
     #顯示名稱
     strDisplayName = models.CharField(max_length=255, null=True)
+    #是否為 VIP
+    isVIP = models.BooleanField(default=False, null=False)
     #email 驗證 UUID
     strEmailVerificationKey = models.CharField(max_length=36, null=True)
     #email 驗證 過期時間
