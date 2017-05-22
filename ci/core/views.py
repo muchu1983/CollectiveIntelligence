@@ -184,6 +184,10 @@ def searchCIUser(request):
         qsetMatchedCIUser = CIUser.objects.filter(queryObject)
         strSearchResult = "查尋 {strKeyword} 共找到 {intResultCount} 個用戶".format(strKeyword=strKeyword, intResultCount=qsetMatchedCIUser.count())
     else:
+        #比對 isVIP
+        queryObject = Q(isVIP=True)
+        #查尋
+        qsetMatchedCIUser = CIUser.objects.filter(queryObject)
         strSearchResult = "請輸入搜尋字串"
     return render(request, "core/searchCIUser.html", locals())
     

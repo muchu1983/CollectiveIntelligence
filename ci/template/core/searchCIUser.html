@@ -35,6 +35,14 @@
 <ul>
 {% for matchedCIUser in qsetMatchedCIUser %}
     <li class="row">
+        <!-- VIP 稱號 -->
+        <div class="col-xs-1 text-center">
+            {% if matchedCIUser.isVIP %}
+                <img src="/static/ci/img/vip.png" height="50" width="50">
+            {% else %}
+                <img src="/static/ci/img/user.png" height="50" width="50">
+            {% endif %}
+        </div>
         <!-- 用戶頭像 -->
         <div class="col-xs-2 text-center">
             <img src="/{{ matchedCIUser.avatarThumbnail.url }}" height="50" width="50">
