@@ -64,10 +64,3 @@ def createCIUser(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def saveCIUser(sender, instance, **kwargs):
     instance.ciuser.save()
-
-# 已配發的使用者 UID (癈棄 可移除)
-class BeDispatchedUID(models.Model):
-    #UID
-    uuidUID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    #最後更新時間
-    dtLatestUpdateTime = models.DateTimeField(auto_now=True, null=False)

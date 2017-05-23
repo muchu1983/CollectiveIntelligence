@@ -18,6 +18,7 @@ class RegisterUserForm(UserCreationForm):
     captcha = ReCaptchaField(
         attrs={
             "theme": "clean",
+            "lang": "zh-TW"
         }
     )
     
