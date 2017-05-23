@@ -59,20 +59,11 @@
                 //更新頁面
                 var isLiked = jsonResp["isLiked"];
                 if (isLiked){
-                    //將贊數 +1
-                    $("#strLikedCount").html(parseInt($.trim($("#strLikedCount").html())) + 1);
-                    //將獎勵PV +1
-                    $("#strRewardPV").html(parseInt($.trim($("#strRewardPV").html())) + 1);
-                    //更改 tooltip
-                    $("#btnLikeOrDislikeQuest").attr("title", "取消喜歡");
+                    // TODO
                 } else {
-                    //將贊數 -1
-                    $("#strLikedCount").html(parseInt($.trim($("#strLikedCount").html())) - 1);
-                    //將獎勵PV -1
-                    $("#strRewardPV").html(parseInt($.trim($("#strRewardPV").html())) - 1);
-                    //更改 tooltip
-                    $("#btnLikeOrDislikeQuest").attr("title", "我喜歡");
+                    // TODO
                 }
+                window.location.reload();
             }, "json");
         });
         //申請執行任務 btnApplyQuest

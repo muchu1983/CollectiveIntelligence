@@ -47,17 +47,22 @@ class QuestUtility:
         isLiked = None
         #確認任務狀態
         if questTarget.strState == "new":
+            #設定獎勵調整額度
+            intPVDelta = 10
+            #VIP 加成
+            if questTarget.ciuserInitiator.isVIP:
+                intPVDelta = 2*intPVDelta
             #加入或移出 setLikedCIUser
             if ciuserRequest in questTarget.setLikedCIUser.all():
                 #調整 獎勵 PV
-                questTarget.intRewardPV = questTarget.intRewardPV-1
+                questTarget.intRewardPV = questTarget.intRewardPV-intPVDelta
                 questTarget.save()
                 #移出 ciuser
                 questTarget.setLikedCIUser.remove(ciuserRequest)
                 isLiked = False
             else:
                 #調整 獎勵 PV
-                questTarget.intRewardPV = questTarget.intRewardPV+1
+                questTarget.intRewardPV = questTarget.intRewardPV+intPVDelta
                 questTarget.save()
                 #加入 ciuser
                 questTarget.setLikedCIUser.add(ciuserRequest)
