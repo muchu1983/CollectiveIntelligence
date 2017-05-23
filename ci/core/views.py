@@ -308,3 +308,7 @@ def renderMainPage(request):
         #未登入
         strDisplayName = "未登入"
     return render(request, "core/main.html", {"strDisplayName":strDisplayName})
+    
+#google 網站驗證
+def googleSiteVerification(request):
+    return render(request, "core/google-site-verification/google707bf3bffb973ed1.html", {})
