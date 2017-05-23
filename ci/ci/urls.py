@@ -70,7 +70,7 @@ urlpatterns = [
     url(r"^quest/terminateQuest/$", quest_views.terminateQuest),
     url(r"^quest/accomplishQuest/$", quest_views.accomplishQuest),
     url(r"^quest/questUnreachable/$", quest_views.questUnreachable),
-    #google 網站驗證
+    #網站驗證
     url(r"^google707bf3bffb973ed1.html$", core_views.googleSiteVerification),
-    
+    url(r"^BingSiteAuth.xml$", core_views.bingSiteVerification),
 ]

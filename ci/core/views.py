@@ -312,3 +312,7 @@ def renderMainPage(request):
 #google 網站驗證
 def googleSiteVerification(request):
     return render(request, "core/google-site-verification/google707bf3bffb973ed1.html", {})
+    
+#bing 網站驗證
+def bingSiteVerification(request):
+    return render(request, "core/bing-site-verification/BingSiteAuth.xml", {})
