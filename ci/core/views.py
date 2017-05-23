@@ -97,7 +97,7 @@ def uploadAvatarThumbnail(request):
 def sendEmailVerification(request):
     if request.user.is_authenticated(): #已登入
         #Server domain
-        strServerDomain = "http://www.c8ei10e.com:9487/"
+        strServerDomain = "http://www.c8ei10e.com/"
         #顯示名稱
         strDisplayName = request.user.ciuser.strDisplayName
         #使用者 UID
@@ -113,15 +113,15 @@ def sendEmailVerification(request):
         request.user.save()
         #生成 Email 認證信
         strMsg = (
-            "<div><img src=\"{strServerDomain}static/ci/img/logo.png\" width=\"80\"/></div>"
-            "<h2>Dear {strDisplayName},</h2>"
+            "<div><img src=\"{strServerDomain}static/ci/img/logo.png\" width=\"80\" height=\"80\"></img></div>"
+            "<h2>親愛的冒險者 {strDisplayName},</h2>"
             "<div>"
-                "<p>Welcome to c8ei10e.</p>"
-                "<p>Please click this "
+                "<p>歡迎加入 C8eI10e 平台。</p>"
+                "<p>請點擊這個 "
                     "<a href=\"{strServerDomain}accounts/verifyEmail/?strCIUserUID={strCIUserUID}&strKeyUUID={strKeyUUID}\">"
-                        "link"
+                        "連結(對！就是點我！)"
                     "</a>"
-                " to verify your email.</p>"
+                " 以進行驗證您的 e-mail 信箱。謝謝！</p>"
                 "<p><a href=\"{strServerDomain}\">{strServerDomain}</a></p>"
             "</div>".format(
                 strServerDomain=strServerDomain,
