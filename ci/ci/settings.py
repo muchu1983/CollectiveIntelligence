@@ -33,7 +33,10 @@ SECRET_KEY = '7oda8t14i(-hb3^nln)rxnwp+u2gn@v6i3_+@pa8d-$qj)adg6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["114.33.151.48"]
+ALLOWED_HOSTS = [
+    "www.c8ei10e.com", "114.33.151.48",
+    "localhost", "127.0.0.1"
+]
 
 
 # Application definition
@@ -138,9 +141,6 @@ CHANNEL_LAYERS = {
         "ROUTING": "ci.routing.channel_routing",
     },
 }
-
-#allowed hosts
-ALLOWED_HOSTS = ["www.c8ei10e.com", "localhost", "127.0.0.1"]
 
 #redirect after login
 LOGIN_REDIRECT_URL = "/core/main/"
