@@ -174,6 +174,8 @@ def searchCIUser(request):
     strFormActionUrl = "/core/searchCIUser/"
     #尋找結果字串
     strSearchResult = None
+    #註冊用戶總數
+    intRegisteredCIUser = CIUser.objects.all().count()
     #尋找結果
     qsetMatchedCIUser = None
     if request.method == "POST":
@@ -188,7 +190,7 @@ def searchCIUser(request):
         queryObject = Q(isVIP=True)
         #查尋
         qsetMatchedCIUser = CIUser.objects.filter(queryObject)
-        strSearchResult = "請輸入搜尋字串"
+        strSearchResult = "目前顯示所有 VIP 用戶，請輸入搜尋字串查詢"
     return render(request, "core/searchCIUser.html", locals())
     
 #尋找 CI 領導人
@@ -200,6 +202,8 @@ def searchLeader(request):
     strFormActionUrl = "/core/searchLeader/"
     #尋找結果字串
     strSearchResult = None
+    #註冊用戶總數
+    intRegisteredCIUser = CIUser.objects.all().count()
     #尋找結果
     qsetMatchedCIUser = None
     #團隊操作工具
