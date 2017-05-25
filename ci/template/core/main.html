@@ -12,6 +12,7 @@
 
 <!-- override block_content -->
 {% block block_content %}
+<!-- main.html block_content -->
 <div class="row text-center">
     <canvas id="canvas_quest_state_demo"></canvas>
 </div>
@@ -25,3 +26,29 @@
 <img class="hiddenIcon" id="iconQuestStateEndFailure" src="/static/ci/img/quest-state-demo/remove.png" width="100" height="100">
 <img class="hiddenIcon" id="iconThumbsup" src="/static/ci/img/quest-state-demo/thumbs-up.png" width="100" height="100">
 {% endblock block_content %}
+
+<!-- override block_footer -->
+{% block block_footer %}
+<!-- main.html block_footer -->
+<div class="row text-left">
+    <!-- 填空 -->
+    <div class="col-xs-7"></div>
+    <!-- 註冊用戶總數 -->
+    <h2 class="col-xs-2">{{ intRegisteredCIUser }}</h2>
+    <!-- 發起任務總數 -->
+    <h2 class="col-xs-2">{{ intInitializedCIQuest }}</h2>
+    <!-- 填空 -->
+    <div class="col-xs-1"></div>
+</div>
+<div class="row text-left">
+    <!-- 填空 -->
+    <div class="col-xs-7"></div>
+    <!-- 註冊用戶總數 -->
+    <h5 class="col-xs-2">註冊用戶</h2>
+    <!-- 發起任務總數 -->
+    <h5 class="col-xs-2">任務</h2>
+    <!-- 填空 -->
+    <div class="col-xs-1"></div>
+</div>
+{{ block.super }} <!-- 複製上層 template block_hidden 的內容 -->
+{% endblock block_footer %}

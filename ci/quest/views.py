@@ -49,8 +49,6 @@ def initNewQuest(request):
 #尋找任務
 @login_required
 def searchCIQuest(request):
-    #已發起任務總數
-    intInitializedCIQuest = CIQuest.objects.all().count()
     #尋找結果字串
     strSearchResult = None
     #尋找結果

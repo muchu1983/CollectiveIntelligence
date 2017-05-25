@@ -7,6 +7,7 @@ This file is part of BSD license
 <https://opensource.org/licenses/BSD-3-Clause>
 """
 import uuid
+
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import JsonResponse
@@ -16,13 +17,17 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db.models import Q
 from django.http import JsonResponse
+
 from core.models import CIUser
 from core.forms import RegisterUserForm
 from core.forms import ProfilesCIUserForm
 from core.forms import ProfilesUserForm
 from core.forms import UploadAvatarThumbnailForm
-from ci.utility.email import EmailUtility
 from core.utility.raid import RaidUtility
+
+from quest.models import CIQuest
+
+from ci.utility.email import EmailUtility
 
 #用戶註冊
 def register(request):
@@ -174,8 +179,6 @@ def searchCIUser(request):
     strFormActionUrl = "/core/searchCIUser/"
     #尋找結果字串
     strSearchResult = None
-    #註冊用戶總數
-    intRegisteredCIUser = CIUser.objects.all().count()
     #尋找結果
     qsetMatchedCIUser = None
     if request.method == "POST":
@@ -202,8 +205,6 @@ def searchLeader(request):
     strFormActionUrl = "/core/searchLeader/"
     #尋找結果字串
     strSearchResult = None
-    #註冊用戶總數
-    intRegisteredCIUser = CIUser.objects.all().count()
     #尋找結果
     qsetMatchedCIUser = None
     #團隊操作工具
@@ -303,6 +304,10 @@ def ciuserViewer(request, strCIUserUID=None):
     
 #主頁面
 def renderMainPage(request):
+    #註冊用戶總數
+    intRegisteredCIUser = CIUser.objects.all().count()
+    #已發起任務總數
+    intInitializedCIQuest = CIQuest.objects.all().count()
     #取得顯示名稱
     strDisplayName = None
     if request.user.is_authenticated():
@@ -311,7 +316,7 @@ def renderMainPage(request):
     else:
         #未登入
         strDisplayName = "未登入"
-    return render(request, "core/main.html", {"strDisplayName":strDisplayName})
+    return render(request, "core/main.html", locals())
     
 #google 網站驗證
 def googleSiteVerification(request):
