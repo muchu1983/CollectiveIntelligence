@@ -62,40 +62,42 @@ This file is part of BSD license
         <div class="container-fluid col-xs-12 row">
             <!-- 靠左 nav -->
             <ul class="nav navbar-nav navbar-left col-xs-6 row">
-                <li class="col-xs-3">
+                <li class="col-xs-2 text-right">
                     <!-- 團隊 toggle button -->
-                    <a class="text-center" type="button" data-toggle="collapse" href="#raidPanel" data-tooltip="on" title="團隊">
+                    <a type="button" data-toggle="collapse" href="#raidPanel" data-tooltip="on" title="團隊">
                         <span class="fa fa-users spanNavbarIcon"></span>
                     </a>
                 </li>
-                <!-- 任務 -->
-                <li class="col-xs-3">
-                    <a class="text-center" type="button" href="/quest/searchCIQuest/" data-tooltip="on" title="任務">
-                        <span class="glyphicon glyphicon-exclamation-sign spanNavbarIcon"></span>
-                    </a>
-                </li>
-                <!-- 搜尋用戶 -->
-                <li class="col-xs-3">
-                    <a class="text-center" type="button" href="/core/searchCIUser/" data-tooltip="on" title="搜尋用戶">
-                        <span class="fa fa-address-card spanNavbarIcon"></span>
-                    </a>
-                </li>
                 <!-- 首頁 -->
-                <li class="col-xs-3">
-                    <a class="text-center" type="button" href="/core/main/" data-tooltip="on" title="首頁">
-                        <span class="glyphicon glyphicon-home spanNavbarIcon"></span>
+                <li class="col-xs-4 text-left">
+                    <a type="button" href="/core/main/" data-tooltip="on" title="首頁">
+                        <img class="img-circle" src="/static/ci/img/logo_rect.png" height="20" width="100">
                     </a>
                 </li>
-                <li class="col-xs-3">
+                <!-- 填空 -->
+                <li class="col-xs-6">
                 </li>
             </ul>
             <!-- 靠右 nav -->
             <ul class="nav navbar-nav navbar-right col-xs-6 row">
-                <li class="col-xs-9">
+                <!-- 填空 -->
+                <li class="col-xs-6">
+                </li>
+                <!-- 搜尋任務 -->
+                <li class="col-xs-2">
+                    <a class="text-center" type="button" href="/quest/searchCIQuest/" data-tooltip="on" title="搜尋任務">
+                        <span class="glyphicon glyphicon-exclamation-sign spanNavbarIcon"></span>
+                    </a>
+                </li>
+                <!-- 搜尋用戶 -->
+                <li class="col-xs-2">
+                    <a class="text-center" type="button" href="/core/searchCIUser/" data-tooltip="on" title="搜尋用戶">
+                        <span class="fa fa-address-card spanNavbarIcon"></span>
+                    </a>
                 </li>
                 <!-- 語言 dropdown -->
                 <!--
-                <li class="dropdown col-xs-3">
+                <li class="dropdown col-xs-2">
                     <a class="dropdown-toggle text-center" data-toggle="dropdown" href="#" data-tooltip="on" title="語言">
                         <span class="glyphicon glyphicon-globe spanNavbarIcon"></span>
                     </a>
@@ -108,7 +110,7 @@ This file is part of BSD license
                 </li>
                 -->
                 <!-- 帳號 dropdown -->
-                <li class="dropdown col-xs-3">
+                <li class="dropdown col-xs-2">
                     <a class="dropdown-toggle text-center" data-toggle="dropdown" href="#">
                         {% if request.user.is_authenticated  %}
                         <img class="img-circle" src="/{{ request.user.ciuser.avatarThumbnail.url }}" height="30" width="30">
