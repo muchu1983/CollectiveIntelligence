@@ -282,6 +282,7 @@ def retrieveLstDicFollower(request):
         #轉換為 json 物件再回傳
         for ciuserFollower in qsetCIUserFollower:
             dicFollower = {
+                "strAvatarThumbnailUrl": ciuserFollower.avatarThumbnail.url,
                 "strDisplayName": ciuserFollower.strDisplayName,
                 "strCIUserUID": ciuserFollower.strCIUserUID,
                 "intPointVolume": ciuserFollower.intPointVolume

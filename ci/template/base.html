@@ -164,7 +164,10 @@ This file is part of BSD license
                         <li class="list-group-item row">
                             {% if request.user.is_authenticated  %}
                                 {% if request.user.ciuser.leader %}
-                                <a class="roleLeader col-xs-6" href="/core/ciuserViewer/{{ request.user.ciuser.leader.strCIUserUID }}/">{{ request.user.ciuser.leader.strDisplayName }}</a>
+                                <div class="col-xs-1">
+                                    <img class="img-circle" src="/{{ request.user.ciuser.leader.avatarThumbnail.url }}" height="20" width="20">
+                                </div>
+                                <a class="roleLeader col-xs-5" href="/core/ciuserViewer/{{ request.user.ciuser.leader.strCIUserUID }}/">{{ request.user.ciuser.leader.strDisplayName }}</a>
                                 <span class="col-xs-3">{{ request.user.ciuser.leader.intPointVolume }} PV</span>
                                 <a type="button" class="btn btn-danger btn-xs btnClearLeader col-xs-3" href="javascript: void(0)">停止追隨</a>
                                 {% else %}
@@ -179,7 +182,10 @@ This file is part of BSD license
                         <!-- 自己 -->
                         <li class="list-group-item row">
                             {% if request.user.is_authenticated  %}
-                            <a class="roleHost col-xs-6" href="/core/ciuserViewer/{{ request.user.ciuser.strCIUserUID }}/">{{ request.user.ciuser.strDisplayName }}</a>
+                            <div class="col-xs-1">
+                                <img class="img-circle" src="/{{ request.user.ciuser.avatarThumbnail.url }}" height="20" width="20">
+                            </div>
+                            <a class="roleHost col-xs-5" href="/core/ciuserViewer/{{ request.user.ciuser.strCIUserUID }}/">{{ request.user.ciuser.strDisplayName }}</a>
                             <span class="col-xs-3">{{ request.user.ciuser.intPointVolume }} PV</span>
                             {% else %}
                             <span>未登入</span>

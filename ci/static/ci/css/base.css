@@ -24,7 +24,7 @@ body {
     min-height: calc(100% - 10vh);
     max-height: calc(100% - 10vh);
     height: calc(100% - 10vh);
-    width: 30vw;
+    width: 40vw;
     overflow-y: auto;
 }
 #raidPanel li{
