@@ -111,7 +111,7 @@ This file is part of BSD license
                 <li class="dropdown col-xs-3">
                     <a class="dropdown-toggle text-center" data-toggle="dropdown" href="#">
                         {% if request.user.is_authenticated  %}
-                        <img src="/{{ request.user.ciuser.avatarThumbnail.url }}" height="30" width="30">
+                        <img class="img-circle" src="/{{ request.user.ciuser.avatarThumbnail.url }}" height="30" width="30">
                         {% else %}
                         <div data-tooltip="on" title="未登入">
                             <span class="glyphicon glyphicon-user spanNavbarIcon" ></span>
@@ -122,7 +122,7 @@ This file is part of BSD license
                         {% if request.user.is_authenticated  %}
                         <li class="text-info text-center row">
                             <div class="col-xs-3">
-                                <img src="/{{ request.user.ciuser.avatarThumbnail.url }}" height="50" width="50">
+                                <img class="img-circle" src="/{{ request.user.ciuser.avatarThumbnail.url }}" height="50" width="50">
                             </div>
                             <h4 class="col-xs-9">{{ request.user.ciuser.strDisplayName }}</h4>
                         </li>
