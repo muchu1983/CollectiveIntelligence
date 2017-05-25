@@ -9,9 +9,15 @@
     $(document).ready(initBase);
     
     function initBase() {
+        initTooltip();
         retrieveLstDicFollower();
         initBtnClearLeader();
         initBtnCloseQuestViewerIFrame();
+    };
+    
+    //初始化 tooltip
+    function initTooltip(){
+        $("[data-tooltip=on]").tooltip(); 
     };
     
     //讀取追隨者物件清單

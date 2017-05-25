@@ -62,30 +62,26 @@ This file is part of BSD license
             <ul class="nav navbar-nav navbar-left col-xs-6 row">
                 <li class="col-xs-3">
                     <!-- 團隊 toggle button -->
-                    <a class="text-center" type="button" data-toggle="collapse" href="#raidPanel">
-                        <span class="glyphicon glyphicon-dashboard"></span><br>
-                        團隊
+                    <a class="text-center" type="button" data-toggle="collapse" href="#raidPanel" data-tooltip="on" title="團隊">
+                        <span class="glyphicon glyphicon-dashboard"></span>
                     </a>
                 </li>
                 <!-- 協作 -->
                 <li class="col-xs-3">
-                    <a class="text-center" type="button" href="/quest/searchCIQuest/">
-                        <span class="glyphicon glyphicon-blackboard"></span><br>
-                        任務
+                    <a class="text-center" type="button" href="/quest/searchCIQuest/" data-tooltip="on" title="任務">
+                        <span class="glyphicon glyphicon-blackboard"></span>
                     </a>
                 </li>
                 <!-- 用戶 -->
                 <li class="col-xs-3">
-                    <a class="text-center" type="button" href="/core/searchCIUser/">
-                        <span class="glyphicon glyphicon-eye-open"></span><br>
-                        用戶
+                    <a class="text-center" type="button" href="/core/searchCIUser/" data-tooltip="on" title="用戶">
+                        <span class="glyphicon glyphicon-eye-open"></span>
                     </a>
                 </li>
                 <!-- 首頁 -->
                 <li class="col-xs-3">
-                    <a class="text-center" type="button" href="/core/main/">
-                        <span class="glyphicon glyphicon-home"></span><br>
-                        首頁
+                    <a class="text-center" type="button" href="/core/main/" data-tooltip="on" title="首頁">
+                        <span class="glyphicon glyphicon-home"></span>
                     </a>
                 </li>
                 <li class="col-xs-3">
@@ -98,8 +94,8 @@ This file is part of BSD license
                 <!-- 語言 dropdown -->
                 <!--
                 <li class="dropdown col-xs-3">
-                    <a class="dropdown-toggle text-center" data-toggle="dropdown" href="#">
-                        <span class="glyphicon glyphicon-globe"></span><br><span class="text-primary">語言</span>
+                    <a class="dropdown-toggle text-center" data-toggle="dropdown" href="#" data-tooltip="on" title="語言">
+                        <span class="glyphicon glyphicon-globe"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="/core/i18n/">台港合旗</a></li>
@@ -112,15 +108,22 @@ This file is part of BSD license
                 <!-- 帳號 dropdown -->
                 <li class="dropdown col-xs-3">
                     <a class="dropdown-toggle text-center" data-toggle="dropdown" href="#">
-                        <span class="glyphicon glyphicon-user"></span><br>
                         {% if request.user.is_authenticated  %}
-                        <span class="text-primary">{{ request.user.ciuser.strDisplayName }}</span>
+                        <img src="/{{ request.user.ciuser.avatarThumbnail.url }}" height="30" width="30">
                         {% else %}
-                        <span class="text-info">未登入</span>
+                        <div data-tooltip="on" title="未登入">
+                            <span class="glyphicon glyphicon-user" ></span>
+                        </div>
                         {% endif %}
                     </a>
                     <ul class="dropdown-menu">
                         {% if request.user.is_authenticated  %}
+                        <li class="text-info text-center row">
+                            <div class="col-xs-3">
+                                <img src="/{{ request.user.ciuser.avatarThumbnail.url }}" height="50" width="50">
+                            </div>
+                            <h4 class="col-xs-9">{{ request.user.ciuser.strDisplayName }}</h4>
+                        </li>
                         <li><a href="/accounts/profiles/">用戶設定</a></li>
                         <li><a href="/accounts/register/">註冊</a></li>
                         <li><a href="/accounts/logout/">登出</a></li>
