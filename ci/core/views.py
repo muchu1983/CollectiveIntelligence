@@ -240,7 +240,9 @@ def resetLeader(request):
     raidUtil = RaidUtility()
     if request.method == "POST":
         strCIUserUID = request.POST.get("strCIUserUID", None)
-        if strCIUserUID:
+        userLeader = raidUtil.getUserByCIUSerUID(strCIUserUID=strCIUserUID)
+        #驗證 leader 是否存在 及 leader 是否設定 此用戶 為 leader - 避免領導人無限迴圈
+        if userLeader and not raidUtil.isLeaderOrLeaderOfLeader(user=userLeader, strLeaderUID=request.user.ciuser.strCIUserUID):
             #重設 領導人 並重置 PV 值
             raidUtil.resetLeaderAndPV(user=request.user, strLeaderUID=strCIUserUID)
             #完成字串
