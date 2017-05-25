@@ -45,7 +45,6 @@
             );
         });
         //按贊 btnLikeOrDislikeQuest
-        $("#btnLikeOrDislikeQuest").tooltip();
         $("#btnLikeOrDislikeQuest").click(function(){
             //POST 資料
             dicPostData = {

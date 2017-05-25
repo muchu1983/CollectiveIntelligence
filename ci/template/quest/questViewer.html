@@ -113,12 +113,12 @@
         {% else %}
         <!-- 除發起人以外的人 -->
             {% if request.user.ciuser in questTarget.setLikedCIUser.all %}
-                <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-xs" type="button" title="取消喜歡">
+                <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-xs" type="button" data-tooltip="on" title="取消喜歡">
                     <span class="glyphicon glyphicon-thumbs-up"></span>
                     <span id="strLikedCount" class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
                 </button>
             {% else %}
-                <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-xs" type="button" title="我喜歡">
+                <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-xs" type="button" data-tooltip="on" title="我喜歡">
                     <span class="glyphicon glyphicon-thumbs-up"></span>
                     <span id="strLikedCount" class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
                 </button>
