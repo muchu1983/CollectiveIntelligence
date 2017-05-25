@@ -9,10 +9,9 @@ This file is part of BSD license
 body {
     height: 100%;
 }
-/* 設定 團隊按鈕 無論螢幕大小永遠顯示 */
-.navbar-toggle {
-    display: block;
-    float: left;
+/* 導覽按鈕圖 */
+.spanNavbarIcon {
+    font-size: 20px;
 }
 /* 團隊 Panel */
 #raidPanel {
@@ -38,33 +37,27 @@ body {
 .roleFollower{
     color: forestgreen;
 }
-
 .roleHost{
     color: royalblue;
 }
-
 .roleLeader{
     color: darkorchid;
 }
-
 /* 我的追隨者 隱藏加入點 */
 #liHiddenMyFollowerAddPoint {
     display: none;
 }
-
 /* 隱藏的各種提示對話框 */
 .dialogHidden {
     display: none;
     float: left;
     margin: 12px 12px 20px 0px;
 }
-
 /* 任務檢視 iframe 關閉按鈕 */
 #btnCloseQuestViewerIFrame{
     position: relative;
     float: right;
 }
-
 /* 隱藏的任務檢視 iframe */
 .divHiddenQuestViewerIFrame {
     position: fixed;
@@ -75,7 +68,6 @@ body {
     border: 0px;
     padding: 0px;
 }
-
 .divHiddenQuestViewerIFrame iframe {
     width: 0px;
     height: 0px;
@@ -84,7 +76,6 @@ body {
     visibility: hidden;
     padding: 0px;
 }
-
 /* 顯示的任務檢視 iframe */
 .divShowQuestViewerIFrame {
     position: fixed;
@@ -98,7 +89,6 @@ body {
     padding: 0px;
     overflow-y: none;
 }
-
 .divShowQuestViewerIFrame iframe {
     width: 50vw;
     height: 80vh;

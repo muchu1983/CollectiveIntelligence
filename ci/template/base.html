@@ -24,6 +24,8 @@ This file is part of BSD license
     <link type="text/css" rel="stylesheet" href="/static/jquery-ui-1.12.1/jquery-ui.min.css">
     <!-- jquery.tagsinput -->
     <link type="text/css" rel="stylesheet" href="/static/jquery.tagsinput/jquery.tagsinput.min.css">
+    <!-- Font Awesome-->
+    <link type="text/css" rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
     <!-- ci -->
     <link type="text/css" rel="stylesheet" href="/static/ci/css/base.css">
     <!-- js -->
@@ -63,25 +65,25 @@ This file is part of BSD license
                 <li class="col-xs-3">
                     <!-- 團隊 toggle button -->
                     <a class="text-center" type="button" data-toggle="collapse" href="#raidPanel" data-tooltip="on" title="團隊">
-                        <span class="glyphicon glyphicon-dashboard"></span>
+                        <span class="fa fa-users spanNavbarIcon"></span>
                     </a>
                 </li>
-                <!-- 協作 -->
+                <!-- 任務 -->
                 <li class="col-xs-3">
                     <a class="text-center" type="button" href="/quest/searchCIQuest/" data-tooltip="on" title="任務">
-                        <span class="glyphicon glyphicon-blackboard"></span>
+                        <span class="glyphicon glyphicon-exclamation-sign spanNavbarIcon"></span>
                     </a>
                 </li>
-                <!-- 用戶 -->
+                <!-- 搜尋用戶 -->
                 <li class="col-xs-3">
-                    <a class="text-center" type="button" href="/core/searchCIUser/" data-tooltip="on" title="用戶">
-                        <span class="glyphicon glyphicon-eye-open"></span>
+                    <a class="text-center" type="button" href="/core/searchCIUser/" data-tooltip="on" title="搜尋用戶">
+                        <span class="fa fa-address-card spanNavbarIcon"></span>
                     </a>
                 </li>
                 <!-- 首頁 -->
                 <li class="col-xs-3">
                     <a class="text-center" type="button" href="/core/main/" data-tooltip="on" title="首頁">
-                        <span class="glyphicon glyphicon-home"></span>
+                        <span class="glyphicon glyphicon-home spanNavbarIcon"></span>
                     </a>
                 </li>
                 <li class="col-xs-3">
@@ -95,7 +97,7 @@ This file is part of BSD license
                 <!--
                 <li class="dropdown col-xs-3">
                     <a class="dropdown-toggle text-center" data-toggle="dropdown" href="#" data-tooltip="on" title="語言">
-                        <span class="glyphicon glyphicon-globe"></span>
+                        <span class="glyphicon glyphicon-globe spanNavbarIcon"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="/core/i18n/">台港合旗</a></li>
@@ -112,7 +114,7 @@ This file is part of BSD license
                         <img src="/{{ request.user.ciuser.avatarThumbnail.url }}" height="30" width="30">
                         {% else %}
                         <div data-tooltip="on" title="未登入">
-                            <span class="glyphicon glyphicon-user" ></span>
+                            <span class="glyphicon glyphicon-user spanNavbarIcon" ></span>
                         </div>
                         {% endif %}
                     </a>
