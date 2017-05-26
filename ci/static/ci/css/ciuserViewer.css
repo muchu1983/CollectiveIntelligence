@@ -19,3 +19,13 @@ This file is part of BSD license
     font-size: 20px;
     color: gold;
 }
+/*圓盤傳送帶 去除左右暗影*/
+.carousel-control.left, .carousel-control.right {
+   background-image:none !important;
+   filter:none !important;
+}
+/*圓盤傳送帶 左右控制鈕*/
+.spanCarouselControl{
+    font-size: 15px !important;
+    color: black;
+}

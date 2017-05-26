@@ -8,6 +8,9 @@
 <link type="text/css" rel="stylesheet" href="/static/ci/css/ciuserViewer.css" >
 <!-- js -->
 <script type="text/javascript" src="/static/ci/js/ciuserViewer.js"></script>
+<script type="text/javascript">
+    var strUserHostCIUserUID = "{{ userHost.ciuser.strCIUserUID }}";
+</script>
 {% endblock block_head %}
 
 <!-- override block_content -->
@@ -58,18 +61,20 @@
             <div class="col-xs-2 text-right">
                 <span>領導人：</span>
             </div>
-            <div class="col-xs-7 text-left row">
+            <div class="col-xs-4 text-left row">
                 {% if userHost.ciuser.leader %}
                 <!-- 領導人 頭像 -->
-                <div class="col-xs-1 text-right">
+                <div class="col-xs-2 text-right">
                     <img class="img-circle" src="/{{ userHost.ciuser.leader.avatarThumbnail.url }}" height="20" width="20">
                 </div>
                 <!-- 領導人 顯示名稱 -->
-                <a class="roleLeader col-xs-8 text-left" href="/core/ciuserViewer/{{ userHost.ciuser.leader.strCIUserUID }}">{{ userHost.ciuser.leader.strDisplayName }}</a>
+                <a class="roleLeader col-xs-10 text-left" href="/core/ciuserViewer/{{ userHost.ciuser.leader.strCIUserUID }}/">{{ userHost.ciuser.leader.strDisplayName }}</a>
                 {% else %}
-                <span class="col-xs-8">尚無領導人</span>
+                <span class="col-xs-12">尚無領導人</span>
                 {% endif %}
             </div>
+            <!-- 填空 -->
+            <div class="3"></div>
         </div>
         <!-- 團隊 PV 資料列 -->
         <div class="row">
@@ -82,9 +87,22 @@
             <div class="col-xs-2 text-right">
                 <span>追隨者：</span>
             </div>
-            <div class="col-xs-7 text-left">
-                <!--follower links spinner -->
+            <!-- userHost 的追隨者 -->
+            <div class="col-xs-4 text-center">
+                <!-- 圓盤傳送帶 -->
+                <div id="carouselUserHostFollower" class="carousel slide" data-ride="carousel">
+                    <!-- 追隨者加入點 -->
+                    <div id="divCarouselInnerWrapper" class="carousel-inner">
+                    </div>
+                    <!-- 圓盤傳送帶 右控制器 -->
+                    <a class="right carousel-control" href="#carouselUserHostFollower" data-slide="next">
+                        <span class="spanCarouselControl glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
             </div>
+            <!-- 填空 -->
+            <div class="col-xs-3"></div>
         </div>
     </div>
 </div>
@@ -93,7 +111,7 @@
 <div id="divContent" class="row">
     <!-- 聊天頻道 -->
     <div class="col-xs-8">
-        <iframe id="iframeChatChannel" src="/chat/channel/{{ userHost.ciuser.strCIUserUID }}">
+        <iframe id="iframeChatChannel" src="/chat/channel/{{ userHost.ciuser.strCIUserUID }}/">
         </iframe>
     </div>
     <!-- 任務欄 -->

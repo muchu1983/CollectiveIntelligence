@@ -271,7 +271,6 @@ def clearLeader(request):
     return JsonResponse({"clear_result":strClearResult}, safe=False)
     
 #取得 追隨者
-@login_required
 def retrieveLstDicFollower(request):
     #取得追隨者結果 字串
     strRetrieveResult = None
@@ -280,17 +279,39 @@ def retrieveLstDicFollower(request):
     #團隊操作工具
     raidUtil = RaidUtility()
     if request.method == "POST":
-        qsetCIUserFollower = raidUtil.getQsetFollower(user=request.user)
-        #轉換為 json 物件再回傳
-        for ciuserFollower in qsetCIUserFollower:
-            dicFollower = {
-                "strAvatarThumbnailUrl": ciuserFollower.avatarThumbnail.url,
-                "strDisplayName": ciuserFollower.strDisplayName,
-                "strCIUserUID": ciuserFollower.strCIUserUID,
-                "intPointVolume": ciuserFollower.intPointVolume
-            }
-            lstDicFollower.append(dicFollower)
-        strRetrieveResult = "完成取得 追隨者"
+        #取得 指定 strCIUserUID
+        strCIUserUID = request.POST.get("strCIUserUID", None)
+        #目標
+        targetUser = None
+        #優先查詢 指定user
+        if strCIUserUID is not None:
+            #若有指定 strCIUserUID 嘗試取得該 指定user 
+            userSpecified = raidUtil.getUserByCIUSerUID(strCIUserUID)
+            if userSpecified is not None:
+                #有找到 指定user 則取得 指定user 的追隨者
+                targetUser = userSpecified
+            else:
+                #沒找到 指定user
+                strRetrieveResult = "錯誤的 strCIUserUID 無法找到 指定user"
+        elif request.user.is_authenticated():
+            #有登入
+            targetUser = request.user
+        else:
+            #沒登入 也沒 指定user
+            strRetrieveResult = "必須登入 或 指定 strCIUserUID"
+        #開始查詢
+        if targetUser is not None:
+            qsetCIUserFollower = raidUtil.getQsetFollower(user=targetUser)
+            #轉換為 json 物件再回傳
+            for ciuserFollower in qsetCIUserFollower:
+                dicFollower = {
+                    "strAvatarThumbnailUrl": ciuserFollower.avatarThumbnail.url,
+                    "strDisplayName": ciuserFollower.strDisplayName,
+                    "strCIUserUID": ciuserFollower.strCIUserUID,
+                    "intPointVolume": ciuserFollower.intPointVolume
+                }
+                lstDicFollower.append(dicFollower)
+            strRetrieveResult = "完成取得 追隨者"
     else:
         strRetrieveResult = "只允許 POST 方式取得 追隨者"
     return JsonResponse({"retrieve_result":strRetrieveResult, "lstDicFollower":lstDicFollower}, safe=False)

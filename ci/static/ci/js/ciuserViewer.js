@@ -13,6 +13,7 @@
         initCIQuestFilter();
         filterExecutorCIQuest();
         filterInitiatorCIQuest();
+        retrieveLstUserHostDicFollower();
     };
     
     //初始化 任務連結
@@ -67,6 +68,45 @@
             //無勾選
             $(".liInitiatorCIQuest").show();
         }
+    };
+    
+    //讀取 userHost 的追隨者物件清單
+    function retrieveLstUserHostDicFollower(){
+        //POST 資料
+        dicPostData = {
+            "strCIUserUID": strUserHostCIUserUID,
+            "csrfmiddlewaretoken": strCsrfToken
+        };
+        console.log(dicPostData);
+        //POST
+        $.post("/core/retrieveLstDicFollower/", dicPostData, function(jsonResp){
+            console.log(jsonResp)
+            //先清空
+            $("#divCarouselInnerWrapper").html("");
+            if (jsonResp["lstDicFollower"].length==0){
+                //沒有追隨者
+                $("#divCarouselInnerWrapper").append("<div class=\"item row active\"><span>沒有追隨者</span></div>");
+            }else{
+                $.each(jsonResp["lstDicFollower"], function(intIndex, dicFollower) {
+                    var strItemDivClass = "item row";
+                    if(intIndex == 0){
+                        //第一個追隨者 div 加入 active
+                        strItemDivClass = "item row active";
+                    };
+                    //加入追隨者
+                    $("#divCarouselInnerWrapper").append(
+                        "<div class=\"" + strItemDivClass + "\">" +
+                            "<div class=\"text-right col-xs-2\">" +
+                                "<img class=\"img-circle\" src=\"/" + dicFollower["strAvatarThumbnailUrl"] + "\" height=\"20\" width=\"20\">" +
+                            "</div>" +
+                            "<a class=\"roleFollower text-left col-xs-10\" href=\"/core/ciuserViewer/" + dicFollower["strCIUserUID"] + "/\">" + 
+                                dicFollower["strDisplayName"] +
+                            "</a>" +
+                        "</div>"
+                    );
+                });
+            };
+        }, "json");
     };
     
 })(jQuery);
