@@ -5,13 +5,19 @@ This file is part of BSD license
 
 <https://opensource.org/licenses/BSD-3-Clause>
 */
-canvas{
+/*超大屏幕*/
+.jumbotron{
+    background-color: lavender;
+}
+/*任務狀態展示*/
+canvas#canvas_quest_state_demo{
     border-style: solid;
     border-width: 3px;
     border-color: lavender;
     width: 80%;
 }
-
+/*隱藏圖示*/
 .hiddenIcon{
     display:none;
 }
+
