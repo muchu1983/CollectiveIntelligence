@@ -1,0 +1,62 @@
+<!-- include quest\include-snippet\searchResult_of_searchCIQuest.html snippet-->
+<!-- 搜尋結果 -->
+<ul class="list-group">
+    <!-- 欄位說明 -->
+    <li class="list-group-item list-group-item-info row">
+        <!-- 狀態圖說明 -->
+        <div class="col-xs-1 dropdown text-center">
+            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="spanQuestStateIcon glyphicon glyphicon-info-sign"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-left">
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-exclamation-sign"></span> 尚無人申請</li>
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-plus-sign"></span> 配對中</li>
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-question-sign"></span> 正在執行中</li>
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-ok-sign"></span> 目標達成</li>
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-remove-sign"></span> 目標已無法達成</li>
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-ok"></span> 已終結-成功</li>
+                <li><span class="spanQuestStateIcon glyphicon glyphicon-remove"></span> 已終結-失敗</li>
+            </ul>
+        </div>
+        <span class="col-xs-5 text-left">任務標題</span>
+        <span class="col-xs-3 text-left">任務標籤</span>
+        <span class="col-xs-2 text-right">任務獎勵</span>
+        <span class="col-xs-1 text-center">檢視</span>
+    </li>
+    <!-- 任務 -->
+    {% for matchedCIQuest in qsetMatchedCIQuest %}
+    <li class="list-group-item row">
+        <!-- 任務狀態圖示 -->
+        {% if matchedCIQuest.strState == "new" %}
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-exclamation-sign text-center"></span>
+        {% elif matchedCIQuest.strState == "matching" %}
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-plus-sign text-center"></span>
+        {% elif matchedCIQuest.strState == "processing" %}
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-question-sign text-center"></span>
+        {% elif matchedCIQuest.strState == "complete" %}
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-ok-sign text-center"></span>
+        {% elif matchedCIQuest.strState == "incomplete" %}
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-remove-sign text-center"></span>
+        {% elif matchedCIQuest.strState == "end_success" %}
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-ok text-center"></span>
+        {% elif matchedCIQuest.strState == "end_failure" %}
+        <span class="col-xs-1 spanQuestStateIcon glyphicon glyphicon-remove text-center"></span>
+        {% else %}
+        {% endif %}
+        <!-- 任務標題 -->
+        <span class="col-xs-5 text-left">{{ matchedCIQuest.strHeadline }}</span>
+        <!-- 任務標籤 -->
+        <div class="col-xs-3">
+            {% for ciquesttag in matchedCIQuest.setCIQuestTag.all %}
+            <a href="javascript: void(0)"><span class="label label-primary spanQuestTag">{{ ciquesttag.strName }}</span></a>
+            {% endfor %}
+        </div>
+        <!-- 任務獎勵 -->
+        <span class="col-xs-2 text-right">{{ matchedCIQuest.intRewardPV }} PV</span>
+        <!-- 任務QID 隱藏 -->
+        <input type="hidden" class="strQID" name="strQID" value={{ matchedCIQuest.strQID }}></input>
+        <!-- 檢視 按鈕 -->
+        <a type="button" class="btn btn-default btn-sm btnViewCIQuest col-xs-1 text-center" href="javascript: void(0);">檢視</a>
+    </li>
+    {% endfor %}
+</ul>

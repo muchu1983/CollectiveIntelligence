@@ -52,7 +52,11 @@ def searchCIQuest(request):
     #尋找結果字串
     strSearchResult = None
     #尋找結果
-    qsetMatchedCIQuest = None
+    qsetMatchedCIQuest = None #搜尋 strKeyword 的結果
+    qsetNewCIQuestTopReward = None #最高獎勵新任務
+    qsetNewCIQuestToday = None #今天新任務 
+    qsetNewCIQuestYesterday = None #昨天新任務
+    qsetNewCIQuestWeekly = None #本周新任務(不含今天與昨天)
     if request.method == "POST":
         strKeyword = request.POST.get("strKeyword", None)
         #比對 strHeadline 條件
@@ -67,15 +71,21 @@ def searchCIQuest(request):
         qsetMatchedCIQuest = CIQuest.objects.filter(queryObject).distinct()
         strSearchResult = "查尋 {strKeyword} 共找到 {intResultCount} 個任務".format(strKeyword=strKeyword, intResultCount=qsetMatchedCIQuest.count())
     else:
-        #TODO
-        #最高獎勵 qsetNewCIQuestTopReward
-        #今天 qsetNewCIQuestToday
-        #本周 qsetNewCIQuestWeekly
         #尋找可申請任務
-        queryState = Q(strState="new")
-        queryObject = queryState
-        qsetMatchedCIQuest = CIQuest.objects.filter(queryObject).order_by("-dtCreated").distinct()
         strSearchResult = "目前顯示最新的可申請任務"
+        queryState = Q(strState="new")
+        #最高獎勵
+        queryObject = queryState
+        qsetNewCIQuestTopReward = CIQuest.objects.filter(queryObject).order_by("-dtCreated").distinct()
+        #今天
+        queryObject = queryState
+        qsetNewCIQuestToday = CIQuest.objects.filter(queryObject).order_by("-dtCreated").distinct()
+        #昨天
+        queryObject = queryState
+        qsetNewCIQuestYesterday = CIQuest.objects.filter(queryObject).order_by("-dtCreated").distinct()
+        #本周(不含今天與昨天)
+        queryObject = queryState
+        qsetNewCIQuestWeekly = CIQuest.objects.filter(queryObject).order_by("-dtCreated").distinct()
     return render(request, "quest/searchCIQuest.html", locals())
     
 #任務檢視頁
