@@ -44,9 +44,9 @@
     {% include "quest\include-snippet\searchResult_of_searchCIQuest.html" with qsetMatchedCIQuest=qsetMatchedCIQuest %}
 {% endif %}
 
-<!-- 最高獎勵 -->
+<!-- 最高獎勵TOP5 - 先比獎勵高-低 再比較時間 新-舊 -->
 {% if qsetNewCIQuestTopReward %}
-<span>最高獎勵</span>
+<span>最高獎勵TOP5</span>
 {% include "quest\include-snippet\searchResult_of_searchCIQuest.html" with qsetMatchedCIQuest=qsetNewCIQuestTopReward %}
 {% endif %}
 

@@ -6,14 +6,18 @@ This file is part of BSD license
 
 <https://opensource.org/licenses/BSD-3-Clause>
 """
+import datetime
+from datetime import timedelta
+
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.http import JsonResponse
+
 from quest.forms import CIQuestForm
 from quest.models import CIQuest
 from quest.models import CIQuestTag
-from django.db.models import Q
-from django.http import JsonResponse
 from quest.utility.quest import QuestUtility
 
 #發起新任務
@@ -53,7 +57,7 @@ def searchCIQuest(request):
     strSearchResult = None
     #尋找結果
     qsetMatchedCIQuest = None #搜尋 strKeyword 的結果
-    qsetNewCIQuestTopReward = None #最高獎勵新任務
+    qsetNewCIQuestTopReward = None #最高獎勵TOP5新任務
     qsetNewCIQuestToday = None #今天新任務 
     qsetNewCIQuestYesterday = None #昨天新任務
     qsetNewCIQuestWeekly = None #本周新任務(不含今天與昨天)
@@ -74,17 +78,32 @@ def searchCIQuest(request):
         #尋找可申請任務
         strSearchResult = "目前顯示最新的可申請任務"
         queryState = Q(strState="new")
-        #最高獎勵
+        #最高獎勵TOP5 - 先比獎勵高-低 再比較時間 新-舊
         queryObject = queryState
-        qsetNewCIQuestTopReward = CIQuest.objects.filter(queryObject).order_by("-dtCreated").distinct()
+        qsetNewCIQuestTopReward = CIQuest.objects.filter(queryObject).order_by("-intRewardPV", "-dtCreated").distinct()
+        if qsetNewCIQuestTopReward.count() > 5:
+            qsetNewCIQuestTopReward = qsetNewCIQuestTopReward[0:5]
         #今天
-        queryObject = queryState
+        dToday = datetime.date.today()
+        dtTodayMin = datetime.datetime.combine(dToday, datetime.time.min)
+        dtTodayMax = datetime.datetime.combine(dToday, datetime.time.max)
+        queryToday = Q(dtCreated__range=(dtTodayMin, dtTodayMax))
+        queryObject = queryState & queryToday
         qsetNewCIQuestToday = CIQuest.objects.filter(queryObject).order_by("-dtCreated").distinct()
         #昨天
-        queryObject = queryState
+        dYesterday = dToday + timedelta(days=-1)
+        dtYesterdayMin = datetime.datetime.combine(dYesterday, datetime.time.min)
+        dtYesterdayMax = datetime.datetime.combine(dYesterday, datetime.time.max)
+        queryYesterday = Q(dtCreated__range=(dtYesterdayMin, dtYesterdayMax))
+        queryObject = queryState & queryYesterday
         qsetNewCIQuestYesterday = CIQuest.objects.filter(queryObject).order_by("-dtCreated").distinct()
         #本周(不含今天與昨天)
-        queryObject = queryState
+        dAWeekAgo = dToday + timedelta(days=-7)
+        d2DayAgo = dToday + timedelta(days=-2)
+        dtAWeekAgoMin = datetime.datetime.combine(dAWeekAgo, datetime.time.min)
+        dt2DayAgoMax = datetime.datetime.combine(d2DayAgo, datetime.time.max)
+        queryWeekly = Q(dtCreated__range=(dtAWeekAgoMin, dt2DayAgoMax))
+        queryObject = queryState & queryWeekly
         qsetNewCIQuestWeekly = CIQuest.objects.filter(queryObject).order_by("-dtCreated").distinct()
     return render(request, "quest/searchCIQuest.html", locals())
     
