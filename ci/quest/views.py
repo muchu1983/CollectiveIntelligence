@@ -67,6 +67,10 @@ def searchCIQuest(request):
         qsetMatchedCIQuest = CIQuest.objects.filter(queryObject).distinct()
         strSearchResult = "查尋 {strKeyword} 共找到 {intResultCount} 個任務".format(strKeyword=strKeyword, intResultCount=qsetMatchedCIQuest.count())
     else:
+        #TODO
+        #最高獎勵 qsetNewCIQuestTopReward
+        #今天 qsetNewCIQuestToday
+        #本周 qsetNewCIQuestWeekly
         #尋找可申請任務
         queryState = Q(strState="new")
         queryObject = queryState

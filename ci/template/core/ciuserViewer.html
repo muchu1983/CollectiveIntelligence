@@ -52,17 +52,29 @@
             <div class="col-xs-2 text-right">
                 <span>個人 PV：</span>
             </div>
-            <div class="col-xs-10 text-left">
+            <div class="col-xs-2 text-left">
                 <span>{{ userHost.ciuser.intPointVolume }}</span>
+            </div>
+            <div class="col-xs-2 text-right">
+                <span>領導人：</span>
+            </div>
+            <div class="col-xs-6 text-left">
+                <!--avatar+name+link-->
             </div>
         </div>
         <!-- 團隊 PV 資料列 -->
-        <div class="row">
+        <div class="row" data-tooltip="on" title="團隊PV = 個人PV + 所有追隨者的個人PV">
             <div class="col-xs-2 text-right">
                 <span>團隊 PV：</span>
             </div>
-            <div class="col-xs-10 text-left">
+            <div class="col-xs-2 text-left">
                 <span>{{ intRaidPV }}</span>
+            </div>
+            <div class="col-xs-2 text-right">
+                <span>追隨者：</span>
+            </div>
+            <div class="col-xs-6 text-left">
+                <!--follower links spinner -->
             </div>
         </div>
     </div>
