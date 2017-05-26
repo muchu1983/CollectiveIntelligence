@@ -28,7 +28,7 @@
             </div>
             <!-- 顯示名稱 -->
             <div class="col-xs-4 text-left">
-                <span>{{ userHost.ciuser.strDisplayName }}</span>
+                <span class="roleHost">{{ userHost.ciuser.strDisplayName }}</span>
             </div>
             <!-- email -->
             <div class="col-xs-4 text-right">
@@ -58,8 +58,17 @@
             <div class="col-xs-2 text-right">
                 <span>領導人：</span>
             </div>
-            <div class="col-xs-7 text-left">
-                <!--avatar+name+link-->
+            <div class="col-xs-7 text-left row">
+                {% if userHost.ciuser.leader %}
+                <!-- 領導人 頭像 -->
+                <div class="col-xs-1 text-right">
+                    <img class="img-circle" src="/{{ userHost.ciuser.leader.avatarThumbnail.url }}" height="20" width="20">
+                </div>
+                <!-- 領導人 顯示名稱 -->
+                <a class="roleLeader col-xs-8 text-left" href="/core/ciuserViewer/{{ userHost.ciuser.leader.strCIUserUID }}">{{ userHost.ciuser.leader.strDisplayName }}</a>
+                {% else %}
+                <span class="col-xs-8">尚無領導人</span>
+                {% endif %}
             </div>
         </div>
         <!-- 團隊 PV 資料列 -->
