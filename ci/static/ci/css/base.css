@@ -9,6 +9,10 @@ This file is part of BSD license
 body {
     height: 100%;
 }
+/* 導覽按鈕 */
+.navbar-nav > li{
+    padding: 0px;
+}
 /* 導覽按鈕圖 */
 .spanNavbarIcon {
     font-size: 30px;
