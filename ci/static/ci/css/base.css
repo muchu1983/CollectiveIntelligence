@@ -24,6 +24,7 @@ body {
     z-index: 10;
     float: left;
     padding: 0px;
+    margin: 0px;
     top: 10vh;
     left: 0px;
     min-height: calc(100% - 10vh);
