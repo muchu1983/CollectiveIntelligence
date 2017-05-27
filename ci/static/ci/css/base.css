@@ -12,6 +12,7 @@ body {
 /* 導覽按鈕 */
 .navbar-nav > li{
     padding: 0px;
+    margin: 0px;
 }
 /* 導覽按鈕圖 */
 .spanNavbarIcon {
