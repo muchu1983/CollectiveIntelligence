@@ -14,6 +14,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
+from storages.backends.ftp import FTPStorage
 
 #CI使用者
 class CIUser(models.Model):
@@ -39,7 +40,8 @@ class CIUser(models.Model):
         upload_to=renameAvatarThumbnailFilePath,
         processors=[ResizeToFill(100, 100)],
         format="JPEG",
-        options={"quality": 90}
+        options={"quality": 90},
+        storage=FTPStorage()
     )
     #PV值
     intPointVolume = models.IntegerField(default=0, null=False)

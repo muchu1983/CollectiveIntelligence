@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "storages",
     "channels",
     "tinymce",
     "captcha",
@@ -135,12 +136,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-# Media files (user-uploaded files)
-
-MEDIA_URL = "/media/"
-
-MEDIA_ROOT = os.path.join(BASE_DIR, "media_root")
-
 #channels settings
 CHANNEL_LAYERS = {
     "default": {
@@ -171,3 +166,14 @@ TINYMCE_COMPRESSOR = True
 RECAPTCHA_PUBLIC_KEY = "6LegZiEUAAAAAPmTPfbp1OJ9ICnNZJ_LsaDbQfaG"
 RECAPTCHA_PRIVATE_KEY = "6LegZiEUAAAAAOs0tBCYmtHJ7YF_L_KqJFQ1vYV_"
 NOCAPTCHA = True
+
+#django-storages (FTPStorage)
+DEFAULT_FILE_STORAGE = "storages.backends.ftp.FTPStorage"
+FTP_STORAGE_LOCATION = "ftp://ci_ftp_root:bee520bee520@localhost:21"
+
+# Media files (user-uploaded files)
+MEDIA_URL = "/media/"
+#this works when DEBUG=False but client will see ftp account and password
+#maybe change to S3 or other CDN later, get media files use http://
+#MEDIA_URL = "ftp://ci_ftp_root:bee520bee520@localhost:21/" 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media_root")
