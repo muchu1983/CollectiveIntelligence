@@ -75,4 +75,7 @@ urlpatterns = [
     #網站驗證
     url(r"^google707bf3bffb973ed1.html$", core_views.googleSiteVerification),
     url(r"^BingSiteAuth.xml$", core_views.bingSiteVerification),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG is True:
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
