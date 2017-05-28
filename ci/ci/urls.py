@@ -20,7 +20,9 @@ Class-based views
 Including another URLconf
     1. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import login as builtin_login
 from django.contrib.auth.views import logout as builtin_logout
@@ -73,4 +75,4 @@ urlpatterns = [
     #網站驗證
     url(r"^google707bf3bffb973ed1.html$", core_views.googleSiteVerification),
     url(r"^BingSiteAuth.xml$", core_views.bingSiteVerification),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -97,7 +97,7 @@
                     $("#divCarouselInnerWrapper").append(
                         "<div class=\"" + strItemDivClass + "\">" +
                             "<div class=\"text-right col-xs-2\">" +
-                                "<img class=\"img-circle\" src=\"/" + dicFollower["strAvatarThumbnailUrl"] + "\" height=\"20\" width=\"20\">" +
+                                "<img class=\"img-circle\" src=\"" + dicFollower["strAvatarThumbnailUrl"] + "\" height=\"20\" width=\"20\">" +
                             "</div>" +
                             "<a class=\"roleFollower text-left col-xs-10\" href=\"/core/ciuserViewer/" + dicFollower["strCIUserUID"] + "/\">" + 
                                 dicFollower["strDisplayName"] +

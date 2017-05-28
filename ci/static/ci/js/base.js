@@ -34,7 +34,7 @@
                 $("#liHiddenMyFollowerAddPoint").after(
                     "<li class=\"list-group-item row\">"+
                         "<div class=\"col-xs-1\">" +
-                            "<img class=\"img-circle\" src=\"/" + dicFollower["strAvatarThumbnailUrl"] + "\" height=\"20\" width=\"20\">" +
+                            "<img class=\"img-circle\" src=\"" + dicFollower["strAvatarThumbnailUrl"] + "\" height=\"20\" width=\"20\">" +
                         "</div>" +
                         "<a class=\"roleFollower col-xs-5\" href=\"/core/ciuserViewer/" + dicFollower["strCIUserUID"] + "/\">" +
                         dicFollower["strDisplayName"] +

@@ -20,7 +20,7 @@ class CIUser(models.Model):
     
     #重新命名頭像圖片路徑
     def renameAvatarThumbnailFilePath(instance, filename):
-        strAvatarsBasePath="static/ci/img/avatars/"
+        strAvatarsBasePath="ci/img/avatars/"
         strFilenameExt = filename.split(".")[-1]
         #亂數產生新 filename
         strNewFilename = "{}.{}".format(uuid.uuid1().hex, strFilenameExt)
@@ -35,7 +35,7 @@ class CIUser(models.Model):
     leader = models.ForeignKey("self", default=None, null=True, on_delete=models.SET_NULL)
     #頭像
     avatarThumbnail = ProcessedImageField(
-        default="static/ci/img/avatars/default-thumbnail.jpg",
+        default="ci/img/avatars/default-thumbnail.jpg",
         upload_to=renameAvatarThumbnailFilePath,
         processors=[ResizeToFill(100, 100)],
         format="JPEG",
