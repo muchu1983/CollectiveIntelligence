@@ -128,8 +128,9 @@ This file is part of BSD license
                             </div>
                             <h4 class="col-xs-9">{{ request.user.ciuser.strDisplayName }}</h4>
                         </li>
-                        <li><a href="/accounts/profiles/">用戶設定</a></li>
-                        <li><a href="/accounts/register/">註冊</a></li>
+                        <li><a href="/core/ciuserViewer/{{ request.user.ciuser.strCIUserUID }}/">我的頻道</a></li>
+                        <li><a href="/accounts/profiles/">個人資料</a></li>
+                        <li><a href="/accounts/register/">註冊新帳號</a></li>
                         <li><a href="/accounts/logout/">登出</a></li>
                         {% else %}
                         <li><a href="/accounts/register/">註冊</a></li>
