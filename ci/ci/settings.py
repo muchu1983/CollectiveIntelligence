@@ -172,8 +172,6 @@ DEFAULT_FILE_STORAGE = "storages.backends.ftp.FTPStorage"
 FTP_STORAGE_LOCATION = "ftp://ci_ftp_root:bee520bee520@localhost:21"
 
 # Media files (user-uploaded files)
-MEDIA_URL = "/media/"
-#this works when DEBUG=False but client will see ftp account and password
-#maybe change to S3 or other CDN later, get media files use http://
-#MEDIA_URL = "ftp://ci_ftp_root:bee520bee520@localhost:21/" 
+MEDIA_URL = "/media/" #need DEBUG=True
+#MEDIA_URL = "ftp://anonymous@ftp.c8ei10e.com:21/" #need config NAT router to forward ftp port, and setting ftp passive mode
 MEDIA_ROOT = os.path.join(BASE_DIR, "media_root")
