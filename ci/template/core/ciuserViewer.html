@@ -120,7 +120,7 @@
         <div class="row">
             <div class="bg-primary col-xs-10">
                 接受的任務
-                <span class="badge">{{ userHost.ciuser.executor_set.all.count }}</span>
+                <span class="badge">{{ userHost.ciuser.executor_quest_set.all.count }}</span>
             </div>
             <!-- 狀態過瀘 dropdown -->
             <div class="dropdown col-xs-2">
@@ -165,7 +165,7 @@
         <div class="row">
             <!-- 列表 -->
             <ul class="list-group col-xs-12">
-                {% for matchedCIQuest in userHost.ciuser.executor_set.all %}
+                {% for matchedCIQuest in userHost.ciuser.executor_quest_set.all %}
                 <li class="list-group-item liExecutorCIQuest row" data-quest-state={{ matchedCIQuest.strState }}>
                     <!-- 任務狀態圖示 -->
                     {% if matchedCIQuest.strState == "new" %}
@@ -198,7 +198,7 @@
         <div class="row">
             <div class="bg-primary col-xs-10">
                 發起的任務
-                <span class="badge">{{ userHost.ciuser.initiator_set.all.count }}</span>
+                <span class="badge">{{ userHost.ciuser.initiator_quest_set.all.count }}</span>
             </div>
             <!-- 狀態過瀘 dropdown -->
             <div class="dropdown col-xs-2">
@@ -247,7 +247,7 @@
         <div class="row">
             <!-- 列表 -->
             <ul class="list-group col-xs-12">
-            {% for matchedCIQuest in userHost.ciuser.initiator_set.all %}
+            {% for matchedCIQuest in userHost.ciuser.initiator_quest_set.all %}
                 <li class="list-group-item liInitiatorCIQuest row" data-quest-state={{ matchedCIQuest.strState }}>
                     <!-- 任務狀態圖示 -->
                     {% if matchedCIQuest.strState == "new" %}

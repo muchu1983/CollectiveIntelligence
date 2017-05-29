@@ -33,7 +33,7 @@ class CIUser(models.Model):
     #一對一 Django 使用者
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     #多對一 領導人 CI使用者
-    leader = models.ForeignKey("self", default=None, null=True, on_delete=models.SET_NULL)
+    leader = models.ForeignKey("self", default=None, null=True, related_name="follower_set", on_delete=models.SET_NULL)
     #頭像
     avatarThumbnail = ProcessedImageField(
         default="ci/img/avatars/default-thumbnail.jpg",
