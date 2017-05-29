@@ -51,7 +51,6 @@ def initNewQuest(request):
     return render(request, "quest/initNewQuest.html", locals())
     
 #尋找任務
-@login_required
 def searchCIQuest(request):
     #尋找結果字串
     strSearchResult = None
@@ -73,7 +72,7 @@ def searchCIQuest(request):
         queryObject = queryHeadline | queryContent | queryTagName
         #查尋
         qsetMatchedCIQuest = CIQuest.objects.filter(queryObject).distinct()
-        strSearchResult = "查尋 {strKeyword} 共找到 {intResultCount} 個任務".format(strKeyword=strKeyword, intResultCount=qsetMatchedCIQuest.count())
+        strSearchResult = "搜尋 {strKeyword} 共找到 {intResultCount} 個任務".format(strKeyword=strKeyword, intResultCount=qsetMatchedCIQuest.count())
     else:
         #尋找可申請任務
         strSearchResult = "目前顯示最新的可申請任務"

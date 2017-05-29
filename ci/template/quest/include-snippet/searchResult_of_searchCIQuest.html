@@ -55,8 +55,12 @@
         <span class="col-xs-2 text-right">{{ matchedCIQuest.intRewardPV }} PV</span>
         <!-- 任務QID 隱藏 -->
         <input type="hidden" class="strQID" name="strQID" value={{ matchedCIQuest.strQID }}></input>
-        <!-- 檢視 按鈕 -->
+        <!-- 檢視 按鈕 (未登入則顯示登入按鈕)-->
+        {% if request.user.is_authenticated %}
         <a type="button" class="btn btn-default btn-sm btnViewCIQuest col-xs-1 text-center" href="javascript: void(0);">檢視</a>
+        {% else %}
+        <a type="button" class="btn btn-default btn-sm col-xs-1 text-center" href="/accounts/login/">需先登入</a>
+        {% endif %}
     </li>
     {% endfor %}
 </ul>
