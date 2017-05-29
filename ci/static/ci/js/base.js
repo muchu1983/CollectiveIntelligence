@@ -10,7 +10,7 @@
     
     function initBase() {
         initTooltip();
-        retrieveLstDicFollower();
+        //retrieveLstDicFollower();
         initBtnClearLeader();
         initBtnCloseQuestViewerIFrame();
     };
@@ -20,7 +20,7 @@
         $("[data-tooltip=on]").tooltip(); 
     };
     
-    //讀取追隨者物件清單
+    //讀取追隨者物件清單 (棄用，暫時保留)
     function retrieveLstDicFollower(){
         //POST 資料
         dicPostData = {

@@ -91,8 +91,28 @@
             <div class="col-xs-4 text-center">
                 <!-- 圓盤傳送帶 -->
                 <div id="carouselUserHostFollower" class="carousel slide" data-ride="carousel">
-                    <!-- 追隨者加入點 -->
+                    <!-- 追隨者們 -->
                     <div id="divCarouselInnerWrapper" class="carousel-inner">
+                        {% if userHost.ciuser.follower_set.all.count == 0 %}
+                        <!-- 沒有追隨者 -->
+                        <div class="item row active"><span>沒有追隨者</span></div>
+                        {% else %}
+                        {% for ciuserUserHostFollower in userHost.ciuser.follower_set.all %}
+                        <!-- 第一個 div 加入 active class -->
+                        {% if forloop.counter0 == 0 %}
+                        <div class="item row active">
+                        {% else %}
+                        <div class="item row">
+                        {% endif %}
+                            <div class="text-right col-xs-2">
+                                <img class="img-circle" src="{{ ciuserUserHostFollower.avatarThumbnail.url }}" height="20" width="20">
+                            </div>
+                            <a class="roleFollower text-left col-xs-10" href="/core/ciuserViewer/{{ ciuserUserHostFollower.strCIUserUID }}/">
+                                {{ ciuserUserHostFollower.strDisplayName }}
+                            </a>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
                     <!-- 圓盤傳送帶 右控制器 -->
                     <a class="right carousel-control" href="#carouselUserHostFollower" data-slide="next">

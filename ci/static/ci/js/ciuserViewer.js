@@ -13,7 +13,7 @@
         initCIQuestFilter();
         filterExecutorCIQuest();
         filterInitiatorCIQuest();
-        retrieveLstUserHostDicFollower();
+        //retrieveLstUserHostDicFollower();
     };
     
     //初始化 任務連結
@@ -70,7 +70,7 @@
         }
     };
     
-    //讀取 userHost 的追隨者物件清單
+    //讀取 userHost 的追隨者物件清單 (棄用，暫時保留)
     function retrieveLstUserHostDicFollower(){
         //POST 資料
         dicPostData = {
