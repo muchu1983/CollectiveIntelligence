@@ -3,6 +3,8 @@
 
 <!-- override block_head -->
 {% block block_head%}
+{% load recaptcha2 %}
+{% recaptcha_explicit_support %}
 {% endblock block_head%}
 
 <!-- override block_content -->
@@ -28,6 +30,7 @@
         {{ formRegisterUser.password2 }}
     </div>
     <!-- 我不是機器人 -->
+    {% recaptcha_explicit_init "zh-TW" %}
     <div>
         {{ formRegisterUser.captcha }}
     </div>

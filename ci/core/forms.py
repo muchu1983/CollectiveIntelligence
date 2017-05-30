@@ -9,18 +9,24 @@ This file is part of BSD license
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from captcha.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 from core.models import CIUser
 
 #用戶註冊表單
 class RegisterUserForm(UserCreationForm):
 
-    captcha = ReCaptchaField(
+    captcha = ReCaptchaField(widget=ReCaptchaWidget(
+        explicit=True,
+        theme="light",
+        type="image",
+        size=None,
+        tabindex=0,
         attrs={
             "theme": "clean",
             "lang": "zh-TW"
         }
-    )
+    ))
     
     #建構子
     def __init__(self, *args, **kwargs):

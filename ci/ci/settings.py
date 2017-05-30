@@ -48,11 +48,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "storages",
-    "channels",
-    "tinymce",
-    "captcha",
-    "imagekit",
+    "storages",#media files upload to
+    "channels",#send async message group 
+    "tinymce",#textarea editor
+    "snowpenguin.django.recaptcha2",#google recaptcha v2
+    "imagekit",#avatar image auto trim
     "core",
     "chat",
     "quest",
@@ -165,7 +165,6 @@ TINYMCE_COMPRESSOR = True
 #google reCAPTCHA
 RECAPTCHA_PUBLIC_KEY = "6LegZiEUAAAAAPmTPfbp1OJ9ICnNZJ_LsaDbQfaG"
 RECAPTCHA_PRIVATE_KEY = "6LegZiEUAAAAAOs0tBCYmtHJ7YF_L_KqJFQ1vYV_"
-NOCAPTCHA = True
 
 #django-storages (FTPStorage)
 DEFAULT_FILE_STORAGE = "storages.backends.ftp.FTPStorage"
