@@ -5,9 +5,9 @@
 {% block block_head %}
 <!-- initNewQuest.html block_head -->
 <!-- css -->
-<link type="text/css" rel="stylesheet" href="/static/ci/css/initNewQuest.css" >
+<link type="text/css" rel="stylesheet" href="/static/ci/css/initNewQuest.css?{% now 'YmdA' %}" >
 <!-- js -->
-<script type="text/javascript" src="/static/ci/js/initNewQuest.js"></script>
+<script type="text/javascript" src="/static/ci/js/initNewQuest.js?{% now 'YmdA' %}"></script>
 {% endblock block_head %}
 
 <!-- override block_content -->

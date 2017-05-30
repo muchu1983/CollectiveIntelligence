@@ -5,11 +5,11 @@
 {% block block_head %}
 <!-- searchLeader.html block_head -->
 <!-- css -->
-<link type="text/css" rel="stylesheet" href="/static/ci/css/searchCIUser.css" >
-<link type="text/css" rel="stylesheet" href="/static/ci/css/searchLeader.css" >
+<link type="text/css" rel="stylesheet" href="/static/ci/css/searchCIUser.css?{% now 'YmdA' %}" >
+<link type="text/css" rel="stylesheet" href="/static/ci/css/searchLeader.css?{% now 'YmdA' %}" >
 <!-- js -->
-<script type="text/javascript" src="/static/ci/js/searchCIUser.js"></script>
-<script type="text/javascript" src="/static/ci/js/searchLeader.js"></script>
+<script type="text/javascript" src="/static/ci/js/searchCIUser.js?{% now 'YmdA' %}"></script>
+<script type="text/javascript" src="/static/ci/js/searchLeader.js?{% now 'YmdA' %}"></script>
 {% endblock block_head %}
 
 <!-- override block_hidden -->

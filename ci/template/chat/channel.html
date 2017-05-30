@@ -5,10 +5,10 @@
 {% block block_head %}
 <!-- channel.html block_head -->
 <!-- css -->
-<link type="text/css" rel="stylesheet" href="/static/ci/css/channel.css" >
+<link type="text/css" rel="stylesheet" href="/static/ci/css/channel.css?{% now 'YmdA' %}" >
 <!-- js -->
-<script type="text/javascript" src="/static/ci/js/websocket_utility.js"></script>
-<script type="text/javascript" src="/static/ci/js/channel.js"></script>
+<script type="text/javascript" src="/static/ci/js/websocket_utility.js?{% now 'YmdA' %}"></script>
+<script type="text/javascript" src="/static/ci/js/channel.js?{% now 'YmdA' %}"></script>
 <script type="text/javascript">
     var strHostCIUserUID = "{{ userHost.ciuser.strCIUserUID }}";
     var strCsrfToken = "{{ csrf_token }}";

@@ -4,10 +4,10 @@
 <!-- override block_head -->
 {% block block_head %}
 <!-- css -->
-<link type="text/css" rel="stylesheet" href="/static/ci/css/main.css" >
+<link type="text/css" rel="stylesheet" href="/static/ci/css/main.css?{% now 'YmdA' %}" >
 <!-- js -->
-<script type="text/javascript" src="/static/ci/js/main.js"></script>
-<script type="text/paperscript" src="/static/ci/js/canvas_quest_state_demo.paper.js" canvas="canvas_quest_state_demo"></script>
+<script type="text/javascript" src="/static/ci/js/main.js?{% now 'YmdA' %}"></script>
+<script type="text/paperscript" src="/static/ci/js/canvas_quest_state_demo.paper.js?{% now 'YmdA' %}" canvas="canvas_quest_state_demo"></script>
 {% endblock block_head %}
 
 <!-- override block_content -->

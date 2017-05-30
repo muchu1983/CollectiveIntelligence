@@ -4,7 +4,7 @@
 <!-- override block_head -->
 {% block block_head %}
 <!-- js -->
-<script type="text/javascript" src="/static/ci/js/profiles.js"></script>
+<script type="text/javascript" src="/static/ci/js/profiles.js?{% now 'YmdA' %}"></script>
 {% endblock block_head %}
 
 <!-- override block_content -->

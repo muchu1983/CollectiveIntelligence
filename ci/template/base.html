@@ -27,7 +27,7 @@ This file is part of BSD license
     <!-- Font Awesome-->
     <link type="text/css" rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
     <!-- ci -->
-    <link type="text/css" rel="stylesheet" href="/static/ci/css/base.css">
+    <link type="text/css" rel="stylesheet" href="/static/ci/css/base.css?{% now 'YmdA' %}">
     <!-- js -->
     <!-- jQuery -->
     <script type="text/javascript" src="/static/jquery-3.1.1/jquery-3.1.1.min.js"></script>
@@ -44,7 +44,7 @@ This file is part of BSD license
     <!-- tinymce -->
     <script type="text/javascript" src="/static/tinymce_4.6.1/tinymce/js/tinymce/tinymce.min.js"></script>
     <!-- ci -->
-    <script type="text/javascript" src="/static/ci/js/base.js"></script>
+    <script type="text/javascript" src="/static/ci/js/base.js?{% now 'YmdA' %}"></script>
     <!-- custom script in this page -->
     <script type="text/javascript">
         var strSessionKey = "{{ request.session.session_key }}";
