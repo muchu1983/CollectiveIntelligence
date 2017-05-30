@@ -36,10 +36,10 @@ class CIUser(models.Model):
     leader = models.ForeignKey("self", default=None, null=True, related_name="follower_set", on_delete=models.SET_NULL)
     #頭像
     avatarThumbnail = ProcessedImageField(
-        default="ci/img/avatars/default-thumbnail.jpg",
+        default="ci/img/avatars/default-thumbnail.png",
         upload_to=renameAvatarThumbnailFilePath,
         processors=[ResizeToFill(100, 100)],
-        format="JPEG",
+        format="PNG",
         options={"quality": 90},
         storage=FTPStorage()
     )
