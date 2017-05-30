@@ -30,7 +30,7 @@
     
     //初始化 任務列表過瀘器
     function initCIQuestFilter(){
-        //接受的任務 列表
+        //執行的任務 列表
         $(".filterExecutorCIQuest input[type=checkbox]").click(function () {
             filterExecutorCIQuest();
         });
@@ -40,7 +40,7 @@
         });
     };
     
-    //過瀘 接受的任務 列表
+    //過瀘 執行的任務 列表
     function filterExecutorCIQuest(){
         if ($(".filterExecutorCIQuest input[type=checkbox]:checked").length) {
             //有勾選

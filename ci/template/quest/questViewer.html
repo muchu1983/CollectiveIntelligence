@@ -103,27 +103,27 @@
     <!-- 任務狀態 - new -->
         {% if isInitiator %}
         <!-- 發起人 -->
-        <button class="btn btn-danger btn-xs" type="button" disabled="true">
+        <button class="btn btn-danger btn-sm" type="button" disabled="true">
             <span class="glyphicon glyphicon-thumbs-up"></span>
             <span class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
         </button>
-        <button id="btnDeleteQuest" class="btn btn-danger btn-xs" type="button">
+        <button id="btnDeleteQuest" class="btn btn-danger btn-sm" type="button">
             刪除任務
         </button>
         {% else %}
         <!-- 除發起人以外的人 -->
             {% if request.user.ciuser in questTarget.setLikedCIUser.all %}
-                <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-xs" type="button" data-tooltip="on" title="取消喜歡">
+                <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-sm" type="button" data-tooltip="on" title="取消喜歡">
                     <span class="glyphicon glyphicon-thumbs-up"></span>
                     <span id="strLikedCount" class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
                 </button>
             {% else %}
-                <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-xs" type="button" data-tooltip="on" title="我喜歡">
+                <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-sm" type="button" data-tooltip="on" title="我喜歡">
                     <span class="glyphicon glyphicon-thumbs-up"></span>
                     <span id="strLikedCount" class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
                 </button>
             {% endif %}
-        <button id="btnApplyQuest" class="btn btn-danger btn-xs" type="button">
+        <button id="btnApplyQuest" class="btn btn-danger btn-sm" type="button">
             申請執行任務
         </button>
         {% endif %}
@@ -131,15 +131,15 @@
     <!-- 任務狀態 - matching -->
         {% if isInitiator %}
         <!-- 發起人 -->
-        <button id="btnAcceptApplication" class="btn btn-danger btn-xs" type="button">
+        <button id="btnAcceptApplication" class="btn btn-danger btn-sm" type="button">
             接受申請
         </button>
-        <button id="btnRejectApplication" class="btn btn-danger btn-xs" type="button">
+        <button id="btnRejectApplication" class="btn btn-danger btn-sm" type="button">
             拒絕申請
         </button>
         {% elif isExecutor %}
         <!-- 執行人 -->
-        <button id="btnCancelApplication" class="btn btn-danger btn-xs" type="button">
+        <button id="btnCancelApplication" class="btn btn-danger btn-sm" type="button">
             取消申請
         </button>
         {% else %}
@@ -150,15 +150,15 @@
     <!-- 任務狀態 - processing -->
         {% if isInitiator %}
         <!-- 發起人 -->
-        <button id="btnQuestReached" class="btn btn-danger btn-xs" type="button">
+        <button id="btnQuestReached" class="btn btn-danger btn-sm" type="button">
             成功達成目標
         </button>
-        <button id="btnTerminateQuest" class="btn btn-danger btn-xs" type="button">
+        <button id="btnTerminateQuest" class="btn btn-danger btn-sm" type="button">
             終結任務
         </button>
         {% elif isExecutor %}
         <!-- 執行人 -->
-        <button id="btnAbandonQuest" class="btn btn-danger btn-xs" type="button">
+        <button id="btnAbandonQuest" class="btn btn-danger btn-sm" type="button">
             放棄任務
         </button>
         {% else %}
@@ -169,7 +169,7 @@
     <!-- 任務狀態 - complete -->
         {% if isExecutor %}
         <!-- 執行人 -->
-        <button id="btnAccomplishQuest" class="btn btn-danger btn-xs" type="button">
+        <button id="btnAccomplishQuest" class="btn btn-danger btn-sm" type="button">
             完成任務
         </button>
         {% else %}
@@ -180,7 +180,7 @@
     <!-- 任務狀態 - incomplete -->
         {% if isExecutor %}
         <!-- 執行人 -->
-        <button id="btnQuestUnreachable" class="btn btn-danger btn-xs" type="button">
+        <button id="btnQuestUnreachable" class="btn btn-danger btn-sm" type="button">
             任務已失敗
         </button>
         {% else %}
