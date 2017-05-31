@@ -103,17 +103,32 @@
     function initBtnSendChatMsg(){
         $("#btnSendChatMsg").click(function(){
             //訊息內容
-            var strChatMsg = $("#inputChatMsg").val();
-            $("#inputChatMsg").val(""); //清除輸入框
-            //訊息對齊方向
-            var strMsgAlign = null;
-            if ($("#checkboxMsgAlign").prop("checked")) {
-                strMsgAlign = "align:right";
-            } else {
-                strMsgAlign = "align:left";
+            var strChatMsg = $("#inputChatMsg").html().trim();
+            //檢查訊息長度 最大2048
+            if (strChatMsg.length > 2048) {
+                $("#dialogInputChatMsgTooLong").dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 300,
+                    modal: true,
+                    buttons: {
+                        "確定": function(){
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            }else{
+                $("#inputChatMsg").html(""); //清除輸入框
+                //訊息對齊方向
+                var strMsgAlign = null;
+                if ($("#checkboxMsgAlign").prop("checked")) {
+                    strMsgAlign = "align:right";
+                } else {
+                    strMsgAlign = "align:left";
+                };
+                jsonChatMsg = buildWsJsonMessage("type:yell", strChatMsg, strMsgAlign);
+                sendWsMessage(wsChannel, jsonChatMsg);
             };
-            jsonChatMsg = buildWsJsonMessage("type:yell", strChatMsg, strMsgAlign);
-            sendWsMessage(wsChannel, jsonChatMsg);
         });
     }
     
@@ -121,11 +136,14 @@
     function initKeyBindings(){
         //輸入框綁定 Enter 鍵
         $("#inputChatMsg").keyup(function(eventKey){
-            var code = eventKey.which;
+            var code = eventKey.which || e.which;
             if (code==13) {
                 eventKey.preventDefault();
+                $("br,p,div", this).replaceWith(" ");
                 $("#btnSendChatMsg").click();
             };
+        }).on("paste",function(){
+            $("br,p,div", this).replaceWith(" ");
         });
     };
     

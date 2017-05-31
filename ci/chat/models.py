@@ -16,7 +16,7 @@ class CIChatMessage(models.Model):
     #多對一 發送者
     ciuserSender = models.ForeignKey(CIUser, on_delete=models.SET_NULL, null=True)
     #訊息內容
-    strMessageContent = models.CharField(max_length=255, null=False)
+    strMessageContent = models.CharField(max_length=2048, null=False)
     #訊息對齊方向
     strMessageAlign = models.CharField(max_length=255, null=False)
     #訊息角色

@@ -148,3 +148,13 @@ left: 5%;
     color: coral;
     background-color: lavender;
 }
+/*訊息輸入框 改為單行輸入*/
+[contenteditable=true].singleLine {
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+}
+[contenteditable=true].singleLine * {
+    display: inline;
+    white-space: nowrap;
+}
