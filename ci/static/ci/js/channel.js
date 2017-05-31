@@ -44,6 +44,7 @@
         //再執行初始化...
         initConnectToWebsocket();
         initHandleWsMessage();
+        initEmoji();
         initBtnSendChatMsg();
         initKeyBindings();
     };
@@ -96,6 +97,13 @@
             };
             //捲動至最下層
             $("#ulChatMessage").animate({scrollTop: $("#ulChatMessage").prop("scrollHeight")}, 500);
+        });
+    };
+    
+    //初始化 顏文字
+    function initEmoji(){
+        $(".liInsertEmojiIcon").click(function(){
+            $("#inputChatMsg").append($(this).html());
         });
     };
     
