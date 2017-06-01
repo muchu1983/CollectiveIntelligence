@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
 <url>
-  <loc>http://www.c8ei10e.com/</loc>
+    <loc>http://www.c8ei10e.com/</loc>
+    <lastmod>2017-05-31T12:26:02+00:00</lastmod>
 </url>
 <url>
-  <loc>http://www.c8ei10e.com/accounts/login/</loc>
-  <lastmod>2017-05-23T12:26:02+00:00</lastmod>
+    <loc>http://www.c8ei10e.com/core/main/</loc>
+    <lastmod>2017-05-31T12:26:02+00:00</lastmod>
 </url>
 <url>
-  <loc>http://www.c8ei10e.com/core/searchCIUser/</loc>
+    <loc>http://www.c8ei10e.com/accounts/register/</loc>
+    <lastmod>2017-05-31T12:26:02+00:00</lastmod>
 </url>
 <url>
-  <loc>http://www.c8ei10e.com/core/main/</loc>
+    <loc>http://www.c8ei10e.com/accounts/login/</loc>
+    <lastmod>2017-05-31T12:26:02+00:00</lastmod>
 </url>
 <url>
-  <loc>http://www.c8ei10e.com/accounts/register/</loc>
+    <loc>http://www.c8ei10e.com/core/searchCIUser/</loc>
+    <lastmod>2017-05-31T12:26:02+00:00</lastmod>
 </url>
 <url>
-  <loc>http://www.c8ei10e.com/accounts/login/</loc>
-  <lastmod>2017-05-23T12:26:07+00:00</lastmod>
+    <loc>http://www.c8ei10e.com/quest/searchCIQuest/</loc>
+    <lastmod>2017-05-31T12:26:02+00:00</lastmod>
 </url>
 </urlset>
