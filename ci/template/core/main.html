@@ -52,25 +52,31 @@
 <!-- override block_footer -->
 {% block block_footer %}
 <!-- main.html block_footer -->
-<div class="row text-left">
-    <!-- 填空 -->
-    <div class="col-xs-7"></div>
-    <!-- 註冊用戶總數 -->
-    <h2 class="col-xs-2">{{ intRegisteredCIUser }}</h2>
-    <!-- 發起任務總數 -->
-    <h2 class="col-xs-2">{{ intInitializedCIQuest }}</h2>
-    <!-- 填空 -->
-    <div class="col-xs-1"></div>
-</div>
-<div class="row text-left">
-    <!-- 填空 -->
-    <div class="col-xs-7"></div>
-    <!-- 註冊用戶總數 -->
-    <h5 class="col-xs-2">註冊用戶</h2>
-    <!-- 發起任務總數 -->
-    <h5 class="col-xs-2">任務</h2>
-    <!-- 填空 -->
-    <div class="col-xs-1"></div>
+<div class="row">
+    <div class="col-xs-6 row">
+    </div>
+    <div class="col-xs-6 row">
+        <div class="row text-left">
+            <!-- 填空 -->
+            <div class="col-xs-1"></div>
+            <!-- 註冊用戶總數 -->
+            <h2 class="col-xs-5">{{ intRegisteredCIUser }}</h2>
+            <!-- 發起任務總數 -->
+            <h2 class="col-xs-5">{{ intInitializedCIQuest }}</h2>
+            <!-- 填空 -->
+            <div class="col-xs-1"></div>
+        </div>
+        <div class="row text-left">
+            <!-- 填空 -->
+            <div class="col-xs-1"></div>
+            <!-- 註冊用戶總數 -->
+            <h5 class="col-xs-5">註冊用戶</h2>
+            <!-- 發起任務總數 -->
+            <h5 class="col-xs-5">任務</h2>
+            <!-- 填空 -->
+            <div class="col-xs-1"></div>
+        </div>
+    </div>
 </div>
 {{ block.super }} <!-- 複製上層 template block_hidden 的內容 -->
 {% endblock block_footer %}
