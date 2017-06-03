@@ -25,6 +25,9 @@
             $("#iframeQuestViewer").attr("src", "/quest/questViewer/" + strQID);
             //popup questViewer iframe
             $("#divQuestViewerIFrame").removeClass("divHiddenQuestViewerIFrame").addClass("divShowQuestViewerIFrame");
+            //更改任務讀取狀態為 已讀取最新狀態
+            $(this).prev().prev().prev(".fa").removeClass("fa-envelope").addClass("fa-envelope-open-o");
+            $(this).prev().prev().prev(".fa").attr("title", "已讀取最新狀態");
         });
     };
     
