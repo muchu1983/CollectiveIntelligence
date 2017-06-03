@@ -11,6 +11,8 @@ This file is part of BSD license
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-color: lavender;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 .jumbotron h1{
     color: lavender;
