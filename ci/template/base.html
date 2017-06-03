@@ -126,7 +126,7 @@ This file is part of BSD license
                         {% if request.user.is_authenticated  %}
                         <li class="text-info text-center row">
                             <div class="col-md-3 col-xs-3">
-                                <img class="img-circle" src="{{ request.user.ciuser.avatarThumbnail.url }}" height="50" width="50">
+                                <img class="img-circle" src="{{ request.user.ciuser.avatarThumbnail.url }}" height="150%" width="150%">
                             </div>
                             <h4 class="col-md-9 col-xs-9">{{ request.user.ciuser.strDisplayName }}</h4>
                         </li>
