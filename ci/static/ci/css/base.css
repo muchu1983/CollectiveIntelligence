@@ -6,8 +6,24 @@ This file is part of BSD license
 <https://opensource.org/licenses/BSD-3-Clause>
 */
 /* body */
-body {
-    height: 100%;
+html,body {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+/* bootstrap container */
+.container-fluid,.container {
+   margin: 0;
+   padding: 0;
+}
+/* bootstrap row */
+.row{
+    margin: 0;
+}
+/* bootstrap col */
+[class*="col-"] {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
 }
 /* 導覽按鈕 */
 .navbar-nav > li{

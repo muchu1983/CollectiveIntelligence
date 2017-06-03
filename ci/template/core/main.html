@@ -10,18 +10,25 @@
 <script type="text/paperscript" src="/static/ci/js/canvas_quest_state_demo.paper.js?{% now 'YmdA' %}" canvas="canvas_quest_state_demo"></script>
 {% endblock block_head %}
 
+<!-- override block_before_main_container -->
+{% block block_before_main_container %}
+<!-- main.html block_before_main_container -->
+<!-- 首頁超大屏幕 -->
+<div class="jumbotron">
+    <div class="container">
+        <img class="img-rounded" src="/static/ci/img/logo_square.png" height="200" width="200">
+        <h1>C8eI10e - 合眾人之智，成一人之事</h1>
+        <p>你眼裡的驚滔駭浪，或許只是別人碗裡的瓊漿</p>
+        <div class="text-center">
+            <a type="button" class="btn btn-primary btn-lg" href="/quest/searchCIQuest/">搜尋任務</a>
+        </div>
+    </div>
+</div>
+{% endblock block_before_main_container %}
+
 <!-- override block_content -->
 {% block block_content %}
 <!-- main.html block_content -->
-<!-- 首頁超大屏幕 -->
-<div class="jumbotron">
-    <img class="img-rounded" src="/static/ci/img/logo_square.png" height="200" width="200">
-    <h1>C8eI10e - 合眾人之智，成一人之事</h1>
-    <p>你眼裡的驚滔駭浪，或許只是別人碗裡的瓊漿</p>
-    <div class="text-center">
-        <a type="button" class="btn btn-primary btn-lg" href="/quest/searchCIQuest/">搜尋任務</a>
-    </div>
-</div>
 <!-- 任務狀態展示 -->
 <h4 class="text-center">任務狀態互動展示</h4>
 <div class="row text-center">
