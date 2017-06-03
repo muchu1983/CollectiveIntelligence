@@ -195,19 +195,19 @@
                     {% endif %}
                     <!-- 任務狀態圖示 -->
                     {% if matchedCIQuest.strState == "new" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-exclamation-sign text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-exclamation-sign text-center col-xs-1" data-tooltip="on" title="尚無人申請"></span>
                     {% elif matchedCIQuest.strState == "matching" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-plus-sign text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-plus-sign text-center col-xs-1" data-tooltip="on" title="配對中"></span>
                     {% elif matchedCIQuest.strState == "processing" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-question-sign text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-question-sign text-center col-xs-1" data-tooltip="on" title="正在執行中"></span>
                     {% elif matchedCIQuest.strState == "complete" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-ok-sign text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-ok-sign text-center col-xs-1" data-tooltip="on" title="目標達成"></span>
                     {% elif matchedCIQuest.strState == "incomplete" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-remove-sign text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-remove-sign text-center col-xs-1" data-tooltip="on" title="目標已無法達成"></span>
                     {% elif matchedCIQuest.strState == "end_success" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-ok text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-ok text-center col-xs-1" data-tooltip="on" title="已終結-成功"></span>
                     {% elif matchedCIQuest.strState == "end_failure" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-remove text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-remove text-center col-xs-1" data-tooltip="on" title="已終結-失敗"></span>
                     {% else %}
                     {% endif %}
                     <!-- 任務QID 隱藏 -->
@@ -283,19 +283,19 @@
                     {% endif %}
                     <!-- 任務狀態圖示 -->
                     {% if matchedCIQuest.strState == "new" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-exclamation-sign text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-exclamation-sign text-center col-xs-1" data-tooltip="on" title="尚無人申請"></span>
                     {% elif matchedCIQuest.strState == "matching" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-plus-sign text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-plus-sign text-center col-xs-1" data-tooltip="on" title="配對中"></span>
                     {% elif matchedCIQuest.strState == "processing" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-question-sign text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-question-sign text-center col-xs-1" data-tooltip="on" title="正在執行中"></span>
                     {% elif matchedCIQuest.strState == "complete" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-ok-sign text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-ok-sign text-center col-xs-1" data-tooltip="on" title="目標達成"></span>
                     {% elif matchedCIQuest.strState == "incomplete" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-remove-sign text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-remove-sign text-center col-xs-1" data-tooltip="on" title="目標已無法達成"></span>
                     {% elif matchedCIQuest.strState == "end_success" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-ok text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-ok text-center col-xs-1" data-tooltip="on" title="已終結-成功"></span>
                     {% elif matchedCIQuest.strState == "end_failure" %}
-                    <span class="spanQuestStateIcon glyphicon glyphicon-remove text-center col-xs-1"></span>
+                    <span class="spanQuestStateIcon glyphicon glyphicon-remove text-center col-xs-1" data-tooltip="on" title="已終結-失敗"></span>
                     {% else %}
                     {% endif %}
                     <!-- 任務QID 隱藏 -->
