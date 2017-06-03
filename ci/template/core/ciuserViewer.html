@@ -189,9 +189,9 @@
                 <li class="list-group-item liExecutorCIQuest row" data-quest-state={{ matchedCIQuest.strState }}>
                     <!-- 執行人 已檢視/未檢視 -->
                     {% if matchedCIQuest.isExecutorViewed %}
-                    <span class="fa fa-envelope-open-o text-center col-xs-1"></span>
+                    <span class="fa fa-envelope-open-o text-center col-xs-1" data-tooltip="on" title="已讀取最新狀態"></span>
                     {% else %}
-                    <span class="fa fa-envelope text-center col-xs-1"></span>
+                    <span class="fa fa-envelope text-center col-xs-1" data-tooltip="on" title="狀態變更了"></span>
                     {% endif %}
                     <!-- 任務狀態圖示 -->
                     {% if matchedCIQuest.strState == "new" %}
@@ -277,9 +277,9 @@
                 <li class="list-group-item liInitiatorCIQuest row" data-quest-state={{ matchedCIQuest.strState }}>
                     <!-- 發起人 已檢視/未檢視 -->
                     {% if matchedCIQuest.isInitiatorViewed %}
-                    <span class="fa fa-envelope-open-o text-center col-xs-1"></span>
+                    <span class="fa fa-envelope-open-o text-center col-xs-1" data-tooltip="on" title="已讀取最新狀態"></span>
                     {% else %}
-                    <span class="fa fa-envelope text-center col-xs-1"></span>
+                    <span class="fa fa-envelope text-center col-xs-1" data-tooltip="on" title="狀態變更了"></span>
                     {% endif %}
                     <!-- 任務狀態圖示 -->
                     {% if matchedCIQuest.strState == "new" %}
