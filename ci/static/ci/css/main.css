@@ -12,6 +12,11 @@ This file is part of BSD license
     background-repeat: no-repeat;
     background-color: lavender;
 }
+.jumbotron h1{
+    color: lavender;
+    font-family: Microsoft JhengHei;
+    font-weight: bold;
+}
 /*任務狀態展示*/
 canvas#canvas_quest_state_demo{
     border-style: solid;
