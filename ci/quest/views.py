@@ -117,9 +117,15 @@ def questViewer(request, strQID=None):
         if request.user.ciuser.strCIUserUID == questTarget.ciuserInitiator.strCIUserUID:
             #request 為 發起人
             isInitiator = True
+            #設定 發起人 已檢視
+            questTarget.isInitiatorViewed = True
+            questTarget.save()
         if questTarget.ciuserExecutor and request.user.ciuser.strCIUserUID == questTarget.ciuserExecutor.strCIUserUID:
             #request 為 執行人
             isExecutor = True
+            #設定 執行人 已檢視
+            questTarget.isExecutorViewed = True
+            questTarget.save()
         return render(request, "quest/questViewer.html", locals())
     else:
         return render(request, "core/notice.html", {"strMsg": "此任務已經不存在了！"})

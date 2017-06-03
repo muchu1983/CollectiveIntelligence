@@ -29,6 +29,10 @@ class CIQuest(models.Model):
     setCIQuestTag = models.ManyToManyField(CIQuestTag)
     #任務狀態
     strState = models.CharField(max_length=255, null=False)
+    #發起人 已檢視
+    isInitiatorViewed = models.BooleanField(default=True, null=False)
+    #執行人 已檢視
+    isExecutorViewed = models.BooleanField(default=True, null=False)
     #任務標題
     strHeadline = models.CharField(max_length=255, null=False)
     #任務內容

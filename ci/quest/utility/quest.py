@@ -77,6 +77,8 @@ class QuestUtility:
             #儲存 ciuserExecutor 及 strState
             questTarget.ciuserExecutor = ciuserRequest
             questTarget.strState = "matching"
+            #設定 發起人 未檢視
+            questTarget.isInitiatorViewed = False
             questTarget.save()
         
     """ 狀態 matching (已有人 申請執行任務 配對中) """
@@ -87,6 +89,8 @@ class QuestUtility:
         if questTarget.ciuserInitiator == ciuserRequest and questTarget.strState == "matching":
             #儲存 strState
             questTarget.strState = "processing"
+            #設定 執行人 未檢視
+            questTarget.isExecutorViewed = False
             questTarget.save()
             
     #拒絕申請
@@ -107,6 +111,8 @@ class QuestUtility:
             #儲存 ciuserExecutor 及 strState
             questTarget.ciuserExecutor = None
             questTarget.strState = "new"
+            #設定 發起人 未檢視
+            questTarget.isInitiatorViewed = False
             questTarget.save()
     
     """ 狀態 processing (已完成配對，正在執行中) """
@@ -123,6 +129,8 @@ class QuestUtility:
             #儲存 ciuserExecutor 及 strState
             questTarget.ciuserExecutor = None
             questTarget.strState = "new"
+            #設定 發起人 未檢視
+            questTarget.isInitiatorViewed = False
             questTarget.save()
     
     #成功達成目標
@@ -132,6 +140,8 @@ class QuestUtility:
         if questTarget.ciuserInitiator == ciuserRequest and questTarget.strState == "processing":
             #儲存 strState
             questTarget.strState = "complete"
+            #設定 執行人 未檢視
+            questTarget.isExecutorViewed = False
             questTarget.save()
             
     #終結任務
@@ -141,6 +151,8 @@ class QuestUtility:
         if questTarget.ciuserInitiator == ciuserRequest and questTarget.strState == "processing":
             #儲存 strState
             questTarget.strState = "incomplete"
+            #設定 執行人 未檢視
+            questTarget.isExecutorViewed = False
             questTarget.save()
             #扣除 發起人 個人PV，扣除數量為本任務的 1/2 獎勵PV 值
             questTarget.ciuserInitiator.intPointVolume = questTarget.ciuserInitiator.intPointVolume-questTarget.intRewardPV/2
