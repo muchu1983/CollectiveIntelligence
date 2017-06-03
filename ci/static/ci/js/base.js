@@ -117,8 +117,6 @@
             $("#divQuestViewerIFrame").removeClass("divShowQuestViewerIFrame").addClass("divHiddenQuestViewerIFrame");
             //設定 questViewer iframe src
             $("#iframeQuestViewer").attr("src", "about:blank");
-            //更新頁面
-            window.location.reload();
         });
     };
     
