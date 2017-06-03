@@ -7,6 +7,9 @@ This file is part of BSD license
 */
 /*超大屏幕*/
 .jumbotron{
+    background-image: url("/static/ci/img/jumbotron_bg.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     background-color: lavender;
 }
 /*任務狀態展示*/
