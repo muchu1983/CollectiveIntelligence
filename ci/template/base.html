@@ -61,45 +61,45 @@ This file is part of BSD license
     <!-- base.html block_header -->
     <!-- 導覽列 -->
     <nav class="navbar navbar row">
-        <div class="container-fluid col-xs-12 row">
+        <div class="container-fluid col-md-12 col-xs-12 row">
             <!-- 靠左 nav -->
-            <ul class="nav navbar-nav navbar-left col-xs-6 row">
-                <li class="col-xs-2 text-right">
+            <ul class="nav navbar-nav navbar-left col-md-6 col-xs-6 row">
+                <li class="col-md-2 col-xs-4 text-right">
                     <!-- 團隊 toggle button -->
                     <a type="button" data-toggle="collapse" href="#raidPanel" data-tooltip="on" title="團隊">
                         <span class="fa fa-users spanNavbarIcon"></span>
                     </a>
                 </li>
                 <!-- 首頁 -->
-                <li class="col-xs-4 text-left">
+                <li class="col-md-4 col-xs-8 text-left">
                     <a type="button" href="/core/main/" data-tooltip="on" title="首頁">
                         <img class="img-rounded" src="/static/ci/img/logo_rect.png" height="30" width="150">
                     </a>
                 </li>
                 <!-- 填空 -->
-                <li class="col-xs-6">
+                <li class="col-md-6 hidden-xs-down">
                 </li>
             </ul>
             <!-- 靠右 nav -->
-            <ul class="nav navbar-nav navbar-right col-xs-6 row">
+            <ul class="nav navbar-nav navbar-right col-md-6 col-xs-6 row">
                 <!-- 填空 -->
-                <li class="col-xs-6">
+                <li class="col-md-6 hidden-xs-down">
                 </li>
                 <!-- 搜尋任務 -->
-                <li class="col-xs-2">
+                <li class="col-md-2 col-xs-4">
                     <a class="text-center" type="button" href="/quest/searchCIQuest/" data-tooltip="on" title="搜尋任務">
                         <span class="glyphicon glyphicon-exclamation-sign spanNavbarIcon"></span>
                     </a>
                 </li>
                 <!-- 搜尋用戶 -->
-                <li class="col-xs-2">
+                <li class="col-md-2 col-xs-4">
                     <a class="text-center" type="button" href="/core/searchCIUser/" data-tooltip="on" title="搜尋用戶">
                         <span class="fa fa-address-card spanNavbarIcon"></span>
                     </a>
                 </li>
                 <!-- 語言 dropdown -->
                 <!--
-                <li class="dropdown col-xs-2">
+                <li class="dropdown col-md-2 col-xs-4">
                     <a class="dropdown-toggle text-center" data-toggle="dropdown" href="#" data-tooltip="on" title="語言">
                         <span class="glyphicon glyphicon-globe spanNavbarIcon"></span>
                     </a>
@@ -112,7 +112,7 @@ This file is part of BSD license
                 </li>
                 -->
                 <!-- 帳號 dropdown -->
-                <li class="dropdown col-xs-2">
+                <li class="dropdown col-md-2 col-xs-4">
                     <a class="dropdown-toggle text-center" data-toggle="dropdown" href="#">
                         {% if request.user.is_authenticated  %}
                         <img class="img-circle" src="{{ request.user.ciuser.avatarThumbnail.url }}" height="30" width="30">
@@ -125,10 +125,10 @@ This file is part of BSD license
                     <ul class="dropdown-menu">
                         {% if request.user.is_authenticated  %}
                         <li class="text-info text-center row">
-                            <div class="col-xs-3">
+                            <div class="col-md-3 col-xs-3">
                                 <img class="img-circle" src="{{ request.user.ciuser.avatarThumbnail.url }}" height="50" width="50">
                             </div>
-                            <h4 class="col-xs-9">{{ request.user.ciuser.strDisplayName }}</h4>
+                            <h4 class="col-md-9 col-xs-9">{{ request.user.ciuser.strDisplayName }}</h4>
                         </li>
                         <hr>
                         <li><a href="/core/ciuserViewer/{{ request.user.ciuser.strCIUserUID }}/">我的頻道</a></li>
@@ -174,16 +174,16 @@ This file is part of BSD license
                         <li class="list-group-item row">
                             {% if request.user.is_authenticated  %}
                                 {% if request.user.ciuser.leader %}
-                                <div class="col-xs-1">
+                                <div class="col-md-1 col-xs-1">
                                     <img class="img-circle" src="{{ request.user.ciuser.leader.avatarThumbnail.url }}" height="20" width="20">
                                 </div>
-                                <a class="roleLeader col-xs-5" href="/core/ciuserViewer/{{ request.user.ciuser.leader.strCIUserUID }}/">{{ request.user.ciuser.leader.strDisplayName }}</a>
-                                <span class="col-xs-3">{{ request.user.ciuser.leader.intPointVolume }} PV</span>
-                                <a type="button" class="btn btn-danger btn-xs btnClearLeader col-xs-3" href="javascript: void(0)">停止追隨</a>
+                                <a class="roleLeader col-md-5 col-xs-5" href="/core/ciuserViewer/{{ request.user.ciuser.leader.strCIUserUID }}/">{{ request.user.ciuser.leader.strDisplayName }}</a>
+                                <span class="col-md-3 col-xs-3">{{ request.user.ciuser.leader.intPointVolume }} PV</span>
+                                <a type="button" class="btn btn-danger btn-xs btnClearLeader col-md-3 col-xs-3" href="javascript: void(0)">停止追隨</a>
                                 {% else %}
-                                <span class="col-xs-6">尚無領導人</span>
-                                <span class="col-xs-3"></span>
-                                <a type="button" class="btn btn-primary btn-xs col-xs-3" href="/core/searchLeader/">開始尋找</a>
+                                <span class="col-md-6 col-xs-6">尚無領導人</span>
+                                <span class="col-md-3 col-xs-3"></span>
+                                <a type="button" class="btn btn-primary btn-xs col-md-3 col-xs-3" href="/core/searchLeader/">開始尋找</a>
                                 {% endif %}
                             {% else %}
                             <span>未登入</span>
@@ -192,13 +192,13 @@ This file is part of BSD license
                         <!-- 自己 -->
                         <li class="list-group-item row">
                             {% if request.user.is_authenticated  %}
-                            <div class="col-xs-1">
+                            <div class="col-md-1 col-xs-1">
                                 <img class="img-circle" src="{{ request.user.ciuser.avatarThumbnail.url }}" height="20" width="20">
                             </div>
-                            <a class="roleHost col-xs-5" href="/core/ciuserViewer/{{ request.user.ciuser.strCIUserUID }}/">
+                            <a class="roleHost col-md-5 col-xs-5" href="/core/ciuserViewer/{{ request.user.ciuser.strCIUserUID }}/">
                                 {{ request.user.ciuser.strDisplayName }}
                             </a>
-                            <span class="col-xs-3">{{ request.user.ciuser.intPointVolume }} PV</span>
+                            <span class="col-md-3 col-xs-3">{{ request.user.ciuser.intPointVolume }} PV</span>
                             {% else %}
                             <span>未登入</span>
                             {% endif %}
@@ -207,13 +207,13 @@ This file is part of BSD license
                         <li id="liHiddenMyFollowerAddPoint" class="list-group-item"></li> <!-- 隱藏加入點，已暫時棄用 -->
                         {% for ciuserFollower in request.user.ciuser.follower_set.all %}
                         <li class="list-group-item row">
-                            <div class="col-xs-1">
+                            <div class="col-md-1 col-xs-1">
                                 <img class="img-circle" src="{{ ciuserFollower.avatarThumbnail.url }}" height="20" width="20">
                             </div>
-                            <a class="roleFollower col-xs-5" href="/core/ciuserViewer/{{ ciuserFollower.strCIUserUID }}/">
+                            <a class="roleFollower col-md-5 col-xs-5" href="/core/ciuserViewer/{{ ciuserFollower.strCIUserUID }}/">
                                 {{ ciuserFollower.strDisplayName }}
                             </a>
-                            <span class="col-xs-3">{{ ciuserFollower.intPointVolume }} PV</span>
+                            <span class="col-md-3 col-xs-3">{{ ciuserFollower.intPointVolume }} PV</span>
                         </li>
                         {% endfor %}
                     </ul>
@@ -256,13 +256,13 @@ This file is part of BSD license
         {% block block_footer %}
         <!-- base.html block_footer -->
         <div class="row">
-            <span class="col-xs-4 text-right">Copyright &copy; 2017, MuChu Hsu </span> 
-            <span class="col-xs-4 text-left">
+            <span class="col-md-4 col-xs-4 text-right">Copyright &copy; 2017, MuChu Hsu </span> 
+            <span class="col-md-4 col-xs-4 text-left">
                 <a href="mailto:muchu1983@gmail.com">
                     <font color="red">muchu1983@gmail.com</font>
                 </a>
             </span>
-            <span class="col-xs-4 text-right">ver.20170603 (beta)</span>
+            <span class="col-md-4 col-xs-4 text-right">ver.20170603 (beta)</span>
         </div>
         {% endblock block_footer %}
     </div>
