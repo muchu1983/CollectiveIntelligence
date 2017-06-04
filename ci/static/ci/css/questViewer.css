@@ -26,6 +26,10 @@ This file is part of BSD license
     background-color: black;
     border-top: 2px solid gold;
 }
+/* 申請人列表 */
+#ulApplicantDropupMenu{
+    width: 50vw!important;
+}
 /*互動按鈕*/
 #divQuestInteractiveBtn button{
     

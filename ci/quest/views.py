@@ -18,6 +18,7 @@ from django.http import JsonResponse
 from quest.forms import CIQuestForm
 from quest.models import CIQuest
 from quest.models import CIQuestTag
+from core.utility.raid import RaidUtility
 from quest.utility.quest import QuestUtility
 
 #發起新任務
@@ -76,7 +77,7 @@ def searchCIQuest(request):
     else:
         #尋找可申請任務
         strSearchResult = "目前顯示最新的可申請任務"
-        queryState = Q(strState="new")
+        queryState = Q(strState="new") | Q(strState="matching")
         #最高獎勵TOP5 - 先比獎勵高-低 再比較時間 新-舊
         queryObject = queryState
         qsetNewCIQuestTopReward = CIQuest.objects.filter(queryObject).order_by("-intRewardPV", "-dtCreated").distinct()
@@ -113,7 +114,9 @@ def questViewer(request, strQID=None):
     questTarget = questUtil.getCIQuestByQID(strQID=strQID)
     if questTarget:
         isInitiator = False
+        isApplicant = False
         isExecutor = False
+        #檢查檢視者的身份
         if request.user.ciuser.strCIUserUID == questTarget.ciuserInitiator.strCIUserUID:
             #request 為 發起人
             isInitiator = True
@@ -126,6 +129,9 @@ def questViewer(request, strQID=None):
             #設定 執行人 已檢視
             questTarget.isExecutorViewed = True
             questTarget.save()
+        if request.user.ciuser in questTarget.setCIuserApplicant.all():
+            #request 為 申請人
+            isApplicant = True
         return render(request, "quest/questViewer.html", locals())
     else:
         return render(request, "core/notice.html", {"strMsg": "此任務已經不存在了！"})
@@ -185,12 +191,18 @@ def acceptApplication(request):
     #結果 字串
     strResult = None
     if request.method == "POST":
-        #申請執行任務
         strQID = request.POST.get("strQID", None)
-        questUtil = QuestUtility()
-        questUtil.acceptApplication(ciuserRequest=request.user.ciuser, strQID=strQID)
-        #完成字串
-        strResult = "已完成 接受申請"
+        #檢查申請人
+        strApplicantCIUserUID = request.POST.get("strApplicantCIUserUID", None)
+        raidUtil = RaidUtility()
+        userApplicant = raidUtil.getUserByCIUSerUID(strApplicantCIUserUID)
+        if userApplicant is not None:
+            #接受申請
+            ciuserApplicant = userApplicant.ciuser
+            questUtil = QuestUtility()
+            questUtil.acceptApplication(ciuserRequest=request.user.ciuser, strQID=strQID, ciuserApplicant=ciuserApplicant)
+            #完成字串
+            strResult = "已完成 接受申請"
     else:
         strResult = "只允許 POST 方式操作任務"
     return JsonResponse({"result":strResult}, safe=False)
@@ -201,12 +213,18 @@ def rejectApplication(request):
     #結果 字串
     strResult = None
     if request.method == "POST":
-        #申請執行任務
         strQID = request.POST.get("strQID", None)
-        questUtil = QuestUtility()
-        questUtil.rejectApplication(ciuserRequest=request.user.ciuser, strQID=strQID)
-        #完成字串
-        strResult = "已完成 拒絕申請"
+        #檢查申請人
+        strApplicantCIUserUID = request.POST.get("strApplicantCIUserUID", None)
+        raidUtil = RaidUtility()
+        userApplicant = raidUtil.getUserByCIUSerUID(strApplicantCIUserUID)
+        if userApplicant is not None:
+            #拒絕申請
+            ciuserApplicant = userApplicant.ciuser
+            questUtil = QuestUtility()
+            questUtil.rejectApplication(ciuserRequest=request.user.ciuser, strQID=strQID, ciuserApplicant=ciuserApplicant)
+            #完成字串
+            strResult = "已完成 拒絕申請"
     else:
         strResult = "只允許 POST 方式操作任務"
     return JsonResponse({"result":strResult}, safe=False)
@@ -217,7 +235,7 @@ def cancelApplication(request):
     #結果 字串
     strResult = None
     if request.method == "POST":
-        #申請執行任務
+        #取消申請
         strQID = request.POST.get("strQID", None)
         questUtil = QuestUtility()
         questUtil.cancelApplication(ciuserRequest=request.user.ciuser, strQID=strQID)

@@ -51,7 +51,7 @@
                     {{ questTarget.ciuserExecutor.strDisplayName }}
                 </a>
                 {% else %}
-                <span>尚無人申請</span>
+                <span>尚無人執行</span>
                 {% endif %}
             </span>
         </div>
@@ -103,9 +103,13 @@
     <!-- 任務狀態 - new -->
         {% if isInitiator %}
         <!-- 發起人 -->
-        <button class="btn btn-danger btn-sm" type="button" disabled="true">
+        <button class="btn btn-danger btn-sm disabled" type="button">
             <span class="glyphicon glyphicon-thumbs-up"></span>
             <span class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
+        </button>
+        <button class="btn btn-danger btn-sm disabled" type="button">
+            申請人數
+            <span class="badge">{{ questTarget.setCIuserApplicant.all.count }}</span>
         </button>
         <button id="btnDeleteQuest" class="btn btn-danger btn-sm" type="button">
             刪除任務
@@ -113,17 +117,17 @@
         {% else %}
         <!-- 除發起人以外的人 -->
             {% if request.user.ciuser in questTarget.setLikedCIUser.all %}
-                <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-sm" type="button" data-tooltip="on" title="取消喜歡">
-                    <span class="glyphicon glyphicon-thumbs-up"></span>
-                    <span id="strLikedCount" class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
-                </button>
+            <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-sm" type="button" data-tooltip="on" title="取消喜歡">
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+                <span id="strLikedCount" class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
+            </button>
             {% else %}
-                <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-sm" type="button" data-tooltip="on" title="我喜歡">
-                    <span class="glyphicon glyphicon-thumbs-up"></span>
-                    <span id="strLikedCount" class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
-                </button>
+            <button id="btnLikeOrDislikeQuest" class="btn btn-danger btn-sm" type="button" data-tooltip="on" title="我喜歡">
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+                <span id="strLikedCount" class="badge">{{ questTarget.setLikedCIUser.all.count }}</span>
+            </button>
             {% endif %}
-        <button id="btnApplyQuest" class="btn btn-danger btn-sm" type="button">
+        <button class="btnApplyQuest btn btn-danger btn-sm" type="button">
             申請執行任務
         </button>
         {% endif %}
@@ -131,20 +135,51 @@
     <!-- 任務狀態 - matching -->
         {% if isInitiator %}
         <!-- 發起人 -->
-        <button id="btnAcceptApplication" class="btn btn-danger btn-sm" type="button">
-            接受申請
-        </button>
-        <button id="btnRejectApplication" class="btn btn-danger btn-sm" type="button">
-            拒絕申請
-        </button>
-        {% elif isExecutor %}
-        <!-- 執行人 -->
+        <div class="dropup">
+            <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown" href="#">
+                申請人數
+                <span class="badge">{{ questTarget.setCIuserApplicant.all.count }}</span>
+            </button>
+            <ul id="ulApplicantDropupMenu" class="dropdown-menu dropdown-menu-right">
+                {% for ciuseApplicant in questTarget.setCIuserApplicant.all %}
+                <li>
+                    <div class="row">
+                        <!-- 申請人 頭像 -->
+                        <div class="col-xs-1">
+                            <img class="img-circle" src="{{ ciuseApplicant.avatarThumbnail.url }}" height="20" width="20">
+                        </div>
+                        <!-- 申請人 顯示名稱 -->
+                        <a class="col-xs-5" target="_blank" href="/core/ciuserViewer/{{ ciuseApplicant.strCIUserUID }}/">
+                            {{ ciuseApplicant.strDisplayName }}
+                        </a>
+                        <!-- 按鈕 -->
+                        <div class="col-xs-6">
+                            <!-- 申請人 CIuserUID 隱藏 -->
+                            <input type="hidden" class="strApplicantCIUserUID" name="strApplicantCIUserUID" value={{ ciuseApplicant.strCIUserUID }}></input>
+                            <!-- 接受申請 按鈕 -->
+                            <button class="btnAcceptApplication btn btn-danger btn-xs" type="button">
+                                接受申請
+                            </button>
+                            <!-- 拒絕申請 按鈕 -->
+                            <button class="btnRejectApplication btn btn-danger btn-xs" type="button">
+                                拒絕申請
+                            </button>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% elif isApplicant %}
+        <!-- 申請人 -->
         <button id="btnCancelApplication" class="btn btn-danger btn-sm" type="button">
             取消申請
         </button>
         {% else %}
-        <!-- 非發起人亦非執行人 -->
-        <span>無相關操作</span>
+        <!-- 非發起人亦非申請人 -->
+        <button class="btnApplyQuest btn btn-danger btn-sm" type="button">
+            申請執行任務
+        </button>
         {% endif %}
     {% elif questTarget.strState == "processing" %}
     <!-- 任務狀態 - processing -->

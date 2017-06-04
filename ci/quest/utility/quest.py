@@ -13,9 +13,9 @@ class QuestUtility:
     """
     strState route graph:
     
-               ↓------ cancel ------↑                          ↑-- reached --> "complete" -- accomplish --> "end_success"
+               ↓---- all cancel ----↑                          ↑-- reached --> "complete" -- accomplish --> "end_success"
                ↓                    ↑                          ↑
-    init ----->↓------ reject ------↑                          ↑-- terminate --> "incomplete" -- unreachable --> "end_failure"
+    init ----->↓---- all reject ----↑                          ↑-- terminate --> "incomplete" -- unreachable --> "end_failure"
      ↑         ↓                    ↑                          ↑
    delete -- "new" -- apply --> "matching" -- accept --> "processing"
                ↑                                               ↓
@@ -46,7 +46,7 @@ class QuestUtility:
         questTarget = self.getCIQuestByQID(strQID=strQID)
         isLiked = None
         #確認任務狀態
-        if questTarget.strState == "new":
+        if questTarget.ciuserInitiator != ciuserRequest and questTarget.strState == "new":
             #設定獎勵調整額度
             intPVDelta = 10
             #VIP 加成
@@ -73,9 +73,9 @@ class QuestUtility:
     def applyQuest(self, ciuserRequest=None, strQID=None):
         questTarget = self.getCIQuestByQID(strQID=strQID)
         #確認是否為 除發起人以外的人
-        if questTarget.ciuserInitiator != ciuserRequest and questTarget.strState == "new":
-            #儲存 ciuserExecutor 及 strState
-            questTarget.ciuserExecutor = ciuserRequest
+        if questTarget.ciuserInitiator != ciuserRequest and (questTarget.strState == "new" or questTarget.strState == "matching"):
+            #加入 setCIuserApplicant 及 變更 strState
+            questTarget.setCIuserApplicant.add(ciuserRequest)
             questTarget.strState = "matching"
             #設定 發起人 未檢視
             questTarget.isInitiatorViewed = False
@@ -83,10 +83,16 @@ class QuestUtility:
         
     """ 狀態 matching (已有人 申請執行任務 配對中) """
     #接受申請
-    def acceptApplication(self, ciuserRequest=None, strQID=None):
+    def acceptApplication(self, ciuserRequest=None, strQID=None, ciuserApplicant=None):
         questTarget = self.getCIQuestByQID(strQID=strQID)
-        #確認是否為 發起人
-        if questTarget.ciuserInitiator == ciuserRequest and questTarget.strState == "matching":
+        #確認是否為 發起人 以及 目標申請人是否在申請人列表
+        if questTarget.ciuserInitiator == ciuserRequest and \
+        questTarget.strState == "matching" and \
+        ciuserApplicant in questTarget.setCIuserApplicant.all():
+            #清除申請人列表
+            questTarget.setCIuserApplicant.clear()
+            #設定執行人
+            questTarget.ciuserExecutor = ciuserApplicant
             #儲存 strState
             questTarget.strState = "processing"
             #設定 執行人 未檢視
@@ -94,23 +100,30 @@ class QuestUtility:
             questTarget.save()
             
     #拒絕申請
-    def rejectApplication(self, ciuserRequest=None, strQID=None):
+    def rejectApplication(self, ciuserRequest=None, strQID=None, ciuserApplicant=None):
         questTarget = self.getCIQuestByQID(strQID=strQID)
-        #確認是否為 發起人
-        if questTarget.ciuserInitiator == ciuserRequest and questTarget.strState == "matching":
-            #儲存 ciuserExecutor 及 strState
-            questTarget.ciuserExecutor = None
-            questTarget.strState = "new"
-            questTarget.save()
+        #確認是否為 發起人 以及 目標申請人是否在申請人列表
+        if questTarget.ciuserInitiator == ciuserRequest and \
+        questTarget.strState == "matching" and \
+        ciuserApplicant in questTarget.setCIuserApplicant.all():
+            #移除該申請人
+            questTarget.setCIuserApplicant.remove(ciuserApplicant)
+            #儲存 strState
+            if questTarget.setCIuserApplicant.all().count() == 0:
+                questTarget.strState = "new"
+                questTarget.save()
     
     #取消申請
     def cancelApplication(self, ciuserRequest=None, strQID=None):
         questTarget = self.getCIQuestByQID(strQID=strQID)
-        #確認是否為 執行人
-        if questTarget.ciuserExecutor == ciuserRequest and questTarget.strState == "matching":
-            #儲存 ciuserExecutor 及 strState
-            questTarget.ciuserExecutor = None
-            questTarget.strState = "new"
+        #確認是否為 申請人
+        if ciuserRequest in questTarget.setCIuserApplicant.all() and \
+        questTarget.strState == "matching":
+            #移除申請
+            questTarget.setCIuserApplicant.remove(ciuserRequest)
+            #儲存 strState
+            if questTarget.setCIuserApplicant.all().count() == 0:
+                questTarget.strState = "new"
             #設定 發起人 未檢視
             questTarget.isInitiatorViewed = False
             questTarget.save()

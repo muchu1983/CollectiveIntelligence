@@ -136,6 +136,41 @@
     </div>
     <!-- 任務欄 -->
     <div class="col-xs-4">
+        
+        <!-- 申請的任務 -->
+        {% if userHost.ciuser.applicant_quest_set.all.count > 0 %}
+        <div class="row">
+            <div class="bg-primary col-xs-10">
+                申請的任務
+                <span class="badge">{{ userHost.ciuser.applicant_quest_set.all.count }}</span>
+            </div>
+            <!-- 填空 -->
+            <div class="col-xs-2"></div>
+        </div>
+        <div class="row">
+            <!-- 列表 -->
+            <ul class="list-group col-xs-12">
+                {% for matchedCIQuest in userHost.ciuser.applicant_quest_set.all %}
+                <li class="list-group-item row">
+                    <!-- 填空 -->
+                    <span class="col-xs-1"></span>
+                    <!-- 任務狀態圖示 (一定是 matching 才對)-->
+                    {% if matchedCIQuest.strState == "matching" %}
+                    <span class="spanQuestStateIcon glyphicon glyphicon-plus-sign text-center col-xs-1" data-tooltip="on" title="配對中"></span>
+                    {% else %}
+                    {% endif %}
+                    <!-- 任務QID 隱藏 -->
+                    <input type="hidden" class="strQID" name="strQID" value={{ matchedCIQuest.strQID }}></input>
+                    <!-- 任務標題 -->
+                    <a class="linkViewCIQuest text-left col-xs-6" href="javascript: void(0);">{{ matchedCIQuest.strHeadline }}</a>
+                    <!-- 任務獎勵 -->
+                    <span class="text-right col-xs-4">{{ matchedCIQuest.intRewardPV }} PV</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        
         <!-- 執行的任務 -->
         <div class="row">
             <div class="bg-primary col-xs-10">
@@ -220,6 +255,7 @@
                 {% endfor %}
             </ul>
         </div>
+        
         <!-- 發起的任務 -->
         <div class="row">
             <div class="bg-primary col-xs-10">

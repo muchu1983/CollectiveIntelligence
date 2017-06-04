@@ -66,7 +66,7 @@
             }, "json");
         });
         //申請執行任務 btnApplyQuest
-        $("#btnApplyQuest").click(function(){
+        $(".btnApplyQuest").click(function(){
             strDialogSelector = "#dialogConfirmApplyQuest";
             showConfirmDialog(
                 strDialogSelector,
@@ -95,10 +95,11 @@
             );
         });
         //接受申請
-        $("#btnAcceptApplication").click(function(){
+        $(".btnAcceptApplication").click(function(){
             //POST 資料
             dicPostData = {
                 "strQID": strQID,
+                "strApplicantCIUserUID": $(this).prev(".strApplicantCIUserUID").val(),
                 "csrfmiddlewaretoken": strCsrfToken
             };
             console.log(dicPostData);
@@ -110,10 +111,11 @@
             }, "json");
         });
         //拒絕申請
-        $("#btnRejectApplication").click(function(){
+        $(".btnRejectApplication").click(function(){
             //POST 資料
             dicPostData = {
                 "strQID": strQID,
+                "strApplicantCIUserUID": $(this).prev().prev(".strApplicantCIUserUID").val(),
                 "csrfmiddlewaretoken": strCsrfToken
             };
             console.log(dicPostData);

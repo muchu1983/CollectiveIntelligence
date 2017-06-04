@@ -21,12 +21,14 @@ class CIQuest(models.Model):
     strQID = models.CharField(db_index=True, editable=False, max_length=36, default=uuid.uuid1, null=False)
     #多對一 發起人
     ciuserInitiator = models.ForeignKey(CIUser, on_delete=models.CASCADE, related_name="initiator_quest_set", null=False)
+    #多對多 申請人
+    setCIuserApplicant = models.ManyToManyField(CIUser, related_name="applicant_quest_set")
     #多對一 執行人
     ciuserExecutor = models.ForeignKey(CIUser, on_delete=models.SET_NULL, related_name="executor_quest_set", default=None, null=True)
     #多對多 按贊人
-    setLikedCIUser = models.ManyToManyField(CIUser)
+    setLikedCIUser = models.ManyToManyField(CIUser, related_name="liked_quest_set")
     #多對多 任務標籤
-    setCIQuestTag = models.ManyToManyField(CIQuestTag)
+    setCIQuestTag = models.ManyToManyField(CIQuestTag, related_name="tagged_quest_set")
     #任務狀態
     strState = models.CharField(max_length=255, null=False)
     #發起人 已檢視
