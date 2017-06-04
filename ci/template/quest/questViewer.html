@@ -85,19 +85,20 @@
     
     <!-- 任務標籤 -->
     <div id="divQuestTags">
-        <span>標籤：</span>
+        <span class="text-primary">標籤：</span>
         {% for ciquesttag in questTarget.setCIQuestTag.all %}
         <span class="label label-primary">{{ ciquesttag.strName }}</span>
         {% endfor %}
     </div>
     <!-- 任務內容 -->
     <div id="divQuestContent">
+        <h4 class="text-primary">任務內容：</h4>
         {{ questTarget.strContent|safe }}
     </div>
     <!-- 剩餘時間 -->
     <!-- 任務獎勵 -->
     <div id="divQuestReward">
-        <h4>獎勵： <span id="strRewardPV">{{ questTarget.intRewardPV }}</span> PV</h4>
+        <h4 class="text-primary">獎勵： <span id="strRewardPV">{{ questTarget.intRewardPV }}</span> PV</h4>
     </div>
 </div>
 <!-- 互動按鈕區 -->
