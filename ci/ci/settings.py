@@ -35,7 +35,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "www.c8ei10e.com", "114.33.151.48",
-    "localhost", "127.0.0.1"
+    "localhost", "127.0.0.1", "192.168.1.103"
 ]
 
 
