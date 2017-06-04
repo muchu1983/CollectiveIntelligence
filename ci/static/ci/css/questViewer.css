@@ -46,6 +46,7 @@ This file is part of BSD license
 #divQuestState{
     font-size: 50px;
     color: gold;
+    padding: 0;
 }
 /*任務標籤*/
 #divQuestTags{

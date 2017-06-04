@@ -33,10 +33,13 @@
 <!-- questViewer.html block_content -->
 <!-- 主要資料區 -->
 <div id="divQuestMajorData" class="row">
-    <div class="col-xs-8">
+    <div class="col-xs-10">
         <!-- 任務標題 -->
-        <div id="divQuestHeadline" class="text-left">
-            <h4>{{ questTarget.strHeadline }}</h4>
+        <div id="divQuestHeadline" class="row">
+            <h4 class="col-xs-9 text-primary text-center">{{ questTarget.strHeadline }}</h4>
+            <span class="col-xs-3 text-left">
+                申請人數：{{ questTarget.setCIuserApplicant.all.count }}
+            </span>
         </div>
         <!-- 相關角色 -->
         <div id="divQuestRoles" class="row">
@@ -45,7 +48,7 @@
                 {{ questTarget.ciuserInitiator.strDisplayName }}
                 </a>
             </span>
-            <span class="col-xs-6 text-right">執行人：
+            <span class="col-xs-6 text-left">執行人：
                 {% if questTarget.ciuserExecutor %}
                 <a target="_blank" href="/core/ciuserViewer/{{ questTarget.ciuserExecutor.strCIUserUID }}/">
                     {{ questTarget.ciuserExecutor.strDisplayName }}
@@ -57,7 +60,7 @@
         </div>
     </div>
     <!-- 任務狀態 -->
-    <div id="divQuestState" class="col-xs-4 text-right">
+    <div id="divQuestState" class="col-xs-2 text-center">
         <!-- 任務狀態圖示 -->
         {% if questTarget.strState == "new" %}
         <span class="glyphicon glyphicon-exclamation-sign"></span>
