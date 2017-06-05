@@ -8,6 +8,7 @@ This file is part of BSD license
 """
 import datetime
 from datetime import timedelta
+from django.utils import timezone
 
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -84,24 +85,26 @@ def searchCIQuest(request):
         if qsetNewCIQuestTopReward.count() > 5:
             qsetNewCIQuestTopReward = qsetNewCIQuestTopReward[0:5]
         #今天
-        dToday = datetime.date.today()
-        dtTodayMin = datetime.datetime.combine(dToday, datetime.time.min)
-        dtTodayMax = datetime.datetime.combine(dToday, datetime.time.max)
+        dToday = timezone.localtime(timezone.now()).date()
+        timeMin = datetime.time(hour=0, minute=0, second=0, tzinfo=timezone.get_current_timezone())
+        timeMax = datetime.time(hour=23, minute=59, second=59, tzinfo=timezone.get_current_timezone())
+        dtTodayMin = datetime.datetime.combine(dToday, timeMin)
+        dtTodayMax = datetime.datetime.combine(dToday, timeMax)
         queryToday = Q(dtCreated__range=(dtTodayMin, dtTodayMax))
         queryObject = queryState & queryToday
         qsetNewCIQuestToday = CIQuest.objects.filter(queryObject).order_by("-dtCreated").distinct()
         #昨天
         dYesterday = dToday + timedelta(days=-1)
-        dtYesterdayMin = datetime.datetime.combine(dYesterday, datetime.time.min)
-        dtYesterdayMax = datetime.datetime.combine(dYesterday, datetime.time.max)
+        dtYesterdayMin = datetime.datetime.combine(dYesterday, timeMin)
+        dtYesterdayMax = datetime.datetime.combine(dYesterday, timeMax)
         queryYesterday = Q(dtCreated__range=(dtYesterdayMin, dtYesterdayMax))
         queryObject = queryState & queryYesterday
         qsetNewCIQuestYesterday = CIQuest.objects.filter(queryObject).order_by("-dtCreated").distinct()
         #本周(不含今天與昨天)
         dAWeekAgo = dToday + timedelta(days=-7)
         d2DayAgo = dToday + timedelta(days=-2)
-        dtAWeekAgoMin = datetime.datetime.combine(dAWeekAgo, datetime.time.min)
-        dt2DayAgoMax = datetime.datetime.combine(d2DayAgo, datetime.time.max)
+        dtAWeekAgoMin = datetime.datetime.combine(dAWeekAgo, timeMin)
+        dt2DayAgoMax = datetime.datetime.combine(d2DayAgo, timeMax)
         queryWeekly = Q(dtCreated__range=(dtAWeekAgoMin, dt2DayAgoMax))
         queryObject = queryState & queryWeekly
         qsetNewCIQuestWeekly = CIQuest.objects.filter(queryObject).order_by("-dtCreated").distinct()
