@@ -117,8 +117,8 @@ This file is part of BSD license
                         {% if request.user.is_authenticated  %}
                         <img class="img-circle" src="{{ request.user.ciuser.avatarThumbnail.url }}" height="30" width="30">
                         {% else %}
-                        <div data-tooltip="on" title="未登入">
-                            <span class="glyphicon glyphicon-user spanNavbarIcon" ></span>
+                        <div>
+                            <span class="fa fa-user-times spanNavbarIcon"></span>
                         </div>
                         {% endif %}
                     </a>
