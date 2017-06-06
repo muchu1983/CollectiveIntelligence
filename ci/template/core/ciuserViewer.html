@@ -26,15 +26,15 @@
     <div class="col-md-10 col-xs-12 row">
         <!-- 顯示名稱資料列 -->
         <div class="row">
-            <div class="col-md-2 col-xs-2 text-right">
+            <div class="col-md-2 col-xs-3 text-right">
                 <span>顯示名稱：</span>
             </div>
             <!-- 顯示名稱 -->
-            <div class="col-md-4 col-xs-4 text-left">
+            <div class="col-md-4 col-xs-3 text-left">
                 <span class="roleHost">{{ userHost.ciuser.strDisplayName }}</span>
             </div>
             <!-- email -->
-            <div class="col-md-4 col-xs-4 text-right">
+            <div class="col-md-4 col-xs-3 text-right">
                 <span>
                     <a href="mailto:{{ userHost.email }}">
                         {{ userHost.email }}
@@ -42,7 +42,7 @@
                 </span>
             </div>
             <!-- email 認證 -->
-            <div class="col-md-2 col-xs-2 text-left">
+            <div class="col-md-2 col-xs-3 text-left">
                 {% if userHost.ciuser.isEmailVerified %}
                 <span class="glyphicon glyphicon-ok text-success">email：已認證</span>
                 {% else %}
@@ -52,16 +52,16 @@
         </div>
         <!-- 個人 PV 資料列 -->
         <div class="row">
-            <div class="col-md-2 col-xs-2 text-right">
+            <div class="col-md-2 col-xs-3 text-right">
                 <span>個人 PV：</span>
             </div>
             <div class="col-md-1 col-xs-1 text-left">
                 <span>{{ userHost.ciuser.intPointVolume }}</span>
             </div>
-            <div class="col-md-2 col-xs-2 text-right">
+            <div class="col-md-2 col-xs-3 text-right">
                 <span>領導人：</span>
             </div>
-            <div class="col-md-4 col-xs-4 text-left row">
+            <div class="col-md-4 col-xs-5 text-left row">
                 {% if userHost.ciuser.leader %}
                 <!-- 領導人 頭像 -->
                 <div class="col-md-2 col-xs-2 text-right">
@@ -74,21 +74,21 @@
                 {% endif %}
             </div>
             <!-- 填空 -->
-            <div class="3"></div>
+            <div class="col-md-3 hidden-xs-down"></div>
         </div>
         <!-- 團隊 PV 資料列 -->
         <div class="row">
-            <div class="col-md-2 col-xs-2 text-right" data-tooltip="on" title="團隊PV = 個人PV + 所有追隨者的個人PV">
+            <div class="col-md-2 col-xs-3 text-right" data-tooltip="on" title="團隊PV = 個人PV + 所有追隨者的個人PV">
                 <span>團隊 PV：</span>
             </div>
             <div class="col-md-1 col-xs-1 text-left" data-tooltip="on" title="團隊PV = 個人PV + 所有追隨者的個人PV">
                 <span>{{ intRaidPV }}</span>
             </div>
-            <div class="col-md-2 col-xs-2 text-right">
+            <div class="col-md-2 col-xs-3 text-right">
                 <span>追隨者：</span>
             </div>
             <!-- userHost 的追隨者 -->
-            <div class="col-md-4 col-xs-4 text-center">
+            <div class="col-md-4 col-xs-5 text-center">
                 <!-- 圓盤傳送帶 -->
                 <div id="carouselUserHostFollower" class="carousel slide" data-ride="carousel">
                     <!-- 追隨者們 -->
@@ -122,7 +122,7 @@
                 </div>
             </div>
             <!-- 填空 -->
-            <div class="col-md-3 col-xs-3"></div>
+            <div class="col-md-3 hidden-xs-down"></div>
         </div>
     </div>
 </div>
