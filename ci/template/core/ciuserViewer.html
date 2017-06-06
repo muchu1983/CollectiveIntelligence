@@ -30,7 +30,7 @@
                 <span>顯示名稱：</span>
             </div>
             <!-- 顯示名稱 -->
-            <div class="col-md-4 col-xs-3 text-left">
+            <div class="col-md-4 col-xs-9 text-left">
                 <span class="roleHost">{{ userHost.ciuser.strDisplayName }}</span>
             </div>
             <!-- email -->
@@ -42,7 +42,7 @@
                 </span>
             </div>
             <!-- email 認證 -->
-            <div class="col-md-2 hidden-xs-down text-left">
+            <div class="col-md-2 col-xs-6 text-left">
                 {% if userHost.ciuser.isEmailVerified %}
                 <span class="glyphicon glyphicon-ok text-success">email：已認證</span>
                 {% else %}
