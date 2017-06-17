@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     "core",
     "chat",
     "quest",
+    "trade",
 )
 
 MIDDLEWARE_CLASSES = (

@@ -29,6 +29,7 @@ from django.contrib.auth.views import logout as builtin_logout
 from core import views as core_views
 from chat import views as chat_views
 from quest import views as quest_views
+from trade import views as trade_views
 
 urlpatterns = [
     url(r"^admin/", include(admin.site.urls)),
@@ -72,6 +73,8 @@ urlpatterns = [
     url(r"^quest/terminateQuest/$", quest_views.terminateQuest),
     url(r"^quest/accomplishQuest/$", quest_views.accomplishQuest),
     url(r"^quest/questUnreachable/$", quest_views.questUnreachable),
+    #商城交易
+    url(r"^trade/mall/", trade_views.renderMallPage),
     #網站驗證
     url(r"^google707bf3bffb973ed1.html$", core_views.googleSiteVerification),
     url(r"^BingSiteAuth.xml$", core_views.bingSiteVerification),
